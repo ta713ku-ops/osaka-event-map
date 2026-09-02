@@ -1,14 +1,18 @@
-import { Compass, LocateFixed, UserRound } from 'lucide-react';
+import { Compass, LocateFixed, UserRound, Map, House } from 'lucide-react';
+import './discovery-header.css';
 
 type Props = {
   liveCount: number;
   originLabel: string;
   onLocate: () => void;
   onOpenProfile: () => void;
+  view?: 'home' | 'map';
+  onShowHome?: () => void;
+  onShowMap?: () => void;
 };
 
 /** A compact, warm discovery header. Layout is intentionally delegated to the app stylesheet. */
-export function DiscoveryHeader({ liveCount, originLabel, onLocate, onOpenProfile }: Props) {
+export function DiscoveryHeader({ liveCount, originLabel, onLocate, onOpenProfile, view = 'map', onShowHome, onShowMap }: Props) {
   return (
     <header className="discovery-header" aria-label="どこいこ大阪">
       <div className="discovery-header__brand">
@@ -18,6 +22,14 @@ export function DiscoveryHeader({ liveCount, originLabel, onLocate, onOpenProfil
           <p className="discovery-header__copy">いつもの街で、まだ知らない体験を。</p>
         </div>
       </div>
+      <nav className="discovery-header__nav" aria-label="メインナビゲーション">
+        <button type="button" aria-label="ホーム" className={view === 'home' ? 'is-active' : ''} onClick={onShowHome} aria-current={view === 'home' ? 'page' : undefined}>
+          <House size={16} aria-hidden="true" /><span>ホーム</span>
+        </button>
+        <button type="button" aria-label="地図" className={view === 'map' ? 'is-active' : ''} onClick={onShowMap} aria-current={view === 'map' ? 'page' : undefined}>
+          <Map size={16} aria-hidden="true" /><span>地図</span>
+        </button>
+      </nav>
       <div className="discovery-header__status" aria-live="polite">
         <span className="discovery-header__live-dot" aria-hidden="true" />
         <span>{originLabel}・開催期間中 {liveCount}件</span>

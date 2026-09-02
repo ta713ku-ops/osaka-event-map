@@ -20,15 +20,15 @@ function renderHome(overrides: Partial<React.ComponentProps<typeof HomeDiscovery
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); });
 
 describe('HomeDiscovery', () => {
-  it('reveals 12 cards, then 24, then all cards', () => {
-    const events = Array.from({ length: 25 }, (_, index) => event(String(index)));
+  it('reveals six cards at a time, then all cards', () => {
+    const events = Array.from({ length: 13 }, (_, index) => event(String(index)));
     renderHome({ events, totalCount: events.length });
     const cards = () => document.querySelectorAll('.home-event-card');
+    expect(cards()).toHaveLength(6);
+    fireEvent.click(screen.getByRole('button', { name: /もっと見る（残り 7件）/ }));
     expect(cards()).toHaveLength(12);
-    fireEvent.click(screen.getByRole('button', { name: /もっと見る（残り 13件）/ }));
-    expect(cards()).toHaveLength(24);
     fireEvent.click(screen.getByRole('button', { name: /もっと見る（残り 1件）/ }));
-    expect(cards()).toHaveLength(25);
+    expect(cards()).toHaveLength(13);
     expect(screen.queryByRole('button', { name: /もっと見る/ })).not.toBeInTheDocument();
   });
 
@@ -53,13 +53,13 @@ describe('HomeDiscovery', () => {
 
   it('labels official images and falls back to the date panel when an image is missing or fails', () => {
     renderHome({ events: [{ ...event('market', '市場の催し', 'マルシェ'), imageUrl: 'https://www.pref.osaka.lg.jp/example.jpg' }, event('plain', '読書会', '読書')] });
-    const market = screen.getByRole('button', { name: /市場の催し/ });
+    const market = screen.getAllByRole('button', { name: /市場の催し/ }).find((button) => button.classList.contains('home-event-card'))!;
     expect(market.querySelector('img')).toHaveAttribute('alt', '');
     expect(within(market).getByText('会場の公式画像')).toBeInTheDocument();
     fireEvent.error(market.querySelector('img')!);
     expect(within(market).queryByRole('img')).not.toBeInTheDocument();
     expect(within(market).getAllByText('9月1日 10:00').length).toBeGreaterThan(0);
-    const plain = screen.getByRole('button', { name: /読書会/ });
+    const plain = screen.getAllByRole('button', { name: /読書会/ }).find((button) => button.classList.contains('home-event-card'))!;
     expect(within(plain).queryByRole('img')).not.toBeInTheDocument();
   });
 

@@ -6,6 +6,7 @@ import { EventMap } from './components/EventMap';
 import { EventSheet, type EventSheetEvent } from './components/EventSheet';
 import { FilterSheet, type EventFilters } from './components/FilterSheet';
 import { ProfileDialog, type Profile } from './components/ProfileDialog';
+import { HomeDiscovery, type HomeEvent } from './components/HomeDiscovery';
 import {
   appleMapsUrl,
   calculateDistanceKm,
@@ -97,6 +98,7 @@ function timeLabel(event: EventItem) {
 }
 
 export function App() {
+  const [view, setView] = useState<'home' | 'map'>('home');
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [locationNotice, setLocationNotice] = useState('');
   const [data, setData] = useState<DataFile | null>(null);
@@ -178,6 +180,19 @@ export function App() {
     displayLabel: index < 4,
   }));
   const activeFilterCount = Object.values(filters).filter((value) => Array.isArray(value) ? value.length > 0 : value !== undefined && value !== false).length;
+  const homeEvents = useMemo<HomeEvent[]>(() => ranked.slice(0, 40).map((event) => ({
+    id: event.id,
+    eventName: event.eventName,
+    categoryLabel: CATEGORY_LABELS[event.category] ?? 'イベント',
+    venueName: event.venueName,
+    timeLabel: timeLabel(event),
+    travelMinutes: event.travelMinutes,
+    recommendation: event.recommendation,
+    ongoing: isOngoing(event, now),
+    description: event.description,
+    imageUrl: typeof event.imageUrl === 'string' && event.imageUrl.startsWith('https://') ? event.imageUrl : undefined,
+    imageSourceUrl: typeof event.imageSourceUrl === 'string' && event.imageSourceUrl.startsWith('https://') ? event.imageSourceUrl : undefined,
+  })), [now, ranked]);
 
   const selectEvent = (event: { id: string } | null) => setSelectedId(event?.id ?? null);
   const saveProfile = (next: Profile) => {
@@ -201,15 +216,35 @@ export function App() {
   };
 
   return (
-    <main className="app-shell is-map">
-      <a className="skip-link" href="#event-results">候補へ移動</a>
+    <main className={`app-shell ${view === 'map' ? 'is-map' : 'is-home'}`}>
+      <a className="skip-link" href={view === 'home' ? '#home-results' : '#event-results'}>候補へ移動</a>
       <DiscoveryHeader
         liveCount={liveCount}
         originLabel={originLabel}
         onLocate={locate}
         onOpenProfile={() => setProfileOpen(true)}
+        view={view}
+        onShowHome={() => setView('home')}
+        onShowMap={() => setView('map')}
       />
       {locationNotice && <div className="location-notice" role="status">{locationNotice}<button type="button" onClick={() => setLocationNotice('')}>閉じる</button></div>}
+      {view === 'home' ? <HomeDiscovery
+        events={homeEvents}
+        totalCount={ranked.length}
+        liveCount={liveCount}
+        query={query}
+        onQueryChange={setQuery}
+        timeFilter={timeFilter}
+        timeFilters={TIME_FILTERS}
+        onTimeFilterChange={(key) => { setTimeFilter(key as TimeFilter); setSelectedId(null); }}
+        onShowMap={() => setView('map')}
+        onSelectEvent={setSelectedId}
+        onOpenFilters={() => setFilterOpen(true)}
+        activeFilterCount={activeFilterCount}
+        loading={!data && !error}
+        error={error}
+        onReset={() => { setQuery(''); setTimeFilter('all'); setFilters({}); setLoadAttempt((value) => value + 1); }}
+      /> : <>
       <section className="time-toolbar" aria-label="開催日の絞り込み">
         <label className="event-search">
           <Search size={18} aria-hidden="true" />
@@ -289,6 +324,7 @@ export function App() {
           )}
         </section>
       </div>
+      </>}
       {(selectedSheet || filterOpen || profileOpen) && <div className="modal-scrim" aria-hidden="true" />}
       <EventSheet event={selectedSheet as EventSheetEvent | null} onClose={() => setSelectedId(null)} onNavigate={navigate} />
       <FilterSheet

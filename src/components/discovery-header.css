@@ -1,0 +1,41 @@
+.discovery-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 64px;
+  padding: 8px clamp(16px, 3vw, 40px);
+  color: #171311;
+  background: rgba(255, 253, 248, .96);
+  border-bottom: 1px solid rgba(23, 19, 17, .14);
+  backdrop-filter: blur(16px);
+}
+.discovery-header__brand { display: flex; align-items: center; gap: 10px; min-width: max-content; }
+.discovery-header__mark { display: grid; place-items: center; width: 38px; height: 38px; color: #fffdf8; background: #b33a2f; border-radius: 6px; }
+.discovery-header__name { margin: 0; color: #171311; font-family: Georgia, 'Times New Roman', serif; font-size: 20px; font-weight: 700; letter-spacing: -.04em; }
+.discovery-header__copy { margin: 1px 0 0; color: #6f625b; font-size: 10px; white-space: nowrap; }
+.discovery-header__nav { display: flex; align-items: stretch; gap: 2px; margin-left: auto; }
+.discovery-header__nav button { position: relative; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; color: #6f625b; background: transparent; border: 0; border-bottom: 2px solid transparent; font: inherit; font-size: 13px; cursor: pointer; }
+.discovery-header__nav button:hover, .discovery-header__nav button.is-active { color: #171311; }
+.discovery-header__nav button.is-active { border-bottom-color: #b33a2f; }
+.discovery-header__status { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 10px; color: #345044; border-left: 1px solid rgba(23,19,17,.16); font-size: 11px; font-weight: 700; white-space: nowrap; }
+.discovery-header__live-dot { width: 7px; height: 7px; background: #b33a2f; border-radius: 50%; }
+.discovery-header__actions { display: flex; align-items: center; gap: 6px; }
+.discovery-header__action, .discovery-header__profile { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 44px; min-height: 44px; padding: 0 11px; color: #171311; background: #fffdf8; border: 1px solid rgba(23,19,17,.2); border-radius: 5px; font: inherit; font-size: 12px; cursor: pointer; }
+.discovery-header__action:hover, .discovery-header__profile:hover { border-color: #b33a2f; }
+.discovery-header button:focus-visible { outline: 3px solid rgba(179,58,47,.4); outline-offset: 2px; }
+@media (max-width: 760px) {
+  .discovery-header { gap: 8px; min-height: 58px; padding: 7px 10px; }
+  .discovery-header__mark { width: 36px; height: 36px; }
+  .discovery-header__name { font-size: 17px; }
+  .discovery-header__copy, .discovery-header__status span:last-child { display: none; }
+  .discovery-header__nav { order: 3; margin-left: 0; }
+  .discovery-header__nav button { width: 44px; padding: 0; justify-content: center; }
+  .discovery-header__nav button span { display: none; }
+  .discovery-header__status { margin-left: auto; padding: 0 5px; border-left: 0; }
+  .discovery-header__actions { gap: 3px; }
+  .discovery-header__profile span { display: none; }
+  .discovery-header__action, .discovery-header__profile { width: 44px; padding: 0; }
+}

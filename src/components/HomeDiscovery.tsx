@@ -46,7 +46,7 @@ export function HomeDiscovery({
   onTimeFilterChange, onShowMap, onSelectEvent, onOpenFilters, activeFilterCount,
   loading, error, onReset,
 }: Props) {
-  const [visibleCount, setVisibleCount] = React.useState(12);
+  const [visibleCount, setVisibleCount] = React.useState(6);
   const [spotlightIndex, setSpotlightIndex] = React.useState(0);
   const [motionPaused, setMotionPaused] = React.useState(false);
   const [reducedMotion, setReducedMotion] = React.useState(false);
@@ -120,8 +120,31 @@ export function HomeDiscovery({
               <span className="home-event-card__meta">約{event.travelMinutes}分 ・ {event.timeLabel}</span>
             </button>)}
           </div>
-          {visibleCount < events.length && <button type="button" className="home-more-button" onClick={() => setVisibleCount((count) => count + 12)}>もっと見る（残り {events.length - visibleCount}件）</button>}
+          {visibleCount < events.length && <button type="button" className="home-more-button" onClick={() => setVisibleCount((count) => count + 6)}>もっと見る（残り {events.length - visibleCount}件）</button>}
           <button type="button" className="home-secondary-map-cta" onClick={onShowMap}><MapPinned size={17} aria-hidden="true" />候補を地図で比べる<ArrowRight size={16} aria-hidden="true" /></button>
+
+          <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
+            <div className="editorial-section__heading"><div><p>大阪の街ではじまっていること</p><h2 id="ongoing-title">開催中のイベント</h2></div><span>{liveCount}件</span></div>
+            <div className="editorial-rail">
+              {(events.filter((event) => event.ongoing).slice(0, 6).length ? events.filter((event) => event.ongoing).slice(0, 6) : featured.slice(0, 3)).map((event) => <button type="button" className="editorial-mini-card" key={`ongoing-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} labelElement="em" /></span><span className="editorial-mini-card__tag">開催中</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>)}
+            </div>
+          </section>
+
+          <section className="editorial-section editorial-discover" aria-labelledby="discover-title">
+            <div className="editorial-section__heading"><div><p>気分に合わせて見つける</p><h2 id="discover-title">探し方を選ぶ</h2></div></div>
+            <div className="editorial-axis-grid">
+              <button type="button" onClick={onShowMap}><MapPinned size={25} aria-hidden="true" /><span>場所から探す</span><small>近い会場を地図で比べる</small><ArrowRight size={17} aria-hidden="true" /></button>
+              <button type="button" onClick={onOpenFilters}><SlidersHorizontal size={25} aria-hidden="true" /><span>好きなことから探す</span><small>祭り・展示・音楽などで絞る</small><ArrowRight size={17} aria-hidden="true" /></button>
+              <button type="button" onClick={() => onTimeFilterChange('weekend')}><Sparkles size={25} aria-hidden="true" /><span>週末の予定を探す</span><small>今週末に行ける候補を見る</small><ArrowRight size={17} aria-hidden="true" /></button>
+            </div>
+          </section>
+
+          <section className="editorial-section editorial-upcoming" aria-labelledby="upcoming-title">
+            <div className="editorial-section__heading"><div><p>次の休みに向けて</p><h2 id="upcoming-title">近日開催のおすすめ</h2></div><span>まだ間に合う</span></div>
+            <div className="editorial-upcoming-grid">{featured.slice(3, 7).map((event) => <button type="button" className="editorial-upcoming-card" key={`upcoming-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-upcoming-card__date">{event.timeLabel}</span><strong>{event.eventName}</strong><small>{event.categoryLabel} ・ {event.venueName ?? '大阪府内'}</small><ArrowRight size={16} aria-hidden="true" /></button>)}</div>
+          </section>
+
+          <aside className="editorial-seasonal"><div><p>OSAKA / SEASONAL NOTE</p><h2>季節の街を、<br />歩いて見つける。</h2><span>会場の空気や街の景色まで、イベントの楽しみ方です。</span></div><button type="button" onClick={onShowMap}>大阪の地図を見る <ArrowRight size={16} aria-hidden="true" /></button></aside>
         </>}
         <p className="data-note">大阪府オープンデータ（CC BY 4.0）を利用。「開催期間中」は会期の表示です。実施日・予約・料金は公式サイトをご確認ください。「会場の公式画像」は提供データの画像で、イベント当日の記録写真とは限りません。</p>
       </div>
