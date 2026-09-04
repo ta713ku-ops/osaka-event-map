@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDialogFocus } from './useDialogFocus';
+import { CATEGORY_LABELS, EVENT_TAG_LABELS } from '../domain';
+import type { EventTag } from '../types';
 
 export type EventFilters = {
   time?: 'today' | 'tomorrow' | 'tonight' | 'weekend';
@@ -10,21 +12,15 @@ export type EventFilters = {
   date?: boolean;
   night?: boolean;
   categories?: string[];
+  tags?: EventTag[];
 };
 
 type Props = { open: boolean; value: EventFilters; onChange: (value: EventFilters) => void; onClose: () => void; categories?: string[] };
 const OPTIONS = [
   ['withinMinutes', '30分以内', 30], ['withinMinutes', '60分以内', 60],
-  ['free', '無料', true], ['rainOk', '雨でもOK', true], ['family', '子ども向け', true],
-  ['date', 'デート向け', true], ['night', '夜イベント', true],
+  ['rainOk', '雨でもOK', true], ['date', 'デート向け', true], ['night', '夜イベント', true],
 ] as const;
-const CATEGORY_LABELS: Record<string, string> = {
-  festival: '祭り・フェス', fireworks: '花火', shopping: 'ショッピング', zoo: 'いきもの', aquarium: '水族館',
-  amusement: '遊園地', themePark: 'テーマパーク', food: 'グルメ', market: 'マルシェ', fleaMarket: 'フリーマーケット',
-  exhibition: '展覧会', museum: '博物館', workshop: '体験・教室', seasonal: '季節イベント',
-  illumination: 'イルミネーション', night: '夜イベント',
-};
-
+const TAG_OPTIONS: EventTag[] = ['celebrity', 'exhibition', 'family', 'free', 'limited'];
 export function FilterSheet({ open, value, onChange, onClose, categories = Object.keys(CATEGORY_LABELS) }: Props) {
   const dialogRef = useDialogFocus(open);
   const [draft, setDraft] = useState(value);
@@ -37,6 +33,11 @@ export function FilterSheet({ open, value, onChange, onClose, categories = Objec
   }, [open, onClose]);
   if (!open) return null;
   const toggle = (key: keyof EventFilters, optionValue: 30 | 60 | true) => setDraft((current) => ({ ...current, [key]: current[key] === optionValue ? undefined : optionValue }));
+  const toggleTag = (tag: EventTag) => setDraft((current) => {
+    const selected = current.tags?.includes(tag) || (tag === 'free' && current.free === true);
+    const tags = selected ? (current.tags ?? []).filter((item) => item !== tag) : [...(current.tags ?? []), tag];
+    return { ...current, tags, ...(tag === 'free' ? { free: undefined } : {}) };
+  });
   return (
     <section ref={dialogRef} className="filter-sheet" role="dialog" aria-modal="true" aria-label="条件を追加">
       <div className="sheet-header"><h2>条件を追加</h2><button type="button" onClick={onClose} aria-label="閉じる">×</button></div>
@@ -44,6 +45,12 @@ export function FilterSheet({ open, value, onChange, onClose, categories = Objec
         {OPTIONS.map(([key, label, optionValue]) => {
           const selected = draft[key] === optionValue;
           return <button type="button" key={label} className={selected ? 'is-selected' : ''} aria-pressed={selected} onClick={() => toggle(key, optionValue)}>{label}</button>;
+        })}
+      </div></fieldset>
+      <fieldset><legend>イベントの特徴</legend><div className="filter-grid">
+        {TAG_OPTIONS.map((tag) => {
+          const selected = draft.tags?.includes(tag) || (tag === 'free' && draft.free === true);
+          return <button type="button" key={tag} className={selected ? 'is-selected' : ''} aria-pressed={selected} onClick={() => toggleTag(tag)}>{EVENT_TAG_LABELS[tag]}</button>;
         })}
       </div></fieldset>
       <fieldset><legend>カテゴリ</legend><div className="filter-grid">

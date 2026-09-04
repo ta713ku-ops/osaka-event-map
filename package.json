@@ -9,6 +9,7 @@
     "collect": "node scripts/collect-events.mjs",
     "build": "npm run collect:cached && tsc -b && vite build",
     "collect:cached": "node scripts/collect-events.mjs --cached",
+    "test:collect": "node --test scripts/*.test.mjs scripts/sources/*.test.mjs",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run --config vitest.config.ts",
     "test:watch": "vitest --config vitest.config.ts",

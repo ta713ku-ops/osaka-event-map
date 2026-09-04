@@ -18,10 +18,24 @@ describe('event time filters', () => {
     expect(filterEvents([event({ startDate: '2026-08-29', startAt: '2026-08-29T10:00:00+09:00', endDate: '2026-08-31', endAt: '2026-08-31T22:00:00+09:00' })], 'tonight', now)).toHaveLength(0);
     expect(filterEvents([event()], 'tonight', now)).toHaveLength(1);
     expect(filterEvents([event({ startTime: undefined, endTime: undefined })], 'tonight', now)).toHaveLength(0);
+    expect(filterEvents([event({ startDate: '2026-08-30', endDate: '2026-08-30', startTime: '10:00', endTime: '12:00', startAt: '2026-08-30T10:00:00+09:00', endAt: '2026-08-30T12:00:00+09:00' })], 'tonight', new Date('2026-08-30T09:00:00+09:00'))).toHaveLength(0);
+    expect(filterEvents([event({ startDate: '2026-08-30', endDate: '2026-09-30', startAt: '2026-08-30T10:00:00+09:00', endAt: '2026-09-30T22:00:00+09:00', startTime: undefined, endTime: undefined })], 'tonight', now)).toHaveLength(0);
+  });
+  it('derives weekend as the next Saturday and Sunday from Osaka local time', () => {
+    const monday = new Date('2026-08-31T09:00:00+09:00');
+    expect(filterEvents([event({ startDate: '2026-09-05', endDate: '2026-09-05', startAt: undefined, endAt: undefined })], 'weekend', monday)).toHaveLength(1);
+    expect(filterEvents([event({ startDate: '2026-09-06', endDate: '2026-09-06', startAt: undefined, endAt: undefined })], 'weekend', monday)).toHaveLength(1);
+    expect(filterEvents([event({ startDate: '2026-09-12', endDate: '2026-09-12', startAt: undefined, endAt: undefined })], 'weekend', monday)).toHaveLength(0);
+    const sunday = new Date('2026-09-06T09:00:00+09:00');
+    expect(filterEvents([event({ startDate: '2026-09-06', endDate: '2026-09-06', startAt: undefined, endAt: undefined })], 'weekend', sunday)).toHaveLength(1);
   });
   it('excludes ended events and handles overnight end', () => {
     expect(isFinished(event({ endAt: '2026-08-30T17:59:59+09:00' }), now)).toBe(true);
     expect(isOngoing(event({ startAt: '2026-08-30T23:00:00+09:00', endAt: '2026-08-31T01:00:00+09:00', endDate: '2026-08-31' }), new Date('2026-08-31T00:30:00+09:00'))).toBe(true);
+    const singleDay = event({ endDate: undefined, endAt: undefined, startAt: '2026-08-30T10:00:00+09:00', startTime: '10:00', endTime: undefined });
+    expect(isOngoing(singleDay, new Date('2026-08-30T18:00:00+09:00'))).toBe(true);
+    expect(isFinished(singleDay, new Date('2026-08-30T23:59:59+09:00'))).toBe(false);
+    expect(isFinished(singleDay, new Date('2026-08-31T00:00:00+09:00'))).toBe(true);
   });
   it('does not treat unknown time as a timed or tonight event', () => {
     const unknown = event({ startTime: undefined, endTime: undefined, startAt: undefined, endAt: undefined });
@@ -48,5 +62,8 @@ describe('domain helpers', () => {
   it('creates destination URLs', () => {
     expect(googleMapsUrl(event())).toContain('destination=34.69%2C135.5');
     expect(appleMapsUrl(event())).toContain('daddr=34.69%2C135.5');
+    const unknownPlace = event({ latitude: null, longitude: null, address: '大阪市北区梅田1-1-1' });
+    expect(googleMapsUrl(unknownPlace)).toContain(encodeURIComponent('大阪市北区梅田1-1-1'));
+    expect(appleMapsUrl(event({ latitude: 0, longitude: 0, venueName: '会場A' }))).toContain(encodeURIComponent('会場A'));
   });
 });

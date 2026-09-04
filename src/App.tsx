@@ -11,22 +11,22 @@ import {
   appleMapsUrl,
   calculateDistanceKm,
   calculateRecommendationScore,
+  CATEGORY_LABELS,
   estimateTravelTimeMinutes,
   filterEvents,
+  hasCoordinates,
+  hasEventTag,
+  eventTagLabels,
   googleMapsUrl,
   isOngoing,
 } from './domain';
-import type { Coordinates, EventItem, TimeFilter, UserProfile } from './types';
+import type { Coordinates, EventDataFile, EventItem, EventSource, TimeFilter, UserProfile } from './types';
 
-type DataFile = {
-  generatedAt: string;
-  attribution: { name: string; license: string; sourceUrl: string };
-  events: EventItem[];
-};
+type DataFile = EventDataFile;
 
 type RankedEvent = EventItem & {
-  distanceKm: number;
-  travelMinutes: number;
+  distanceKm?: number;
+  travelMinutes?: number;
   recommendation: number;
   recommendationReasons: string[];
 };
@@ -41,12 +41,23 @@ const TIME_FILTERS: { key: TimeFilter; label: string; accent?: boolean }[] = [
   { key: 'weekend', label: '今週末' },
 ];
 
-const CATEGORY_LABELS: Record<string, string> = {
-  festival: '祭り・フェス', fireworks: '花火', shopping: 'ショッピング', zoo: 'いきもの',
-  aquarium: '水族館', amusement: '遊園地', themePark: 'テーマパーク', food: 'グルメ',
-  market: 'マルシェ', fleaMarket: 'フリーマーケット', exhibition: '展覧会', museum: '博物館',
-  workshop: '体験・教室', seasonal: '季節イベント', illumination: 'イルミネーション', night: '夜イベント',
-};
+const sourceStatusLabels: Record<EventSource['status'], string> = { success: '取得済み', error: '取得失敗', stale: '更新確認が古い可能性' };
+
+function SourceStatusDetails({ sources }: { sources: EventSource[] }) {
+  const checked = sources.filter((source) => source.status === 'success').length;
+  const warnings = sources.length - checked;
+  const checkedAt = (value: string) => {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat('ja-JP', { dateStyle: 'medium', timeStyle: 'short' }).format(date);
+  };
+  return <details className="source-status-details">
+    <summary>公式ソース {checked}/{sources.length}件を確認{warnings > 0 ? ` ・ 注意 ${warnings}件` : ''}</summary>
+    <div className="source-status-details__body">
+      {warnings > 0 && <p role="status">一部情報の更新確認に失敗しています。参加前に公式サイトで最新情報をご確認ください。</p>}
+      {sources.map((source) => <p key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a> ・ {sourceStatusLabels[source.status]} ・ 確認 {checkedAt(source.checkedAt)}{source.error ? `：${source.error}` : ''}</p>)}
+    </div>
+  </details>;
+}
 
 function readProfile(): Profile {
   try {
@@ -75,15 +86,19 @@ function domainProfile(profile: Profile): UserProfile {
   };
 }
 
-function recommendationReasons(event: EventItem, profile: UserProfile, distanceKm: number, now: Date) {
+function recommendationReasons(event: EventItem, profile: UserProfile, distanceKm: number | undefined, now: Date) {
   const reasons: string[] = [];
   if (isOngoing(event, now)) reasons.push('開催期間中（開催日時は公式確認）');
   if (profile.favoriteCategories?.includes(event.category)) reasons.push('好きなジャンル');
   if (profile.hasChildren && event.childFriendly) reasons.push('子どもと楽しめる');
   if (profile.companion === 'partner' && event.dateFriendly) reasons.push('ふたりのお出かけ向き');
-  if (event.freeEvent) reasons.push('無料');
-  if (distanceKm < 10) reasons.push('近くて行きやすい');
+  if (hasEventTag(event, 'free')) reasons.push('無料');
+  if (typeof distanceKm === 'number' && Number.isFinite(distanceKm) && distanceKm < 10) reasons.push('近くて行きやすい');
   return reasons.slice(0, 2);
+}
+
+function travelLabel(minutes?: number) {
+  return typeof minutes === 'number' && Number.isFinite(minutes) ? `約${minutes}分` : '場所を確認';
 }
 
 function timeLabel(event: EventItem) {
@@ -112,6 +127,8 @@ export function App() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [origin, setOrigin] = useState<Coordinates>(OSAKA_STATION);
   const [originLabel, setOriginLabel] = useState('大阪駅から');
+  const [mapListLimit, setMapListLimit] = useState(20);
+  const [railLimit, setRailLimit] = useState(12);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -135,35 +152,38 @@ export function App() {
     const normalizedQuery = query.normalize('NFKC').trim().toLocaleLowerCase('ja');
     return filterEvents(data.events, timeFilter, now)
       .map((event) => {
-        const distanceKm = calculateDistanceKm(origin, { latitude: Number(event.latitude), longitude: Number(event.longitude) });
-        const travelMinutes = estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train');
+        const distanceKm = hasCoordinates(event)
+          ? calculateDistanceKm(origin, { latitude: event.latitude, longitude: event.longitude })
+          : undefined;
+        const travelMinutes = distanceKm == null ? undefined : estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train');
         return {
           ...event,
-          distanceKm,
-          travelMinutes,
+          ...(distanceKm == null ? {} : { distanceKm }),
+          ...(travelMinutes == null ? {} : { travelMinutes }),
           recommendation: calculateRecommendationScore(event, userProfile, distanceKm),
           recommendationReasons: recommendationReasons(event, userProfile, distanceKm, now),
         };
       })
       .filter((event) => {
         if (normalizedQuery) {
-          const searchable = [event.eventName, event.venueName, event.address, CATEGORY_LABELS[event.category]]
+          const searchable = [event.eventName, event.venueName, event.address, CATEGORY_LABELS[event.category], ...eventTagLabels(event)]
             .filter(Boolean)
             .join(' ')
             .normalize('NFKC')
             .toLocaleLowerCase('ja');
           if (!searchable.includes(normalizedQuery)) return false;
         }
-        if (filters.withinMinutes && event.travelMinutes > filters.withinMinutes) return false;
-        if (filters.free && event.freeEvent !== true) return false;
+        if (filters.withinMinutes && (event.travelMinutes == null || event.travelMinutes > filters.withinMinutes)) return false;
+        if (filters.free && !hasEventTag(event, 'free')) return false;
         if (filters.rainOk && event.rainSupport !== true && event.indoor !== true) return false;
-        if (filters.family && event.childFriendly !== true) return false;
+        if (filters.family && !hasEventTag(event, 'family')) return false;
+        if (filters.tags?.some((tag) => !hasEventTag(event, tag))) return false;
         if (filters.date && event.dateFriendly !== true) return false;
         if (filters.night && !['night', 'illumination', 'fireworks'].includes(event.category)) return false;
         if (filters.categories?.length && !filters.categories.includes(event.category)) return false;
         return true;
       })
-      .sort((a, b) => Number(isOngoing(b, now)) - Number(isOngoing(a, now)) || b.recommendation - a.recommendation || a.distanceKm - b.distanceKm);
+      .sort((a, b) => Number(isOngoing(b, now)) - Number(isOngoing(a, now)) || b.recommendation - a.recommendation || (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity));
   }, [data, filters, now, origin, query, timeFilter, userProfile]);
 
   const selected = ranked.find((event) => event.id === selectedId) ?? null;
@@ -171,16 +191,18 @@ export function App() {
     ...selected,
     ongoing: isOngoing(selected, now),
     address: selected.address === selected.venueName ? undefined : selected.address,
+    sourceReports: data?.sources,
   } : null;
   const liveCount = ranked.filter((event) => isOngoing(event, now)).length;
   const mapEvents = ranked.map((event, index) => ({
     ...event,
-    latitude: Number(event.latitude),
-    longitude: Number(event.longitude),
-    displayLabel: index < 4,
+    latitude: hasCoordinates(event) ? event.latitude : undefined,
+    longitude: hasCoordinates(event) ? event.longitude : undefined,
+    displayLabel: index < 4 && hasCoordinates(event),
   }));
-  const activeFilterCount = Object.values(filters).filter((value) => Array.isArray(value) ? value.length > 0 : value !== undefined && value !== false).length;
-  const homeEvents = useMemo<HomeEvent[]>(() => ranked.slice(0, 40).map((event) => ({
+  const activeTagCount = new Set([...(filters.tags ?? []), ...(filters.free ? ['free'] as const : [])]).size;
+  const activeFilterCount = Object.entries(filters).filter(([key, value]) => key !== 'tags' && key !== 'free' && (Array.isArray(value) ? value.length > 0 : value !== undefined && value !== false)).length + activeTagCount;
+  const homeEvents = useMemo<HomeEvent[]>(() => ranked.map((event) => ({
     id: event.id,
     eventName: event.eventName,
     categoryLabel: CATEGORY_LABELS[event.category] ?? 'イベント',
@@ -243,6 +265,7 @@ export function App() {
         activeFilterCount={activeFilterCount}
         loading={!data && !error}
         error={error}
+        sourceStatus={data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : undefined}
         onReset={() => { setQuery(''); setTimeFilter('all'); setFilters({}); setLoadAttempt((value) => value + 1); }}
       /> : <>
       <section className="time-toolbar" aria-label="開催日の絞り込み">
@@ -280,19 +303,21 @@ export function App() {
           {!data && !error && <div className="state-card" role="status"><span className="loading-dot" />大阪のイベントを探しています…</div>}
           {data && ranked.length === 0 && <div className="state-card"><strong>条件に合うイベントがありません</strong><span>検索語や時間、条件を少し広げてみてください。</span><button type="button" onClick={() => { setQuery(''); setTimeFilter('all'); setFilters({}); }}>すべての候補を見る</button></div>}
           <div className="event-list">
-            {ranked.slice(0, 20).map((event, index) => (
+            {ranked.slice(0, mapListLimit).map((event, index) => (
               <button key={event.id} type="button" className={`event-row ${selectedId === event.id ? 'is-selected' : ''}`} onClick={() => setSelectedId(event.id)}>
                 <span className={`rank-badge ${isOngoing(event, now) ? 'is-live' : ''}`}>{isOngoing(event, now) ? '開催中' : index + 1}</span>
                 <span className="event-row-copy">
                   <span className="event-row-top"><b>{CATEGORY_LABELS[event.category] ?? 'イベント'}</b><em>おすすめ {event.recommendation}%</em></span>
                   <strong>{event.eventName}</strong>
-                  <span>{timeLabel(event)} ・ 約{event.travelMinutes}分 ・ {event.freeEvent ? '無料' : event.price || '料金は公式確認'}</span>
+                  <span>{timeLabel(event)} ・ {travelLabel(event.travelMinutes)} ・ {hasEventTag(event, 'free') ? '無料' : event.price || '料金は公式確認'}</span>
                 </span>
                 <ChevronRight size={19} aria-hidden="true" />
               </button>
             ))}
           </div>
-          {data && <p className="data-note">大阪府オープンデータ（CC BY 4.0）を利用。内容は参加前に公式サイトで確認してください。</p>}
+          {mapListLimit < ranked.length && <button type="button" className="map-more-button" onClick={() => setMapListLimit((limit) => Math.min(ranked.length, limit + 20))}>もっと見る（残り {ranked.length - mapListLimit}件）</button>}
+          {data && <p className="data-note">公式公開データと公式サイトの情報を利用しています。内容は参加前に公式サイトで確認してください。</p>}
+          {data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : null}
         </aside>
 
         <section className="map-panel" aria-label="大阪府イベントマップ">
@@ -305,14 +330,15 @@ export function App() {
             <div className="discovery-rail" role="region" aria-label="おすすめ候補">
             <div className="rail-title"><span>今から出会う、大阪</span><b>横にスワイプ</b></div>
               <div className="rail-cards">
-                {ranked.slice(0, 12).map((event) => (
+                {ranked.slice(0, railLimit).map((event) => (
                   <button key={event.id} type="button" onClick={() => setSelectedId(event.id)}>
                     <span>{isOngoing(event, now) ? '開催中' : timeLabel(event)} ・ {CATEGORY_LABELS[event.category] ?? 'イベント'}</span>
                     <strong>{event.eventName}</strong>
-                    <small>約{event.travelMinutes}分　おすすめ {event.recommendation}%</small>
+                    <small>{travelLabel(event.travelMinutes)}　おすすめ {event.recommendation}%</small>
                   </button>
                 ))}
               </div>
+              {railLimit < ranked.length && <button type="button" className="rail-more-button" onClick={() => setRailLimit((limit) => Math.min(ranked.length, limit + 12))}>もっと見る（残り {ranked.length - railLimit}件）</button>}
             </div>
           )}
           {data && ranked.length === 0 && (

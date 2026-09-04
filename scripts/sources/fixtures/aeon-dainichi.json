@@ -1,0 +1,30 @@
+{
+  "events": [
+    {
+      "id": 90559,
+      "is_published": true,
+      "html_path": "/sc/dainichi/event/2609mybottle-results.html",
+      "start_time": "2026-09-04 00:00:00 +0900",
+      "end_time": "2026-09-30 21:00:00 +0900",
+      "title": "マイボトルデザインコンテスト受賞作品発表",
+      "title_oneline": "マイボトルデザインコンテスト受賞作品発表",
+      "display_event_date": "9月1日(火)〜30日(水)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "優秀作品が決定しましたので発表いたします!"
+    },
+    {
+      "id": 90508,
+      "is_published": true,
+      "html_path": "/sc/dainichi/event/2609mybottle-tenji.html",
+      "start_time": "2026-09-04 00:00:00 +0900",
+      "end_time": "2026-09-30 21:00:00 +0900",
+      "title": "マイボトルデザインコンテスト応募作品を展示いたします!",
+      "title_oneline": "マイボトルデザインコンテスト応募作品を展示いたします!",
+      "display_event_date": "8月7日(金)〜9月30日(水)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "応募いただいた作品を展示いたします。"
+    }
+  ]
+}

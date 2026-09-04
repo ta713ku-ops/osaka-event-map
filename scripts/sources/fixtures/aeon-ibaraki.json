@@ -1,0 +1,43 @@
+{
+  "events": [
+    {
+      "id": 89840,
+      "is_published": true,
+      "html_path": "/sc/ibaraki/event/2609aeoncard-family.html",
+      "start_time": "2026-09-01 00:00:00 +0900",
+      "end_time": "2026-10-31 21:00:00 +0900",
+      "title": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+      "title_oneline": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+      "display_event_date": "9月1日(火)〜10月31日(土)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "申込期間：2026年9月1日(火)〜10月31日(土)"
+    },
+    {
+      "id": 90029,
+      "is_published": true,
+      "html_path": "/sc/ibaraki/event/event_e90029_as.html",
+      "start_time": "2026-09-01 00:00:00 +0900",
+      "end_time": "2026-10-31 23:45:00 +0900",
+      "title": "【近畿地区在住の会員さま限定】ユニバーサル・スタジオ・ジャパンにご招待！",
+      "title_oneline": "【近畿地区在住の会員さま限定】ユニバーサル・スタジオ・ジャパンにご招待！",
+      "display_event_date": "9月1日(火)〜10月31日(土)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "期間中に応募できるキャンペーンです。"
+    },
+    {
+      "id": 89924,
+      "is_published": true,
+      "html_path": "/sc/ibaraki/event/event_e89924_as.html",
+      "start_time": "2026-09-05 00:00:00 +0900",
+      "end_time": "2026-09-05 21:00:00 +0900",
+      "title": "「あたらしい創作絵本大賞」読み聞かせ・表彰式",
+      "title_oneline": "「あたらしい創作絵本大賞」読み聞かせ・表彰式",
+      "display_event_date": "9月5日(土)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "読み聞かせと表彰式・合評会を開催します。"
+    }
+  ]
+}

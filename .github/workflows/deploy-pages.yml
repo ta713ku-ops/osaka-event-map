@@ -26,10 +26,29 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Refresh Osaka Prefecture events
+      - name: Restore last-good collection snapshot
+        id: collection-cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/sources/collection-report.json
+            data/sources/270008_event.csv
+          key: osaka-event-collection-${{ github.repository }}-${{ github.run_id }}
+          restore-keys: |
+            osaka-event-collection-${{ github.repository }}-
+      - name: Refresh official event sources
         run: npm run collect
+      - name: Save last-good collection snapshot
+        if: success()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/sources/collection-report.json
+            data/sources/270008_event.csv
+          key: osaka-event-collection-${{ github.repository }}-${{ github.run_id }}
       - run: npm run typecheck
       - run: npm test
+      - run: npm run test:collect
       - name: Build for Pages
         run: npm run build
         env:

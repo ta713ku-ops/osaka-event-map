@@ -8,13 +8,33 @@ const asDate = (s?: string, endOfDay = false) => {
   return new Date(s);
 };
 
+const dateTime = (date: string | undefined, time: string | undefined, endOfDay = false) => {
+  if (!date) return undefined;
+  const normalizedTime = time?.trim().replace(/時/g, ':').replace(/分/g, '').slice(0, 8);
+  return asDate(`${date}T${normalizedTime || (endOfDay ? '23:59:59' : '00:00:00')}+09:00`);
+};
+
+const eventStart = (event: EventItem) => asDate(event.startAt) ?? dateTime(event.startDate, event.startTime);
+
+const eventEnd = (event: EventItem) => {
+  const start = eventStart(event);
+  let end = asDate(event.endAt)
+    ?? (event.endDate ? dateTime(event.endDate, event.endTime, true) : dateTime(event.startDate, event.endTime, true));
+  // A single-day record without an end time is valid through that day's close.
+  if (!end && event.startDate) end = dateTime(event.startDate, undefined, true);
+  // A source may give an overnight endTime without an endDate. Keep it on the
+  // following day instead of making the event look already finished.
+  if (end && start && end < start && !event.endDate) end = new Date(end.getTime() + 86400000);
+  return end;
+};
+
 export function isOngoing(event: EventItem, now = new Date()): boolean {
-  const start = asDate(event.startAt) ?? asDate(event.startDate);
-  const end = asDate(event.endAt) ?? asDate(event.endDate, true) ?? start;
+  const start = eventStart(event);
+  const end = eventEnd(event);
   return !!start && !!end && start <= now && now <= end;
 }
 export function isFinished(event: EventItem, now = new Date()): boolean {
-  const end = asDate(event.endAt) ?? asDate(event.endDate, true);
+  const end = eventEnd(event);
   return !!end && end < now;
 }
 export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', now = new Date()): EventItem[] {
@@ -22,23 +42,30 @@ export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', no
   const tomorrow = day(new Date(now.getTime() + 86400000));
   // Derive the weekend from the Osaka calendar, independent of host locale.
   const osakaParts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tokyo', weekday: 'short' }).format(now);
-  const weekdayOffset = osakaParts === 'Sun' ? -1 : 6 - ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(osakaParts);
+  const weekdayIndex = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(osakaParts);
+  const weekdayOffset = osakaParts === 'Sun' ? -1 : 5 - weekdayIndex;
   const saturday = new Date(`${today}T12:00:00+09:00`);
   saturday.setUTCDate(saturday.getUTCDate() + weekdayOffset);
   const sunday = new Date(saturday.getTime() + 86400000);
   const weekendDates = new Set([day(saturday), day(sunday)]);
   return events.filter(e => {
     if (isFinished(e, now)) return false;
-    const start = asDate(e.startAt) ?? asDate(e.startDate);
-    const end = asDate(e.endAt) ?? asDate(e.endDate, true) ?? start;
+    const start = eventStart(e);
+    const end = eventEnd(e);
     const startsOrSpans = (date: string) => dateOnly(e.startDate) <= date && dateOnly(e.endDate ?? e.startDate) >= date;
     if (filter === 'all') return true;
     if (filter === 'today') return startsOrSpans(today);
     if (filter === 'tomorrow') return startsOrSpans(tomorrow);
     if (filter === 'weekend') return [...weekendDates].some(startsOrSpans);
-    // Tonight requires an explicit source time. Unknown all-day data must not be promoted as an evening option.
-    const hasExplicitTime = !!e.startTime || !!e.endTime;
-    return hasExplicitTime && startsOrSpans(today) && !!start && !!end && end >= now && start.toLocaleDateString('en-CA', { timeZone: 'Asia/Tokyo' }) === today;
+    // Tonight means a record whose published daily clock overlaps 18:00 to
+    // midnight. A long startAt/endAt interval alone is a date range, not a
+    // promise that the venue is open tonight.
+    const hasDailyTime = !!e.startTime || !!e.endTime;
+    const tonightStart = dateTime(today, '18:00');
+    const tonightEnd = dateTime(today, undefined, true);
+    const overlapsTonight = !!start && !!end && !!tonightStart && !!tonightEnd
+      && start <= tonightEnd && end >= tonightStart;
+    return hasDailyTime && startsOrSpans(today) && !!start && !!end && end >= now && day(start) === today && overlapsTonight;
   });
 }
 

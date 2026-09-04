@@ -1,5 +1,29 @@
 export type EventCategory = string;
 
+export const EVENT_TAGS = ['celebrity', 'exhibition', 'family', 'free', 'limited'] as const;
+export type EventTag = typeof EVENT_TAGS[number];
+
+export type EventSourceStatus = 'success' | 'error' | 'stale';
+
+export interface EventSource {
+  id: string;
+  name: string;
+  url: string;
+  status: EventSourceStatus;
+  count: number;
+  checkedAt: string;
+  error?: string;
+}
+
+export interface EventProvenance {
+  sourceId?: string;
+  source?: string;
+  sourceUrl?: string;
+  officialUrl?: string;
+  lastCheckedAt?: string;
+  evidence?: string;
+}
+
 export interface EventItem {
   id: string;
   eventName: string;
@@ -7,8 +31,8 @@ export interface EventItem {
   category: EventCategory;
   description?: string;
   address?: string;
-  latitude?: number;
-  longitude?: number;
+  latitude?: number | null;
+  longitude?: number | null;
   startDate: string;
   endDate?: string;
   startAt?: string;
@@ -30,6 +54,10 @@ export interface EventItem {
   imageLicense?: string;
   source?: string;
   sourceUrl?: string;
+  sourceId?: string;
+  tags?: EventTag[];
+  tagEvidence?: Record<string, string>;
+  provenance?: EventProvenance[];
   lastCheckedAt?: string;
   [key: string]: unknown;
 }
@@ -45,3 +73,12 @@ export interface UserProfile {
 
 export type TimeFilter = 'all' | 'today' | 'tomorrow' | 'tonight' | 'weekend';
 export interface Coordinates { latitude: number; longitude: number }
+
+export interface EventDataFile {
+  schemaVersion?: number;
+  generatedAt: string;
+  freshness?: 'fresh' | 'partial' | 'stale' | string;
+  attribution: { name: string; license: string; sourceUrl: string };
+  sources?: EventSource[];
+  events: EventItem[];
+}

@@ -1,0 +1,30 @@
+{
+  "events": [
+    {
+      "id": 90560,
+      "is_published": true,
+      "html_path": "/sc/hineno/event/2609mybottle-results.html",
+      "start_time": "2026-09-04 00:00:00 +0900",
+      "end_time": "2026-09-30 21:00:00 +0900",
+      "title": "マイボトルデザインコンテスト受賞作品発表",
+      "title_oneline": "マイボトルデザインコンテスト受賞作品発表",
+      "display_event_date": "9月1日(火)〜30日(水)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "優秀作品が決定しましたので発表いたします!"
+    },
+    {
+      "id": 89958,
+      "is_published": true,
+      "html_path": "/sc/hineno/event/2609akiyasumi.html",
+      "start_time": "2026-09-01 10:00:00 +0900",
+      "end_time": "2026-09-27 21:00:00 +0900",
+      "title": "イオンモールの秋休み",
+      "title_oneline": "イオンモールの秋休み",
+      "display_event_date": "9月18日(金)〜27日(日)",
+      "display_event_time": "",
+      "display_event_place": "",
+      "body": "家族と秋を楽しむイベントやスポットをご用意します。"
+    }
+  ]
+}

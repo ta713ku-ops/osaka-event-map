@@ -45,11 +45,11 @@
 .home-hero { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); min-height: 350px; }
 .home-spotlight { position: relative; display: block; min-height: 314px; background: #6d3b28; }
 .home-spotlight__story { min-height: inherit; animation: home-story-in .45s ease both; }
-.home-spotlight__media { position: absolute; inset: 0; min-height: 0; }
+.home-spotlight__media { position: absolute; inset: 0; min-height: 0; overflow: hidden; }
 .home-spotlight__media img { display: block; }
 .home-spotlight__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(31,17,11,.9) 0%, rgba(42,21,13,.64) 45%, rgba(42,21,13,.12) 100%), linear-gradient(0deg, rgba(26,13,8,.65), transparent 55%); }
 .home-spotlight__media > span { z-index: 2; top: 10px; right: 10px; bottom: auto; left: auto; }
-.home-spotlight__copy { position: relative; z-index: 1; width: min(62%, 360px); min-height: 314px; justify-content: center; padding: 26px 24px; }
+.home-spotlight__copy { position: relative; z-index: 1; width: min(62%, 360px); min-height: 314px; justify-content: center; padding: 26px 24px 84px; }
 .home-spotlight__copy h2 { display: -webkit-box; max-height: 2.3em; overflow: hidden; font-size: clamp(24px, 2.3vw, 28px); -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .home-spotlight__copy small { display: -webkit-box; max-height: 3.2em; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .home-spotlight__controls { position: absolute; right: 14px; bottom: 12px; left: 14px; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -140,4 +140,92 @@
  .editorial-upcoming-card { grid-template-columns:88px 1fr auto; }
  .editorial-seasonal { margin-top:52px; padding:26px 18px; display:block; }
  .editorial-seasonal button { margin-top:24px; }
+}
+
+/* First-open motion: a short editorial arrival with a stable, always-readable layout. */
+.home-hero__content > .home-hero__eyebrow,
+.home-hero__content > h1,
+.home-hero__content > p:not(.home-hero__eyebrow),
+.home-hero__content > .home-map-cta {
+  animation: home-hero-stage-in 560ms cubic-bezier(.22,.75,.28,1) both;
+}
+.home-hero__content > .home-hero__eyebrow { animation-delay: 70ms; }
+.home-hero__content > h1 { animation-delay: 140ms; }
+.home-hero h1 strong { white-space: nowrap; }
+.home-hero__content > p:not(.home-hero__eyebrow) { animation-delay: 220ms; }
+.home-hero__content > .home-map-cta { animation-delay: 300ms; }
+.home-spotlight {
+  animation: home-spotlight-frame-in 680ms cubic-bezier(.22,.75,.28,1) 110ms both;
+}
+.home-spotlight__story {
+  animation: none;
+  position: relative;
+  min-height: inherit;
+}
+.home-spotlight__story.is-switching {
+  animation: home-story-switch 520ms cubic-bezier(.22,.75,.28,1) both;
+}
+.home-spotlight__story.is-motion-active .home-spotlight__media img {
+  animation: home-image-drift 9800ms cubic-bezier(.35,.04,.25,1) both;
+  transform-origin: 52% 48%;
+}
+.home-spotlight__story.is-switching .home-spotlight__media::after {
+  animation: home-spotlight-veil-in 620ms ease-out both;
+}
+.home-spotlight__story.is-switching .home-spotlight__copy > * {
+  animation: home-hero-stage-in 460ms cubic-bezier(.22,.75,.28,1) both;
+}
+.home-spotlight__story.is-switching .home-spotlight__copy > * { animation-delay: 90ms; }
+
+/* The stop control pauses both the rotation and any in-flight image/story movement. */
+.home-discovery[data-motion="paused"] .home-spotlight__story,
+.home-discovery[data-motion="paused"] .home-spotlight__story.is-switching,
+.home-discovery[data-motion="paused"] .home-spotlight__story .home-spotlight__copy > *,
+.home-discovery[data-motion="paused"] .home-spotlight__story.is-switching .home-spotlight__copy > *,
+.home-discovery[data-motion="paused"] .home-hero__content > *,
+.home-discovery[data-motion="paused"] .home-spotlight,
+.home-discovery[data-motion="paused"] .home-spotlight__media img,
+.home-discovery[data-motion="paused"] .home-spotlight__media::after {
+  animation-play-state: paused;
+}
+.home-discovery[data-motion="paused"] .home-spotlight__story.is-switching,
+.home-discovery[data-motion="paused"] .home-spotlight__story.is-switching .home-spotlight__copy > * {
+  animation: none;
+}
+.home-discovery[data-motion="reduced"] .home-spotlight__story,
+.home-discovery[data-motion="reduced"] .home-spotlight,
+.home-discovery[data-motion="reduced"] .home-spotlight__story *,
+.home-discovery[data-motion="reduced"] .home-spotlight__story::before,
+.home-discovery[data-motion="reduced"] .home-spotlight__story::after,
+.home-discovery[data-motion="reduced"] .home-spotlight__media::before,
+.home-discovery[data-motion="reduced"] .home-spotlight__media::after,
+.home-discovery[data-motion="reduced"] .home-spotlight__media img,
+.home-discovery[data-motion="reduced"] .home-hero__content > * {
+  animation: none !important;
+  transition: none !important;
+}
+.home-discovery[data-motion="reduced"] button:hover,
+.home-discovery[data-motion="reduced"] button:active {
+  transform: none;
+}
+
+@keyframes home-hero-stage-in {
+  from { transform: translate3d(0, 9px, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes home-spotlight-frame-in {
+  from { transform: translate3d(0, 8px, 0) scale(.988); }
+  to { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes home-story-switch {
+  from { opacity: .9; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes home-image-drift {
+  from { transform: scale(1.045) translate3d(-.4%, .2%, 0); }
+  to { transform: scale(1.01) translate3d(.35%, -.25%, 0); }
+}
+@keyframes home-spotlight-veil-in {
+  from { opacity: .78; }
+  to { opacity: 1; }
 }

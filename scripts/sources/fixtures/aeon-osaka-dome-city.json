@@ -1,0 +1,58 @@
+{
+  "events": [
+    {
+      "id": 89716,
+      "file_name": "2609pokemon-shinka-rally2.html",
+      "is_published": true,
+      "html_path": "/sc/osakadomecity/event/2609pokemon-shinka-rally2.html",
+      "start_time": "2026-08-26 00:00:00 +0900",
+      "end_time": "2026-09-27 21:00:00 +0900",
+      "attachments": [{"attachment_path": "/sc/osakadomecity/event/detail/2609pokemon-shinka-rally2.html/attachment1/pokemon.jpg"}],
+      "body": "歴代の『ポケットモンスター』シリーズをテーマにしたデジタルスタンプラリー。第2弾：9月4日(金)〜27日(日)。最後まで進化させるとオリジナルデザインの壁紙をゲットできます!",
+      "title": "『ポケモンしんかラリー』第2弾スタート!!",
+      "title_oneline": "『ポケモンしんかラリー』第2弾スタート!!",
+      "display_event_date": "9月4日(金)〜27日(日)",
+      "display_event_time": "",
+      "display_event_place": "1階：千鳥屋前"
+    },
+    {
+      "id": 89608,
+      "file_name": "event_e89608_as.html",
+      "is_published": true,
+      "html_path": "/sc/osakadomecity/event/event_e89608_as.html",
+      "start_time": "2026-09-01 12:00:00 +0900",
+      "end_time": "2026-10-04 18:00:00 +0900",
+      "event_calendar_schedules": [{"calendar_start_date": "2026-09-29", "calendar_end_date": "2026-10-04"}],
+      "attachments": [{"attachment_path": "/sc/osakadomecity/event/detail/event_e89608_as.html/attachment1/seasonal.jpg"}],
+      "body": "彩り豊かないちご大福やもちもち食感の団子など、人気の和菓子をご用意しております。",
+      "title": "季節の和菓子　食物販イベント",
+      "title_oneline": "季節の和菓子　食物販イベント",
+      "display_event_date": "9月29日〜10月4日",
+      "display_event_time": "10：00〜19：00",
+      "display_event_place": "1階「乃が美」前スペース"
+    },
+    {
+      "id": 89000,
+      "file_name": "free-family-event.html",
+      "is_published": true,
+      "html_path": "/sc/osakadomecity/event/free-family-event.html",
+      "start_time": "2026-09-13 00:00:00 +0900",
+      "end_time": "2026-09-13 21:00:00 +0900",
+      "attachments": [],
+      "body": "親子で参加できる無料イベントです。",
+      "title": "親子で楽しむ館内イベント",
+      "title_oneline": "親子で楽しむ館内イベント",
+      "display_event_date": "9月13日(日)",
+      "display_event_time": "13：00〜15：00",
+      "display_event_place": "3階 キャッスル広場"
+    },
+    {
+      "id": 88999,
+      "file_name": "not-published.html",
+      "is_published": false,
+      "start_time": "2026-09-01 00:00:00 +0900",
+      "end_time": "2026-09-30 21:00:00 +0900",
+      "title": "非公開データ"
+    }
+  ]
+}
