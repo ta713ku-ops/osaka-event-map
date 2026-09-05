@@ -32,18 +32,22 @@ jobs:
         with:
           path: |
             data/sources/collection-report.json
+            data/sources/coverage-report.json
             data/sources/270008_event.csv
           key: osaka-event-collection-${{ github.repository }}-${{ github.run_id }}
           restore-keys: |
             osaka-event-collection-${{ github.repository }}-
       - name: Refresh official event sources
         run: npm run collect
+      - name: Audit registered coverage and official discovery pages
+        run: npm run audit:coverage
       - name: Save last-good collection snapshot
         if: success()
         uses: actions/cache/save@v4
         with:
           path: |
             data/sources/collection-report.json
+            data/sources/coverage-report.json
             data/sources/270008_event.csv
           key: osaka-event-collection-${{ github.repository }}-${{ github.run_id }}
       - run: npm run typecheck

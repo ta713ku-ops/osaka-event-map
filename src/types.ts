@@ -82,3 +82,51 @@ export interface EventDataFile {
   sources?: EventSource[];
   events: EventItem[];
 }
+
+/**
+ * A deliberately separate contract for the optional collection-coverage
+ * snapshot. Coverage describes what we monitor; it is not an event count and
+ * must never be used as a substitute for EventDataFile.events.
+ */
+export type CoverageHealth = 'tracked' | 'healthy' | 'warning' | 'gap';
+
+export interface CoverageDimension {
+  id: string;
+  name: string;
+  status: CoverageHealth;
+  count?: number;
+  checkedAt?: string;
+  url?: string;
+  note?: string;
+}
+
+export interface CoverageCandidateItem {
+  id: string;
+  name: string;
+  discoveredFrom?: string;
+  officialUrl?: string;
+  detectedAt?: string;
+  verification?: string;
+  note?: string;
+}
+
+export interface CoverageSummary {
+  tracked?: number;
+  healthy?: number;
+  warning?: number;
+  gap?: number;
+  total?: number;
+  records?: number;
+  sources?: CoverageDimension[];
+}
+
+export interface CoverageDataFile {
+  schemaVersion?: number;
+  generatedAt?: string;
+  summary?: CoverageSummary;
+  sources?: CoverageDimension[];
+  categories?: CoverageDimension[];
+  venues?: CoverageDimension[];
+  candidates?: CoverageCandidateItem[];
+  limitations?: string[];
+}

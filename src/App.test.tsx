@@ -21,6 +21,15 @@ const events = {
     { id: 'event-unknown', eventName: '場所未確認の音楽会', category: 'music', startDate: '2099-09-02', startTime: '18:00', endTime: '21:00', latitude: null, longitude: null, tags: ['celebrity'] as const },
   ],
 };
+const coverage = {
+  schemaVersion: 1,
+  generatedAt: '2026-09-01T00:00:00+09:00',
+  summary: { tracked: 1, healthy: 1, warning: 0, gap: 1 },
+  sources: [{ id: 'coverage-source', name: '収集範囲テスト', status: 'healthy', eventCount: 3 }],
+  categories: [], venues: [], candidates: [], limitations: [],
+};
+
+const responseFor = (url: unknown, eventData: unknown = events) => ({ ok: true, json: async () => String(url).includes('coverage.json') ? coverage : eventData });
 
 async function openFirstFeaturedEvent() {
   await screen.findAllByText('中之島ナイトマーケット');
@@ -31,7 +40,7 @@ async function openFirstFeaturedEvent() {
 
 describe('App editorial home integration', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => events }));
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url) => responseFor(url)));
     const values = new Map<string, string>([['dokoiko-osaka-profile-v1', JSON.stringify({ companion: 'ひとり', transport: '電車' })]]);
     vi.stubGlobal('localStorage', { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => values.set(key, value), removeItem: (key: string) => values.delete(key), clear: () => values.clear() });
   });
@@ -61,12 +70,18 @@ describe('App editorial home integration', () => {
   });
 
   it('retries a failed event load in place', async () => {
-    const fetchMock = vi.fn().mockRejectedValueOnce(new Error('offline')).mockResolvedValueOnce({ ok: true, json: async () => events });
+    let eventAttempts = 0;
+    const fetchMock = vi.fn().mockImplementation(async (url) => {
+      if (String(url).includes('coverage.json')) return responseFor(url);
+      eventAttempts += 1;
+      if (eventAttempts === 1) throw new Error('offline');
+      return responseFor(url);
+    });
     vi.stubGlobal('fetch', fetchMock);
     render(<App />);
     expect(await screen.findByRole('alert')).toHaveTextContent('イベント情報を読み込めませんでした');
     fireEvent.click(screen.getByRole('button', { name: 'もう一度読み込む' }));
-    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(eventAttempts).toBe(2));
   });
 
   it('opens Apple and Google map URLs from details', async () => {
@@ -139,7 +154,7 @@ describe('App editorial home integration', () => {
       id: `event-extra-${index}`, eventName: `追加イベント${index + 1}`, category: 'market', venueName: `会場${index + 1}`,
       address: `大阪市北区${index + 1}`, startDate: '2099-09-03', latitude: 34.6 + index / 1000, longitude: 135.5,
     }));
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ...events, events: [...events.events, ...extra] }) }));
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url) => responseFor(url, { ...events, events: [...events.events, ...extra] })));
     render(<App />);
     fireEvent.click(await screen.findByRole('button', { name: /地図で近さを見る/ }));
     expect(document.querySelectorAll('.event-row')).toHaveLength(20);

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "scope": "大阪府内の公式イベント入口・主要会場を継続確認するための登録台帳",
+  "categories": [
+    { "id": "festival", "label": "祭り・地域行事", "sourceIds": ["bodik-osaka", "osaka-city-events", "osaka-info-events"] },
+    { "id": "exhibition", "label": "展覧会・美術館", "sourceIds": ["osaka-art-museum", "nakka-art-museum", "osaka-natural-history-museum", "ghibli-park-exhibition-osaka"] },
+    { "id": "music", "label": "音楽・ライブ", "sourceIds": ["festival-hall", "zepp-namba"] },
+    { "id": "theater", "label": "演劇・舞台", "sourceIds": ["festival-hall"] },
+    { "id": "workshop", "label": "体験・親子", "sourceIds": ["bodik-osaka", "aeon-osaka-dome-city", "aeon-dainichi", "aeon-hineno", "aeon-ibaraki"] },
+    { "id": "market", "label": "商業施設・物産", "sourceIds": ["hankyu-umeda", "aeon-osaka-dome-city", "aeon-dainichi", "aeon-hineno", "aeon-ibaraki"] },
+    { "id": "seasonal", "label": "季節・公園", "sourceIds": ["bodik-osaka", "osaka-info-events"] },
+    { "id": "amusement", "label": "テーマパーク", "sourceIds": [] }
+  ],
+  "sources": [
+    { "id": "bodik-osaka", "name": "大阪府オープンデータ（BODIK）", "url": "https://data.bodik.jp/dataset/270008_event" },
+    { "id": "osaka-city-events", "name": "大阪市イベント情報", "url": "https://www.city.osaka.lg.jp/main/event2/curr.html" },
+    { "id": "osaka-info-events", "name": "大阪公式観光情報 OSAKA-INFO", "url": "https://osaka-info.jp/event/" },
+    { "id": "osaka-art-museum", "name": "大阪市立美術館", "url": "https://www.osaka-art-museum.jp/planned_exhibition" },
+    { "id": "nakka-art-museum", "name": "大阪中之島美術館", "url": "https://nakka-art.jp/exhibition/held/" },
+    { "id": "festival-hall", "name": "フェスティバルホール", "url": "https://www.festivalhall.jp/events/list/" },
+    { "id": "aeon-osaka-dome-city", "name": "イオンモール大阪ドームシティ", "url": "https://www.aeon.jp/sc/osakadomecity/event/" },
+    { "id": "aeon-dainichi", "name": "イオンモール大日", "url": "https://www.aeon.jp/sc/dainichi/event/" },
+    { "id": "aeon-hineno", "name": "イオンモール日根野", "url": "https://www.aeon.jp/sc/hineno/event/" },
+    { "id": "aeon-ibaraki", "name": "イオンモール茨木", "url": "https://www.aeon.jp/sc/ibaraki/event/" },
+    { "id": "hankyu-umeda", "name": "阪急うめだ本店", "url": "https://www.hankyu-dept.co.jp/honten/event/" },
+    { "id": "osaka-natural-history-museum", "name": "大阪市立自然史博物館", "url": "https://omnh.jp/" },
+    { "id": "zepp-namba", "name": "Zepp Namba (OSAKA)", "url": "https://www.zepp.co.jp/hall/namba/schedule/" },
+    { "id": "ghibli-park-exhibition-osaka", "name": "ジブリパーク展 大阪公式", "url": "https://ghiblipark-exhibition.jp/osaka/index.html" },
+    { "id": "atc-events", "name": "ATC公式イベント一覧", "url": "https://www.atc-co.com/event/" }
+  ],
+  "venues": [
+    { "id": "atc", "name": "大阪南港ATC", "aliases": ["大阪南港ＡＴＣ", "ATCギャラリー"], "category": "exhibition", "url": "https://www.atc-co.com/event/", "sourceIds": ["atc-events", "ghibli-park-exhibition-osaka"] },
+    { "id": "osaka-art", "name": "大阪市立美術館", "category": "exhibition", "url": "https://www.osaka-art-museum.jp/", "sourceIds": ["osaka-art-museum"] },
+    { "id": "nakka", "name": "大阪中之島美術館", "category": "exhibition", "url": "https://nakka-art.jp/", "sourceIds": ["nakka-art-museum"] },
+    { "id": "natural-history", "name": "大阪市立自然史博物館", "category": "exhibition", "url": "https://omnh.jp/", "sourceIds": ["osaka-natural-history-museum"] },
+    { "id": "festival-hall", "name": "フェスティバルホール", "category": "music", "url": "https://www.festivalhall.jp/", "sourceIds": ["festival-hall"] },
+    { "id": "zepp-namba", "name": "Zepp Namba (OSAKA)", "category": "music", "url": "https://www.zepp.co.jp/hall/namba/", "sourceIds": ["zepp-namba"] },
+    { "id": "hankyu-umeda", "name": "阪急うめだ本店", "category": "market", "url": "https://www.hankyu-dept.co.jp/honten/", "sourceIds": ["hankyu-umeda"] },
+    { "id": "aeon-dome", "name": "イオンモール大阪ドームシティ", "category": "market", "url": "https://www.aeon.jp/sc/osakadomecity/", "sourceIds": ["aeon-osaka-dome-city"] },
+    { "id": "aeon-dainichi", "name": "イオンモール大日", "category": "market", "url": "https://www.aeon.jp/sc/dainichi/", "sourceIds": ["aeon-dainichi"] },
+    { "id": "aeon-hineno", "name": "イオンモール日根野", "category": "market", "url": "https://www.aeon.jp/sc/hineno/", "sourceIds": ["aeon-hineno"] },
+    { "id": "aeon-ibaraki", "name": "イオンモール茨木", "category": "market", "url": "https://www.aeon.jp/sc/ibaraki/", "sourceIds": ["aeon-ibaraki"] },
+    { "id": "expo-park", "name": "万博記念公園", "category": "seasonal", "url": "https://www.expo70-park.jp/events/", "sourceIds": [] },
+    { "id": "hirakata-park", "name": "ひらかたパーク", "category": "amusement", "url": "https://www.hirakatapark.co.jp/topics/?p=event", "sourceIds": [] },
+    { "id": "osaka-castle", "name": "大阪城公園", "category": "seasonal", "url": "https://www.osakacastlepark.jp/events/index.html?lang=ja", "sourceIds": [] },
+    { "id": "kaiyukan", "name": "海遊館", "category": "amusement", "url": "https://www.kaiyukan.com/connect/events/", "sourceIds": [] },
+    { "id": "tennoji-zoo", "name": "天王寺動物園", "category": "amusement", "url": "https://www.tennojizoo.jp/event/", "sourceIds": [] },
+    { "id": "national-art-osaka", "name": "国立国際美術館", "category": "exhibition", "url": "https://www.nmao.go.jp/events/", "sourceIds": [] },
+    { "id": "history-museum", "name": "大阪歴史博物館", "category": "exhibition", "url": "https://www.osakamushis.jp/news/", "sourceIds": [] },
+    { "id": "science-museum", "name": "大阪市立科学館", "category": "exhibition", "url": "https://www.sci-museum.jp/event/", "sourceIds": [] },
+    { "id": "oriental-ceramics", "name": "大阪市立東洋陶磁美術館", "category": "exhibition", "url": "https://www.moco.or.jp/exhibition/", "sourceIds": [] },
+    { "id": "nhk-osaka-hall", "name": "NHK大阪ホール", "category": "theater", "url": "https://www.nhk-osakahall.jp/event/", "sourceIds": [] },
+    { "id": "fenice-sakai", "name": "フェニーチェ堺", "category": "theater", "url": "https://www.fenice-sacay.jp/event/", "sourceIds": [] },
+    { "id": "grand-cube", "name": "大阪府立国際会議場", "category": "theater", "url": "https://www.gco.co.jp/event/", "sourceIds": [] },
+    { "id": "orix-theater", "name": "オリックス劇場", "category": "theater", "url": "https://www.orixtheater.jp/schedule/", "sourceIds": [] },
+    { "id": "billboard-osaka", "name": "ビルボードライブ大阪", "category": "music", "url": "https://www.billboard-live.com/osaka/schedules", "sourceIds": [] },
+    { "id": "umeda-arts", "name": "梅田芸術劇場", "category": "theater", "url": "https://www.umegei.com/schedule/", "sourceIds": [] },
+    { "id": "grand-front", "name": "グランフロント大阪", "category": "market", "url": "https://www.grandfront-osaka.jp/event/", "sourceIds": [] },
+    { "id": "lucua", "name": "ルクア大阪", "category": "market", "url": "https://www.lucua.jp/topics/", "sourceIds": [] },
+    { "id": "namba-parks", "name": "なんばパークス", "category": "market", "url": "https://nambaparks.com/event", "sourceIds": [] },
+    { "id": "abeno-harukas", "name": "あべのハルカス近鉄本店", "category": "market", "url": "https://abenoharukas.d-kintetsu.co.jp/event/", "sourceIds": [] }
+  ],
+  "discoveryEntrypoints": [
+    { "id": "atc-discovery", "name": "ATC公式イベント", "url": "https://www.atc-co.com/event/", "maxCandidates": 60 },
+    { "id": "expo-discovery", "name": "万博記念公園イベント", "url": "https://www.expo70-park.jp/events/", "maxCandidates": 60 },
+    { "id": "hirakata-discovery", "name": "ひらかたパークイベント", "url": "https://www.hirakatapark.co.jp/topics/?p=event", "maxCandidates": 60 },
+    { "id": "castle-discovery", "name": "大阪城公園イベント", "url": "https://www.osakacastlepark.jp/events/index.html?lang=ja", "maxCandidates": 60 }
+  ],
+  "candidateSeeds": [
+    { "id": "ghibli-park-exhibition-osaka-2026", "title": "ジブリパーク展", "priority": "high", "discoveredFrom": "ジブリパーク展 大阪公式", "officialCandidateUrl": "https://ghiblipark-exhibition.jp/osaka/index.html", "keywords": ["ジブリパーク展", "大阪南港ATCギャラリー"] }
+  ],
+  "limitations": [
+    "台帳登録済みでも収集アダプター未実装の会場は未対応として表示します。",
+    "掲載数に上限は設けていませんが、公式サイトの公開範囲・HTML変更・開催情報の粒度に左右されます。"
+  ]
+}

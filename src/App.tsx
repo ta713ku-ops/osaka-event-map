@@ -7,6 +7,7 @@ import { EventSheet, type EventSheetEvent } from './components/EventSheet';
 import { FilterSheet, type EventFilters } from './components/FilterSheet';
 import { ProfileDialog, type Profile } from './components/ProfileDialog';
 import { HomeDiscovery, type HomeEvent } from './components/HomeDiscovery';
+import { CoverageStatus, parseCoverageData, type CoverageData } from './components/CoverageStatus';
 import {
   appleMapsUrl,
   calculateDistanceKm,
@@ -117,6 +118,9 @@ export function App() {
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [locationNotice, setLocationNotice] = useState('');
   const [data, setData] = useState<DataFile | null>(null);
+  const [coverage, setCoverage] = useState<CoverageData | null>(null);
+  const [coverageError, setCoverageError] = useState('');
+  const [coverageAttempt, setCoverageAttempt] = useState(0);
   const [error, setError] = useState('');
   const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
   const [query, setQuery] = useState('');
@@ -144,6 +148,25 @@ export function App() {
       });
     return () => controller.abort();
   }, [loadAttempt]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setCoverageError('');
+    fetch(`${import.meta.env.BASE_URL}data/coverage.json`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json() as Promise<unknown>;
+      })
+      .then((value) => {
+        const parsed = parseCoverageData(value);
+        if (!parsed) throw new Error('invalid coverage data');
+        setCoverage(parsed);
+      })
+      .catch((reason: unknown) => {
+        if ((reason as { name?: string }).name !== 'AbortError') setCoverageError('収集範囲を読み込めませんでした。');
+      });
+    return () => controller.abort();
+  }, [coverageAttempt]);
 
   const now = useMemo(() => new Date(), [data, timeFilter, filters]);
   const userProfile = useMemo(() => domainProfile(profile), [profile]);
@@ -265,7 +288,10 @@ export function App() {
         activeFilterCount={activeFilterCount}
         loading={!data && !error}
         error={error}
-        sourceStatus={data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : undefined}
+        sourceStatus={<>
+          <CoverageStatus data={coverage} loading={!coverage && !coverageError} error={coverageError} onRetry={() => setCoverageAttempt((value) => value + 1)} />
+          {data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : null}
+        </>}
         onReset={() => { setQuery(''); setTimeFilter('all'); setFilters({}); setLoadAttempt((value) => value + 1); }}
       /> : <>
       <section className="time-toolbar" aria-label="開催日の絞り込み">
@@ -318,6 +344,7 @@ export function App() {
           {mapListLimit < ranked.length && <button type="button" className="map-more-button" onClick={() => setMapListLimit((limit) => Math.min(ranked.length, limit + 20))}>もっと見る（残り {ranked.length - mapListLimit}件）</button>}
           {data && <p className="data-note">公式公開データと公式サイトの情報を利用しています。内容は参加前に公式サイトで確認してください。</p>}
           {data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : null}
+          <CoverageStatus data={coverage} loading={!coverage && !coverageError} error={coverageError} onRetry={() => setCoverageAttempt((value) => value + 1)} />
         </aside>
 
         <section className="map-panel" aria-label="大阪府イベントマップ">

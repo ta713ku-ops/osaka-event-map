@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-04T20:36:15.543Z",
+  "generatedAt": "2026-09-05T09:34:35.176Z",
   "freshness": "cached",
-  "eventCount": 248,
+  "eventCount": 270,
   "sources": [
     {
       "id": "bodik-osaka",
@@ -10,7 +10,7 @@
       "url": "https://data.bodik.jp/dataset/270008_event",
       "status": "success",
       "count": 42,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "osaka-city-events",
@@ -18,7 +18,7 @@
       "url": "https://www.city.osaka.lg.jp/main/event2/curr.html",
       "status": "success",
       "count": 4,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "osaka-info-events",
@@ -26,7 +26,7 @@
       "url": "https://osaka-info.jp/event/",
       "status": "success",
       "count": 40,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "osaka-art-museum",
@@ -34,7 +34,7 @@
       "url": "https://www.osaka-art-museum.jp/planned_exhibition",
       "status": "success",
       "count": 5,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "nakka-art-museum",
@@ -42,7 +42,7 @@
       "url": "https://nakka-art.jp/exhibition/held/",
       "status": "success",
       "count": 7,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "festival-hall",
@@ -50,7 +50,7 @@
       "url": "https://www.festivalhall.jp/events/list/",
       "status": "success",
       "count": 23,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "aeon-osaka-dome-city",
@@ -58,7 +58,7 @@
       "url": "https://www.aeon.jp/sc/osakadomecity/event/",
       "status": "success",
       "count": 17,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "hankyu-umeda",
@@ -66,7 +66,7 @@
       "url": "https://www.hankyu-dept.co.jp/honten/event/",
       "status": "success",
       "count": 31,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "aeon-dainichi",
@@ -74,7 +74,7 @@
       "url": "https://www.aeon.jp/sc/dainichi/event/",
       "status": "success",
       "count": 43,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "aeon-hineno",
@@ -82,15 +82,15 @@
       "url": "https://www.aeon.jp/sc/hineno/event/",
       "status": "success",
       "count": 30,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "aeon-ibaraki",
       "name": "イオンモール茨木",
       "url": "https://www.aeon.jp/sc/ibaraki/event/",
       "status": "success",
-      "count": 26,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "count": 25,
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "osaka-natural-history-museum",
@@ -98,15 +98,31 @@
       "url": "https://omnh.jp/",
       "status": "success",
       "count": 4,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     },
     {
       "id": "zepp-namba",
       "name": "Zepp Namba (OSAKA)",
       "url": "https://www.zepp.co.jp/hall/namba/schedule/",
       "status": "success",
-      "count": 13,
-      "checkedAt": "2026-09-04T20:36:15.543Z"
+      "count": 18,
+      "checkedAt": "2026-09-05T09:34:35.176Z"
+    },
+    {
+      "id": "ghibli-park-exhibition-osaka",
+      "name": "ジブリパーク展 大阪公式",
+      "url": "https://ghiblipark-exhibition.jp/osaka/index.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-05T09:34:35.176Z"
+    },
+    {
+      "id": "atc-events",
+      "name": "ATC公式イベント一覧",
+      "url": "https://www.atc-co.com/event/",
+      "status": "success",
+      "count": 17,
+      "checkedAt": "2026-09-05T09:34:35.176Z"
     }
   ]
 }

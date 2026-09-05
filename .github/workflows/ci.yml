@@ -17,4 +17,5 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run test:collect
+      - run: npm run audit:coverage:cached
       - run: npm run build

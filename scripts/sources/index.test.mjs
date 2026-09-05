@@ -13,6 +13,8 @@ import {
 
 const NOW = new Date('2026-09-04T12:00:00+09:00');
 const FIXTURE_ROOT = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
+const GHIBLI_FIXTURE = `<h1>開催概要</h1><div class="mv-date">2026年7月18日～9月26日</div><div class="mv-venue">大阪南港ATCギャラリー 〒559-0034 大阪市住之江区南港北2-1-10</div><ul><li><h3>展覧会名</h3><p>ジブリパーク展</p></li><li><h3>会期</h3><p>2026年7月18日～9月26日</p></li><li><h3>会場</h3><p>大阪南港ATCギャラリー 〒559-0034 大阪市住之江区南港北2-1-10</p></li></ul>`;
+const ATC_FIXTURE = `<script>const atcEventList = {"preload":[{"title":"ATCテストイベント","url":"/event/test/","location":"ATCホール","date_ymd":"2026-09-20","end_ymd":"2026-09-20"}]};</script>`;
 
 function source(id, url) {
   return { id, name: id, url };
@@ -223,6 +225,8 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     ['https://omnh.jp/archives/14221', await fixture('omnh-event-14221.html')],
     ['https://omnh.jp/archives/14237', await fixture('omnh-event-14237.html')],
     [SOURCE_URLS.zeppNamba, await fixture('zepp-namba.html')],
+    [SOURCE_URLS.ghibliParkOsaka, GHIBLI_FIXTURE],
+    [SOURCE_URLS.atcEvents, ATC_FIXTURE],
   ]);
   const aeonJson = await fixture('aeon-osaka-dome-city.json');
   const aeonByIndexUrl = new Map([
@@ -249,7 +253,7 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
 
   const result = await collectAdditionalEvents({ fetchText, now: NOW });
   assert.equal(result.sources.length, ADDITIONAL_SOURCE_DEFINITIONS.length);
-  assert.equal(result.sources.length, 12);
+  assert.equal(result.sources.length, 14);
   assert.deepEqual([...new Set(result.sources.map((item) => item.status))], ['success']);
   assert.ok(result.events.length > 0);
   assert.ok(result.events.some((event) => event.sourceId === 'osaka-art-museum'));
@@ -271,7 +275,7 @@ test('source failures and changed markup are reported as error rather than succe
     now: NOW,
   });
   assert.equal(failed.events.length, 0);
-  assert.equal(failed.sources.length, 12);
+  assert.equal(failed.sources.length, 14);
   assert.ok(failed.sources.every((sourceReport) => sourceReport.status === 'error'));
   assert.ok(failed.sources.every((sourceReport) => /network unavailable/.test(sourceReport.error ?? '')));
 

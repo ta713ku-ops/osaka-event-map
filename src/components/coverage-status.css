@@ -1,0 +1,375 @@
+/*
+ * Coverage is intentionally a quiet editorial footnote: it is discoverable
+ * after the event cards, but never competes with the hero or the primary
+ * "今から選べる場所" route.
+ */
+.coverage-status {
+  width: 100%;
+  min-width: 0;
+  margin: 30px 0 0;
+  color: var(--text);
+}
+
+.coverage-status__disclosure {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, .92);
+  box-shadow: 0 8px 22px rgba(79, 48, 32, .06);
+}
+
+.coverage-status__disclosure > summary {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.coverage-status__disclosure > summary::marker { color: var(--primary); }
+.coverage-status__disclosure > summary::-webkit-details-marker { color: var(--primary); }
+.coverage-status__disclosure > summary:hover { background: rgba(247, 241, 231, .58); }
+
+.coverage-status__summary-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.coverage-status__summary-copy > strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font: 500 18px/1.25 Georgia, "Times New Roman", serif;
+}
+
+.coverage-status__summary-copy > small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.coverage-status__summary-hint {
+  flex: 0 0 auto;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.coverage-status__eyebrow {
+  margin: 0;
+  color: var(--primary);
+  font: 800 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.coverage-status__body {
+  min-width: 0;
+  padding: 18px 16px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.coverage-status__lead {
+  max-width: 58rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.coverage-status__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 14px 0 20px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.coverage-status__facts span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.coverage-status__facts strong {
+  color: var(--text);
+  font: 600 18px/1 Georgia, "Times New Roman", serif;
+}
+
+.coverage-status__grid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.coverage-status__grid > section,
+.coverage-status__confirmation,
+.coverage-status__candidates,
+.coverage-status__limitations {
+  min-width: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.coverage-status__grid h3,
+.coverage-status__confirmation h3,
+.coverage-status__candidates h3,
+.coverage-status__limitations h3 {
+  margin: 0 0 9px;
+  color: var(--text);
+  font: 600 15px/1.3 Georgia, "Times New Roman", serif;
+}
+
+.coverage-status__list,
+.coverage-status__candidate-list,
+.coverage-status__limitations ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.coverage-status__list {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.coverage-status__list > li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(216, 206, 193, .68);
+}
+
+.coverage-status__list > li:last-child { border-bottom: 0; }
+
+.coverage-status__state {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.coverage-status__state.is-tracked { color: var(--secondary); background: #eef3ef; }
+.coverage-status__state.is-healthy { color: var(--success); background: #edf7ee; }
+.coverage-status__state.is-warning { color: var(--warning); background: #fff7ed; }
+.coverage-status__state.is-gap { color: var(--muted); background: #f1ece5; }
+
+.coverage-status__item-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.coverage-status__item-copy strong,
+.coverage-status__item-copy a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.coverage-status__item-copy a,
+.coverage-status__candidate-list a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.coverage-status__item-copy small,
+.coverage-status__candidate-list small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.coverage-status__confirmation,
+.coverage-status__candidates,
+.coverage-status__limitations { margin-top: 18px; }
+
+.coverage-status__status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.coverage-status__status-item {
+  min-width: 0;
+  min-height: 54px;
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  padding: 7px 9px;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+  background: rgba(247, 241, 231, .62);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.coverage-status__status-item strong {
+  color: var(--text);
+  font: 600 19px/1 Georgia, "Times New Roman", serif;
+}
+
+.coverage-status__status-item.is-tracked { border-left-color: var(--secondary); }
+.coverage-status__status-item.is-healthy { border-left-color: var(--success); }
+.coverage-status__status-item.is-warning { border-left-color: var(--warning); }
+.coverage-status__status-item.is-gap { border-left-color: var(--muted); }
+
+.coverage-status__confirmation > p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.coverage-status__candidate-list {
+  display: grid;
+  gap: 8px;
+}
+
+.coverage-status__candidate-list > li {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  padding: 9px 10px;
+  border-left: 3px solid var(--warning);
+  background: #fff7ed;
+}
+
+.coverage-status__candidate-list strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.coverage-status__candidate-list > li > span {
+  color: var(--warning);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.coverage-status__candidate-list a { width: fit-content; font-size: 10px; }
+
+.coverage-status__limitations ul {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.coverage-status__limitations li { overflow-wrap: anywhere; }
+.coverage-status__limitations li::before { content: '・'; color: var(--primary); }
+
+.coverage-status__empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.coverage-status__state-card {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, .92);
+}
+
+.coverage-status__state-card h2 {
+  margin: 0;
+  font: 500 19px/1.3 Georgia, "Times New Roman", serif;
+}
+
+.coverage-status__state-card p:not(.coverage-status__eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.coverage-status__state-card.is-warning {
+  border-color: #e4b39e;
+  background: #fff7f1;
+}
+
+.coverage-status__state-card.is-warning h2 { color: #7b3927; }
+.coverage-status__state-card.is-warning p:not(.coverage-status__eyebrow) { color: #7c5142; }
+
+.coverage-status__state-card button {
+  width: fit-content;
+  min-height: 44px;
+  margin-top: 2px;
+  padding: 0 13px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  color: #fffdf8;
+  background: var(--primary);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.coverage-status__loading-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: coverage-pulse 1s ease-in-out infinite;
+}
+
+@keyframes coverage-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .45; }
+}
+
+@media (max-width: 760px) {
+  .coverage-status { margin-top: 26px; }
+  .coverage-status__disclosure > summary { min-height: 64px; padding: 9px 12px; }
+  .coverage-status__body { padding: 16px 12px 18px; }
+  .coverage-status__grid { grid-template-columns: 1fr; gap: 16px; }
+  .coverage-status__grid > section { padding-top: 12px; }
+  .coverage-status__status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coverage-status__summary-hint { font-size: 10px; }
+}
+
+@media (max-width: 390px) {
+  .coverage-status__disclosure > summary { gap: 8px; }
+  .coverage-status__summary-copy > strong { font-size: 16px; }
+  .coverage-status__summary-copy > small { font-size: 10px; }
+  .coverage-status__summary-hint { max-width: 5em; white-space: normal; line-height: 1.3; text-align: center; }
+  .coverage-status__facts { gap: 7px 13px; }
+  .coverage-status__facts strong { font-size: 17px; }
+  .coverage-status__state-card { padding: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coverage-status__loading-dot { animation: none; }
+}
