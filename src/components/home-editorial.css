@@ -5,7 +5,7 @@
 .home-hero h1 { margin: 0; font: 850 clamp(2.6rem, 5vw, 4.5rem)/1.02 -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; letter-spacing: -.075em; }
 .home-hero h1 strong { color: #a84422; font: inherit; }
 .home-hero__content > p:not(.home-hero__eyebrow) { max-width: 25rem; margin: 20px 0 25px; color: #725d4d; font-size: 14px; line-height: 1.8; }
-.home-spotlight { display: grid; grid-template-columns: 1.1fr .9fr; min-width: 0; background: #d8784c; border-radius: 9px; overflow: hidden; color: #fffaf1; }
+.home-spotlight { display: grid; grid-template-columns: 1.1fr .9fr; min-width: 0; background: #d8784c; border-radius: 9px; overflow: hidden; color: #fffaf1; touch-action: pan-y; }
 .home-spotlight__media { position: relative; min-height: 310px; }
 .home-spotlight__media img { width: 100%; height: 100%; object-fit: cover; }
 .home-spotlight__media > span, .home-event-card__media em { position: absolute; left: 10px; bottom: 10px; padding: 3px 6px; color: #fffaf1; background: rgba(45,25,15,.72); font: 700 10px ui-monospace, monospace; font-style: normal; }
@@ -100,6 +100,7 @@
 .editorial-section__heading h2 { margin:0; color:#171311; font:500 clamp(1.65rem,3vw,2.35rem)/1.1 Georgia, 'Yu Mincho', serif; }
 .editorial-section__heading > span { color:#766b62; font-size:12px; }
 .editorial-rail { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.editorial-empty { margin: 0; padding: 18px; color: #725d4d; background: #f7efdf; border: 1px dashed #d6c2aa; border-radius: 8px; }
 .editorial-mini-card { display:grid; grid-template-columns:120px 1fr; grid-template-rows:auto auto 1fr; column-gap:14px; text-align:left; padding:0 0 14px; border:0; border-bottom:1px solid #d8cec1; background:none; color:#171311; cursor:pointer; }
 .editorial-mini-card:focus-visible, .editorial-upcoming-card:focus-visible { outline:3px solid rgba(179,58,47,.58); outline-offset:4px; }
 .editorial-mini-card__media { grid-row:1 / span 3; height:132px; position:relative; overflow:hidden; background:#e8e0d5; }
@@ -228,4 +229,17 @@
 @keyframes home-spotlight-veil-in {
   from { opacity: .78; }
   to { opacity: 1; }
+}
+
+/* Compact touch controls keep the existing palette and typography. */
+.home-spotlight__controls { gap: 4px; flex-wrap: wrap; }
+.home-spotlight__arrow { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; border: 1px solid #ffffff80; border-radius: 50%; color: #fffaf1; background: #183c3280; cursor: pointer; }
+.home-spotlight__arrow:disabled { opacity: .4; cursor: default; }
+.home-spotlight__position { min-width: 36px; text-align: center; color: #fffaf1; font-size: 12px; font-variant-numeric: tabular-nums; }
+.home-spotlight:focus-visible, .home-spotlight__controls button:focus-visible, .home-spotlight__copy button:focus-visible { outline: 3px solid #b33a2f; outline-offset: 3px; }
+.home-spotlight__media { cursor: pointer; user-select: none; }
+.home-spotlight__media img { -webkit-user-drag: none; }
+.home-spotlight__controls .home-motion-toggle { margin-left: auto; }
+@media (max-width: 760px) {
+  .home-spotlight__controls .home-spotlight__dots { display: none; }
 }

@@ -9,6 +9,7 @@
     "collect": "node scripts/collect-events.mjs",
     "audit:coverage": "node scripts/audit-coverage.mjs",
     "audit:coverage:cached": "node scripts/audit-coverage.mjs --cached",
+    "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "build": "npm run collect:cached && npm run audit:coverage:cached && tsc -b && vite build",
     "collect:cached": "node scripts/collect-events.mjs --cached",
     "test:collect": "node --test scripts/*.test.mjs scripts/sources/*.test.mjs",

@@ -180,4 +180,55 @@ describe('HomeDiscovery', () => {
     expect(document.querySelector('.home-spotlight__media img')).toHaveAttribute('src', 'https://example.test/2.jpg');
     expect(document.querySelector('.home-spotlight__story')).toHaveClass('is-switching');
   });
+
+  it('wraps with arrow controls and supports keyboard arrows', () => {
+    const events = ['a', 'b', 'c'].map((id) => event(id, `矢印${id}`));
+    renderHome({ events });
+    fireEvent.click(screen.getByRole('button', { name: '前の注目イベント' }));
+    expect(screen.getByRole('heading', { name: '矢印c' })).toBeInTheDocument();
+    fireEvent.keyDown(screen.getByLabelText('注目イベント'), { key: 'ArrowRight' });
+    expect(screen.getByRole('heading', { name: '矢印a' })).toBeInTheDocument();
+  });
+
+  it('keeps auto rotation paused for ten seconds after a manual change', () => {
+    vi.useFakeTimers();
+    renderHome({ events: ['a', 'b', 'c'].map((id) => event(id, `待機${id}`)) });
+    fireEvent.click(screen.getByRole('button', { name: '次の注目イベント' }));
+    act(() => vi.advanceTimersByTime(9999));
+    expect(screen.getByRole('heading', { name: '待機b' })).toBeInTheDocument();
+    act(() => vi.advanceTimersByTime(2));
+    expect(screen.getByRole('heading', { name: '待機c' })).toBeInTheDocument();
+  });
+
+  it('does not switch for a vertical touch gesture and cancels detail after horizontal swipe', () => {
+    vi.stubGlobal('PointerEvent', MouseEvent);
+    const onSelectEvent = vi.fn();
+    renderHome({ events: ['a', 'b'].map((id) => event(id, `タッチ${id}`)), onSelectEvent });
+    const hero = screen.getByLabelText('注目イベント');
+    fireEvent.pointerDown(hero, { pointerType: 'touch', clientX: 100, clientY: 100 });
+    fireEvent.pointerUp(hero, { pointerType: 'touch', clientX: 105, clientY: 180 });
+    expect(screen.getByRole('heading', { name: 'タッチa' })).toBeInTheDocument();
+    fireEvent.pointerDown(hero, { pointerType: 'touch', clientX: 180, clientY: 100 });
+    fireEvent.pointerUp(hero, { pointerType: 'touch', clientX: 80, clientY: 105 });
+    fireEvent.click(screen.getByRole('button', { name: /詳細を見る/ }));
+    expect(onSelectEvent).not.toHaveBeenCalled();
+    expect(screen.getByRole('heading', { name: 'タッチb' })).toBeInTheDocument();
+  });
+
+  it('uses only explicit today events and shows an empty state when absent', () => {
+    renderHome({ events: [{ ...event('ongoing'), ongoing: true }], todayEvents: [] });
+    expect(screen.getByRole('heading', { name: '本日開催のおすすめ' })).toBeInTheDocument();
+    expect(screen.getByText(/本日開催の確定したおすすめはありません/)).toBeInTheDocument();
+    cleanup();
+    renderHome({ events: [], totalCount: 0, todayEvents: [event('today', '今日だけ')] });
+    expect(screen.getByRole('button', { name: /今日だけ/ })).toBeInTheDocument();
+  });
+
+  it('keeps the active spotlight id when large events reorder', () => {
+    const largeEvents = ['a', 'b'].map((id) => event(id, `並び${id}`));
+    const { rerender, props } = renderHome({ events: largeEvents, largeEvents });
+    fireEvent.click(screen.getByRole('button', { name: '次の注目イベント' }));
+    rerender(<HomeDiscovery {...props} largeEvents={[largeEvents[1], largeEvents[0]]} />);
+    expect(screen.getByRole('heading', { name: '並びb' })).toBeInTheDocument();
+  });
 });

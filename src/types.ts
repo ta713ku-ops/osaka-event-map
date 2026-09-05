@@ -23,6 +23,14 @@ export interface EventProvenance {
   lastCheckedAt?: string;
   evidence?: string;
 }
+export interface RecommendationEvidence {
+  verified?: string; official?: boolean; publishedHours?: string;
+  scale?: 'major' | 'medium' | 'local'; season?: string; topic?: string;
+  osakaUnique?: string; organizer?: string; access?: string; reservation?: string;
+}
+export interface EventSchedule {
+  evidence?: string; weekdays?: number[]; closedDates?: string[]; daily?: boolean; dates?: string[];
+}
 
 export interface EventItem {
   id: string;
@@ -59,6 +67,8 @@ export interface EventItem {
   tagEvidence?: Record<string, string>;
   provenance?: EventProvenance[];
   lastCheckedAt?: string;
+  recommendationEvidence?: RecommendationEvidence;
+  schedule?: EventSchedule;
   [key: string]: unknown;
 }
 

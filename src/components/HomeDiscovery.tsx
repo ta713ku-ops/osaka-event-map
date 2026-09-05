@@ -1,4 +1,4 @@
-import { ArrowRight, MapPinned, Pause, Play, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MapPinned, Pause, Play, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
 import * as React from 'react';
 import './home-editorial.css';
 
@@ -17,6 +17,7 @@ export type HomeEvent = {
 };
 
 const STORY_SWITCH_MS = 520;
+const MANUAL_PAUSE_MS = 10000;
 
 function travelLabel(minutes?: number | null) {
   return typeof minutes === 'number' && Number.isFinite(minutes) ? `約${minutes}分` : '場所を確認';
@@ -24,6 +25,8 @@ function travelLabel(minutes?: number | null) {
 
 type Props = {
   events: HomeEvent[];
+  largeEvents?: HomeEvent[];
+  todayEvents?: HomeEvent[];
   totalCount: number;
   liveCount: number;
   query: string;
@@ -49,7 +52,7 @@ function EventMedia({ event, labelElement = 'span' }: { event: HomeEvent; labelE
 }
 
 export function HomeDiscovery({
-  events, totalCount, liveCount, query, onQueryChange, timeFilter, timeFilters,
+  events, largeEvents, todayEvents = [], totalCount, liveCount, query, onQueryChange, timeFilter, timeFilters,
   onTimeFilterChange, onShowMap, onSelectEvent, onOpenFilters, activeFilterCount,
   loading, error, sourceStatus, onReset,
 }: Props) {
@@ -62,9 +65,16 @@ export function HomeDiscovery({
   const [storyMotionId, setStoryMotionId] = React.useState<string | null>(null);
   const spotlightRegionRef = React.useRef<HTMLElement>(null);
   const spotlightIndexRef = React.useRef(0);
+  const manualPauseUntilRef = React.useRef(0);
+  const swipeStartRef = React.useRef<{x:number;y:number}|null>(null);
+  const swipedRef = React.useRef(false);
+  const [manualVersion, setManualVersion] = React.useState(0);
+  const activeIdRef = React.useRef<string | undefined>(undefined);
+  const [inView, setInView] = React.useState(true);
+  const pointerActiveRef = React.useRef(false);
   const storyTransitionTimerRef = React.useRef<number | undefined>(undefined);
   const featured = events.slice(0, visibleCount);
-  const spotlights = React.useMemo(() => {
+  const fallbackSpotlights = React.useMemo(() => {
     const imageCandidates = events.filter((event) => event.imageUrl?.trim());
     if (!imageCandidates.length) return events.slice(0, 4);
     const chosen: HomeEvent[] = [];
@@ -104,12 +114,14 @@ export function HomeDiscovery({
     }
     return chosen;
   }, [events]);
+  const spotlights = largeEvents ?? fallbackSpotlights;
   const spotlightIds = React.useMemo(() => spotlights.map((event) => event.id).join('\u0001'), [spotlights]);
   const spotlightsRef = React.useRef(spotlights);
   spotlightsRef.current = spotlights;
   const safeSpotlightIndex = spotlights.length ? Math.min(spotlightIndex, spotlights.length - 1) : 0;
+  activeIdRef.current ??= spotlights[safeSpotlightIndex]?.id;
   const spotlight = !loading && !error ? spotlights[safeSpotlightIndex] : undefined;
-  const ongoingEvents = React.useMemo(() => events.filter((event) => event.ongoing).slice(0, 6), [events]);
+  const todayRecommended = todayEvents.slice(0, 6);
   const upcomingEvents = React.useMemo(() => events.filter((event) => !event.ongoing).slice(0, 4), [events]);
   const spotlightMotionActive = Boolean(spotlight && storyMotionId === spotlight.id);
   const motionStopped = motionPaused || reducedMotion;
@@ -140,7 +152,9 @@ export function HomeDiscovery({
   }, [spotlight?.id]);
 
   React.useEffect(() => {
-    const nextIndex = spotlights.length ? Math.min(spotlightIndexRef.current, spotlights.length - 1) : 0;
+    const retainedIndex = spotlights.findIndex(event => event.id === activeIdRef.current);
+    const nextIndex = retainedIndex >= 0 ? retainedIndex : 0;
+    activeIdRef.current = spotlights[nextIndex]?.id;
     spotlightIndexRef.current = nextIndex;
     setSpotlightIndex(nextIndex);
     setStoryTransitioning(false);
@@ -160,26 +174,62 @@ export function HomeDiscovery({
     const normalizedIndex = ((nextIndex % availableSpotlights.length) + availableSpotlights.length) % availableSpotlights.length;
     if (spotlightIndexRef.current === normalizedIndex) return;
     spotlightIndexRef.current = normalizedIndex;
+    activeIdRef.current = availableSpotlights[normalizedIndex].id;
     setStoryMotionId(availableSpotlights[normalizedIndex].id);
-    setStoryTransitioning(true);
+    setStoryTransitioning(!reducedMotion);
     clearStoryTransitionTimer();
     storyTransitionTimerRef.current = window.setTimeout(() => {
       storyTransitionTimerRef.current = undefined;
       setStoryTransitioning(false);
     }, STORY_SWITCH_MS);
     setSpotlightIndex(normalizedIndex);
-  }, [clearStoryTransitionTimer, spotlightIds]);
+  }, [clearStoryTransitionTimer, spotlightIds, reducedMotion]);
+
+  const manualSpotlightAction = React.useCallback((nextIndex: number) => {
+    manualPauseUntilRef.current = Date.now() + MANUAL_PAUSE_MS;
+    setManualVersion(value => value + 1);
+    goToSpotlight(nextIndex);
+  }, [goToSpotlight]);
 
   React.useEffect(() => clearStoryTransitionTimer, [clearStoryTransitionTimer]);
 
   React.useEffect(() => {
-    if (motionStopped || spotlights.length < 2 || loading || error || documentHidden) return;
-    const timer = window.setInterval(() => {
-      if (document.hidden || spotlightRegionRef.current?.contains(document.activeElement)) return;
+    if (!spotlightRegionRef.current || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+    observer.observe(spotlightRegionRef.current);
+    return () => observer.disconnect();
+  }, [Boolean(spotlight)]);
+
+  React.useEffect(() => {
+    if (motionStopped || spotlights.length < 2 || loading || error || documentHidden || !inView) return;
+    let timer: number;
+    const advance = () => {
+      // A focused detail link must not change beneath the reader. Persistent
+      // controls can retain focus while rotation resumes after manual use.
+      const focusedDetail = spotlightRegionRef.current?.querySelector('.home-spotlight__story')?.contains(document.activeElement);
+      if (document.hidden || pointerActiveRef.current || focusedDetail) {
+        timer = window.setTimeout(advance, 6500);
+        return;
+      }
       goToSpotlight(spotlightIndexRef.current + 1);
-    }, 6500);
-    return () => window.clearInterval(timer);
-  }, [documentHidden, error, goToSpotlight, loading, motionStopped, spotlights.length]);
+      timer = window.setTimeout(advance, 6500);
+    };
+    const remainingPause = manualPauseUntilRef.current - Date.now();
+    timer = window.setTimeout(advance, remainingPause > 0 ? remainingPause : 6500);
+    return () => window.clearTimeout(timer);
+  }, [documentHidden, error, goToSpotlight, loading, motionStopped, spotlights.length, manualVersion, inView]);
+
+  const finishPointer = (e: React.PointerEvent<HTMLElement>) => {
+    pointerActiveRef.current = false;
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (!start) return;
+    const dx = e.clientX - start.x, dy = e.clientY - start.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      swipedRef.current = true;
+      manualSpotlightAction(spotlightIndexRef.current + (dx < 0 ? 1 : -1));
+    }
+  };
   return (
     <section className="home-discovery" data-motion={motionMode} aria-labelledby="home-title">
       <div className="home-hero">
@@ -191,12 +241,35 @@ export function HomeDiscovery({
             <MapPinned size={19} aria-hidden="true" />地図で近さを見る<ArrowRight size={17} aria-hidden="true" />
           </button>
         </div>
-        {spotlight && <article className="home-spotlight" ref={spotlightRegionRef}>
+        {spotlight && <article className="home-spotlight" ref={spotlightRegionRef} tabIndex={0} aria-label="注目イベント"
+          onKeyDown={(e) => {
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            e.preventDefault();
+            manualSpotlightAction(spotlightIndexRef.current + (e.key === 'ArrowRight' ? 1 : -1));
+          }}
+          onPointerDown={(e) => {
+            if (e.button !== 0) return;
+            pointerActiveRef.current = true;
+            swipedRef.current = false;
+            swipeStartRef.current = { x: e.clientX, y: e.clientY };
+          }}
+          onPointerMove={(e) => {
+            const start = swipeStartRef.current;
+            if (!start) return;
+            const dx = Math.abs(e.clientX - start.x), dy = Math.abs(e.clientY - start.y);
+            if (dy > 12 && dy > dx) swipeStartRef.current = null;
+            else if (dx > 12 && dx > dy * 1.25) e.currentTarget.setPointerCapture?.(e.pointerId);
+          }}
+          onPointerUp={finishPointer}
+          onPointerCancel={() => { pointerActiveRef.current = false; swipeStartRef.current = null; }}
+          onLostPointerCapture={() => { pointerActiveRef.current = false; }}
+          onPointerLeave={() => { if (!swipeStartRef.current) pointerActiveRef.current = false; }}
+          onClickCapture={(e) => { if (swipedRef.current) { e.preventDefault(); e.stopPropagation(); swipedRef.current = false; } }}>
           <div className={`home-spotlight__story ${spotlightMotionActive ? 'is-motion-active' : ''} ${storyTransitioning ? 'is-switching' : ''}`} key={spotlight.id}>
-            <div className="home-spotlight__media"><EventMedia event={spotlight} /></div>
-            <div className="home-spotlight__copy"><p>気になる、次のお出かけ</p><h2>{spotlight.eventName}</h2><span>{spotlight.venueName ?? '大阪府内'} ・ {spotlight.ongoing ? '開催期間中' : spotlight.timeLabel}</span><small>{spotlight.description ?? '詳しい開催内容は公式サイトでご確認ください。'}</small><button type="button" aria-label="このイベントを見る（詳細を見る）" onClick={() => onSelectEvent(spotlight.id)}>このイベントを見る <ArrowRight size={15} aria-hidden="true" /></button></div>
+            <div className="home-spotlight__media" onClick={() => onSelectEvent(spotlight.id)}><EventMedia event={spotlight} /></div>
+            <div className="home-spotlight__copy"><p>大阪で今、注目のお出かけ</p><h2>{spotlight.eventName}</h2><span>{spotlight.venueName ?? '大阪府内'} ・ {spotlight.ongoing ? '開催期間中' : spotlight.timeLabel}</span><small>{spotlight.description ?? '詳しい開催内容は公式サイトでご確認ください。'}</small><button type="button" aria-label="このイベントを見る（詳細を見る）" onClick={() => onSelectEvent(spotlight.id)}>このイベントを見る <ArrowRight size={15} aria-hidden="true" /></button></div>
           </div>
-          <div className="home-spotlight__controls">{spotlights.length > 1 && <div className="home-spotlight__dots" aria-label="おすすめイベントを選択">{spotlights.map((item, index) => <button key={item.id} type="button" aria-label={`おすすめ${index + 1}件目を表示`} aria-current={index === safeSpotlightIndex} onClick={() => goToSpotlight(index)} />)}</div>}<button type="button" className="home-motion-toggle" aria-pressed={motionStopped} disabled={reducedMotion} onClick={() => setMotionPaused((paused) => !paused)}>{motionStopped ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}{reducedMotion ? '動きを減らしています' : motionPaused ? '動かす' : '動きを止める'}</button></div>
+          <div className="home-spotlight__controls"><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="前の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex - 1)}><ArrowLeft size={18} aria-hidden="true" /></button><span className="home-spotlight__position" aria-label="現在のスライド">{safeSpotlightIndex + 1} / {spotlights.length}</span><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="次の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex + 1)}><ArrowRight size={18} aria-hidden="true" /></button>{spotlights.length > 1 && <div className="home-spotlight__dots" aria-label="おすすめイベントを選択">{spotlights.map((item, index) => <button key={item.id} type="button" aria-label={`おすすめ${index + 1}件目を表示`} aria-current={index === safeSpotlightIndex} onClick={() => manualSpotlightAction(index)} />)}</div>}<button type="button" className="home-motion-toggle" aria-pressed={motionStopped} disabled={reducedMotion} onClick={() => setMotionPaused((paused) => !paused)}>{motionStopped ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}{reducedMotion ? '動きを減らしています' : motionPaused ? '動かす' : '動きを止める'}</button></div>
         </article>}
       </div>
 
@@ -230,6 +303,12 @@ export function HomeDiscovery({
         {error && <div className="home-state-card is-error" role="alert"><strong>{error}</strong><button type="button" onClick={onReset}>もう一度読み込む</button></div>}
         {!loading && !error && events.length === 0 && <div className="home-state-card"><strong>条件に合うイベントがありません</strong><span>検索語や時間、条件を少し広げてみてください。</span><button type="button" onClick={onReset}>すべての候補を見る</button></div>}
 
+          {!loading && !error && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
+            <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">本日開催のおすすめ</h2></div><span>{todayRecommended.length}件</span></div>
+            <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} labelElement="em" /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}
+            </div>
+          </section>}
+
         {!loading && !error && featured.length > 0 && <>
           <div className="home-section-heading"><div><p>今から出会う、大阪</p><h2>今から選べる場所</h2></div><span>{events.length}件の候補</span></div>
           <div className="home-featured-grid">
@@ -246,12 +325,7 @@ export function HomeDiscovery({
           {visibleCount < events.length && <button type="button" className="home-more-button" onClick={() => setVisibleCount((count) => count + 6)}>もっと見る（残り {events.length - visibleCount}件）</button>}
           <button type="button" className="home-secondary-map-cta" onClick={onShowMap}><MapPinned size={17} aria-hidden="true" />候補を地図で比べる<ArrowRight size={16} aria-hidden="true" /></button>
 
-          {ongoingEvents.length > 0 && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
-            <div className="editorial-section__heading"><div><p>大阪の街ではじまっていること</p><h2 id="ongoing-title">開催中のイベント</h2></div><span>{liveCount}件</span></div>
-            <div className="editorial-rail">
-              {ongoingEvents.map((event) => <button type="button" className="editorial-mini-card" key={`ongoing-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} labelElement="em" /></span><span className="editorial-mini-card__tag">開催中</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>)}
-            </div>
-          </section>}
+
 
           <section className="editorial-section editorial-discover" aria-labelledby="discover-title">
             <div className="editorial-section__heading"><div><p>気分に合わせて見つける</p><h2 id="discover-title">探し方を選ぶ</h2></div></div>

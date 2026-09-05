@@ -21,6 +21,7 @@ import {
   googleMapsUrl,
   isOngoing,
 } from './domain';
+import { recommendHomeEvents } from './domain/homeRecommendations';
 import type { Coordinates, EventDataFile, EventItem, EventSource, TimeFilter, UserProfile } from './types';
 
 type DataFile = EventDataFile;
@@ -103,12 +104,13 @@ function travelLabel(minutes?: number) {
 }
 
 function timeLabel(event: EventItem) {
-  const formatter = new Intl.DateTimeFormat('ja-JP', { month: 'numeric', day: 'numeric', weekday: 'short' });
+  const formatter = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric', weekday: 'short' });
   const start = new Date(`${event.startDate}T00:00:00+09:00`);
+  if (!Number.isFinite(start.getTime())) return '開催日を確認';
   const date = formatter.format(start);
   const time = event.startTime ? ` ${event.startTime.slice(0, 5)}` : '';
   const end = event.endDate && event.endDate !== event.startDate
-    ? `〜${new Intl.DateTimeFormat('ja-JP', { year: event.endDate.slice(0, 4) !== event.startDate.slice(0, 4) ? 'numeric' : undefined, month: 'numeric', day: 'numeric' }).format(new Date(`${event.endDate}T00:00:00+09:00`))}`
+    ? `〜${new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', year: event.endDate.slice(0, 4) !== event.startDate.slice(0, 4) ? 'numeric' : undefined, month: 'numeric', day: 'numeric' }).format(new Date(`${event.endDate}T00:00:00+09:00`))}`
     : '';
   return `${date}${end}${time}`;
 }
@@ -168,7 +170,13 @@ export function App() {
     return () => controller.abort();
   }, [coverageAttempt]);
 
-  const now = useMemo(() => new Date(), [data, timeFilter, filters]);
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const refresh = () => setNow(new Date());
+    const timer = window.setInterval(refresh, 60_000);
+    document.addEventListener('visibilitychange', refresh);
+    return () => { window.clearInterval(timer); document.removeEventListener('visibilitychange', refresh); };
+  }, []);
   const userProfile = useMemo(() => domainProfile(profile), [profile]);
   const ranked = useMemo<RankedEvent[]>(() => {
     if (!data) return [];
@@ -239,6 +247,11 @@ export function App() {
     imageSourceUrl: typeof event.imageSourceUrl === 'string' && event.imageSourceUrl.startsWith('https://') ? event.imageSourceUrl : undefined,
   })), [now, ranked]);
 
+  const homeRecommendations = useMemo(() => recommendHomeEvents(ranked, now), [ranked, now]);
+  const homeById = new Map(homeEvents.map((event) => [event.id, event]));
+  const largeHomeEvents = homeRecommendations.large.flatMap(({ event }) => homeById.get(event.id) ? [homeById.get(event.id)!] : []);
+  const todayHomeEvents = homeRecommendations.today.flatMap(({ event }) => homeById.get(event.id) ? [homeById.get(event.id)!] : []);
+
   const selectEvent = (event: { id: string } | null) => setSelectedId(event?.id ?? null);
   const saveProfile = (next: Profile) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
@@ -275,6 +288,8 @@ export function App() {
       {locationNotice && <div className="location-notice" role="status">{locationNotice}<button type="button" onClick={() => setLocationNotice('')}>閉じる</button></div>}
       {view === 'home' ? <HomeDiscovery
         events={homeEvents}
+        largeEvents={largeHomeEvents}
+        todayEvents={todayHomeEvents}
         totalCount={ranked.length}
         liveCount={liveCount}
         query={query}

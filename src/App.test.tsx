@@ -163,6 +163,34 @@ describe('App editorial home integration', () => {
     expect(document.querySelectorAll('.event-row')).toHaveLength(24);
   });
 
+  it('keeps time filters, search, discovery axes and map navigation usable', async () => {
+    const base = new Date();
+    const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(base);
+    const tomorrow = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(new Date(base.getTime() + 86400000));
+    const fixture = { ...events, events: [
+      { ...events.events[0], startDate: today, endTime: '23:59' },
+      { ...events.events[1], startDate: tomorrow },
+    ] };
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async url => responseFor(url, fixture)));
+    render(<App />);
+    await screen.findAllByText('中之島ナイトマーケット');
+    fireEvent.click(screen.getByRole('button', { name: '今日' }));
+    expect(screen.queryByText('大阪クラフト展')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '明日' }));
+    expect(screen.queryByText('中之島ナイトマーケット')).not.toBeInTheDocument();
+    expect(screen.getAllByText('大阪クラフト展').length).toBeGreaterThan(0);
+    fireEvent.click(screen.getByRole('button', { name: '今夜' }));
+    expect(screen.queryByText('大阪クラフト展')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '今週末' }));
+    expect(screen.getByRole('button', { name: '今週末' })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(screen.getByRole('button', { name: 'これから' }));
+    fireEvent.click(screen.getByRole('button', { name: /好きなことから探す/ }));
+    expect(screen.getByRole('button', { name: 'この条件で探す' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'この条件で探す' }));
+    fireEvent.click(screen.getByRole('button', { name: /場所から探す/ }));
+    expect(screen.getByTestId('event-map')).toBeInTheDocument();
+  });
+
   it('moves from home to map and back', async () => {
     render(<App />);
     fireEvent.click(await screen.findByRole('button', { name: /地図で近さを見る/ }));
