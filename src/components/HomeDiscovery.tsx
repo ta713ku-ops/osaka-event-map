@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, MapPinned, Pause, Play, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MapPinned, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
 import * as React from 'react';
 import './home-editorial.css';
 
@@ -64,7 +64,6 @@ export function HomeDiscovery({
   const [trackTransitioning, setTrackTransitioning] = React.useState(false);
   const [dragOffset, setDragOffset] = React.useState(0);
   const [dragging, setDragging] = React.useState(false);
-  const [motionPaused, setMotionPaused] = React.useState(false);
   const [reducedMotion, setReducedMotion] = React.useState(false);
   const [documentHidden, setDocumentHidden] = React.useState(() => typeof document !== 'undefined' && document.hidden);
   const [storyTransitioning, setStoryTransitioning] = React.useState(false);
@@ -78,6 +77,7 @@ export function HomeDiscovery({
   const activeIdRef = React.useRef<string | undefined>(undefined);
   const [inView, setInView] = React.useState(true);
   const pointerActiveRef = React.useRef(false);
+  const pointerFocusedRef = React.useRef(false);
   const storyTransitionTimerRef = React.useRef<number | undefined>(undefined);
   const featured = events.slice(0, visibleCount);
   const fallbackSpotlights = React.useMemo(() => {
@@ -130,8 +130,8 @@ export function HomeDiscovery({
   const todayRecommended = todayEvents.slice(0, 6);
   const upcomingEvents = React.useMemo(() => events.filter((event) => !event.ongoing).slice(0, 4), [events]);
   const spotlightMotionActive = Boolean(spotlight && storyMotionId === spotlight.id);
-  const motionStopped = motionPaused || reducedMotion;
-  const motionMode = reducedMotion ? 'reduced' : motionPaused ? 'paused' : 'playing';
+  const motionStopped = reducedMotion;
+  const motionMode = reducedMotion ? 'reduced' : 'playing';
 
   React.useEffect(() => {
     if (!window.matchMedia) return;
@@ -236,7 +236,8 @@ export function HomeDiscovery({
       // A focused detail link must not change beneath the reader. Persistent
       // controls can retain focus while rotation resumes after manual use.
       const focusedSpotlight = spotlightRegionRef.current?.querySelector('.home-spotlight__viewport') === document.activeElement;
-      if (document.hidden || pointerActiveRef.current || focusedSpotlight) {
+      const keyboardFocusedSpotlight = focusedSpotlight && !pointerFocusedRef.current;
+      if (document.hidden || pointerActiveRef.current || keyboardFocusedSpotlight) {
         timer = window.setTimeout(advance, AUTO_ADVANCE_MS);
         return;
       }
@@ -299,6 +300,7 @@ export function HomeDiscovery({
         {spotlight && <article className="home-spotlight" ref={spotlightRegionRef} aria-label="注目の大型イベント">
           <div className="home-spotlight__viewport" role="button" tabIndex={0} aria-label={`注目イベント「${spotlight.eventName}」の詳細を見る`}
           onKeyDown={(e) => {
+            pointerFocusedRef.current = false;
             if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
               e.preventDefault();
               manualSpotlightAction(spotlightIndexRef.current + (e.key === 'ArrowRight' ? 1 : -1));
@@ -317,6 +319,7 @@ export function HomeDiscovery({
           }}
           onPointerDown={(e) => {
             if (e.button !== 0) return;
+            pointerFocusedRef.current = true;
             pointerActiveRef.current = true;
             swipedRef.current = false;
             swipeStartRef.current = { x: e.clientX, y: e.clientY, mode: 'pending' };
@@ -340,6 +343,7 @@ export function HomeDiscovery({
           }}
           onPointerUp={finishPointer}
           onPointerCancel={() => { pointerActiveRef.current = false; swipeStartRef.current = null; setDragging(false); setDragOffset(0); }}
+          onBlur={() => { pointerFocusedRef.current = false; }}
           onLostPointerCapture={() => { pointerActiveRef.current = false; }}>
             <div className={`home-spotlight__track ${trackTransitioning ? 'is-track-animating' : ''} ${dragging ? 'is-dragging' : ''}`} style={spotlightStyle}>
               {trackSlides.map(({ event, key, realIndex }) => <div className={`home-spotlight__story ${realIndex === safeSpotlightIndex && spotlightMotionActive ? 'is-motion-active' : ''} ${realIndex === safeSpotlightIndex && storyTransitioning ? 'is-switching' : ''}`} key={key} aria-hidden={realIndex !== safeSpotlightIndex}>
@@ -348,7 +352,7 @@ export function HomeDiscovery({
               </div>)}
             </div>
           </div>
-          <div className="home-spotlight__controls"><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="前の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex - 1)}><ArrowLeft size={18} aria-hidden="true" /></button><span className="home-spotlight__position" aria-label="現在のスライド">{safeSpotlightIndex + 1} / {spotlights.length}</span><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="次の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex + 1)}><ArrowRight size={18} aria-hidden="true" /></button>{spotlights.length > 1 && <div className="home-spotlight__dots" aria-label="おすすめイベントを選択">{spotlights.map((item, index) => <button key={item.id} type="button" aria-label={`おすすめ${index + 1}件目を表示`} aria-current={index === safeSpotlightIndex} onClick={() => manualSpotlightAction(index)} />)}</div>}<button type="button" className="home-motion-toggle" aria-pressed={motionStopped} disabled={reducedMotion} aria-label={reducedMotion ? '動きを減らしています' : motionPaused ? '自動送りを再開' : '自動送りを停止'} title={reducedMotion ? '動きを減らしています' : motionPaused ? '自動送りを再開' : '自動送りを停止'} onClick={() => setMotionPaused((paused) => !paused)}>{motionStopped ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}<span className="sr-only">{reducedMotion ? '動きを減らしています' : motionPaused ? '自動送りを再開' : '自動送りを停止'}</span></button></div>
+          <div className="home-spotlight__controls"><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="前の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex - 1)}><ArrowLeft size={18} aria-hidden="true" /></button><span className="home-spotlight__position" aria-label="現在のスライド">{safeSpotlightIndex + 1} / {spotlights.length}</span><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="次の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex + 1)}><ArrowRight size={18} aria-hidden="true" /></button>{spotlights.length > 1 && <div className="home-spotlight__dots" aria-label="おすすめイベントを選択">{spotlights.map((item, index) => <button key={item.id} type="button" aria-label={`おすすめ${index + 1}件目を表示`} aria-current={index === safeSpotlightIndex} onClick={() => manualSpotlightAction(index)} />)}</div>}</div>
         </article>}
       </div>
 

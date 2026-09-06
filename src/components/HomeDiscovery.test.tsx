@@ -104,17 +104,17 @@ describe('HomeDiscovery', () => {
     expect(document.querySelector('.home-spotlight__story[aria-hidden="false"] img')).not.toBeInTheDocument();
   });
 
-  it('rotates the visual story and allows the user to pause it', () => {
+  it('rotates the visual story every three seconds without a manual pause control', () => {
     vi.useFakeTimers();
     const events = Array.from({ length: 3 }, (_, index) => ({ ...event(String(index), `物語${index}`), imageUrl: `https://example.test/${index}.jpg` }));
     renderHome({ events, totalCount: events.length });
     expect(screen.getByRole('heading', { name: '物語0' })).toBeInTheDocument();
+    expect(document.querySelector('.home-motion-toggle')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /自動送り/ })).not.toBeInTheDocument();
     act(() => vi.advanceTimersByTime(3000));
     expect(screen.getByRole('heading', { name: '物語1' })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: '自動送りを停止' }));
-    act(() => vi.advanceTimersByTime(13000));
-    expect(screen.getByRole('heading', { name: '物語1' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '自動送りを再開' })).toBeInTheDocument();
+    act(() => vi.advanceTimersByTime(3000));
+    expect(screen.getByRole('heading', { name: '物語2' })).toBeInTheDocument();
   });
 
   it('does not auto-rotate when reduced motion is requested', () => {
@@ -124,7 +124,9 @@ describe('HomeDiscovery', () => {
     renderHome({ events, totalCount: events.length });
     act(() => vi.advanceTimersByTime(13000));
     expect(screen.getByRole('heading', { name: '静かな物語0' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '動きを減らしています' })).toBeDisabled();
+    expect(document.querySelector('.home-motion-toggle')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /自動送り/ })).not.toBeInTheDocument();
+    expect(document.querySelector('.home-discovery')).toHaveAttribute('data-motion', 'reduced');
   });
 
   it('uses a clear fallback when travel time is unavailable and does not mislabel future events as ongoing', () => {
@@ -159,6 +161,22 @@ describe('HomeDiscovery', () => {
     act(() => vi.advanceTimersByTime(3000));
     expect(document.activeElement).toBe(detail);
     expect(screen.getByRole('heading', { name: 'フォーカス物語0' })).toBeInTheDocument();
+  });
+
+  it('resumes auto-rotation after the temporary pause following a swipe', () => {
+    vi.useFakeTimers();
+    vi.stubGlobal('PointerEvent', MouseEvent);
+    const events = Array.from({ length: 3 }, (_, index) => ({ ...event(String(index), `再開物語${index}`), imageUrl: `https://example.test/${index}.jpg` }));
+    renderHome({ events, totalCount: events.length });
+    const detail = screen.getByRole('button', { name: /注目イベント.*詳細/ });
+    fireEvent.pointerDown(detail, { pointerType: 'touch', button: 0, clientX: 180, clientY: 100 });
+    detail.focus();
+    fireEvent.pointerUp(detail, { pointerType: 'touch', clientX: 80, clientY: 105 });
+    expect(screen.getByRole('heading', { name: '再開物語1' })).toBeInTheDocument();
+    act(() => vi.advanceTimersByTime(9999));
+    expect(screen.getByRole('heading', { name: '再開物語1' })).toBeInTheDocument();
+    act(() => vi.advanceTimersByTime(1));
+    expect(screen.getByRole('heading', { name: '再開物語2' })).toBeInTheDocument();
   });
 
   it('does not reset the spotlight timer when event objects refresh unchanged', () => {
