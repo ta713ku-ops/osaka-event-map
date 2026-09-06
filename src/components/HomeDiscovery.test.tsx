@@ -47,7 +47,7 @@ describe('HomeDiscovery', () => {
   it('opens the spotlight event detail', () => {
     const onSelectEvent = vi.fn();
     renderHome({ onSelectEvent });
-    fireEvent.click(screen.getByRole('button', { name: /詳細を見る/ }));
+    fireEvent.click(screen.getByRole('button', { name: /注目イベント.*詳細/ }));
     expect(onSelectEvent).toHaveBeenCalledWith('a');
   });
 
@@ -86,7 +86,7 @@ describe('HomeDiscovery', () => {
     ];
     renderHome({ events, totalCount: events.length });
     expect(screen.getByRole('button', { name: 'おすすめ4件目を表示' })).toBeInTheDocument();
-    expect(document.querySelector('.home-spotlight__media img')).toHaveAttribute('src', 'https://example.test/shared.jpg');
+    expect(document.querySelector('.home-spotlight__story[aria-hidden="false"] img')).toHaveAttribute('src', 'https://example.test/shared.jpg');
   });
 
   it('fills remaining spotlight slots with image-less events after unique images', () => {
@@ -101,7 +101,7 @@ describe('HomeDiscovery', () => {
     expect(screen.getByRole('button', { name: 'おすすめ4件目を表示' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'おすすめ2件目を表示' }));
     expect(screen.getByRole('heading', { name: '画像なし1' })).toBeInTheDocument();
-    expect(document.querySelector('.home-spotlight__media img')).not.toBeInTheDocument();
+    expect(document.querySelector('.home-spotlight__story[aria-hidden="false"] img')).not.toBeInTheDocument();
   });
 
   it('rotates the visual story and allows the user to pause it', () => {
@@ -109,12 +109,12 @@ describe('HomeDiscovery', () => {
     const events = Array.from({ length: 3 }, (_, index) => ({ ...event(String(index), `物語${index}`), imageUrl: `https://example.test/${index}.jpg` }));
     renderHome({ events, totalCount: events.length });
     expect(screen.getByRole('heading', { name: '物語0' })).toBeInTheDocument();
-    act(() => vi.advanceTimersByTime(6500));
+    act(() => vi.advanceTimersByTime(3000));
     expect(screen.getByRole('heading', { name: '物語1' })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: '動きを止める' }));
+    fireEvent.click(screen.getByRole('button', { name: '自動送りを停止' }));
     act(() => vi.advanceTimersByTime(13000));
     expect(screen.getByRole('heading', { name: '物語1' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '動かす' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '自動送りを再開' })).toBeInTheDocument();
   });
 
   it('does not auto-rotate when reduced motion is requested', () => {
@@ -154,9 +154,9 @@ describe('HomeDiscovery', () => {
     vi.useFakeTimers();
     const events = Array.from({ length: 2 }, (_, index) => ({ ...event(String(index), `フォーカス物語${index}`), imageUrl: `https://example.test/${index}.jpg` }));
     renderHome({ events, totalCount: events.length });
-    const detail = screen.getByRole('button', { name: /詳細を見る/ });
+    const detail = screen.getByRole('button', { name: /注目イベント.*詳細/ });
     detail.focus();
-    act(() => vi.advanceTimersByTime(6500));
+    act(() => vi.advanceTimersByTime(3000));
     expect(document.activeElement).toBe(detail);
     expect(screen.getByRole('heading', { name: 'フォーカス物語0' })).toBeInTheDocument();
   });
@@ -165,7 +165,7 @@ describe('HomeDiscovery', () => {
     vi.useFakeTimers();
     const initial = Array.from({ length: 2 }, (_, index) => ({ ...event(String(index), `更新前${index}`), imageUrl: `https://example.test/${index}.jpg` }));
     const { rerender, props } = renderHome({ events: initial, totalCount: initial.length });
-    act(() => vi.advanceTimersByTime(6499));
+    act(() => vi.advanceTimersByTime(2999));
     const refreshed = initial.map((item) => ({ ...item, description: '更新後の説明' }));
     rerender(<HomeDiscovery {...props} events={refreshed} />);
     act(() => vi.advanceTimersByTime(1));
@@ -177,8 +177,8 @@ describe('HomeDiscovery', () => {
     renderHome({ events, totalCount: events.length });
     fireEvent.click(screen.getByRole('button', { name: 'おすすめ3件目を表示' }));
     expect(screen.getByRole('heading', { name: '手動物語2' })).toBeInTheDocument();
-    expect(document.querySelector('.home-spotlight__media img')).toHaveAttribute('src', 'https://example.test/2.jpg');
-    expect(document.querySelector('.home-spotlight__story')).toHaveClass('is-switching');
+    expect(document.querySelector('.home-spotlight__story[aria-hidden="false"] img')).toHaveAttribute('src', 'https://example.test/2.jpg');
+    expect(document.querySelector('.home-spotlight__story[aria-hidden="false"]')).toHaveClass('is-switching');
   });
 
   it('wraps with arrow controls and supports keyboard arrows', () => {
@@ -186,7 +186,7 @@ describe('HomeDiscovery', () => {
     renderHome({ events });
     fireEvent.click(screen.getByRole('button', { name: '前の注目イベント' }));
     expect(screen.getByRole('heading', { name: '矢印c' })).toBeInTheDocument();
-    fireEvent.keyDown(screen.getByLabelText('注目イベント'), { key: 'ArrowRight' });
+    fireEvent.keyDown(screen.getByRole('button', { name: /注目イベント.*詳細/ }), { key: 'ArrowRight' });
     expect(screen.getByRole('heading', { name: '矢印a' })).toBeInTheDocument();
   });
 
@@ -204,13 +204,13 @@ describe('HomeDiscovery', () => {
     vi.stubGlobal('PointerEvent', MouseEvent);
     const onSelectEvent = vi.fn();
     renderHome({ events: ['a', 'b'].map((id) => event(id, `タッチ${id}`)), onSelectEvent });
-    const hero = screen.getByLabelText('注目イベント');
+    const hero = screen.getByRole('button', { name: /注目イベント.*詳細/ });
     fireEvent.pointerDown(hero, { pointerType: 'touch', clientX: 100, clientY: 100 });
     fireEvent.pointerUp(hero, { pointerType: 'touch', clientX: 105, clientY: 180 });
     expect(screen.getByRole('heading', { name: 'タッチa' })).toBeInTheDocument();
-    fireEvent.pointerDown(hero, { pointerType: 'touch', clientX: 180, clientY: 100 });
+    fireEvent.pointerDown(hero, { pointerType: 'touch', button: 0, clientX: 180, clientY: 100 });
     fireEvent.pointerUp(hero, { pointerType: 'touch', clientX: 80, clientY: 105 });
-    fireEvent.click(screen.getByRole('button', { name: /詳細を見る/ }));
+    fireEvent.click(hero);
     expect(onSelectEvent).not.toHaveBeenCalled();
     expect(screen.getByRole('heading', { name: 'タッチb' })).toBeInTheDocument();
   });
@@ -230,5 +230,45 @@ describe('HomeDiscovery', () => {
     fireEvent.click(screen.getByRole('button', { name: '次の注目イベント' }));
     rerender(<HomeDiscovery {...props} largeEvents={[largeEvents[1], largeEvents[0]]} />);
     expect(screen.getByRole('heading', { name: '並びb' })).toBeInTheDocument();
+  });
+
+  it('uses the supplied large-event recommendations instead of rebuilding the spotlight', () => {
+    const all = [event('all', '一覧の先頭'), event('large', '大型おすすめ')];
+    renderHome({ events: all, largeEvents: [all[1]] });
+    expect(screen.getByRole('heading', { name: '大型おすすめ' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '一覧の先頭' })).not.toBeInTheDocument();
+  });
+
+  it('follows a horizontal pointer drag and returns on a sub-threshold gesture', () => {
+    vi.stubGlobal('PointerEvent', MouseEvent);
+    const events = ['a', 'b'].map((id) => event(id, `ドラッグ${id}`));
+    renderHome({ events });
+    const hero = screen.getByRole('button', { name: /注目イベント.*詳細/ });
+    fireEvent.pointerDown(hero, { pointerType: 'touch', button: 0, clientX: 180, clientY: 100 });
+    fireEvent.pointerMove(hero, { pointerType: 'touch', clientX: 130, clientY: 104, pointerId: 1 });
+    expect(document.querySelector('.home-spotlight__track')).toHaveStyle('--spotlight-drag: -50px');
+    fireEvent.pointerUp(hero, { pointerType: 'touch', clientX: 155, clientY: 104 });
+    expect(screen.getByRole('heading', { name: 'ドラッグa' })).toBeInTheDocument();
+    expect(document.querySelector('.home-spotlight__track')).toHaveStyle('--spotlight-drag: 0px');
+    expect(document.querySelector('.home-spotlight__track')).toHaveClass('is-track-animating');
+  });
+
+  it('opens the whole spotlight card with Enter and Space', () => {
+    const onSelectEvent = vi.fn();
+    renderHome({ onSelectEvent });
+    const hero = screen.getByRole('button', { name: /注目イベント.*詳細/ });
+    hero.focus();
+    fireEvent.keyDown(hero, { key: 'Enter' });
+    fireEvent.keyDown(hero, { key: ' ' });
+    expect(onSelectEvent).toHaveBeenCalledTimes(2);
+  });
+
+  it('places today recommendations immediately after the hero and before facts', () => {
+    renderHome({ todayEvents: [event('today', '今日だけ')] });
+    const hero = document.querySelector('.home-hero')!;
+    const today = document.querySelector('.editorial-ongoing')!;
+    const facts = document.querySelector('.home-discovery__facts')!;
+    expect(hero.compareDocumentPosition(today) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(today.compareDocumentPosition(facts) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

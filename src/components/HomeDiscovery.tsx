@@ -16,8 +16,10 @@ export type HomeEvent = {
   imageSourceUrl?: string;
 };
 
+const AUTO_ADVANCE_MS = 3000;
 const STORY_SWITCH_MS = 520;
 const MANUAL_PAUSE_MS = 10000;
+const SWIPE_THRESHOLD_PX = 45;
 
 function travelLabel(minutes?: number | null) {
   return typeof minutes === 'number' && Number.isFinite(minutes) ? `約${minutes}分` : '場所を確認';
@@ -44,11 +46,11 @@ type Props = {
   onReset: () => void;
 };
 
-function EventMedia({ event, labelElement = 'span' }: { event: HomeEvent; labelElement?: 'span' | 'em' }) {
+function EventMedia({ event, labelElement = 'span', showSource = true }: { event: HomeEvent; labelElement?: 'span' | 'em'; showSource?: boolean }) {
   const [failed, setFailed] = React.useState(false);
   React.useEffect(() => setFailed(false), [event.imageUrl]);
   if (!event.imageUrl || failed) return <div className="home-date-art"><span>{event.timeLabel}</span><strong>{event.categoryLabel}</strong></div>;
-  return <><img src={event.imageUrl} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)} />{React.createElement(labelElement, null, '公式画像・出典')}</>;
+  return <><img src={event.imageUrl} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)} />{showSource && React.createElement(labelElement, null, '公式画像・出典')}</>;
 }
 
 export function HomeDiscovery({
@@ -58,6 +60,10 @@ export function HomeDiscovery({
 }: Props) {
   const [visibleCount, setVisibleCount] = React.useState(6);
   const [spotlightIndex, setSpotlightIndex] = React.useState(0);
+  const [trackPosition, setTrackPosition] = React.useState(1);
+  const [trackTransitioning, setTrackTransitioning] = React.useState(false);
+  const [dragOffset, setDragOffset] = React.useState(0);
+  const [dragging, setDragging] = React.useState(false);
   const [motionPaused, setMotionPaused] = React.useState(false);
   const [reducedMotion, setReducedMotion] = React.useState(false);
   const [documentHidden, setDocumentHidden] = React.useState(() => typeof document !== 'undefined' && document.hidden);
@@ -66,7 +72,7 @@ export function HomeDiscovery({
   const spotlightRegionRef = React.useRef<HTMLElement>(null);
   const spotlightIndexRef = React.useRef(0);
   const manualPauseUntilRef = React.useRef(0);
-  const swipeStartRef = React.useRef<{x:number;y:number}|null>(null);
+  const swipeStartRef = React.useRef<{x:number;y:number;mode:'pending'|'horizontal'|'vertical'}|null>(null);
   const swipedRef = React.useRef(false);
   const [manualVersion, setManualVersion] = React.useState(0);
   const activeIdRef = React.useRef<string | undefined>(undefined);
@@ -157,6 +163,10 @@ export function HomeDiscovery({
     activeIdRef.current = spotlights[nextIndex]?.id;
     spotlightIndexRef.current = nextIndex;
     setSpotlightIndex(nextIndex);
+    setTrackPosition(spotlights.length ? nextIndex + 1 : 0);
+    setTrackTransitioning(false);
+    setDragOffset(0);
+    setDragging(false);
     setStoryTransitioning(false);
     setStoryMotionId((current) => current && spotlights.some((event) => event.id === current) ? current : null);
   }, [spotlightIds, spotlights.length]);
@@ -172,16 +182,35 @@ export function HomeDiscovery({
     const availableSpotlights = spotlightsRef.current;
     if (!availableSpotlights.length) return;
     const normalizedIndex = ((nextIndex % availableSpotlights.length) + availableSpotlights.length) % availableSpotlights.length;
-    if (spotlightIndexRef.current === normalizedIndex) return;
+    const currentIndex = spotlightIndexRef.current;
+    if (currentIndex === normalizedIndex) return;
     spotlightIndexRef.current = normalizedIndex;
     activeIdRef.current = availableSpotlights[normalizedIndex].id;
     setStoryMotionId(availableSpotlights[normalizedIndex].id);
     setStoryTransitioning(!reducedMotion);
+    setDragOffset(0);
+    setDragging(false);
     clearStoryTransitionTimer();
-    storyTransitionTimerRef.current = window.setTimeout(() => {
-      storyTransitionTimerRef.current = undefined;
-      setStoryTransitioning(false);
-    }, STORY_SWITCH_MS);
+    const wrapsForward = currentIndex === availableSpotlights.length - 1 && normalizedIndex === 0;
+    const wrapsBackward = currentIndex === 0 && normalizedIndex === availableSpotlights.length - 1;
+    const targetPosition = wrapsForward ? availableSpotlights.length + 1 : wrapsBackward ? 0 : normalizedIndex + 1;
+    if (reducedMotion) {
+      setTrackTransitioning(false);
+      setTrackPosition(normalizedIndex + 1);
+    } else {
+      setTrackTransitioning(true);
+      setTrackPosition(targetPosition);
+      storyTransitionTimerRef.current = window.setTimeout(() => {
+        storyTransitionTimerRef.current = undefined;
+        setStoryTransitioning(false);
+        if (wrapsForward || wrapsBackward) {
+          setTrackTransitioning(false);
+          setTrackPosition(normalizedIndex + 1);
+        } else {
+          setTrackTransitioning(false);
+        }
+      }, STORY_SWITCH_MS);
+    }
     setSpotlightIndex(normalizedIndex);
   }, [clearStoryTransitionTimer, spotlightIds, reducedMotion]);
 
@@ -206,16 +235,16 @@ export function HomeDiscovery({
     const advance = () => {
       // A focused detail link must not change beneath the reader. Persistent
       // controls can retain focus while rotation resumes after manual use.
-      const focusedDetail = spotlightRegionRef.current?.querySelector('.home-spotlight__story')?.contains(document.activeElement);
-      if (document.hidden || pointerActiveRef.current || focusedDetail) {
-        timer = window.setTimeout(advance, 6500);
+      const focusedSpotlight = spotlightRegionRef.current?.querySelector('.home-spotlight__viewport') === document.activeElement;
+      if (document.hidden || pointerActiveRef.current || focusedSpotlight) {
+        timer = window.setTimeout(advance, AUTO_ADVANCE_MS);
         return;
       }
       goToSpotlight(spotlightIndexRef.current + 1);
-      timer = window.setTimeout(advance, 6500);
+      timer = window.setTimeout(advance, AUTO_ADVANCE_MS);
     };
     const remainingPause = manualPauseUntilRef.current - Date.now();
-    timer = window.setTimeout(advance, remainingPause > 0 ? remainingPause : 6500);
+    timer = window.setTimeout(advance, remainingPause > 0 ? remainingPause : AUTO_ADVANCE_MS);
     return () => window.clearTimeout(timer);
   }, [documentHidden, error, goToSpotlight, loading, motionStopped, spotlights.length, manualVersion, inView]);
 
@@ -223,13 +252,39 @@ export function HomeDiscovery({
     pointerActiveRef.current = false;
     const start = swipeStartRef.current;
     swipeStartRef.current = null;
-    if (!start) return;
+    setDragging(false);
+    if (!start) {
+      setDragOffset(0);
+      return;
+    }
     const dx = e.clientX - start.x, dy = e.clientY - start.y;
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+    setDragOffset(0);
+    const horizontalSwipe = (start.mode === 'horizontal' || start.mode === 'pending')
+      && Math.abs(dx) >= SWIPE_THRESHOLD_PX && Math.abs(dx) > Math.abs(dy) * 1.15;
+    if (horizontalSwipe) {
       swipedRef.current = true;
       manualSpotlightAction(spotlightIndexRef.current + (dx < 0 ? 1 : -1));
+    } else if (start.mode === 'horizontal') {
+      clearStoryTransitionTimer();
+      setTrackTransitioning(true);
+      storyTransitionTimerRef.current = window.setTimeout(() => {
+        storyTransitionTimerRef.current = undefined;
+        setTrackTransitioning(false);
+      }, STORY_SWITCH_MS);
     }
   };
+  const trackSlides = spotlights.length > 1
+    ? [
+      { event: spotlights[spotlights.length - 1], key: `clone-last-${spotlights[spotlights.length - 1].id}`, realIndex: -1 },
+      ...spotlights.map((event, index) => ({ event, key: event.id, realIndex: index })),
+      { event: spotlights[0], key: `clone-first-${spotlights[0].id}`, realIndex: -1 },
+    ]
+    : spotlights.map((event, index) => ({ event, key: event.id, realIndex: index }));
+  const spotlightStyle = {
+    '--spotlight-index': trackPosition,
+    '--spotlight-offset': `${trackPosition * -100}%`,
+    '--spotlight-drag': `${dragOffset}px`,
+  } as React.CSSProperties;
   return (
     <section className="home-discovery" data-motion={motionMode} aria-labelledby="home-title">
       <div className="home-hero">
@@ -241,39 +296,67 @@ export function HomeDiscovery({
             <MapPinned size={19} aria-hidden="true" />地図で近さを見る<ArrowRight size={17} aria-hidden="true" />
           </button>
         </div>
-        {spotlight && <article className="home-spotlight" ref={spotlightRegionRef} tabIndex={0} aria-label="注目イベント"
+        {spotlight && <article className="home-spotlight" ref={spotlightRegionRef} aria-label="注目の大型イベント">
+          <div className="home-spotlight__viewport" role="button" tabIndex={0} aria-label={`注目イベント「${spotlight.eventName}」の詳細を見る`}
           onKeyDown={(e) => {
-            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-            e.preventDefault();
-            manualSpotlightAction(spotlightIndexRef.current + (e.key === 'ArrowRight' ? 1 : -1));
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+              e.preventDefault();
+              manualSpotlightAction(spotlightIndexRef.current + (e.key === 'ArrowRight' ? 1 : -1));
+            } else if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onSelectEvent(spotlight.id);
+            }
+          }}
+          onClick={(e) => {
+            if (swipedRef.current) {
+              e.preventDefault();
+              swipedRef.current = false;
+              return;
+            }
+            onSelectEvent(spotlight.id);
           }}
           onPointerDown={(e) => {
             if (e.button !== 0) return;
             pointerActiveRef.current = true;
             swipedRef.current = false;
-            swipeStartRef.current = { x: e.clientX, y: e.clientY };
+            swipeStartRef.current = { x: e.clientX, y: e.clientY, mode: 'pending' };
           }}
           onPointerMove={(e) => {
             const start = swipeStartRef.current;
             if (!start) return;
-            const dx = Math.abs(e.clientX - start.x), dy = Math.abs(e.clientY - start.y);
-            if (dy > 12 && dy > dx) swipeStartRef.current = null;
-            else if (dx > 12 && dx > dy * 1.25) e.currentTarget.setPointerCapture?.(e.pointerId);
+            const signedDx = e.clientX - start.x;
+            const dx = Math.abs(signedDx), dy = Math.abs(e.clientY - start.y);
+            if (start.mode === 'pending' && dy > 12 && dy > dx * 1.15) {
+              start.mode = 'vertical';
+              setDragOffset(0);
+              return;
+            }
+            if (start.mode === 'pending' && dx > 12 && dx > dy * 1.15) {
+              start.mode = 'horizontal';
+              setDragging(true);
+              e.currentTarget.setPointerCapture?.(e.pointerId);
+            }
+            if (start.mode === 'horizontal') setDragOffset(signedDx);
           }}
           onPointerUp={finishPointer}
-          onPointerCancel={() => { pointerActiveRef.current = false; swipeStartRef.current = null; }}
-          onLostPointerCapture={() => { pointerActiveRef.current = false; }}
-          onPointerLeave={() => { if (!swipeStartRef.current) pointerActiveRef.current = false; }}
-          onClickCapture={(e) => { if (swipedRef.current) { e.preventDefault(); e.stopPropagation(); swipedRef.current = false; } }}>
-          <div className={`home-spotlight__story ${spotlightMotionActive ? 'is-motion-active' : ''} ${storyTransitioning ? 'is-switching' : ''}`} key={spotlight.id}>
-            <div className="home-spotlight__media" onClick={() => onSelectEvent(spotlight.id)}><EventMedia event={spotlight} /></div>
-            <div className="home-spotlight__copy"><p>大阪で今、注目のお出かけ</p><h2>{spotlight.eventName}</h2><span>{spotlight.venueName ?? '大阪府内'} ・ {spotlight.ongoing ? '開催期間中' : spotlight.timeLabel}</span><small>{spotlight.description ?? '詳しい開催内容は公式サイトでご確認ください。'}</small><button type="button" aria-label="このイベントを見る（詳細を見る）" onClick={() => onSelectEvent(spotlight.id)}>このイベントを見る <ArrowRight size={15} aria-hidden="true" /></button></div>
+          onPointerCancel={() => { pointerActiveRef.current = false; swipeStartRef.current = null; setDragging(false); setDragOffset(0); }}
+          onLostPointerCapture={() => { pointerActiveRef.current = false; }}>
+            <div className={`home-spotlight__track ${trackTransitioning ? 'is-track-animating' : ''} ${dragging ? 'is-dragging' : ''}`} style={spotlightStyle}>
+              {trackSlides.map(({ event, key, realIndex }) => <div className={`home-spotlight__story ${realIndex === safeSpotlightIndex && spotlightMotionActive ? 'is-motion-active' : ''} ${realIndex === safeSpotlightIndex && storyTransitioning ? 'is-switching' : ''}`} key={key} aria-hidden={realIndex !== safeSpotlightIndex}>
+                <div className="home-spotlight__media"><EventMedia event={event} showSource={false} /></div>
+                <div className="home-spotlight__copy"><p>大阪で今、注目のお出かけ</p><h2>{event.eventName}</h2><span>{event.venueName ?? '大阪府内'} ・ {event.ongoing ? '開催期間中' : event.timeLabel}</span><small>{event.description ?? '詳しい開催内容は公式サイトでご確認ください。'}</small></div>
+              </div>)}
+            </div>
           </div>
-          <div className="home-spotlight__controls"><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="前の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex - 1)}><ArrowLeft size={18} aria-hidden="true" /></button><span className="home-spotlight__position" aria-label="現在のスライド">{safeSpotlightIndex + 1} / {spotlights.length}</span><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="次の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex + 1)}><ArrowRight size={18} aria-hidden="true" /></button>{spotlights.length > 1 && <div className="home-spotlight__dots" aria-label="おすすめイベントを選択">{spotlights.map((item, index) => <button key={item.id} type="button" aria-label={`おすすめ${index + 1}件目を表示`} aria-current={index === safeSpotlightIndex} onClick={() => manualSpotlightAction(index)} />)}</div>}<button type="button" className="home-motion-toggle" aria-pressed={motionStopped} disabled={reducedMotion} onClick={() => setMotionPaused((paused) => !paused)}>{motionStopped ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}{reducedMotion ? '動きを減らしています' : motionPaused ? '動かす' : '動きを止める'}</button></div>
+          <div className="home-spotlight__controls"><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="前の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex - 1)}><ArrowLeft size={18} aria-hidden="true" /></button><span className="home-spotlight__position" aria-label="現在のスライド">{safeSpotlightIndex + 1} / {spotlights.length}</span><button type="button" className="home-spotlight__arrow" disabled={spotlights.length < 2} aria-label="次の注目イベント" onClick={() => manualSpotlightAction(safeSpotlightIndex + 1)}><ArrowRight size={18} aria-hidden="true" /></button>{spotlights.length > 1 && <div className="home-spotlight__dots" aria-label="おすすめイベントを選択">{spotlights.map((item, index) => <button key={item.id} type="button" aria-label={`おすすめ${index + 1}件目を表示`} aria-current={index === safeSpotlightIndex} onClick={() => manualSpotlightAction(index)} />)}</div>}<button type="button" className="home-motion-toggle" aria-pressed={motionStopped} disabled={reducedMotion} aria-label={reducedMotion ? '動きを減らしています' : motionPaused ? '自動送りを再開' : '自動送りを停止'} title={reducedMotion ? '動きを減らしています' : motionPaused ? '自動送りを再開' : '自動送りを停止'} onClick={() => setMotionPaused((paused) => !paused)}>{motionStopped ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}<span className="sr-only">{reducedMotion ? '動きを減らしています' : motionPaused ? '自動送りを再開' : '自動送りを停止'}</span></button></div>
         </article>}
       </div>
 
       <div className="home-discovery__body" id="home-results" tabIndex={-1}>
+        {!loading && !error && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
+          <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">本日開催のおすすめ</h2></div><span>{todayRecommended.length}件</span></div>
+          <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} labelElement="em" /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}</div>
+        </section>}
         <div className="home-discovery__facts" aria-label="イベント概要">
           <span><strong>{totalCount}</strong> 件の候補</span>
           <span><i aria-hidden="true" />開催期間中 <strong>{liveCount}</strong> 件</span>
@@ -302,12 +385,6 @@ export function HomeDiscovery({
         {loading && <div className="home-state-card" role="status"><span className="loading-dot" />大阪のイベントを探しています…</div>}
         {error && <div className="home-state-card is-error" role="alert"><strong>{error}</strong><button type="button" onClick={onReset}>もう一度読み込む</button></div>}
         {!loading && !error && events.length === 0 && <div className="home-state-card"><strong>条件に合うイベントがありません</strong><span>検索語や時間、条件を少し広げてみてください。</span><button type="button" onClick={onReset}>すべての候補を見る</button></div>}
-
-          {!loading && !error && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
-            <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">本日開催のおすすめ</h2></div><span>{todayRecommended.length}件</span></div>
-            <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} labelElement="em" /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}
-            </div>
-          </section>}
 
         {!loading && !error && featured.length > 0 && <>
           <div className="home-section-heading"><div><p>今から出会う、大阪</p><h2>今から選べる場所</h2></div><span>{events.length}件の候補</span></div>

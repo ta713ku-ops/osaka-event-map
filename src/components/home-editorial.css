@@ -42,7 +42,7 @@
 }
 
 /* Final editorial composition: the spotlight reads as one photographic story. */
-.home-hero { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); min-height: 350px; }
+.home-hero { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: stretch; min-height: 350px; }
 .home-spotlight { position: relative; display: block; min-height: 314px; background: #6d3b28; }
 .home-spotlight__story { min-height: inherit; animation: home-story-in .45s ease both; }
 .home-spotlight__media { position: absolute; inset: 0; min-height: 0; overflow: hidden; }
@@ -236,10 +236,32 @@
 .home-spotlight__arrow { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; border: 1px solid #ffffff80; border-radius: 50%; color: #fffaf1; background: #183c3280; cursor: pointer; }
 .home-spotlight__arrow:disabled { opacity: .4; cursor: default; }
 .home-spotlight__position { min-width: 36px; text-align: center; color: #fffaf1; font-size: 12px; font-variant-numeric: tabular-nums; }
-.home-spotlight:focus-visible, .home-spotlight__controls button:focus-visible, .home-spotlight__copy button:focus-visible { outline: 3px solid #b33a2f; outline-offset: 3px; }
+.home-spotlight__viewport:focus-visible, .home-spotlight__controls button:focus-visible { outline: 3px solid #b33a2f; outline-offset: -3px; }
 .home-spotlight__media { cursor: pointer; user-select: none; }
 .home-spotlight__media img { -webkit-user-drag: none; }
 .home-spotlight__controls .home-motion-toggle { margin-left: auto; }
 @media (max-width: 760px) {
   .home-spotlight__controls .home-spotlight__dots { display: none; }
+}
+
+/* Horizontal editorial carousel: the neighboring clone makes both ends loop
+   without a visible jump while the pointer can temporarily lead the track. */
+.home-spotlight__viewport { position: relative; width: 100%; min-width: 0; min-height: inherit; height: 100%; overflow: hidden; }
+.home-spotlight__track { display: flex; flex-wrap: nowrap; width: 100%; min-width: 0; min-height: inherit; transform: translate3d(calc(var(--spotlight-offset) + var(--spotlight-drag)), 0, 0); }
+.home-spotlight__track.is-track-animating { transition: transform 520ms cubic-bezier(.22,.75,.28,1); }
+.home-spotlight__track.is-dragging { transition: none; cursor: grabbing; }
+.home-spotlight__track .home-spotlight__story { flex: 0 0 100%; width: 100%; min-width: 0; }
+.home-spotlight__track .home-spotlight__story.is-switching,
+.home-spotlight__track .home-spotlight__story.is-switching .home-spotlight__copy > * { animation: none; }
+.home-spotlight__story[aria-hidden="true"] { pointer-events: none; }
+.home-spotlight { cursor: pointer; }
+.home-spotlight__controls, .home-spotlight__controls button { cursor: default; }
+.home-spotlight__controls button { cursor: pointer; }
+.home-motion-toggle { width: 44px; min-width: 44px; padding: 0; justify-content: center; font-size: 0; }
+@media (max-width: 760px) {
+  .home-spotlight__arrow { display: none; }
+  .home-spotlight__position { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-spotlight__track, .home-spotlight__track.is-track-animating { transition: none !important; }
 }
