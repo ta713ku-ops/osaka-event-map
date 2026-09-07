@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import {
+  assignStableRouteIds,
   collectEvents,
   createFetchText,
   rowToEvent,
@@ -16,6 +17,27 @@ import {
   normalizeDate,
   validCoordinates,
 } from './lib/events.mjs';
+
+test('preserves a published route id when mutable event facts change', () => {
+  const previous = [{ id: 'old-internal', routeId: 'published-route', officialUrl: 'https://example.test/events/stable' }];
+  const current = [{ id: 'new-internal', eventName: 'Updated title', officialUrl: 'https://example.test/events/stable/' }];
+  assert.equal(assignStableRouteIds(current, previous)[0].routeId, 'published-route');
+});
+
+test('normalizes only explicit detail-page facts and evidence', () => {
+  const event = normalizeEventRecord(fixtureEvent(70, {
+    reservationRequired: true,
+    reservationInfo: '公式フォームから申込',
+    rainPolicy: '荒天中止',
+    nearestStation: '大阪駅',
+    officialSocialLinks: [{ label: '公式Instagram', url: 'https://example.test/social' }, { url: 'javascript:alert(1)' }],
+    fieldEvidence: { reservation: { text: '要予約と明記', sourceUrl: 'https://example.test/events/70' } },
+  }), { sourceId: 'fixture', sourceName: 'Fixture', sourceUrl: 'https://example.test', checkedAt: NOW.toISOString() });
+  assert.equal(event.reservationRequired, true);
+  assert.equal(event.rainPolicy, '荒天中止');
+  assert.equal(event.officialSocialLinks.length, 1);
+  assert.equal(event.fieldEvidence.reservation.text, '要予約と明記');
+});
 
 const NOW = new Date('2026-09-04T12:00:00+09:00');
 const LATER = new Date('2026-09-05T12:00:00+09:00');

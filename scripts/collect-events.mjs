@@ -204,6 +204,43 @@ function explicitParking(value) {
   return undefined;
 }
 
+function explicitReservation(value) {
+  const text = textValue(value);
+  if (!text) return undefined;
+  if (/不要|予約なし|予約不要/u.test(text)) return false;
+  if (/要予約|予約必要|事前申込|申込必要/u.test(text)) return true;
+  return undefined;
+}
+
+function routeUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return '';
+  const parsed = new URL(url);
+  parsed.hash = '';
+  if (parsed.pathname.length > 1) parsed.pathname = parsed.pathname.replace(/\/+$/u, '');
+  return parsed.href;
+}
+
+/** Preserve the first published route id when the official page remains the same. */
+export function assignStableRouteIds(events, previousEvents = []) {
+  const byInternalId = new Map(previousEvents.filter((event) => event?.id).map((event) => [event.id, event]));
+  const officialGroups = new Map();
+  for (const event of previousEvents) {
+    const key = routeUrl(event?.officialUrl);
+    if (!key) continue;
+    const group = officialGroups.get(key) ?? [];
+    group.push(event);
+    officialGroups.set(key, group);
+  }
+  return events.map((event) => {
+    const exact = byInternalId.get(event.id);
+    const officialMatches = officialGroups.get(routeUrl(event.officialUrl)) ?? [];
+    const previous = exact || (officialMatches.length === 1 ? officialMatches[0] : undefined);
+    const routeId = textValue(previous?.routeId) || textValue(previous?.id) || event.id;
+    return { ...event, routeId };
+  });
+}
+
 export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
   const eventName = textValue(row['イベント名']);
   const startDate = normalizeDate(row['開始日']);
@@ -220,6 +257,14 @@ export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
   const endTime = normalizeTime(row['終了時間']);
   const officialUrl = httpUrl(row['コンテンツURL']) || httpUrl(row['URL']) || SOURCE_PAGE;
   const imageUrl = httpUrl(row['画像']);
+  const reservationInfo = textValue(row['予約']) || textValue(row['申込方法']) || textValue(row['申込']) || undefined;
+  const rainPolicy = textValue(row['開催条件']) || textValue(row['雨天時']) || undefined;
+  const parkingInfo = textValue(row['駐車場情報']) || undefined;
+  const nearestStation = textValue(row['最寄駅']) || textValue(row['交通アクセス']) || undefined;
+  const accessByCar = textValue(row['車でのアクセス']) || undefined;
+  const accessByTransit = textValue(row['公共交通でのアクセス']) || undefined;
+  const contactName = textValue(row['問い合わせ先名称']) || textValue(row['問い合わせ先']) || undefined;
+  const contactPhone = textValue(row['問い合わせ先電話番号']) || textValue(row['電話番号']) || undefined;
   const event = normalizeEventRecord({
     eventName,
     venueName,
@@ -237,6 +282,14 @@ export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
     outdoor: /公園|広場|森|里山|海|緑地/u.test(`${venueName ?? ''} ${description ?? ''}`) ? true : undefined,
     rainSupport: /雨天決行|雨天開催/u.test(textValue(row['開催条件'])) ? true : (/雨天中止|荒天中止/u.test(textValue(row['開催条件'])) ? false : undefined),
     parking: explicitParking(row['駐車場情報']),
+    reservationRequired: explicitReservation(reservationInfo),
+    reservationInfo,
+    rainPolicy,
+    parkingInfo,
+    nearestStation,
+    accessByCar,
+    accessByTransit,
+    contact: contactName || contactPhone ? { name: contactName, phone: contactPhone } : undefined,
     childFriendly: tags.tags.includes('family') ? true : undefined,
     dateFriendly: /イルミ|花火|夜|ライトアップ|音楽|コンサート|マルシェ/u.test(`${eventName} ${description ?? ''}`) ? true : undefined,
     officialUrl,
@@ -594,11 +647,11 @@ export async function collectEvents({
     const hasSuccess = cachedSnapshot.sources.some((source) => source.status === 'success');
     const envelope = {
       ...cachedSnapshot,
-      schemaVersion: 2,
+      schemaVersion: 3,
       generatedAt: cachedSnapshot.generatedAt,
       freshness: hasIssue ? (hasSuccess ? 'partial' : 'stale') : 'cached',
       sources: cachedSnapshot.sources,
-      events: cachedSnapshot.events,
+      events: assignStableRouteIds(cachedSnapshot.events, cachedSnapshot.events),
     };
     await writeJsonAtomic(outputPath, envelope);
     await writeJsonAtomic(reportPath, reportEnvelope(envelope));
@@ -653,12 +706,12 @@ export async function collectEvents({
 
   const generatedAt = generatedAtFor({ cached, sources: sourceReports, nowIso, lastGood: usingLastGood ? lastGood : undefined });
   const envelope = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     generatedAt,
     freshness: outputFreshness({ cached, sources: sourceReports, usingLastGood }),
     attribution: attributionFor(sourceReports, lastGood),
     sources: sourceReports,
-    events: retainedEvents,
+    events: assignStableRouteIds(retainedEvents, previousSnapshot?.events),
   };
   await writeJsonAtomic(outputPath, envelope);
   await writeJsonAtomic(reportPath, reportEnvelope(envelope));

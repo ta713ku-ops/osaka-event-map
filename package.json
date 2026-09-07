@@ -10,7 +10,7 @@
     "audit:coverage": "node scripts/audit-coverage.mjs",
     "audit:coverage:cached": "node scripts/audit-coverage.mjs --cached",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",
-    "build": "npm run collect:cached && npm run audit:coverage:cached && tsc -b && vite build",
+    "build": "npm run collect:cached && npm run audit:coverage:cached && tsc -b && vite build && node scripts/generate-event-pages.mjs",
     "collect:cached": "node scripts/collect-events.mjs --cached",
     "test:collect": "node --test scripts/*.test.mjs scripts/sources/*.test.mjs",
     "typecheck": "tsc -b --pretty false",

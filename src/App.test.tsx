@@ -40,6 +40,7 @@ async function openFirstFeaturedEvent() {
 
 describe('App editorial home integration', () => {
   beforeEach(() => {
+    window.history.replaceState({}, '', '/');
     vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url) => responseFor(url)));
     const values = new Map<string, string>([['dokoiko-osaka-profile-v1', JSON.stringify({ companion: 'ひとり', transport: '電車' })]]);
     vi.stubGlobal('localStorage', { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => values.set(key, value), removeItem: (key: string) => values.delete(key), clear: () => values.clear() });
@@ -62,11 +63,12 @@ describe('App editorial home integration', () => {
     expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
   });
 
-  it('opens event details from the candidate rail and blocks the background', async () => {
+  it('opens a shareable event detail page from the candidate rail', async () => {
     render(<App />);
     await openFirstFeaturedEvent();
-    expect(screen.getByRole('dialog', { name: 'イベント詳細' })).toBeInTheDocument();
-    expect(document.querySelector('.modal-scrim')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: '中之島ナイトマーケット' })).toBeInTheDocument();
+    expect(window.location.pathname).toBe('/events/event-a/');
+    expect(document.querySelector('.app-surface')).toHaveAttribute('hidden');
   });
 
   it('retries a failed event load in place', async () => {
@@ -87,17 +89,19 @@ describe('App editorial home integration', () => {
   it('opens Apple and Google map URLs from details', async () => {
     const open = vi.fn(); vi.stubGlobal('open', open); render(<App />);
     await openFirstFeaturedEvent();
-    fireEvent.click(screen.getByRole('button', { name: /Apple Maps/ }));
+    fireEvent.click(screen.getByRole('button', { name: '経路を見る（Apple Maps）' }));
     fireEvent.click(screen.getByRole('button', { name: /Google Maps/ }));
     expect(open).toHaveBeenNthCalledWith(1, expect.stringContaining('maps.apple.com'), '_blank', 'noopener,noreferrer');
     expect(open).toHaveBeenNthCalledWith(2, expect.stringContaining('google.com/maps'), '_blank', 'noopener,noreferrer');
   });
 
-  it('closes event details with Escape', async () => {
+  it('returns from event details and restores the discovery surface', async () => {
     render(<App />);
     await openFirstFeaturedEvent();
-    fireEvent.keyDown(window, { key: 'Escape' });
-    expect(screen.queryByRole('dialog', { name: 'イベント詳細' })).not.toBeInTheDocument();
+    window.history.replaceState({}, '', '/');
+    fireEvent.popState(window);
+    expect(screen.queryByRole('heading', { level: 1, name: '中之島ナイトマーケット' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
   });
 
   it('applies additional filters while keeping the home mounted', async () => {
@@ -123,21 +127,22 @@ describe('App editorial home integration', () => {
     const card = [...document.querySelectorAll<HTMLButtonElement>('.home-event-card')].find((item) => item.textContent?.includes('場所未確認の音楽会'));
     expect(card).toBeTruthy();
     fireEvent.click(card!);
-    expect(screen.getByRole('dialog', { name: 'イベント詳細' })).toBeInTheDocument();
-    const routeButtons = screen.getAllByRole('button', { name: '経路案内を利用できません' });
+    expect(screen.getByRole('heading', { level: 1, name: '場所未確認の音楽会' })).toBeInTheDocument();
+    const routeButtons = screen.getAllByRole('button', { name: /経路を見る/ });
     routeButtons.forEach((button) => expect(button).toBeDisabled());
-    fireEvent.click(screen.getByRole('button', { name: '閉じる' }));
-    expect(screen.queryByRole('dialog', { name: 'イベント詳細' })).not.toBeInTheDocument();
+    expect(screen.getByText(/住所・会場情報が未確認のため/)).toBeInTheDocument();
   });
 
-  it('opens an unknown-coordinate detail from the map-side list and keeps it open', async () => {
+  it('opens a compact preview from the map-side list before full details', async () => {
     render(<App />);
     fireEvent.click(await screen.findByRole('button', { name: /地図で近さを見る/ }));
     const row = [...document.querySelectorAll<HTMLButtonElement>('.event-row')].find((item) => item.textContent?.includes('場所未確認の音楽会'));
     expect(row).toBeTruthy();
     fireEvent.click(row!);
-    expect(screen.getByRole('dialog', { name: 'イベント詳細' })).toBeInTheDocument();
-    expect(screen.getAllByRole('button', { name: '経路案内を利用できません' }).every((button) => button.hasAttribute('disabled'))).toBe(true);
+    expect(screen.getByRole('dialog', { name: '地図のイベント概要' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '経路案内なし' })).toBeDisabled();
+    fireEvent.click(screen.getByRole('button', { name: /詳しく見る/ }));
+    expect(screen.getByRole('heading', { level: 1, name: '場所未確認の音楽会' })).toBeInTheDocument();
   });
 
   it('shows source health in a compact disclosure', async () => {

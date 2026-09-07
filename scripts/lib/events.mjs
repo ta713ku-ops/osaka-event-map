@@ -396,6 +396,45 @@ function normalizeIso(value) {
   return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
 }
 
+function normalizeOfficialStatus(value) {
+  const candidate = textValue(value);
+  return ['scheduled', 'cancelled', 'postponed', 'sold_out', 'registration_closed'].includes(candidate) ? candidate : undefined;
+}
+
+function normalizeExternalLinks(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((entry) => {
+    if (typeof entry === 'string') return { url: httpUrl(entry) };
+    if (!entry || typeof entry !== 'object') return {};
+    return { ...(textValue(entry.label) ? { label: textValue(entry.label) } : {}), url: httpUrl(entry.url) };
+  }).filter((entry) => entry.url);
+}
+
+function normalizeContact(value) {
+  if (!value || typeof value !== 'object') return undefined;
+  const contact = {
+    ...(textValue(value.name) ? { name: textValue(value.name) } : {}),
+    ...(textValue(value.phone) ? { phone: textValue(value.phone) } : {}),
+    ...(textValue(value.email) ? { email: textValue(value.email) } : {}),
+  };
+  return Object.keys(contact).length ? contact : undefined;
+}
+
+function normalizeFieldEvidence(value) {
+  if (!value || typeof value !== 'object') return undefined;
+  const entries = Object.entries(value).flatMap(([rawKey, rawEvidence]) => {
+    const key = textValue(rawKey);
+    if (!key || !rawEvidence || typeof rawEvidence !== 'object') return [];
+    const evidence = {
+      ...(textValue(rawEvidence.text) ? { text: textValue(rawEvidence.text) } : {}),
+      ...(httpUrl(rawEvidence.sourceUrl) ? { sourceUrl: httpUrl(rawEvidence.sourceUrl) } : {}),
+      ...(textValue(rawEvidence.checkedAt) ? { checkedAt: textValue(rawEvidence.checkedAt) } : {}),
+    };
+    return Object.keys(evidence).length ? [[key, evidence]] : [];
+  });
+  return entries.length ? Object.fromEntries(entries) : undefined;
+}
+
 /** Normalize an EventItem-like object from an additional provider. */
 export function normalizeEventRecord(raw, {
   sourceId,
@@ -445,6 +484,9 @@ export function normalizeEventRecord(raw, {
   const source = textValue(raw.source) || sourceName;
   const canonicalSourceUrl = httpUrl(raw.sourceUrl) || httpUrl(sourceUrl);
   const canonicalOfficialUrl = httpUrl(raw.officialUrl);
+  const officialSocialLinks = normalizeExternalLinks(raw.officialSocialLinks);
+  const contact = normalizeContact(raw.contact);
+  const fieldEvidence = normalizeFieldEvidence(raw.fieldEvidence);
   const trustedExplicitFree = explicitFree === false
     ? false
     : explicitFree === true && (suppliedEvidence.free || inferred.tags.includes('free'))
@@ -482,6 +524,14 @@ export function normalizeEventRecord(raw, {
     ...(textValue(raw.imageSource) ? { imageSource: textValue(raw.imageSource) } : {}),
     ...(httpUrl(raw.imageSourceUrl) ? { imageSourceUrl: httpUrl(raw.imageSourceUrl) } : {}),
     ...(textValue(raw.imageLicense) ? { imageLicense: textValue(raw.imageLicense) } : {}),
+    ...(normalizeOfficialStatus(raw.officialStatus) ? { officialStatus: normalizeOfficialStatus(raw.officialStatus) } : {}),
+    ...(textValue(raw.statusEvidence) ? { statusEvidence: textValue(raw.statusEvidence) } : {}),
+    ...(explicitBoolean(raw.reservationRequired) !== undefined ? { reservationRequired: explicitBoolean(raw.reservationRequired) } : {}),
+    ...(['reservationInfo', 'rainPolicy', 'parkingInfo', 'nearestStation', 'accessByCar', 'accessByTransit']
+      .reduce((fields, key) => textValue(raw[key]) ? { ...fields, [key]: textValue(raw[key]) } : fields, {})),
+    ...(contact ? { contact } : {}),
+    ...(officialSocialLinks.length ? { officialSocialLinks } : {}),
+    ...(fieldEvidence ? { fieldEvidence } : {}),
     ...(raw.evidence && typeof raw.evidence === 'object' ? {
       evidence: Object.fromEntries(Object.entries(raw.evidence)
         .map(([key, value]) => [textValue(key), textValue(value)])

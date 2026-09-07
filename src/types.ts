@@ -32,8 +32,29 @@ export interface EventSchedule {
   evidence?: string; weekdays?: number[]; closedDates?: string[]; daily?: boolean; dates?: string[];
 }
 
+export type EventOfficialStatus = 'scheduled' | 'cancelled' | 'postponed' | 'sold_out' | 'registration_closed';
+
+export interface EventExternalLink {
+  label?: string;
+  url: string;
+}
+
+export interface EventContact {
+  name?: string;
+  phone?: string;
+  email?: string;
+}
+
+export interface EventFieldEvidence {
+  text?: string;
+  sourceUrl?: string;
+  checkedAt?: string;
+}
+
 export interface EventItem {
   id: string;
+  /** Stable public route id. Once published, collection preserves it across mutable fact updates. */
+  routeId?: string;
   eventName: string;
   venueName?: string;
   category: EventCategory;
@@ -69,6 +90,18 @@ export interface EventItem {
   lastCheckedAt?: string;
   recommendationEvidence?: RecommendationEvidence;
   schedule?: EventSchedule;
+  officialStatus?: EventOfficialStatus;
+  statusEvidence?: string;
+  reservationRequired?: boolean | null;
+  reservationInfo?: string;
+  rainPolicy?: string;
+  parkingInfo?: string;
+  nearestStation?: string;
+  accessByCar?: string;
+  accessByTransit?: string;
+  contact?: EventContact;
+  officialSocialLinks?: EventExternalLink[];
+  fieldEvidence?: Record<string, EventFieldEvidence>;
   [key: string]: unknown;
 }
 

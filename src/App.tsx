@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronRight, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { DiscoveryHeader } from './components/DiscoveryHeader';
 import { DiscoveryIntro } from './components/DiscoveryIntro';
 import { EventMap } from './components/EventMap';
 import { EventSheet, type EventSheetEvent } from './components/EventSheet';
+import { EventDetailPage, type DetailEvent } from './components/EventDetailPage';
 import { FilterSheet, type EventFilters } from './components/FilterSheet';
 import { ProfileDialog, type Profile } from './components/ProfileDialog';
 import { HomeDiscovery, type HomeEvent } from './components/HomeDiscovery';
@@ -22,6 +23,7 @@ import {
   isOngoing,
 } from './domain';
 import { recommendHomeEvents } from './domain/homeRecommendations';
+import { appHomePath, eventIdFromPath, eventPath } from './domain/eventRoutes';
 import type { Coordinates, EventDataFile, EventItem, EventSource, TimeFilter, UserProfile } from './types';
 
 type DataFile = EventDataFile;
@@ -135,6 +137,27 @@ export function App() {
   const [originLabel, setOriginLabel] = useState('大阪駅から');
   const [mapListLimit, setMapListLimit] = useState(20);
   const [railLimit, setRailLimit] = useState(12);
+  const [detailId, setDetailId] = useState<string | null>(() => eventIdFromPath(window.location.pathname));
+  const surfaceScrollRef = useRef(0);
+  const detailTriggerRef = useRef<HTMLElement | null>(null);
+
+  const restoreSurface = useCallback(() => {
+    window.requestAnimationFrame(() => {
+      const shell = document.querySelector<HTMLElement>('.app-shell.is-home');
+      if (shell) shell.scrollTop = surfaceScrollRef.current;
+      if (detailTriggerRef.current?.isConnected) detailTriggerRef.current.focus({ preventScroll: true });
+    });
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const nextId = eventIdFromPath(window.location.pathname);
+      setDetailId(nextId);
+      if (!nextId) restoreSurface();
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [restoreSurface]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -224,6 +247,15 @@ export function App() {
     address: selected.address === selected.venueName ? undefined : selected.address,
     sourceReports: data?.sources,
   } : null;
+  const detailBase = detailId ? data?.events.find((event) => (event.routeId ?? event.id) === detailId || event.id === detailId) ?? null : null;
+  const detailEvent = useMemo<DetailEvent | null>(() => {
+    if (!detailBase) return null;
+    const distanceKm = hasCoordinates(detailBase)
+      ? calculateDistanceKm(origin, { latitude: detailBase.latitude, longitude: detailBase.longitude })
+      : undefined;
+    const travelMinutes = distanceKm == null ? undefined : estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train');
+    return { ...detailBase, ...(distanceKm == null ? {} : { distanceKm }), ...(travelMinutes == null ? {} : { travelMinutes }), sourceReports: data?.sources };
+  }, [data?.sources, detailBase, origin, userProfile.transport]);
   const liveCount = ranked.filter((event) => isOngoing(event, now)).length;
   const mapEvents = ranked.map((event, index) => ({
     ...event,
@@ -252,7 +284,25 @@ export function App() {
   const largeHomeEvents = homeRecommendations.large.flatMap(({ event }) => homeById.get(event.id) ? [homeById.get(event.id)!] : []);
   const todayHomeEvents = homeRecommendations.today.flatMap(({ event }) => homeById.get(event.id) ? [homeById.get(event.id)!] : []);
 
-  const selectEvent = (event: { id: string } | null) => setSelectedId(event?.id ?? null);
+  const selectEvent = useCallback((event: { id: string } | null) => setSelectedId(event?.id ?? null), []);
+  const openDetail = useCallback((eventId: string) => {
+    const shell = document.querySelector<HTMLElement>('.app-shell.is-home');
+    surfaceScrollRef.current = shell?.scrollTop ?? 0;
+    detailTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const publicId = data?.events.find((event) => event.id === eventId)?.routeId ?? eventId;
+    window.history.pushState({ ...(window.history.state ?? {}), dokoikoDetail: true }, '', eventPath(publicId));
+    setSelectedId(null);
+    setDetailId(publicId);
+  }, [data?.events]);
+  const closeDetail = useCallback(() => {
+    if (window.history.state?.dokoikoDetail) {
+      window.history.back();
+      return;
+    }
+    window.history.replaceState({}, '', appHomePath());
+    setDetailId(null);
+    restoreSurface();
+  }, [restoreSurface]);
   const saveProfile = (next: Profile) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     setProfile(next);
@@ -268,12 +318,21 @@ export function App() {
       setLocationNotice('');
     }, () => setLocationNotice('現在地を取得できませんでした。位置情報の許可を確認してください。'), { timeout: 10000 });
   };
-  const navigate = (provider: 'apple' | 'google') => {
-    if (!selected) return;
-    window.open(provider === 'apple' ? appleMapsUrl(selected) : googleMapsUrl(selected), '_blank', 'noopener,noreferrer');
+  const navigate = (provider: 'apple' | 'google', target: EventItem | null = selected) => {
+    if (!target) return;
+    window.open(provider === 'apple' ? appleMapsUrl(target) : googleMapsUrl(target), '_blank', 'noopener,noreferrer');
   };
 
+  useEffect(() => {
+    const defaultTitle = 'どこいこ大阪｜イベント発見マップ';
+    document.title = detailEvent ? `${detailEvent.eventName}｜どこいこ大阪` : defaultTitle;
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (description) description.content = detailEvent?.description?.slice(0, 150) || '大阪で今日・今夜・週末に行けるイベントを見つける';
+  }, [detailEvent]);
+
   return (
+    <>
+    <div className="app-surface" hidden={!!detailId}>
     <main className={`app-shell ${view === 'map' ? 'is-map' : 'is-home'}`}>
       <a className="skip-link" href={view === 'home' ? '#home-results' : '#event-results'}>候補へ移動</a>
       <DiscoveryHeader
@@ -298,7 +357,7 @@ export function App() {
         timeFilters={TIME_FILTERS}
         onTimeFilterChange={(key) => { setTimeFilter(key as TimeFilter); setSelectedId(null); }}
         onShowMap={() => setView('map')}
-        onSelectEvent={setSelectedId}
+        onSelectEvent={openDetail}
         onOpenFilters={() => setFilterOpen(true)}
         activeFilterCount={activeFilterCount}
         loading={!data && !error}
@@ -394,7 +453,7 @@ export function App() {
       </div>
       </>}
       {(selectedSheet || filterOpen || profileOpen) && <div className="modal-scrim" aria-hidden="true" />}
-      <EventSheet event={selectedSheet as EventSheetEvent | null} onClose={() => setSelectedId(null)} onNavigate={navigate} />
+      <EventSheet event={selectedSheet as EventSheetEvent | null} onClose={() => setSelectedId(null)} onOpenDetail={selected ? () => openDetail(selected.id) : undefined} onNavigate={(provider) => navigate(provider)} />
       <FilterSheet
         open={filterOpen}
         value={filters}
@@ -404,5 +463,17 @@ export function App() {
       />
       <ProfileDialog open={profileOpen} value={profile} onChange={setProfile} onSave={saveProfile} onClose={() => setProfileOpen(false)} />
     </main>
+    </div>
+    {detailId && <EventDetailPage
+      event={detailEvent}
+      requestedId={detailId}
+      loading={!data && !error}
+      loadError={error}
+      now={now}
+      onBack={closeDetail}
+      onRetry={() => setLoadAttempt((value) => value + 1)}
+      onNavigate={navigate}
+    />}
+    </>
   );
 }
