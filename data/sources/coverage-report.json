@@ -4,8 +4,8 @@
   "scope": "大阪府内の公式イベント入口・主要会場を継続確認するための登録台帳",
   "summary": {
     "tracked": 18,
-    "healthy": 18,
-    "warning": 0,
+    "healthy": 0,
+    "warning": 18,
     "gap": 20,
     "resolvedCandidates": 1,
     "pendingCandidates": 11,
@@ -15,10 +15,10 @@
     {
       "id": "festival",
       "label": "祭り・地域行事",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 3,
-      "healthy": 3,
-      "eventCount": 12,
+      "healthy": 0,
+      "eventCount": 11,
       "sourceIds": [
         "bodik-osaka",
         "osaka-city-events",
@@ -28,10 +28,10 @@
     {
       "id": "exhibition",
       "label": "展覧会・美術館",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 4,
-      "healthy": 4,
-      "eventCount": 26,
+      "healthy": 0,
+      "eventCount": 27,
       "sourceIds": [
         "osaka-art-museum",
         "nakka-art-museum",
@@ -42,10 +42,10 @@
     {
       "id": "music",
       "label": "音楽・ライブ",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 2,
-      "healthy": 2,
-      "eventCount": 52,
+      "healthy": 0,
+      "eventCount": 48,
       "sourceIds": [
         "festival-hall",
         "zepp-namba"
@@ -54,9 +54,9 @@
     {
       "id": "theater",
       "label": "演劇・舞台",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 1,
-      "healthy": 1,
+      "healthy": 0,
       "eventCount": 4,
       "sourceIds": [
         "festival-hall"
@@ -65,10 +65,10 @@
     {
       "id": "workshop",
       "label": "体験・親子",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 5,
-      "healthy": 5,
-      "eventCount": 43,
+      "healthy": 0,
+      "eventCount": 40,
       "sourceIds": [
         "bodik-osaka",
         "aeon-osaka-dome-city",
@@ -80,9 +80,9 @@
     {
       "id": "market",
       "label": "商業施設・物産",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 5,
-      "healthy": 5,
+      "healthy": 0,
       "eventCount": 9,
       "sourceIds": [
         "hankyu-umeda",
@@ -95,10 +95,10 @@
     {
       "id": "seasonal",
       "label": "季節・公園",
-      "status": "healthy",
+      "status": "warning",
       "tracked": 2,
-      "healthy": 2,
-      "eventCount": 28,
+      "healthy": 0,
+      "eventCount": 36,
       "sourceIds": [
         "bodik-osaka",
         "osaka-info-events"
@@ -120,44 +120,52 @@
       "name": "大阪南港ATC",
       "category": "exhibition",
       "url": "https://www.atc-co.com/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
-      "matchedEvents": 18,
+      "healthy": false,
+      "matchedEvents": 26,
       "matchedEventIds": [
         "5f6b5d58712fbb792229",
         "a25b7e7e0acbff9ec884",
-        "aaa453f4d5870ee64e1a",
-        "7de9bde8688329eea613",
         "a28395cb8b90640d06b0",
         "c597c85bc299f57bd239",
         "04b4f8c3bb2ef2bf2c00",
         "bd39972494ccb8631cb5",
         "e9956ba412cbe1633b2f",
         "eb8b6c09c43c08e1cb31",
+        "da49e6e741d644b0c2a0",
         "33542e7f9ed963ef0aaa",
+        "21a4f7b0adb75d0d6121",
+        "2c907339a7ea66b21904",
+        "e2a9855eba7199c690a6",
         "2003193630a171b8aedc",
         "38205f047b299fb983ff",
+        "772ac5a66407521268ff",
         "618eccbd913152ca5a99",
+        "d11d174bf21afbfd5a2a",
+        "16754a68e993fcff2d8f",
         "0ef8318cd6b303633bcb",
+        "83cc8e15f1b7239e0d53",
         "63bd6ad0a0823b3fafc6",
-        "e7b6030dbbfdfeced56f",
-        "66bc64701a3f52101758"
+        "acc045d94ab63b8d327c",
+        "240d94eb285beca75567",
+        "66bc64701a3f52101758",
+        "850afeda9dbf5a115045"
       ],
       "sourceIds": [
         "atc-events",
         "ghibli-park-exhibition-osaka"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "osaka-art",
       "name": "大阪市立美術館",
       "category": "exhibition",
       "url": "https://www.osaka-art-museum.jp/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 5,
       "matchedEventIds": [
         "466d4181c357a8d94e72",
@@ -169,16 +177,16 @@
       "sourceIds": [
         "osaka-art-museum"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "nakka",
       "name": "大阪中之島美術館",
       "category": "exhibition",
       "url": "https://nakka-art.jp/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 7,
       "matchedEventIds": [
         "0b7087763cd3de1ebbba",
@@ -192,16 +200,16 @@
       "sourceIds": [
         "nakka-art-museum"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "natural-history",
       "name": "大阪市立自然史博物館",
       "category": "exhibition",
       "url": "https://omnh.jp/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 4,
       "matchedEventIds": [
         "98b7d2306d6ca954c70a",
@@ -212,20 +220,18 @@
       "sourceIds": [
         "osaka-natural-history-museum"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "festival-hall",
       "name": "フェスティバルホール",
       "category": "music",
       "url": "https://www.festivalhall.jp/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
-      "matchedEvents": 23,
+      "healthy": false,
+      "matchedEvents": 21,
       "matchedEventIds": [
-        "dce4f599fe62806c5ad4",
-        "f37247ab9066009f321f",
         "d57ea818b2e0b7299a04",
         "e8bb1659186df87fda12",
         "0badb816051dd216f01a",
@@ -251,20 +257,18 @@
       "sourceIds": [
         "festival-hall"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "zepp-namba",
       "name": "Zepp Namba (OSAKA)",
       "category": "music",
       "url": "https://www.zepp.co.jp/hall/namba/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
-      "matchedEvents": 18,
+      "healthy": false,
+      "matchedEvents": 16,
       "matchedEventIds": [
-        "bd3b248fadf6f24f98e8",
-        "2afda115f04489f569fe",
         "7b979e651aab90aaaec7",
         "f56319d39b757d4e01f4",
         "2137e64fce20a9b79f0e",
@@ -285,16 +289,16 @@
       "sourceIds": [
         "zepp-namba"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "hankyu-umeda",
       "name": "阪急うめだ本店",
       "category": "market",
       "url": "https://www.hankyu-dept.co.jp/honten/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 31,
       "matchedEventIds": [
         "f05a4615770e13e77098",
@@ -332,16 +336,16 @@
       "sourceIds": [
         "hankyu-umeda"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-dome",
       "name": "イオンモール大阪ドームシティ",
       "category": "market",
       "url": "https://www.aeon.jp/sc/osakadomecity/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 17,
       "matchedEventIds": [
         "99f380fcc6d84529dd99",
@@ -365,17 +369,17 @@
       "sourceIds": [
         "aeon-osaka-dome-city"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-dainichi",
       "name": "イオンモール大日",
       "category": "market",
       "url": "https://www.aeon.jp/sc/dainichi/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
-      "matchedEvents": 43,
+      "healthy": false,
+      "matchedEvents": 42,
       "matchedEventIds": [
         "1b55d5fa87357f30a87b",
         "2ade7019129d802cb250",
@@ -386,8 +390,6 @@
         "0696e1623fb5b003dc9e",
         "5b8e9cc249c5b40c83fb",
         "f5ee84a165892a628c64",
-        "9a9a51034809cc044206",
-        "5fed54af97e2b9b933f8",
         "4dc6f238b33188da1995",
         "5c214c50d51f1965eb4c",
         "0c6a88b3a834e5bfba49",
@@ -406,6 +408,7 @@
         "1ddcba47167652e1bdee",
         "8f062fc57cd8165e816c",
         "a3f8d1cb93559cf4aff9",
+        "733d34e1b58610869cb9",
         "c72265fc34798f9f695c",
         "58cfd7c36b416a160fbd",
         "c64e8a2d7402639dab2a",
@@ -424,16 +427,16 @@
       "sourceIds": [
         "aeon-dainichi"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-hineno",
       "name": "イオンモール日根野",
       "category": "market",
       "url": "https://www.aeon.jp/sc/hineno/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 30,
       "matchedEventIds": [
         "7cd2105562478ff77bdf",
@@ -447,7 +450,6 @@
         "aab1f368525e9077e1a5",
         "8aad4b1041fc949f2a5b",
         "3f1c19c6590d2f9b3301",
-        "4672a0d9e9b912639176",
         "63dd819f23a383639a85",
         "cc3a5007bb8de1f390e0",
         "ce89bf18e304498b43d5",
@@ -460,6 +462,7 @@
         "7ff2864e09256d8499cf",
         "2e076779f430e5e13f79",
         "3edefbc7c00b716bbf28",
+        "5f6e32decb2af2d192a6",
         "0cd1f94ff684d09bdf61",
         "15ca85ebc41b1cbfec77",
         "5865665d324c0c3f1bd0",
@@ -470,16 +473,16 @@
       "sourceIds": [
         "aeon-hineno"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-ibaraki",
       "name": "イオンモール茨木",
       "category": "market",
       "url": "https://www.aeon.jp/sc/ibaraki/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "matchedEvents": 25,
       "matchedEventIds": [
         "17b9cfa597e87e4437bb",
@@ -492,8 +495,7 @@
         "7aeb5ffae1d5c7ac5001",
         "6030b7954c6266d34b17",
         "b171668950613811904c",
-        "0bd155e61f01fa7da4e9",
-        "6d8151647a316cf68004",
+        "93dd2f3343627d8ba72b",
         "b7c180fdf1340cfc6fa4",
         "27614ea40eb6fd51b0ef",
         "770be17fb137ce7dd796",
@@ -503,6 +505,7 @@
         "4950101a8de9af6c0e34",
         "016ec1b370dd29f71f96",
         "e6a8e9f9e39e7c5377b5",
+        "1402ab2ecdd4af75e642",
         "b511ceef577e2af5a5c1",
         "a189e0758568f95a76a0",
         "1a3ebfac5048db5fa99e",
@@ -511,7 +514,7 @@
       "sourceIds": [
         "aeon-ibaraki"
       ],
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "expo-park",
@@ -747,181 +750,181 @@
       "id": "bodik-osaka",
       "name": "大阪府オープンデータ（BODIK）",
       "url": "https://data.bodik.jp/dataset/270008_event",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 42,
-      "eventCount": 42,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "eventCount": 40,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "osaka-city-events",
       "name": "大阪市イベント情報",
       "url": "https://www.city.osaka.lg.jp/main/event2/curr.html",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
-      "count": 4,
-      "eventCount": 4,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "count": 3,
+      "eventCount": 3,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "osaka-info-events",
       "name": "大阪公式観光情報 OSAKA-INFO",
       "url": "https://osaka-info.jp/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
-      "count": 40,
-      "eventCount": 39,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "count": 37,
+      "eventCount": 37,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "osaka-art-museum",
       "name": "大阪市立美術館",
       "url": "https://www.osaka-art-museum.jp/planned_exhibition",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 5,
       "eventCount": 5,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "nakka-art-museum",
       "name": "大阪中之島美術館",
       "url": "https://nakka-art.jp/exhibition/held/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 7,
       "eventCount": 7,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "festival-hall",
       "name": "フェスティバルホール",
       "url": "https://www.festivalhall.jp/events/list/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
-      "count": 23,
-      "eventCount": 23,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "count": 21,
+      "eventCount": 21,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-osaka-dome-city",
       "name": "イオンモール大阪ドームシティ",
       "url": "https://www.aeon.jp/sc/osakadomecity/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 17,
       "eventCount": 17,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-dainichi",
       "name": "イオンモール大日",
       "url": "https://www.aeon.jp/sc/dainichi/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
-      "count": 43,
-      "eventCount": 43,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "count": 42,
+      "eventCount": 42,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-hineno",
       "name": "イオンモール日根野",
       "url": "https://www.aeon.jp/sc/hineno/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 30,
       "eventCount": 30,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "aeon-ibaraki",
       "name": "イオンモール茨木",
       "url": "https://www.aeon.jp/sc/ibaraki/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 25,
       "eventCount": 25,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "hankyu-umeda",
       "name": "阪急うめだ本店",
       "url": "https://www.hankyu-dept.co.jp/honten/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 31,
       "eventCount": 31,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "osaka-natural-history-museum",
       "name": "大阪市立自然史博物館",
       "url": "https://omnh.jp/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 4,
       "eventCount": 4,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "zepp-namba",
       "name": "Zepp Namba (OSAKA)",
       "url": "https://www.zepp.co.jp/hall/namba/schedule/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
-      "count": 18,
-      "eventCount": 18,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "count": 16,
+      "eventCount": 16,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "ghibli-park-exhibition-osaka",
       "name": "ジブリパーク展 大阪公式",
       "url": "https://ghiblipark-exhibition.jp/osaka/index.html",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
       "count": 1,
       "eventCount": 1,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     },
     {
       "id": "atc-events",
       "name": "ATC公式イベント一覧",
       "url": "https://www.atc-co.com/event/",
-      "status": "healthy",
+      "status": "warning",
       "tracked": true,
-      "healthy": true,
+      "healthy": false,
       "collectionStatus": "success",
-      "count": 17,
-      "eventCount": 17,
-      "lastCheckedAt": "2026-09-05T09:34:35.176Z"
+      "count": 25,
+      "eventCount": 25,
+      "lastCheckedAt": "2026-09-07T03:13:05.840Z"
     }
   ],
   "discovery": [

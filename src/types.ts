@@ -94,6 +94,7 @@ export interface EventItem {
   statusEvidence?: string;
   reservationRequired?: boolean | null;
   reservationInfo?: string;
+  reservationUrl?: string;
   rainPolicy?: string;
   parkingInfo?: string;
   nearestStation?: string;

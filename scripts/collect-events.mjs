@@ -207,8 +207,12 @@ function explicitParking(value) {
 function explicitReservation(value) {
   const text = textValue(value);
   if (!text) return undefined;
-  if (/不要|予約なし|予約不要/u.test(text)) return false;
-  if (/要予約|予約必要|事前申込|申込必要/u.test(text)) return true;
+  // BODIK's official field contains both short flags ("なし", "否") and
+  // longer instructions ("要事前申込。…"). Keep the interpretation
+  // conservative, but recognise every explicit no/yes form used by the feed.
+  if (/^(?:申込|申し込み|申込み)?(?:不要|なし|無|否)$/u.test(text.replace(/[\s　]+/gu, ''))
+    || /予約なし|予約不要|申込不要|申し込み不要|申し込み不要/u.test(text)) return false;
+  if (/要予約|予約必要|事前申込|事前申し込み|事前申込み|申込必要|申込要|申し込み必要|申し込み要/u.test(text)) return true;
   return undefined;
 }
 
@@ -250,21 +254,40 @@ export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
   const description = textValue(row['概要']) || textValue(row['説明']) || undefined;
   const venueName = textValue(row['場所名称']) || textValue(row['集合（受付）場所']) || undefined;
   const address = sourceAddress(row);
-  const price = textValue(row['料金(基本)']) || undefined;
+  // The current BODIK schema keeps the human-readable amount in
+  // 「料金(詳細)」; 「料金(基本)」 is often blank. Preserve both when
+  // present so a value written in the official CSV cannot disappear.
+  const priceBase = textValue(row['料金(基本)']);
+  const priceDetail = textValue(row['料金(詳細)']);
+  const price = [priceBase, priceDetail].filter(Boolean).filter((value, index, values) => values.indexOf(value) === index).join(' / ') || undefined;
   const tags = classifyTags({ name: eventName, description, price, audience: row['対象者'], rawTags: row['タグ'] });
   const coords = validCoordinates(row['緯度'], row['経度']);
   const startTime = normalizeTime(row['開始時間']);
   const endTime = normalizeTime(row['終了時間']);
   const officialUrl = httpUrl(row['コンテンツURL']) || httpUrl(row['URL']) || SOURCE_PAGE;
   const imageUrl = httpUrl(row['画像']);
-  const reservationInfo = textValue(row['予約']) || textValue(row['申込方法']) || textValue(row['申込']) || undefined;
+  const reservationInfo = textValue(row['参加申込方法']) || textValue(row['予約']) || textValue(row['申込方法']) || textValue(row['申込']) || undefined;
   const rainPolicy = textValue(row['開催条件']) || textValue(row['雨天時']) || undefined;
-  const parkingInfo = textValue(row['駐車場情報']) || undefined;
+  const parkingText = textValue(row['駐車場情報']);
+  const parkingFee = textValue(row['駐車場料金']);
+  const parkingInfo = [parkingText, parkingFee ? `料金: ${parkingFee}` : undefined].filter(Boolean).join(' / ') || undefined;
   const nearestStation = textValue(row['最寄駅']) || textValue(row['交通アクセス']) || undefined;
   const accessByCar = textValue(row['車でのアクセス']) || undefined;
-  const accessByTransit = textValue(row['公共交通でのアクセス']) || undefined;
-  const contactName = textValue(row['問い合わせ先名称']) || textValue(row['問い合わせ先']) || undefined;
-  const contactPhone = textValue(row['問い合わせ先電話番号']) || textValue(row['電話番号']) || undefined;
+  const accessByTransit = textValue(row['アクセス方法']) || textValue(row['公共交通でのアクセス']) || undefined;
+  const contactName = textValue(row['連絡先名称']) || textValue(row['問い合わせ先名称']) || textValue(row['問い合わせ先']) || undefined;
+  const contactPhone = textValue(row['連絡先電話番号']) || textValue(row['問い合わせ先電話番号']) || textValue(row['電話番号']) || undefined;
+  const reservationUrl = httpUrl(row['申込URL']);
+  const evidenceValues = {
+    price,
+    reservation: reservationInfo,
+    rainPolicy,
+    parking: parkingInfo,
+    access: [nearestStation, accessByTransit, accessByCar].filter(Boolean).join(' / ') || undefined,
+    contact: [contactName, contactPhone].filter(Boolean).join(' / ') || undefined,
+  };
+  const fieldEvidence = Object.fromEntries(Object.entries(evidenceValues)
+    .filter(([, value]) => value)
+    .map(([key, value]) => [key, { text: value, sourceUrl: SOURCE_PAGE, checkedAt }]));
   const event = normalizeEventRecord({
     eventName,
     venueName,
@@ -284,6 +307,7 @@ export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
     parking: explicitParking(row['駐車場情報']),
     reservationRequired: explicitReservation(reservationInfo),
     reservationInfo,
+    reservationUrl,
     rainPolicy,
     parkingInfo,
     nearestStation,
@@ -303,6 +327,7 @@ export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
     source: SOURCE_NAME,
     sourceUrl: SOURCE_PAGE,
     lastCheckedAt: checkedAt,
+    fieldEvidence,
   }, {
     sourceId: SOURCE_ID,
     sourceName: SOURCE_NAME,

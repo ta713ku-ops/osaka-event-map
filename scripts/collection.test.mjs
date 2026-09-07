@@ -39,6 +39,37 @@ test('normalizes only explicit detail-page facts and evidence', () => {
   assert.equal(event.fieldEvidence.reservation.text, '要予約と明記');
 });
 
+test('maps the current BODIK column names without dropping explicit facts', () => {
+  const event = rowToEvent({
+    'イベント名': '公式CSV項目テスト',
+    '開始日': '2099-01-01',
+    '終了日': '2099-01-01',
+    '料金(基本)': '',
+    '料金(詳細)': '500円（高校生以下無料）',
+    '参加申込方法': '要事前申込。公式フォームから受付',
+    '申込URL': 'https://example.test/apply',
+    '開催条件': '雨天中止',
+    '駐車場情報': 'あり',
+    '駐車場料金': '1日500円',
+    'アクセス方法': '南海高野線「大阪狭山市駅」から徒歩10分',
+    '連絡先名称': '公式事務局',
+    '連絡先電話番号': '06-1234-5678',
+    'コンテンツURL': 'https://example.test/event',
+  }, NOW.toISOString());
+  assert.ok(event);
+  assert.equal(event.price, '500円(高校生以下無料)');
+  assert.equal(event.reservationRequired, true);
+  assert.equal(event.reservationInfo, '要事前申込。公式フォームから受付');
+  assert.equal(event.reservationUrl, 'https://example.test/apply');
+  assert.equal(event.rainPolicy, '雨天中止');
+  assert.equal(event.parking, true);
+  assert.equal(event.parkingInfo, 'あり / 料金: 1日500円');
+  assert.equal(event.accessByTransit, '南海高野線「大阪狭山市駅」から徒歩10分');
+  assert.deepEqual(event.contact, { name: '公式事務局', phone: '06-1234-5678' });
+  assert.equal(event.fieldEvidence.price.text, '500円(高校生以下無料)');
+  assert.equal(event.fieldEvidence.contact.text, '公式事務局 / 06-1234-5678');
+});
+
 const NOW = new Date('2026-09-04T12:00:00+09:00');
 const LATER = new Date('2026-09-05T12:00:00+09:00');
 const SOURCE_CSV = new URL('../data/sources/270008_event.csv', import.meta.url);

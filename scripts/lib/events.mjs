@@ -529,6 +529,7 @@ export function normalizeEventRecord(raw, {
     ...(explicitBoolean(raw.reservationRequired) !== undefined ? { reservationRequired: explicitBoolean(raw.reservationRequired) } : {}),
     ...(['reservationInfo', 'rainPolicy', 'parkingInfo', 'nearestStation', 'accessByCar', 'accessByTransit']
       .reduce((fields, key) => textValue(raw[key]) ? { ...fields, [key]: textValue(raw[key]) } : fields, {})),
+    ...(httpUrl(raw.reservationUrl) ? { reservationUrl: httpUrl(raw.reservationUrl) } : {}),
     ...(contact ? { contact } : {}),
     ...(officialSocialLinks.length ? { officialSocialLinks } : {}),
     ...(fieldEvidence ? { fieldEvidence } : {}),
