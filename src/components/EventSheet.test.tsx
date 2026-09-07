@@ -24,6 +24,17 @@ describe('EventSheet map preview', () => {
     const navigate = vi.fn();
     render(<EventSheet event={{ eventName: '座標のみの会場', latitude: 34.69, longitude: 135.5 }} onClose={vi.fn()} onNavigate={navigate} />);
     fireEvent.click(screen.getByRole('button', { name: '経路を見る' }));
-    expect(navigate).toHaveBeenCalledWith('apple');
+    expect(screen.getByRole('dialog', { name: '地図アプリを選ぶ' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Google Maps' }));
+    expect(navigate).toHaveBeenCalledWith('google');
+  });
+
+  it('closes only the map chooser when Escape is pressed', () => {
+    render(<EventSheet event={{ eventName: '経路選択の会場', address: '大阪市北区' }} onClose={vi.fn()} onNavigate={vi.fn()} />);
+    fireEvent.click(screen.getByRole('button', { name: '経路を見る' }));
+    expect(screen.getByRole('dialog', { name: '地図アプリを選ぶ' })).toBeInTheDocument();
+    fireEvent.keyDown(window, { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: '地図アプリを選ぶ' })).not.toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: '地図のイベント概要' })).toBeInTheDocument();
   });
 });

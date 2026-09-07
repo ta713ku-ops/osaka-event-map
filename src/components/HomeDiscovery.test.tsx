@@ -63,11 +63,11 @@ describe('HomeDiscovery', () => {
     expect(screen.getByText('条件に合うイベントがありません')).toBeInTheDocument();
   });
 
-  it('labels official images and falls back to the date panel when an image is missing or fails', () => {
+  it('keeps imagery quiet and falls back to the date panel when an image is missing or fails', () => {
     renderHome({ events: [{ ...event('market', '市場の催し', 'マルシェ'), imageUrl: 'https://www.pref.osaka.lg.jp/example.jpg' }, event('plain', '読書会', '読書')] });
     const market = screen.getAllByRole('button', { name: /市場の催し/ }).find((button) => button.classList.contains('home-event-card'))!;
     expect(market.querySelector('img')).toHaveAttribute('alt', '');
-    expect(within(market).getByText('公式画像・出典')).toBeInTheDocument();
+    expect(within(market).queryByText('公式画像・出典')).not.toBeInTheDocument();
     fireEvent.error(market.querySelector('img')!);
     expect(within(market).queryByRole('img')).not.toBeInTheDocument();
     expect(within(market).getAllByText('9月1日 10:00').length).toBeGreaterThan(0);

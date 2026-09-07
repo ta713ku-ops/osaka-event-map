@@ -6,6 +6,7 @@ import {
 import { CATEGORY_LABELS, EVENT_TAG_LABELS, hasCoordinates } from '../domain';
 import { eventPath } from '../domain/eventRoutes';
 import type { EventItem, EventSource } from '../types';
+import { MapProviderDialog } from './MapProviderDialog';
 
 export type DetailEvent = EventItem & {
   distanceKm?: number;
@@ -42,7 +43,7 @@ function scheduleLabel(event: EventItem) {
     : formatDate(event.startDate, true);
   const time = event.startTime
     ? `${event.startTime.slice(0, 5)}${event.endTime ? `–${event.endTime.slice(0, 5)}` : ''}`
-    : '開催時間は公式情報をご確認ください';
+    : '開催時間未取得';
   return { range, time };
 }
 
@@ -72,6 +73,7 @@ export function EventDetailPage({ event, requestedId, loading, loadError, now, o
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [imageFailed, setImageFailed] = useState(false);
   const [shareNotice, setShareNotice] = useState('');
+  const [mapChoiceOpen, setMapChoiceOpen] = useState(false);
   useEffect(() => { headingRef.current?.focus({ preventScroll: true }); }, [requestedId, event?.id]);
   useEffect(() => setImageFailed(false), [event?.imageUrl]);
   const schedule = event ? scheduleLabel(event) : null;
@@ -102,10 +104,10 @@ export function EventDetailPage({ event, requestedId, loading, loadError, now, o
   if (loadError) return <main className="event-detail-page"><div className="event-detail-state is-error" role="alert"><strong>{loadError}</strong><button type="button" onClick={onRetry}>もう一度読み込む</button></div></main>;
   if (!event) return <main className="event-detail-page"><div className="event-detail-state"><strong>イベントが見つかりません</strong><p>ID「{requestedId}」の情報は終了または更新された可能性があります。</p><button type="button" onClick={onBack}>イベントを探す</button></div></main>;
 
-  const price = present(event.price) ? String(event.price) : event.freeEvent === true ? '無料' : '公式情報で確認';
-  const reservation = event.reservationRequired === false ? '予約不要' : event.reservationRequired === true ? (event.reservationInfo || '予約必要') : (event.reservationInfo || '公式情報で確認');
-  const weather = event.rainPolicy || (event.rainSupport === true ? '雨天開催' : event.rainSupport === false ? '雨天中止' : '公式情報で確認');
-  const parking = event.parkingInfo || (event.parking === true ? '駐車場あり' : event.parking === false ? '駐車場なし' : '公式情報で確認');
+  const price = present(event.price) ? String(event.price) : event.freeEvent === true ? '無料' : '未取得';
+  const reservation = event.reservationRequired === false ? '予約不要' : event.reservationRequired === true ? (event.reservationInfo || '予約必要') : (event.reservationInfo || '未取得');
+  const weather = event.rainPolicy || (event.rainSupport === true ? '雨天開催' : event.rainSupport === false ? '雨天中止' : '未取得');
+  const parking = event.parkingInfo || (event.parking === true ? '駐車場あり' : event.parking === false ? '駐車場なし' : '未取得');
 
   return <main className="event-detail-page" id="event-detail">
     <header className="event-detail-nav">
@@ -131,7 +133,6 @@ export function EventDetailPage({ event, requestedId, loading, loadError, now, o
           {present(event.imageUrl) && !imageFailed
             ? <img src={event.imageUrl} alt={`${event.eventName}の公式イメージ`} referrerPolicy="no-referrer" onError={() => setImageFailed(true)} />
             : <div className="event-detail-media__fallback" aria-hidden="true"><span>{formatDate(event.startDate)}</span><strong>{CATEGORY_LABELS[event.category] ?? '大阪のイベント'}</strong></div>}
-          {present(event.imageSourceUrl || event.officialUrl || event.sourceUrl) && <figcaption><a href={event.imageSourceUrl || event.officialUrl || event.sourceUrl} target="_blank" rel="noreferrer">公式画像・出典 <ExternalLink size={12} aria-hidden="true" /></a></figcaption>}
         </figure>
       </div>
 
@@ -163,12 +164,13 @@ export function EventDetailPage({ event, requestedId, loading, loadError, now, o
           {event.officialUrl && <a className="event-detail-official" href={event.officialUrl} target="_blank" rel="noreferrer">公式サイトで最新情報を確認 <ExternalLink size={16} aria-hidden="true" /></a>}
           {event.officialSocialLinks?.map((link) => <a key={link.url} className="event-detail-source-link" href={link.url} target="_blank" rel="noreferrer">{link.label || '公式SNS'} <ExternalLink size={14} aria-hidden="true" /></a>)}
           {event.contact && <div className="event-detail-contact"><b>問い合わせ</b>{event.contact.name && <span>{event.contact.name}</span>}{event.contact.phone && <a href={`tel:${event.contact.phone}`}>{event.contact.phone}</a>}{event.contact.email && <a href={`mailto:${event.contact.email}`}>{event.contact.email}</a>}</div>}
-          <div className="event-detail-provenance"><b>情報の確認</b><span>{event.source || '公式ソース'}</span>{event.lastCheckedAt && <span>最終確認 {checkedAtLabel(event.lastCheckedAt)}</span>}{event.sourceUrl && <a href={event.sourceUrl} target="_blank" rel="noreferrer">出典を開く</a>}</div>
+          <div className="event-detail-provenance"><b>情報の確認</b><span>{event.source || '公式ソース'}</span>{event.lastCheckedAt && <span>最終確認 {checkedAtLabel(event.lastCheckedAt)}</span>}</div>
           <p className="event-detail-disclaimer">開催内容は変更される場合があります。参加前に公式情報をご確認ください。</p>
         </aside>
       </div>
     </article>
 
-    <div className="event-detail-mobile-actions"><button type="button" disabled={!canNavigate} onClick={() => onNavigate('apple', event)}><Navigation size={18} aria-hidden="true" />経路を見る</button>{event.officialUrl && <a href={event.officialUrl} target="_blank" rel="noreferrer">公式情報 <ArrowRight size={18} aria-hidden="true" /></a>}</div>
+    <div className="event-detail-mobile-actions"><button type="button" disabled={!canNavigate} onClick={() => setMapChoiceOpen(true)}><Navigation size={18} aria-hidden="true" />経路を見る</button>{event.officialUrl && <a href={event.officialUrl} target="_blank" rel="noreferrer">公式情報 <ArrowRight size={18} aria-hidden="true" /></a>}</div>
+    <MapProviderDialog open={mapChoiceOpen} eventName={event.eventName} onClose={() => setMapChoiceOpen(false)} onSelect={(provider) => { setMapChoiceOpen(false); onNavigate(provider, event); }} />
   </main>;
 }

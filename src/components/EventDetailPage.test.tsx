@@ -19,12 +19,19 @@ describe('EventDetailPage', () => {
     expect(screen.getByText('予約不要')).toBeInTheDocument();
     expect(screen.getByText('小雨決行')).toBeInTheDocument();
     expect(screen.getByText('駐車場なし')).toBeInTheDocument();
+    expect(screen.queryByText('出典を開く')).not.toBeInTheDocument();
   });
 
   it('uses explicit official cancellation status over date calculation', () => {
     render(<EventDetailPage event={{ ...event, officialStatus: 'cancelled', statusEvidence: '主催者が中止を発表' }} requestedId="event-a" loading={false} now={new Date('2026-09-06T12:00:00+09:00')} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
     expect(screen.getByText('中止')).toBeInTheDocument();
     expect(screen.getByText('主催者が中止を発表')).toBeInTheDocument();
+  });
+
+  it('keeps unavailable facts concise without repeating the source instruction', () => {
+    render(<EventDetailPage event={{ ...event, price: undefined, freeEvent: undefined, reservationRequired: undefined, rainPolicy: undefined, rainSupport: undefined, parking: undefined }} requestedId="event-a" loading={false} now={new Date()} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
+    expect(screen.getAllByText('未取得')).toHaveLength(4);
+    expect(screen.queryByText(/公式情報で確認/)).not.toBeInTheDocument();
   });
 
   it('falls back to copying the canonical URL when native share is unavailable', async () => {
@@ -35,5 +42,14 @@ describe('EventDetailPage', () => {
     fireEvent.click(screen.getByRole('button', { name: '共有' }));
     expect(await screen.findByText('URLをコピーしました')).toBeInTheDocument();
     expect(writeText).toHaveBeenCalledWith(expect.stringMatching(/\/events\/event-a\/$/u));
+  });
+
+  it('asks which map app to use from the mobile route action', () => {
+    const navigate = vi.fn();
+    render(<EventDetailPage event={event} requestedId="event-a" loading={false} now={new Date()} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={navigate} />);
+    fireEvent.click(screen.getByRole('button', { name: '経路を見る' }));
+    expect(screen.getByRole('dialog', { name: '地図アプリを選ぶ' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Apple Maps' }));
+    expect(navigate).toHaveBeenCalledWith('apple', event);
   });
 });

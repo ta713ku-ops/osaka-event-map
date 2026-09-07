@@ -13,7 +13,6 @@ export type HomeEvent = {
   ongoing: boolean;
   description?: string;
   imageUrl?: string;
-  imageSourceUrl?: string;
 };
 
 const AUTO_ADVANCE_MS = 3000;
@@ -46,11 +45,11 @@ type Props = {
   onReset: () => void;
 };
 
-function EventMedia({ event, labelElement = 'span', showSource = true }: { event: HomeEvent; labelElement?: 'span' | 'em'; showSource?: boolean }) {
+function EventMedia({ event }: { event: HomeEvent }) {
   const [failed, setFailed] = React.useState(false);
   React.useEffect(() => setFailed(false), [event.imageUrl]);
   if (!event.imageUrl || failed) return <div className="home-date-art"><span>{event.timeLabel}</span><strong>{event.categoryLabel}</strong></div>;
-  return <><img src={event.imageUrl} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)} />{showSource && React.createElement(labelElement, null, '公式画像・出典')}</>;
+  return <img src={event.imageUrl} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)} />;
 }
 
 export function HomeDiscovery({
@@ -347,7 +346,7 @@ export function HomeDiscovery({
           onLostPointerCapture={() => { pointerActiveRef.current = false; }}>
             <div className={`home-spotlight__track ${trackTransitioning ? 'is-track-animating' : ''} ${dragging ? 'is-dragging' : ''}`} style={spotlightStyle}>
               {trackSlides.map(({ event, key, realIndex }) => <div className={`home-spotlight__story ${realIndex === safeSpotlightIndex && spotlightMotionActive ? 'is-motion-active' : ''} ${realIndex === safeSpotlightIndex && storyTransitioning ? 'is-switching' : ''}`} key={key} aria-hidden={realIndex !== safeSpotlightIndex}>
-                <div className="home-spotlight__media"><EventMedia event={event} showSource={false} /></div>
+                <div className="home-spotlight__media"><EventMedia event={event} /></div>
                 <div className="home-spotlight__copy"><p>大阪で今、注目のお出かけ</p><h2>{event.eventName}</h2><span>{event.venueName ?? '大阪府内'} ・ {event.ongoing ? '開催期間中' : event.timeLabel}</span><small>{event.description ?? '詳しい開催内容は公式サイトでご確認ください。'}</small></div>
               </div>)}
             </div>
@@ -359,7 +358,7 @@ export function HomeDiscovery({
       <div className="home-discovery__body" id="home-results" tabIndex={-1}>
         {!loading && !error && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
           <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">本日開催のおすすめ</h2></div><span>{todayRecommended.length}件</span></div>
-          <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} labelElement="em" /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}</div>
+            <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}</div>
         </section>}
         <div className="home-discovery__facts" aria-label="イベント概要">
           <span><strong>{totalCount}</strong> 件の候補</span>
@@ -394,7 +393,7 @@ export function HomeDiscovery({
           <div className="home-section-heading"><div><p>今から出会う、大阪</p><h2>今から選べる場所</h2></div><span>{events.length}件の候補</span></div>
           <div className="home-featured-grid">
             {featured.map((event) => <button key={event.id} type="button" className="home-event-card" onClick={() => onSelectEvent(event.id)}>
-              <span className="home-event-card__media"><EventMedia event={event} labelElement="em" /></span>
+              <span className="home-event-card__media"><EventMedia event={event} /></span>
               <span className={`home-event-card__status ${event.ongoing ? 'is-live' : ''}`}>{event.ongoing ? '開催期間中' : event.timeLabel}</span>
               <span className="home-event-card__category">{event.categoryLabel}</span>
               <strong>{event.eventName}</strong>
@@ -425,7 +424,7 @@ export function HomeDiscovery({
           <aside className="editorial-seasonal"><div><p>OSAKA / SEASONAL NOTE</p><h2>季節の街を、<br />歩いて見つける。</h2><span>会場の空気や街の景色まで、イベントの楽しみ方です。</span></div><button type="button" onClick={onShowMap}>大阪の地図を見る <ArrowRight size={16} aria-hidden="true" /></button></aside>
         </>}
         {sourceStatus}
-        <p className="data-note">大阪府などの公式公開データと公式サイトの情報を利用しています。「開催期間中」は会期の表示です。実施日・予約・料金は公式サイトをご確認ください。「公式画像・出典」は提供データの画像で、イベント当日の記録写真とは限りません。</p>
+        <p className="data-note">大阪府などの公式公開データと公式サイトの情報を利用しています。「開催期間中」は会期の表示です。参加前に最新情報をご確認ください。</p>
       </div>
     </section>
   );

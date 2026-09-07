@@ -130,6 +130,16 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .map-empty span { color: var(--muted); font-size: 12px; }
 .map-empty button { min-height: 46px; margin-top: 4px; border: 0; border-radius: 9px; color: #fff; background: var(--primary); cursor: pointer; font-weight: 800; }
 .modal-scrim { position: fixed; z-index: 1500; inset: 0; background: rgba(15,23,42,.38); }
+.map-choice-dialog { position: fixed; z-index: 1700; left: 50%; top: 50%; width: min(420px, calc(100vw - 32px)); padding: 24px; border: 1px solid var(--line); border-radius: 16px; color: var(--text); background: var(--surface); box-shadow: var(--shadow); transform: translate(-50%, -50%); }
+.map-choice-kicker { margin: 0 0 4px; color: var(--primary); font: 800 10px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; }
+.map-choice-dialog .dialog-header { align-items: flex-start; }
+.map-choice-dialog .dialog-header h2 { font-family: Georgia, "Times New Roman", serif; }
+.map-choice-dialog .dialog-header button { flex: 0 0 auto; }
+.map-choice-description { margin: 18px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.map-choice-actions { display: grid; gap: 9px; margin-top: 20px; }
+.map-choice-actions button { min-height: 50px; padding: 0 15px; border: 1px solid var(--primary); border-radius: 7px; color: #fff; background: var(--primary); cursor: pointer; font-size: 13px; font-weight: 800; }
+.map-choice-actions button + button { color: var(--primary); background: transparent; }
+.map-choice-cancel { width: 100%; min-height: 44px; margin-top: 10px; border: 0; color: var(--muted); background: transparent; cursor: pointer; font-size: 12px; font-weight: 800; }
 
 .event-sheet, .filter-sheet, .profile-dialog { position: fixed; z-index: 1600; overflow-y: auto; border: 1px solid rgba(229,231,235,.9); background: rgba(255,255,255,.98); box-shadow: var(--shadow); backdrop-filter: blur(24px); }
 .event-sheet { right: 20px; bottom: 20px; width: min(440px, calc(100vw - 40px)); max-height: min(720px, calc(100dvh - 150px)); border-radius: 18px; }
@@ -214,6 +224,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 3px s
   .event-actions button { min-height: 54px; font-size: 11px; }
   .filter-sheet { left: 0; right: 0; top: auto; bottom: 0; width: 100%; max-height: 78dvh; padding: 20px 16px calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 20px 20px 0 0; }
   .profile-dialog { left: 0; top: auto; bottom: 0; width: 100%; max-height: 88dvh; padding: 20px 16px calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 20px 20px 0 0; transform: none; }
+  .map-choice-dialog { left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); top: auto; width: auto; padding: 20px 16px calc(16px + env(safe-area-inset-bottom)); border-radius: 18px; transform: none; }
   .source-status-details { width: 100%; margin-inline: 0; }
 }
 

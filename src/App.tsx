@@ -276,7 +276,6 @@ export function App() {
     ongoing: isOngoing(event, now),
     description: event.description,
     imageUrl: typeof event.imageUrl === 'string' && event.imageUrl.startsWith('https://') ? event.imageUrl : undefined,
-    imageSourceUrl: typeof event.imageSourceUrl === 'string' && event.imageSourceUrl.startsWith('https://') ? event.imageSourceUrl : undefined,
   })), [now, ranked]);
 
   const homeRecommendations = useMemo(() => recommendHomeEvents(ranked, now), [ranked, now]);
