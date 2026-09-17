@@ -12,14 +12,19 @@ const event = {
 describe('EventDetailPage', () => {
   afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
-  it('shows decision facts without fabricating missing fields', () => {
+  it('removes the decision and official-information panels', () => {
     render(<EventDetailPage event={event} requestedId="event-a" loading={false} now={new Date('2026-09-06T12:00:00+09:00')} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
     expect(screen.getByRole('heading', { level: 1, name: '中之島の灯り' })).toBeInTheDocument();
     expect(screen.getByText('開催期間中')).toBeInTheDocument();
-    expect(screen.getByText('予約不要')).toBeInTheDocument();
-    expect(screen.getByText('小雨決行')).toBeInTheDocument();
-    expect(screen.getByText('駐車場なし')).toBeInTheDocument();
-    expect(screen.queryByText('出典を開く')).not.toBeInTheDocument();
+    expect(screen.queryByText('BEFORE YOU GO')).not.toBeInTheDocument();
+    expect(screen.queryByText('行く前に知っておきたいこと')).not.toBeInTheDocument();
+    expect(screen.queryByText('OFFICIAL INFORMATION')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '公式情報' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /公式情報/ })).not.toBeInTheDocument();
+    expect(screen.queryByText(/開催内容は変更される場合があります/)).not.toBeInTheDocument();
+    expect(screen.queryByText('最寄駅')).not.toBeInTheDocument();
+    expect(screen.getAllByText('大阪市北区')).toHaveLength(1);
+    expect(screen.getByRole('button', { name: '経路を見る（Apple Maps）' })).toBeInTheDocument();
   });
 
   it('uses explicit official cancellation status over date calculation', () => {
@@ -28,10 +33,21 @@ describe('EventDetailPage', () => {
     expect(screen.getByText('主催者が中止を発表')).toBeInTheDocument();
   });
 
-  it('keeps unavailable facts concise without repeating the source instruction', () => {
-    render(<EventDetailPage event={{ ...event, price: undefined, freeEvent: undefined, reservationRequired: undefined, rainPolicy: undefined, rainSupport: undefined, parking: undefined }} requestedId="event-a" loading={false} now={new Date()} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
-    expect(screen.getAllByText('未取得')).toHaveLength(4);
-    expect(screen.queryByText(/公式情報で確認/)).not.toBeInTheDocument();
+  it('shows both related-event sections and opens a selected event', () => {
+    const openEvent = vi.fn();
+    const nearby = [{ ...event, id: 'nearby', routeId: 'nearby-route', eventName: '近くの催し' }];
+    const sameArea = [{ ...event, id: 'same-area', eventName: '同じ地域の催し' }];
+    render(<EventDetailPage event={event} requestedId="event-a" loading={false} now={new Date()} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} onOpenEvent={openEvent} nearbyOngoingEvents={nearby} sameAreaEvents={sameArea} />);
+    expect(screen.getByRole('heading', { name: '近くで開催中のイベント' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '同じ会場・エリアのイベント' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('link', { name: /近くの催し/ }));
+    expect(openEvent).toHaveBeenCalledWith('nearby');
+  });
+
+  it('does not render empty related-event sections', () => {
+    render(<EventDetailPage event={event} requestedId="event-a" loading={false} now={new Date()} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
+    expect(screen.queryByRole('heading', { name: '近くで開催中のイベント' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '同じ会場・エリアのイベント' })).not.toBeInTheDocument();
   });
 
   it('falls back to copying the canonical URL when native share is unavailable', async () => {

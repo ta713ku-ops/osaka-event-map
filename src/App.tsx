@@ -14,6 +14,7 @@ import {
   calculateDistanceKm,
   calculateRecommendationScore,
   CATEGORY_LABELS,
+  detailRecommendations,
   estimateTravelTimeMinutes,
   filterEvents,
   hasCoordinates,
@@ -254,8 +255,11 @@ export function App() {
       ? calculateDistanceKm(origin, { latitude: detailBase.latitude, longitude: detailBase.longitude })
       : undefined;
     const travelMinutes = distanceKm == null ? undefined : estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train');
-    return { ...detailBase, ...(distanceKm == null ? {} : { distanceKm }), ...(travelMinutes == null ? {} : { travelMinutes }), sourceReports: data?.sources };
-  }, [data?.sources, detailBase, origin, userProfile.transport]);
+    return { ...detailBase, ...(distanceKm == null ? {} : { distanceKm }), ...(travelMinutes == null ? {} : { travelMinutes }) };
+  }, [detailBase, origin, userProfile.transport]);
+  const detailRelated = useMemo(() => detailBase && data
+    ? detailRecommendations(detailBase, data.events, now)
+    : { nearbyOngoing: [], sameArea: [] }, [data, detailBase, now]);
   const liveCount = ranked.filter((event) => isOngoing(event, now)).length;
   const mapEvents = ranked.map((event, index) => ({
     ...event,
@@ -472,6 +476,9 @@ export function App() {
       onBack={closeDetail}
       onRetry={() => setLoadAttempt((value) => value + 1)}
       onNavigate={navigate}
+      onOpenEvent={openDetail}
+      nearbyOngoingEvents={detailRelated.nearbyOngoing}
+      sameAreaEvents={detailRelated.sameArea}
     />}
     </>
   );

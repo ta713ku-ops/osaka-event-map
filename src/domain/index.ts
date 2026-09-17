@@ -4,3 +4,4 @@ export * from './maps';
 export * from './recommend';
 export * from './tags';
 export * from './categories';
+export * from './detailRecommendations';
