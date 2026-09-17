@@ -46,3 +46,16 @@ test('previous candidates persist alongside maintained seeds during cached audit
   });
   assert.deepEqual(report.candidates.map((item) => item.id).sort(), ['ghibli-2026', 'prior']);
 });
+
+test('a successful fetch with no publishable records remains a source warning', () => {
+  const report = auditCoverage({
+    registry,
+    eventData: { events: [] },
+    collectionReport: { sources: [{ ...collectionReport.sources[0], publishedCount: 0 }] },
+    now: NOW,
+  });
+  assert.equal(report.sources[0].collectionStatus, 'success');
+  assert.equal(report.sources[0].status, 'warning');
+  assert.equal(report.summary.sourceHealthy, 0);
+  assert.equal(report.summary.sourceWarning, 1);
+});

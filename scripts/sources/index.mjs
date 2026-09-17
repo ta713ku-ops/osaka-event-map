@@ -10,6 +10,11 @@ import {
   FEATURED_SOURCE_URLS,
   __test__ as featuredTest,
 } from './featured.mjs';
+import {
+  PARK_SOURCE_DEFINITIONS,
+  PARK_SOURCE_URLS,
+  __test__ as parksTest,
+} from './parks.mjs';
 
 /**
  * Additional first-party event sources.
@@ -35,6 +40,7 @@ export const SOURCE_URLS = Object.freeze({
   hankyuUmeda: 'https://www.hankyu-dept.co.jp/honten/event/',
   ...CULTURAL_SOURCE_URLS,
   ...FEATURED_SOURCE_URLS,
+  ...PARK_SOURCE_URLS,
 });
 
 const OSAKA_INFO_API = 'https://osaka-info.jp/api_/orden/get_event_list.php';
@@ -835,6 +841,7 @@ SOURCE_DEFINITIONS.push(
   ...AEON_SOURCE_CONFIGS.slice(1).map(createAeonSourceDefinition),
   ...CULTURAL_SOURCE_DEFINITIONS,
   ...FEATURED_SOURCE_DEFINITIONS,
+  ...PARK_SOURCE_DEFINITIONS,
 );
 
 export const ADDITIONAL_SOURCE_DEFINITIONS = SOURCE_DEFINITIONS.map(({ id, name, url }) => ({ id, name, url }));
@@ -896,4 +903,5 @@ export const __test__ = Object.freeze({
   parseHankyuPage,
   ...culturalTest,
   featured: featuredTest,
+  parks: parksTest,
 });

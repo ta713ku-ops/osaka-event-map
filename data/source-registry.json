@@ -8,8 +8,8 @@
     { "id": "theater", "label": "演劇・舞台", "sourceIds": ["festival-hall"] },
     { "id": "workshop", "label": "体験・親子", "sourceIds": ["bodik-osaka", "aeon-osaka-dome-city", "aeon-dainichi", "aeon-hineno", "aeon-ibaraki"] },
     { "id": "market", "label": "商業施設・物産", "sourceIds": ["hankyu-umeda", "aeon-osaka-dome-city", "aeon-dainichi", "aeon-hineno", "aeon-ibaraki"] },
-    { "id": "seasonal", "label": "季節・公園", "sourceIds": ["bodik-osaka", "osaka-info-events"] },
-    { "id": "amusement", "label": "テーマパーク", "sourceIds": [] }
+    { "id": "seasonal", "label": "季節・公園", "sourceIds": ["bodik-osaka", "osaka-info-events", "expo-park"] },
+    { "id": "amusement", "label": "テーマパーク", "sourceIds": ["hirakata-park"] }
   ],
   "sources": [
     { "id": "bodik-osaka", "name": "大阪府オープンデータ（BODIK）", "url": "https://data.bodik.jp/dataset/270008_event" },
@@ -26,7 +26,9 @@
     { "id": "osaka-natural-history-museum", "name": "大阪市立自然史博物館", "url": "https://omnh.jp/" },
     { "id": "zepp-namba", "name": "Zepp Namba (OSAKA)", "url": "https://www.zepp.co.jp/hall/namba/schedule/" },
     { "id": "ghibli-park-exhibition-osaka", "name": "ジブリパーク展 大阪公式", "url": "https://ghiblipark-exhibition.jp/osaka/index.html" },
-    { "id": "atc-events", "name": "ATC公式イベント一覧", "url": "https://www.atc-co.com/event/" }
+    { "id": "atc-events", "name": "ATC公式イベント一覧", "url": "https://www.atc-co.com/event/" },
+    { "id": "expo-park", "name": "万博記念公園", "url": "https://www.expo70-park.jp/events/" },
+    { "id": "hirakata-park", "name": "ひらかたパーク", "url": "https://www.hirakatapark.co.jp/topics/?p=event" }
   ],
   "venues": [
     { "id": "atc", "name": "大阪南港ATC", "aliases": ["大阪南港ＡＴＣ", "ATCギャラリー"], "category": "exhibition", "url": "https://www.atc-co.com/event/", "sourceIds": ["atc-events", "ghibli-park-exhibition-osaka"] },
@@ -40,8 +42,8 @@
     { "id": "aeon-dainichi", "name": "イオンモール大日", "category": "market", "url": "https://www.aeon.jp/sc/dainichi/", "sourceIds": ["aeon-dainichi"] },
     { "id": "aeon-hineno", "name": "イオンモール日根野", "category": "market", "url": "https://www.aeon.jp/sc/hineno/", "sourceIds": ["aeon-hineno"] },
     { "id": "aeon-ibaraki", "name": "イオンモール茨木", "category": "market", "url": "https://www.aeon.jp/sc/ibaraki/", "sourceIds": ["aeon-ibaraki"] },
-    { "id": "expo-park", "name": "万博記念公園", "category": "seasonal", "url": "https://www.expo70-park.jp/events/", "sourceIds": [] },
-    { "id": "hirakata-park", "name": "ひらかたパーク", "category": "amusement", "url": "https://www.hirakatapark.co.jp/topics/?p=event", "sourceIds": [] },
+    { "id": "expo-park", "name": "万博記念公園", "category": "seasonal", "url": "https://www.expo70-park.jp/events/", "sourceIds": ["expo-park"] },
+    { "id": "hirakata-park", "name": "ひらかたパーク", "category": "amusement", "url": "https://www.hirakatapark.co.jp/topics/?p=event", "sourceIds": ["hirakata-park"] },
     { "id": "osaka-castle", "name": "大阪城公園", "category": "seasonal", "url": "https://www.osakacastlepark.jp/events/index.html?lang=ja", "sourceIds": [] },
     { "id": "kaiyukan", "name": "海遊館", "category": "amusement", "url": "https://www.kaiyukan.com/connect/events/", "sourceIds": [] },
     { "id": "tennoji-zoo", "name": "天王寺動物園", "category": "amusement", "url": "https://www.tennojizoo.jp/event/", "sourceIds": [] },

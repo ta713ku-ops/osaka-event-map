@@ -16,6 +16,7 @@ import {
   filterFutureEvents,
   sortEvents,
 } from './lib/events.mjs';
+import { partitionPublishable, qualitySummary } from './lib/quality.mjs';
 
 export const SOURCE_ID = 'bodik-osaka';
 export const SOURCE_URL = 'https://data.bodik.jp/dataset/388c34d1-f97a-4865-a547-8e89c53a364a/resource/a6f32430-9e39-49f7-b429-6e4eadcc96de/download/270008_event.csv';
@@ -625,7 +626,26 @@ function attributionFor(sources, previous) {
 }
 
 function reportEnvelope(envelope) {
-  return { schemaVersion: envelope.schemaVersion, generatedAt: envelope.generatedAt, freshness: envelope.freshness, eventCount: envelope.events.length, sources: envelope.sources };
+  return {
+    schemaVersion: envelope.schemaVersion,
+    generatedAt: envelope.generatedAt,
+    freshness: envelope.freshness,
+    eventCount: envelope.events.length,
+    sources: envelope.sources,
+    quality: envelope.quality,
+  };
+}
+
+function sourceReportsWithPublishedCounts(sources, events) {
+  const counts = new Map();
+  for (const event of events) {
+    const ids = new Set([
+      textValue(event.sourceId),
+      ...(Array.isArray(event.provenance) ? event.provenance.map((entry) => textValue(entry?.sourceId)) : []),
+    ].filter(Boolean));
+    for (const id of ids) counts.set(id, (counts.get(id) ?? 0) + 1);
+  }
+  return sources.map((source) => ({ ...source, publishedCount: counts.get(source.id) ?? 0 }));
 }
 
 function newestSnapshot(first, second) {
@@ -670,13 +690,22 @@ export async function collectEvents({
     // every event's lastCheckedAt byte-for-byte stable across builds.
     const hasIssue = cachedSnapshot.sources.some((source) => source.status === 'error' || source.status === 'stale');
     const hasSuccess = cachedSnapshot.sources.some((source) => source.status === 'success');
+    const publication = partitionPublishable(cachedSnapshot.events);
+    const events = assignStableRouteIds(sortEvents(publication.accepted), cachedSnapshot.events);
+    const sources = sourceReportsWithPublishedCounts(cachedSnapshot.sources, events);
+    const quality = qualitySummary(events, { rejected: publication.rejected });
+    if (cachedSnapshot.quality?.rejected) {
+      quality.rejected = cachedSnapshot.quality.rejected;
+      quality.rejectionReasons = cachedSnapshot.quality.rejectionReasons ?? {};
+    }
     const envelope = {
       ...cachedSnapshot,
       schemaVersion: 3,
       generatedAt: cachedSnapshot.generatedAt,
       freshness: hasIssue ? (hasSuccess ? 'partial' : 'stale') : 'cached',
-      sources: cachedSnapshot.sources,
-      events: assignStableRouteIds(cachedSnapshot.events, cachedSnapshot.events),
+      sources,
+      events,
+      quality,
     };
     await writeJsonAtomic(outputPath, envelope);
     await writeJsonAtomic(reportPath, reportEnvelope(envelope));
@@ -729,15 +758,19 @@ export async function collectEvents({
     retainedEvents = reusableLastGoodEvents;
   }
 
+  const publication = partitionPublishable(retainedEvents);
+  retainedEvents = sortEvents(publication.accepted);
+
   const generatedAt = generatedAtFor({ cached, sources: sourceReports, nowIso, lastGood: usingLastGood ? lastGood : undefined });
   const envelope = {
     schemaVersion: 3,
     generatedAt,
     freshness: outputFreshness({ cached, sources: sourceReports, usingLastGood }),
     attribution: attributionFor(sourceReports, lastGood),
-    sources: sourceReports,
+    sources: sourceReportsWithPublishedCounts(sourceReports, retainedEvents),
     events: assignStableRouteIds(retainedEvents, previousSnapshot?.events),
   };
+  envelope.quality = qualitySummary(envelope.events, { rejected: publication.rejected });
   await writeJsonAtomic(outputPath, envelope);
   await writeJsonAtomic(reportPath, reportEnvelope(envelope));
   if (!cached) await writeJsonAtomic(cacheReportPath, envelope);

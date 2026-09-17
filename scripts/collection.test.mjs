@@ -138,6 +138,20 @@ test('retains every valid record beyond the former 50-item cap', async (t) => {
   assert.equal(result.events.filter((event) => event.sourceId === 'fixture').length, 55);
 });
 
+test('excludes records without official venue evidence and reports the rejection', async (t) => {
+  const directory = await fixtureDir();
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const result = await collectIn(directory, {
+    additionalCollector: async () => ({
+      events: [fixtureEvent(700, { venueName: undefined, address: undefined, latitude: undefined, longitude: undefined })],
+      sources: [{ id: 'fixture', name: 'Fixture source', url: 'https://example.test/events', status: 'success', count: 1, checkedAt: NOW.toISOString() }],
+    }),
+  });
+  assert.equal(result.events.some((event) => event.eventName === 'Fixture event 700'), false);
+  assert.equal(result.quality.rejectionReasons.venue_evidence, 1);
+  assert.equal(result.sources.find((source) => source.id === 'fixture')?.publishedCount, 0);
+});
+
 test('keeps valid providers when another provider fails and reports the failure', async (t) => {
   const directory = await fixtureDir();
   t.after(() => rm(directory, { recursive: true, force: true }));
@@ -474,6 +488,36 @@ test('live snapshot and cached build preserve event IDs, count, and checked time
   assert.deepEqual(cached.events.map((event) => [event.id, event.lastCheckedAt]), liveShape);
   assert.equal(cached.events.length, live.events.length);
   assert.equal(cached.sources.find((source) => source.id === 'stable-source')?.status, 'success');
+});
+
+test('cached build preserves live publication rejection diagnostics', async (t) => {
+  const directory = await fixtureDir();
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const paths = {
+    sourceCachePath: join(directory, 'sources', '270008_event.csv'),
+    outputPath: join(directory, 'events.json'),
+    reportPath: join(directory, 'public-report.json'),
+    cacheReportPath: join(directory, 'sources', 'collection-report.json'),
+  };
+  const invalid = fixtureEvent(903, { venueName: undefined, address: undefined, latitude: undefined, longitude: undefined });
+  const live = await collectEvents({
+    now: NOW,
+    fetchImpl: fixedBodikFetch(await readFile(paths.sourceCachePath)),
+    ...paths,
+    additionalCollector: async () => ({
+      events: [invalid],
+      sources: [{ id: 'invalid-source', name: 'Invalid', url: 'https://example.test/invalid', status: 'success', count: 1, checkedAt: NOW.toISOString() }],
+    }),
+  });
+  const cached = await collectEvents({
+    now: LATER,
+    cached: true,
+    fetchImpl: async () => { throw new Error('network must not be called'); },
+    ...paths,
+  });
+  assert.equal(live.quality.rejectionReasons.venue_evidence, 1);
+  assert.equal(cached.quality.rejectionReasons.venue_evidence, 1);
+  assert.equal(cached.quality.rejected, live.quality.rejected);
 });
 
 test('fails clearly when every provider fails and no bounded cache exists', async (t) => {

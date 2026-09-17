@@ -11,6 +11,7 @@ export interface EventSource {
   url: string;
   status: EventSourceStatus;
   count: number;
+  publishedCount?: number;
   checkedAt: string;
   error?: string;
 }
@@ -124,7 +125,22 @@ export interface EventDataFile {
   freshness?: 'fresh' | 'partial' | 'stale' | string;
   attribution: { name: string; license: string; sourceUrl: string };
   sources?: EventSource[];
+  quality?: EventQualitySummary;
   events: EventItem[];
+}
+
+export interface EventQualityMetric {
+  count: number;
+  percentage: number;
+}
+
+export interface EventQualitySummary {
+  published: number;
+  rejected: number;
+  sourceCount: number;
+  duplicateGroups: number;
+  rejectionReasons: Record<string, number>;
+  fields: Record<string, EventQualityMetric>;
 }
 
 /**
@@ -161,6 +177,10 @@ export interface CoverageSummary {
   gap?: number;
   total?: number;
   records?: number;
+  sourceTracked?: number;
+  sourceHealthy?: number;
+  sourceWarning?: number;
+  sourceGap?: number;
   sources?: CoverageDimension[];
 }
 

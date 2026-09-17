@@ -435,6 +435,27 @@ function normalizeFieldEvidence(value) {
   return entries.length ? Object.fromEntries(entries) : undefined;
 }
 
+function normalizeSchedule(value) {
+  if (!value || typeof value !== 'object') return undefined;
+  const dates = Array.isArray(value.dates)
+    ? [...new Set(value.dates.map(normalizeDate).filter(Boolean))]
+    : [];
+  const closedDates = Array.isArray(value.closedDates)
+    ? [...new Set(value.closedDates.map(normalizeDate).filter(Boolean))]
+    : [];
+  const weekdays = Array.isArray(value.weekdays)
+    ? [...new Set(value.weekdays.map(Number).filter((day) => Number.isInteger(day) && day >= 0 && day <= 6))]
+    : [];
+  const schedule = {
+    ...(textValue(value.evidence) ? { evidence: textValue(value.evidence) } : {}),
+    ...(weekdays.length ? { weekdays } : {}),
+    ...(closedDates.length ? { closedDates } : {}),
+    ...(dates.length ? { dates } : {}),
+    ...(typeof value.daily === 'boolean' ? { daily: value.daily } : {}),
+  };
+  return Object.keys(schedule).length ? schedule : undefined;
+}
+
 /** Normalize an EventItem-like object from an additional provider. */
 export function normalizeEventRecord(raw, {
   sourceId,
@@ -487,6 +508,7 @@ export function normalizeEventRecord(raw, {
   const officialSocialLinks = normalizeExternalLinks(raw.officialSocialLinks);
   const contact = normalizeContact(raw.contact);
   const fieldEvidence = normalizeFieldEvidence(raw.fieldEvidence);
+  const schedule = normalizeSchedule(raw.schedule);
   const trustedExplicitFree = explicitFree === false
     ? false
     : explicitFree === true && (suppliedEvidence.free || inferred.tags.includes('free'))
@@ -533,6 +555,7 @@ export function normalizeEventRecord(raw, {
     ...(contact ? { contact } : {}),
     ...(officialSocialLinks.length ? { officialSocialLinks } : {}),
     ...(fieldEvidence ? { fieldEvidence } : {}),
+    ...(schedule ? { schedule } : {}),
     ...(raw.evidence && typeof raw.evidence === 'object' ? {
       evidence: Object.fromEntries(Object.entries(raw.evidence)
         .map(([key, value]) => [textValue(key), textValue(value)])

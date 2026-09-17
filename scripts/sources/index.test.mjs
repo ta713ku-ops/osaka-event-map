@@ -227,6 +227,8 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     [SOURCE_URLS.zeppNamba, await fixture('zepp-namba.html')],
     [SOURCE_URLS.ghibliParkOsaka, GHIBLI_FIXTURE],
     [SOURCE_URLS.atcEvents, ATC_FIXTURE],
+    [SOURCE_URLS.expoPark, '<div class="module__park-and-sport-new-event"><section class="event-box"><li><p class="date">2026年9月19日から<br>2026年9月23日</p><h1><a href="/event/test/">万博公園テスト</a></h1></li></section></div><!-- CSS -->'],
+    [SOURCE_URLS.hirakataPark, '<section class="topics__event"><a class="event__link" href="/topics/test/"><h4 class="event__title">ひらパーテスト</h4><div class="event__main-date">2026年9月19日〜9月23日</div><span data-startday="20260919" data-endday="20260923" data-holiday=""></span></a></section><section class="topics__pickup"></section>'],
   ]);
   const aeonJson = await fixture('aeon-osaka-dome-city.json');
   const aeonByIndexUrl = new Map([
@@ -253,13 +255,14 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
 
   const result = await collectAdditionalEvents({ fetchText, now: NOW });
   assert.equal(result.sources.length, ADDITIONAL_SOURCE_DEFINITIONS.length);
-  assert.equal(result.sources.length, 14);
   assert.deepEqual([...new Set(result.sources.map((item) => item.status))], ['success']);
   assert.ok(result.events.length > 0);
   assert.ok(result.events.some((event) => event.sourceId === 'osaka-art-museum'));
   assert.ok(result.events.some((event) => event.sourceId === 'aeon-osaka-dome-city'));
   assert.ok(result.events.some((event) => event.sourceId === 'osaka-natural-history-museum'));
   assert.ok(result.events.some((event) => event.sourceId === 'zepp-namba'));
+  assert.ok(result.events.some((event) => event.sourceId === 'expo-park'));
+  assert.ok(result.events.some((event) => event.sourceId === 'hirakata-park'));
   assert.equal(infoPages.length, 6);
   for (const report of result.sources) {
     assert.match(report.url, /^https:\/\//);
@@ -275,7 +278,7 @@ test('source failures and changed markup are reported as error rather than succe
     now: NOW,
   });
   assert.equal(failed.events.length, 0);
-  assert.equal(failed.sources.length, 14);
+  assert.equal(failed.sources.length, ADDITIONAL_SOURCE_DEFINITIONS.length);
   assert.ok(failed.sources.every((sourceReport) => sourceReport.status === 'error'));
   assert.ok(failed.sources.every((sourceReport) => /network unavailable/.test(sourceReport.error ?? '')));
 

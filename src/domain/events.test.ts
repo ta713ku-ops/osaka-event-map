@@ -20,6 +20,14 @@ describe('event time filters', () => {
     expect(filterEvents([event({ startTime: undefined, endTime: undefined })], 'tonight', now)).toHaveLength(0);
     expect(filterEvents([event({ startDate: '2026-08-30', endDate: '2026-08-30', startTime: '10:00', endTime: '12:00', startAt: '2026-08-30T10:00:00+09:00', endAt: '2026-08-30T12:00:00+09:00' })], 'tonight', new Date('2026-08-30T09:00:00+09:00'))).toHaveLength(0);
     expect(filterEvents([event({ startDate: '2026-08-30', endDate: '2026-09-30', startAt: '2026-08-30T10:00:00+09:00', endAt: '2026-09-30T22:00:00+09:00', startTime: undefined, endTime: undefined })], 'tonight', now)).toHaveLength(0);
+    expect(filterEvents([event({ endTime: undefined, endAt: undefined })], 'tonight', now)).toHaveLength(0);
+    expect(filterEvents([event({ startTime: undefined, startAt: undefined })], 'tonight', now)).toHaveLength(0);
+  });
+
+  it('respects explicit occurrence and closure dates', () => {
+    expect(filterEvents([event({ schedule: { closedDates: ['2026-08-30'] } })], 'today', now)).toHaveLength(0);
+    expect(filterEvents([event({ startDate: '2026-08-01', endDate: '2026-09-30', schedule: { dates: ['2026-08-31'] } })], 'today', now)).toHaveLength(0);
+    expect(filterEvents([event({ startDate: '2026-08-01', endDate: '2026-09-30', schedule: { dates: ['2026-08-30'] } })], 'today', now)).toHaveLength(1);
   });
   it('derives weekend as the next Saturday and Sunday from Osaka local time', () => {
     const monday = new Date('2026-08-31T09:00:00+09:00');

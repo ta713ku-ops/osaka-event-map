@@ -52,7 +52,11 @@ export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', no
     if (isFinished(e, now)) return false;
     const start = eventStart(e);
     const end = eventEnd(e);
-    const startsOrSpans = (date: string) => dateOnly(e.startDate) <= date && dateOnly(e.endDate ?? e.startDate) >= date;
+    const startsOrSpans = (date: string) => {
+      if (e.schedule?.closedDates?.includes(date)) return false;
+      if (e.schedule?.dates?.length) return e.schedule.dates.includes(date);
+      return dateOnly(e.startDate) <= date && dateOnly(e.endDate ?? e.startDate) >= date;
+    };
     if (filter === 'all') return true;
     if (filter === 'today') return startsOrSpans(today);
     if (filter === 'tomorrow') return startsOrSpans(tomorrow);
@@ -60,7 +64,7 @@ export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', no
     // Tonight means a record whose published daily clock overlaps 18:00 to
     // midnight. A long startAt/endAt interval alone is a date range, not a
     // promise that the venue is open tonight.
-    const hasDailyTime = !!e.startTime || !!e.endTime;
+    const hasDailyTime = !!e.startTime && !!e.endTime;
     const tonightStart = dateTime(today, '18:00');
     const tonightEnd = dateTime(today, undefined, true);
     const overlapsTonight = !!start && !!end && !!tonightStart && !!tonightEnd

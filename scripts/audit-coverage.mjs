@@ -187,7 +187,8 @@ function sourceFresh(source, now, maxAgeMs) {
 function sourceCoverage(source, { now, maxAgeMs } = {}) {
   if (!source) return { tracked: false, healthy: false, status: 'gap' };
   const status = reportStatus(source.status) || 'error';
-  const healthy = status === 'success' && sourceFresh(source, now, maxAgeMs) && Number(source.count) > 0;
+  const publishedCount = Number(source.publishedCount ?? source.count);
+  const healthy = status === 'success' && sourceFresh(source, now, maxAgeMs) && publishedCount > 0;
   return { tracked: true, healthy, status: healthy ? 'healthy' : 'warning' };
 }
 
@@ -303,6 +304,7 @@ function buildSourceAudit(registry, sourceReports, events, { now, maxAgeMs }) {
       healthy: coverage.healthy,
       collectionStatus: reportStatus(report?.status) || 'not-collected',
       count: Number.isFinite(Number(report?.count)) ? Number(report.count) : eventCount,
+      publishedCount: Number.isFinite(Number(report?.publishedCount)) ? Number(report.publishedCount) : eventCount,
       eventCount,
       ...(report?.checkedAt ? { lastCheckedAt: report.checkedAt } : {}),
       ...(report?.error ? { error: collapseWhitespace(report.error) } : {}),
@@ -550,6 +552,10 @@ export function auditCoverage({
     healthy: coverageEntries.filter((entry) => entry.status === 'healthy').length,
     warning: coverageEntries.filter((entry) => entry.status === 'warning').length,
     gap: coverageEntries.filter((entry) => entry.status === 'gap').length,
+    sourceTracked: sources.filter((entry) => entry.status !== 'gap').length,
+    sourceHealthy: sources.filter((entry) => entry.status === 'healthy').length,
+    sourceWarning: sources.filter((entry) => entry.status === 'warning').length,
+    sourceGap: sources.filter((entry) => entry.status === 'gap').length,
     resolvedCandidates: outputCandidates.filter((candidate) => candidate.status === 'resolved').length,
     pendingCandidates: outputCandidates.filter((candidate) => candidate.status === 'pending').length,
     highPriorityGaps: outputCandidates.filter((candidate) => candidate.priority === 'high' && candidate.status === 'pending').length,
@@ -668,7 +674,7 @@ export async function runCli(argv = process.argv.slice(2)) {
   if (strict && (failedDiscovery || highPriorityGap)) {
     throw new Error(`網羅性監査が未解決です（探索警告 ${report.discovery.filter((entry) => entry.status === 'warning').length}件、高優先度gap ${report.summary.highPriorityGaps}件）。coverage.jsonをsuccess扱いしません`);
   }
-  console.log(`網羅性監査を出力しました（healthy ${report.summary.healthy}, warning ${report.summary.warning}, gap ${report.summary.gap}, 候補 ${report.candidates.length}件）。`);
+  console.log(`網羅性監査を出力しました（カテゴリ・会場 healthy ${report.summary.healthy}, warning ${report.summary.warning}, gap ${report.summary.gap}; 収集元 healthy ${report.summary.sourceHealthy}, warning ${report.summary.sourceWarning}, gap ${report.summary.sourceGap}; 候補 ${report.candidates.length}件）。`);
   return report;
 }
 
