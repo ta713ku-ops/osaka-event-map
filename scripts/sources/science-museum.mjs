@@ -18,7 +18,10 @@ export function parseScienceMuseumPage(html, { checkedAt, source = SOURCE } = {}
     const title = plain(block.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/iu)?.[1]);
     const dateHtml = block.match(/<th\b[^>]*>\s*日時\s*<\/th>\s*<td\b[^>]*>([\s\S]*?)<\/td>/iu)?.[1] ?? '';
     const dateText = plain(dateHtml).normalize('NFKC');
-    const match = dateText.match(/(20\d{2})年(\d{1,2})月(\d{1,2})日/u);
+    // A later explicit year can belong only to the end of a yearless range
+    // (for example "11月7日〜2027年1月17日"). Require the first date itself
+    // to carry its year rather than publishing the range's end as a one-day event.
+    const match = dateText.match(/^(20\d{2})年(\d{1,2})月(\d{1,2})日/u);
     const date = match ? normalizeDate(`${match[1]}-${match[2]}-${match[3]}`) : undefined;
     if (!title || !date || /(?:募集|締切|中止|延期)/u.test(title)) continue;
     const time = dateText.match(/(?:^|\s)(\d{1,2}):([0-5]\d)\s*[~〜～-]/u);
