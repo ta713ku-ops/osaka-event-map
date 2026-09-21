@@ -380,7 +380,7 @@ export function parseZeppNambaPage(html, { checkedAt, now, source } = {}) {
     const performer = textFromMatch(inner, /<h2\b[^>]*class=["'][^"']*\bsch-content-text__performer\b[^"']*["'][^>]*>([\s\S]*?)<\/h2>/i);
     const title = textFromMatch(inner, /<h3\b[^>]*class=["'][^"']*\bsch-content-text__ttl\b[^"']*["'][^>]*>([\s\S]*?)<\/h3>/i);
     const eventName = title || performer;
-    if (!range || !eventName || /(?:公演中止|開催中止|中止)/u.test(`${performer} ${title}`)) continue;
+    if (!range || !eventName || /(?:公演中止|開催中止|中止)/u.test(`${performer} ${title}`) || /^(?:PRIVATE|貸切)$/iu.test(eventName.trim())) continue;
     const open = textFromMatch(inner, /<span\b[^>]*class=["'][^"']*\bsch-content-text-date__open\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/i);
     const start = textFromMatch(inner, /<span\b[^>]*class=["'][^"']*\bsch-content-text-date__start\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/i);
     const time = open || start ? {

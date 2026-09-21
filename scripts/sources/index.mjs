@@ -15,6 +15,31 @@ import {
   PARK_SOURCE_URLS,
   __test__ as parksTest,
 } from './parks.mjs';
+import {
+  COMMERCIAL_SOURCE_DEFINITIONS,
+  COMMERCIAL_SOURCE_URLS,
+  __test__ as commercialTest,
+} from './commercial.mjs';
+import {
+  LUCUA_SOURCE_DEFINITIONS,
+  LUCUA_SOURCE_URLS,
+  __test__ as lucuaTest,
+} from './lucua.mjs';
+import {
+  BILLBOARD_SOURCE_DEFINITIONS,
+  BILLBOARD_URL,
+  __test__ as billboardTest,
+} from './billboard.mjs';
+import {
+  FENICE_SOURCE_DEFINITIONS,
+  FENICE_URL,
+  __test__ as feniceTest,
+} from './fenice.mjs';
+import {
+  NHK_HALL_SOURCE_DEFINITIONS,
+  NHK_HALL_URL,
+  __test__ as nhkHallTest,
+} from './nhk-hall.mjs';
 
 /**
  * Additional first-party event sources.
@@ -41,6 +66,12 @@ export const SOURCE_URLS = Object.freeze({
   ...CULTURAL_SOURCE_URLS,
   ...FEATURED_SOURCE_URLS,
   ...PARK_SOURCE_URLS,
+  ...COMMERCIAL_SOURCE_URLS,
+  lucuaEvents: LUCUA_SOURCE_URLS.events,
+  lucuaPopup: LUCUA_SOURCE_URLS.popup,
+  billboardOsaka: BILLBOARD_URL,
+  feniceSakai: FENICE_URL,
+  nhkOsakaHall: NHK_HALL_URL,
 });
 
 const OSAKA_INFO_API = 'https://osaka-info.jp/api_/orden/get_event_list.php';
@@ -842,6 +873,11 @@ SOURCE_DEFINITIONS.push(
   ...CULTURAL_SOURCE_DEFINITIONS,
   ...FEATURED_SOURCE_DEFINITIONS,
   ...PARK_SOURCE_DEFINITIONS,
+  ...COMMERCIAL_SOURCE_DEFINITIONS,
+  ...LUCUA_SOURCE_DEFINITIONS,
+  ...BILLBOARD_SOURCE_DEFINITIONS,
+  ...FENICE_SOURCE_DEFINITIONS,
+  ...NHK_HALL_SOURCE_DEFINITIONS,
 );
 
 export const ADDITIONAL_SOURCE_DEFINITIONS = SOURCE_DEFINITIONS.map(({ id, name, url }) => ({ id, name, url }));
@@ -904,4 +940,9 @@ export const __test__ = Object.freeze({
   ...culturalTest,
   featured: featuredTest,
   parks: parksTest,
+  commercial: commercialTest,
+  lucua: lucuaTest,
+  billboard: billboardTest,
+  fenice: feniceTest,
+  nhkHall: nhkHallTest,
 });

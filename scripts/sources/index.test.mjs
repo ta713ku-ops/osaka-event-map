@@ -229,6 +229,14 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     [SOURCE_URLS.atcEvents, ATC_FIXTURE],
     [SOURCE_URLS.expoPark, '<div class="module__park-and-sport-new-event"><section class="event-box"><li><p class="date">2026年9月19日から<br>2026年9月23日</p><h1><a href="/event/test/">万博公園テスト</a></h1></li></section></div><!-- CSS -->'],
     [SOURCE_URLS.hirakataPark, '<section class="topics__event"><a class="event__link" href="/topics/test/"><h4 class="event__title">ひらパーテスト</h4><div class="event__main-date">2026年9月19日〜9月23日</div><span data-startday="20260919" data-endday="20260923" data-holiday=""></span></a></section><section class="topics__pickup"></section>'],
+    [SOURCE_URLS.grandFront, '<a href="/event/test/" class="card-list-block js-fadeup"><p class="card-list-block__name">北館</p><p class="card-list-block__ttl">グランフロントテスト</p><time datetime="2026-09-19">2026.09.19</time></a>'],
+    [SOURCE_URLS.nambaParks, '<div class="p-event__item" data-start="2026/09/19" data-end="2026/09/20"><p class="p-event__item-heading">なんばパークステスト</p><a href="https://nambaparks.com/event/test"></a><div class="p-event__item-date">2026年9月19日〜20日</div></div>'],
+    [SOURCE_URLS.lucuaEvents, '<article class="topics-archive-post"><a href="https://www.lucua.jp/topics/p-123.html"><h2 class="entry-title">ルクアテスト</h2></a></article>'],
+    [SOURCE_URLS.lucuaPopup, '<article class="topics-archive-post"><a href="https://www.lucua.jp/topics/p-123.html"><h2 class="entry-title">ルクアテスト</h2></a></article>'],
+    ['https://www.lucua.jp/topics/p-123.html', '<meta property="og:image" content="https://www.lucua.jp/image.jpg"><h1 class="entry-title">ルクアテスト</h1><div class="event-date"><p class="date"><span class="year">2026/</span>9/19</p></div>'],
+    ...['202609', '202610', '202611', '202612', '202701', '202702'].map((month) => [`${SOURCE_URLS.billboardOsaka}?month=${month}`, `<div data-trigger-element="schedule-card-list"><a class="ArtistCardFull_root__test" href="/osaka/show?event_id=ev-123&amp;date=${month.slice(0, 4)}-${month.slice(4)}-19"><h3 class="EventHeading_mainTitle__test" aria-label="公式ライブテスト"></h3></a></div>`]),
+    ...Array.from({ length: 10 }, (_, index) => [index === 0 ? SOURCE_URLS.feniceSakai : `${SOURCE_URLS.feniceSakai}page/${index + 1}/`, '<li class="p-event__item"><div class="c-event_card"><a href="https://www.fenice-sacay.jp/event/123/"><div class="c-pickup__title">公式舞台テスト</div><li class="c-pickup__info__item">2026.10.20</li><li class="c-pickup__info__item"><i><img src="/img/common/ico/location-dot-light.svg"></i>大ホール</li></a></div></li>']),
+    [SOURCE_URLS.nhkOsakaHall, '<h2 class="eventh2">2026年10月</h2><tr class="event_timer"><td class="td_eventDT"><p><strong>２０</strong>開演 １８：００</p></td><td><p class="fxl"><strong>公式ホールテスト</strong></p></td></tr>'],
   ]);
   const aeonJson = await fixture('aeon-osaka-dome-city.json');
   const aeonByIndexUrl = new Map([
@@ -263,6 +271,12 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
   assert.ok(result.events.some((event) => event.sourceId === 'zepp-namba'));
   assert.ok(result.events.some((event) => event.sourceId === 'expo-park'));
   assert.ok(result.events.some((event) => event.sourceId === 'hirakata-park'));
+  assert.ok(result.events.some((event) => event.sourceId === 'grand-front'));
+  assert.ok(result.events.some((event) => event.sourceId === 'namba-parks'));
+  assert.ok(result.events.some((event) => event.sourceId === 'lucua'));
+  assert.ok(result.events.some((event) => event.sourceId === 'billboard-osaka'));
+  assert.ok(result.events.some((event) => event.sourceId === 'fenice-sakai'));
+  assert.ok(result.events.some((event) => event.sourceId === 'nhk-osaka-hall'));
   assert.equal(infoPages.length, 6);
   for (const report of result.sources) {
     assert.match(report.url, /^https:\/\//);
