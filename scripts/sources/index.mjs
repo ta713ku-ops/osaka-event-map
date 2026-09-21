@@ -40,6 +40,11 @@ import {
   NHK_HALL_URL,
   __test__ as nhkHallTest,
 } from './nhk-hall.mjs';
+import {
+  SCIENCE_MUSEUM_SOURCE_DEFINITIONS,
+  SCIENCE_MUSEUM_URL,
+  __test__ as scienceMuseumTest,
+} from './science-museum.mjs';
 
 /**
  * Additional first-party event sources.
@@ -72,6 +77,7 @@ export const SOURCE_URLS = Object.freeze({
   billboardOsaka: BILLBOARD_URL,
   feniceSakai: FENICE_URL,
   nhkOsakaHall: NHK_HALL_URL,
+  scienceMuseum: SCIENCE_MUSEUM_URL,
 });
 
 const OSAKA_INFO_API = 'https://osaka-info.jp/api_/orden/get_event_list.php';
@@ -878,6 +884,7 @@ SOURCE_DEFINITIONS.push(
   ...BILLBOARD_SOURCE_DEFINITIONS,
   ...FENICE_SOURCE_DEFINITIONS,
   ...NHK_HALL_SOURCE_DEFINITIONS,
+  ...SCIENCE_MUSEUM_SOURCE_DEFINITIONS,
 );
 
 export const ADDITIONAL_SOURCE_DEFINITIONS = SOURCE_DEFINITIONS.map(({ id, name, url }) => ({ id, name, url }));
@@ -945,4 +952,5 @@ export const __test__ = Object.freeze({
   billboard: billboardTest,
   fenice: feniceTest,
   nhkHall: nhkHallTest,
+  scienceMuseum: scienceMuseumTest,
 });

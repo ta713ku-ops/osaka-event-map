@@ -237,6 +237,7 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     ...['202609', '202610', '202611', '202612', '202701', '202702'].map((month) => [`${SOURCE_URLS.billboardOsaka}?month=${month}`, `<div data-trigger-element="schedule-card-list"><a class="ArtistCardFull_root__test" href="/osaka/show?event_id=ev-123&amp;date=${month.slice(0, 4)}-${month.slice(4)}-19"><h3 class="EventHeading_mainTitle__test" aria-label="公式ライブテスト"></h3></a></div>`]),
     ...Array.from({ length: 10 }, (_, index) => [index === 0 ? SOURCE_URLS.feniceSakai : `${SOURCE_URLS.feniceSakai}page/${index + 1}/`, '<li class="p-event__item"><div class="c-event_card"><a href="https://www.fenice-sacay.jp/event/123/"><div class="c-pickup__title">公式舞台テスト</div><li class="c-pickup__info__item">2026.10.20</li><li class="c-pickup__info__item"><i><img src="/img/common/ico/location-dot-light.svg"></i>大ホール</li></a></div></li>']),
     [SOURCE_URLS.nhkOsakaHall, '<h2 class="eventh2">2026年10月</h2><tr class="event_timer"><td class="td_eventDT"><p><strong>２０</strong>開演 １８：００</p></td><td><p class="fxl"><strong>公式ホールテスト</strong></p></td></tr>'],
+    [SOURCE_URLS.scienceMuseum, '<div id="pl123"><h3 class="tit03">科学館テスト</h3><table><tr><th>日時</th><td>2026年10月21日 13:00～14:00</td></tr></table></div>'],
   ]);
   const aeonJson = await fixture('aeon-osaka-dome-city.json');
   const aeonByIndexUrl = new Map([
@@ -277,6 +278,7 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
   assert.ok(result.events.some((event) => event.sourceId === 'billboard-osaka'));
   assert.ok(result.events.some((event) => event.sourceId === 'fenice-sakai'));
   assert.ok(result.events.some((event) => event.sourceId === 'nhk-osaka-hall'));
+  assert.ok(result.events.some((event) => event.sourceId === 'science-museum'));
   assert.equal(infoPages.length, 6);
   for (const report of result.sources) {
     assert.match(report.url, /^https:\/\//);

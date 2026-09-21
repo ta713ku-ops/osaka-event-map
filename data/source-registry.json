@@ -3,7 +3,7 @@
   "scope": "大阪府内の公式イベント入口・主要会場を継続確認するための登録台帳",
   "categories": [
     { "id": "festival", "label": "祭り・地域行事", "sourceIds": ["bodik-osaka", "osaka-city-events", "osaka-info-events"] },
-    { "id": "exhibition", "label": "展覧会・美術館", "sourceIds": ["osaka-art-museum", "nakka-art-museum", "osaka-natural-history-museum", "ghibli-park-exhibition-osaka"] },
+    { "id": "exhibition", "label": "展覧会・美術館", "sourceIds": ["osaka-art-museum", "nakka-art-museum", "osaka-natural-history-museum", "ghibli-park-exhibition-osaka", "science-museum"] },
     { "id": "music", "label": "音楽・ライブ", "sourceIds": ["festival-hall", "zepp-namba", "billboard-osaka"] },
     { "id": "theater", "label": "演劇・舞台", "sourceIds": ["festival-hall", "fenice-sakai", "nhk-osaka-hall"] },
     { "id": "workshop", "label": "体験・親子", "sourceIds": ["bodik-osaka", "aeon-osaka-dome-city", "aeon-dainichi", "aeon-hineno", "aeon-ibaraki"] },
@@ -34,7 +34,8 @@
     { "id": "lucua", "name": "ルクア大阪", "url": "https://www.lucua.jp/topics_category/event_info/" },
     { "id": "billboard-osaka", "name": "ビルボードライブ大阪", "url": "https://www.billboard-live.com/osaka/schedules" },
     { "id": "fenice-sakai", "name": "フェニーチェ堺", "url": "https://www.fenice-sacay.jp/event/" },
-    { "id": "nhk-osaka-hall", "name": "NHK大阪ホール", "url": "https://www.nhk-osakahall.jp/event/" }
+    { "id": "nhk-osaka-hall", "name": "NHK大阪ホール", "url": "https://www.nhk-osakahall.jp/event/" },
+    { "id": "science-museum", "name": "大阪市立科学館", "url": "https://www.sci-museum.jp/event/" }
   ],
   "venues": [
     { "id": "atc", "name": "大阪南港ATC", "aliases": ["大阪南港ＡＴＣ", "ATCギャラリー"], "category": "exhibition", "url": "https://www.atc-co.com/event/", "sourceIds": ["atc-events", "ghibli-park-exhibition-osaka"] },
@@ -55,7 +56,7 @@
     { "id": "tennoji-zoo", "name": "天王寺動物園", "category": "amusement", "url": "https://www.tennojizoo.jp/event/", "sourceIds": [] },
     { "id": "national-art-osaka", "name": "国立国際美術館", "category": "exhibition", "url": "https://www.nmao.go.jp/events/", "sourceIds": [] },
     { "id": "history-museum", "name": "大阪歴史博物館", "category": "exhibition", "url": "https://www.osakamushis.jp/news/", "sourceIds": [] },
-    { "id": "science-museum", "name": "大阪市立科学館", "category": "exhibition", "url": "https://www.sci-museum.jp/event/", "sourceIds": [] },
+    { "id": "science-museum", "name": "大阪市立科学館", "category": "exhibition", "url": "https://www.sci-museum.jp/event/", "sourceIds": ["science-museum"] },
     { "id": "oriental-ceramics", "name": "大阪市立東洋陶磁美術館", "category": "exhibition", "url": "https://www.moco.or.jp/exhibition/", "sourceIds": [] },
     { "id": "nhk-osaka-hall", "name": "NHK大阪ホール", "category": "theater", "url": "https://www.nhk-osakahall.jp/event/", "sourceIds": ["nhk-osaka-hall"] },
     { "id": "fenice-sakai", "name": "フェニーチェ堺", "category": "theater", "url": "https://www.fenice-sacay.jp/event/", "sourceIds": ["fenice-sakai"] },

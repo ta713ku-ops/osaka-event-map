@@ -1,8 +1,8 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-20T11:08:41.668Z",
+  "generatedAt": "2026-09-21T07:24:11.510Z",
   "freshness": "partial",
-  "eventCount": 563,
+  "eventCount": 555,
   "sources": [
     {
       "id": "bodik-osaka",
@@ -10,8 +10,8 @@
       "url": "https://data.bodik.jp/dataset/270008_event",
       "status": "success",
       "count": 97,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 94
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 89
     },
     {
       "id": "osaka-city-events",
@@ -19,7 +19,7 @@
       "url": "https://www.city.osaka.lg.jp/main/event2/curr.html",
       "status": "success",
       "count": 3,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 0
     },
     {
@@ -27,9 +27,9 @@
       "name": "OSAKA-INFO(大阪観光局)",
       "url": "https://osaka-info.jp/event/",
       "status": "success",
-      "count": 26,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 22
+      "count": 21,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 17
     },
     {
       "id": "osaka-art-museum",
@@ -37,7 +37,7 @@
       "url": "https://www.osaka-art-museum.jp/planned_exhibition",
       "status": "success",
       "count": 5,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 5
     },
     {
@@ -46,7 +46,7 @@
       "url": "https://nakka-art.jp/exhibition/held/",
       "status": "success",
       "count": 7,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 7
     },
     {
@@ -54,36 +54,36 @@
       "name": "フェスティバルホール",
       "url": "https://www.festivalhall.jp/events/list/",
       "status": "success",
-      "count": 11,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 11
+      "count": 10,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 10
     },
     {
       "id": "aeon-osaka-dome-city",
       "name": "イオンモール大阪ドームシティ",
       "url": "https://www.aeon.jp/sc/osakadomecity/event/",
       "status": "success",
-      "count": 36,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 36
+      "count": 35,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 35
     },
     {
       "id": "hankyu-umeda",
       "name": "阪急うめだ本店",
       "url": "https://www.hankyu-dept.co.jp/honten/event/",
       "status": "success",
-      "count": 29,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 29
+      "count": 26,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 26
     },
     {
       "id": "aeon-dainichi",
       "name": "イオンモール大日",
       "url": "https://www.aeon.jp/sc/dainichi/event/",
       "status": "success",
-      "count": 50,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 50
+      "count": 49,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 49
     },
     {
       "id": "aeon-hineno",
@@ -91,7 +91,7 @@
       "url": "https://www.aeon.jp/sc/hineno/event/",
       "status": "success",
       "count": 30,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 30
     },
     {
@@ -99,9 +99,9 @@
       "name": "イオンモール茨木",
       "url": "https://www.aeon.jp/sc/ibaraki/event/",
       "status": "success",
-      "count": 34,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 34
+      "count": 33,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 33
     },
     {
       "id": "osaka-natural-history-museum",
@@ -109,7 +109,7 @@
       "url": "https://omnh.jp/",
       "status": "stale",
       "count": 2,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "error": "最新取得に失敗したため前回のイベントを使用しています",
       "publishedCount": 2
     },
@@ -119,7 +119,7 @@
       "url": "https://www.zepp.co.jp/hall/namba/schedule/",
       "status": "success",
       "count": 7,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 7
     },
     {
@@ -128,7 +128,7 @@
       "url": "https://ghiblipark-exhibition.jp/osaka/index.html",
       "status": "success",
       "count": 1,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 1
     },
     {
@@ -136,9 +136,9 @@
       "name": "ATC公式イベント一覧",
       "url": "https://www.atc-co.com/event/",
       "status": "success",
-      "count": 21,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 21
+      "count": 19,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 19
     },
     {
       "id": "expo-park",
@@ -146,7 +146,7 @@
       "url": "https://www.expo70-park.jp/events/",
       "status": "success",
       "count": 11,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 11
     },
     {
@@ -155,7 +155,7 @@
       "url": "https://www.hirakatapark.co.jp/topics/?p=event",
       "status": "success",
       "count": 13,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 13
     },
     {
@@ -163,9 +163,9 @@
       "name": "グランフロント大阪",
       "url": "https://www.grandfront-osaka.jp/event/",
       "status": "success",
-      "count": 30,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 30
+      "count": 32,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 32
     },
     {
       "id": "namba-parks",
@@ -173,7 +173,7 @@
       "url": "https://nambaparks.com/event",
       "status": "success",
       "count": 5,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 5
     },
     {
@@ -181,18 +181,18 @@
       "name": "ルクア大阪",
       "url": "https://www.lucua.jp/topics_category/event_info/",
       "status": "success",
-      "count": 16,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 16
+      "count": 15,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 15
     },
     {
       "id": "billboard-osaka",
       "name": "ビルボードライブ大阪",
       "url": "https://www.billboard-live.com/osaka/schedules",
       "status": "success",
-      "count": 84,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 84
+      "count": 83,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 83
     },
     {
       "id": "fenice-sakai",
@@ -200,7 +200,7 @@
       "url": "https://www.fenice-sacay.jp/event/",
       "status": "success",
       "count": 44,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
+      "checkedAt": "2026-09-21T07:24:11.510Z",
       "publishedCount": 44
     },
     {
@@ -208,63 +208,72 @@
       "name": "NHK大阪ホール",
       "url": "https://www.nhk-osakahall.jp/event/",
       "status": "success",
-      "count": 33,
-      "checkedAt": "2026-09-20T11:08:41.668Z",
-      "publishedCount": 33
+      "count": 32,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 32
+    },
+    {
+      "id": "science-museum",
+      "name": "大阪市立科学館",
+      "url": "https://www.sci-museum.jp/event/",
+      "status": "success",
+      "count": 7,
+      "checkedAt": "2026-09-21T07:24:11.510Z",
+      "publishedCount": 7
     }
   ],
   "quality": {
-    "published": 563,
+    "published": 555,
     "rejected": 5,
-    "sourceCount": 22,
+    "sourceCount": 23,
     "duplicateGroups": 0,
     "rejectionReasons": {
       "venue_evidence": 5
     },
     "fields": {
       "venueName": {
-        "count": 563,
+        "count": 555,
         "percentage": 100
       },
       "address": {
-        "count": 423,
-        "percentage": 75.1
+        "count": 419,
+        "percentage": 75.5
       },
       "description": {
-        "count": 259,
-        "percentage": 46
+        "count": 248,
+        "percentage": 44.7
       },
       "startTime": {
-        "count": 172,
-        "percentage": 30.6
+        "count": 173,
+        "percentage": 31.2
       },
       "endTime": {
-        "count": 70,
+        "count": 69,
         "percentage": 12.4
       },
       "price": {
-        "count": 130,
-        "percentage": 23.1
+        "count": 123,
+        "percentage": 22.2
       },
       "image": {
-        "count": 514,
-        "percentage": 91.3
+        "count": 506,
+        "percentage": 91.2
       },
       "coordinates": {
-        "count": 94,
-        "percentage": 16.7
+        "count": 89,
+        "percentage": 16
       },
       "reservation": {
-        "count": 94,
-        "percentage": 16.7
+        "count": 89,
+        "percentage": 16
       },
       "contact": {
-        "count": 94,
-        "percentage": 16.7
+        "count": 89,
+        "percentage": 16
       },
       "fieldEvidence": {
-        "count": 330,
-        "percentage": 58.6
+        "count": 331,
+        "percentage": 59.6
       }
     }
   }
