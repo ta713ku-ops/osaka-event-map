@@ -293,15 +293,11 @@ export function App() {
     surfaceScrollRef.current = shell?.scrollTop ?? 0;
     detailTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const publicId = data?.events.find((event) => event.id === eventId)?.routeId ?? eventId;
-    window.history.pushState({ ...(window.history.state ?? {}), dokoikoDetail: true }, '', eventPath(publicId));
+    window.history.replaceState({ ...(window.history.state ?? {}), dokoikoDetail: true }, '', eventPath(publicId));
     setSelectedId(null);
     setDetailId(publicId);
   }, [data?.events]);
   const closeDetail = useCallback(() => {
-    if (window.history.state?.dokoikoDetail) {
-      window.history.back();
-      return;
-    }
     window.history.replaceState({}, '', appHomePath());
     setDetailId(null);
     restoreSurface();

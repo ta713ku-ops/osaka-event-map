@@ -64,11 +64,25 @@ describe('App editorial home integration', () => {
   });
 
   it('opens a shareable event detail page from the candidate rail', async () => {
+    const replaceState = vi.spyOn(window.history, 'replaceState');
+    const pushState = vi.spyOn(window.history, 'pushState');
     render(<App />);
     await openFirstFeaturedEvent();
     expect(screen.getByRole('heading', { level: 1, name: '中之島ナイトマーケット' })).toBeInTheDocument();
     expect(window.location.pathname).toBe('/events/event-a/');
     expect(document.querySelector('.app-surface')).toHaveAttribute('hidden');
+    expect(replaceState).toHaveBeenCalledWith(expect.objectContaining({ dokoikoDetail: true }), '', '/events/event-a/');
+    expect(pushState).not.toHaveBeenCalled();
+  });
+
+  it('closes details without leaving the detail URL in browser history', async () => {
+    const back = vi.spyOn(window.history, 'back');
+    render(<App />);
+    await openFirstFeaturedEvent();
+    fireEvent.click(screen.getByRole('button', { name: '戻る' }));
+    expect(window.location.pathname).toBe('/');
+    expect(back).not.toHaveBeenCalled();
+    expect(screen.queryByRole('heading', { level: 1, name: '中之島ナイトマーケット' })).not.toBeInTheDocument();
   });
 
   it('retries a failed event load in place', async () => {

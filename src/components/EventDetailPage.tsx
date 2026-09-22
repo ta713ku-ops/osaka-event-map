@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowLeft, ArrowRight, CalendarDays, MapPin, Navigation, Share2,
+  ArrowLeft, ArrowRight, CalendarDays, ExternalLink, MapPin, Navigation, Share2,
 } from 'lucide-react';
 import { CATEGORY_LABELS, EVENT_TAG_LABELS, hasCoordinates, type DetailRecommendation } from '../domain';
 import { eventPath } from '../domain/eventRoutes';
@@ -176,14 +176,14 @@ export function EventDetailPage({
           <RelatedEventsSection id="event-same-area-title" title="同じ会場・エリアのイベント" events={sameAreaEvents} onOpenEvent={onOpenEvent} />
 
           <section aria-labelledby="event-access-title"><p className="event-detail-section-kicker">ACCESS</p><h2 id="event-access-title">アクセス</h2>
-            <div className="event-detail-route-actions is-standalone"><button type="button" disabled={!canNavigate} onClick={() => onNavigate('apple', event)}>経路を見る（Apple Maps）</button><button type="button" disabled={!canNavigate} onClick={() => onNavigate('google', event)}>Google Mapsで見る</button></div>
+            <div className="event-detail-route-actions is-standalone"><button type="button" disabled={!canNavigate} onClick={() => onNavigate('apple', event)}>経路を見る（Apple Maps）</button><button type="button" disabled={!canNavigate} onClick={() => onNavigate('google', event)}>Google Mapsで見る</button>{event.officialUrl && <a className="event-detail-official-action" href={event.officialUrl} target="_blank" rel="noreferrer">公式サイトを見る <ExternalLink size={16} aria-hidden="true" /></a>}</div>
             {!canNavigate && <p className="event-detail-missing">住所・会場情報が未確認のため、経路案内は利用できません。</p>}
           </section>
         </div>
       </div>
     </article>
 
-    <div className="event-detail-mobile-actions"><button type="button" disabled={!canNavigate} onClick={() => setMapChoiceOpen(true)}><Navigation size={18} aria-hidden="true" />経路を見る</button></div>
+    <div className={`event-detail-mobile-actions${event.officialUrl ? ' has-official' : ''}`}><button type="button" disabled={!canNavigate} onClick={() => setMapChoiceOpen(true)}><Navigation size={18} aria-hidden="true" />経路を見る</button>{event.officialUrl && <a href={event.officialUrl} target="_blank" rel="noreferrer">公式サイトを見る <ExternalLink size={18} aria-hidden="true" /></a>}</div>
     <MapProviderDialog open={mapChoiceOpen} eventName={event.eventName} onClose={() => setMapChoiceOpen(false)} onSelect={(provider) => { setMapChoiceOpen(false); onNavigate(provider, event); }} />
   </main>;
 }

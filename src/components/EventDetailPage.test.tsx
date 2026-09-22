@@ -12,7 +12,7 @@ const event = {
 describe('EventDetailPage', () => {
   afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
-  it('removes the decision and official-information panels', () => {
+  it('keeps the streamlined detail while preserving official-site actions', () => {
     render(<EventDetailPage event={event} requestedId="event-a" loading={false} now={new Date('2026-09-06T12:00:00+09:00')} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
     expect(screen.getByRole('heading', { level: 1, name: '中之島の灯り' })).toBeInTheDocument();
     expect(screen.getByText('開催期間中')).toBeInTheDocument();
@@ -20,11 +20,21 @@ describe('EventDetailPage', () => {
     expect(screen.queryByText('行く前に知っておきたいこと')).not.toBeInTheDocument();
     expect(screen.queryByText('OFFICIAL INFORMATION')).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: '公式情報' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: /公式情報/ })).not.toBeInTheDocument();
     expect(screen.queryByText(/開催内容は変更される場合があります/)).not.toBeInTheDocument();
     expect(screen.queryByText('最寄駅')).not.toBeInTheDocument();
     expect(screen.getAllByText('大阪市北区')).toHaveLength(1);
     expect(screen.getByRole('button', { name: '経路を見る（Apple Maps）' })).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: '公式サイトを見る' })).toHaveLength(2);
+    for (const link of screen.getAllByRole('link', { name: '公式サイトを見る' })) {
+      expect(link).toHaveAttribute('href', 'https://example.test/event');
+      expect(link).toHaveAttribute('target', '_blank');
+    }
+  });
+
+  it('does not show an official-site action without an official URL', () => {
+    const withoutOfficialUrl = { ...event, officialUrl: undefined };
+    render(<EventDetailPage event={withoutOfficialUrl} requestedId="event-a" loading={false} now={new Date()} onBack={vi.fn()} onRetry={vi.fn()} onNavigate={vi.fn()} />);
+    expect(screen.queryByRole('link', { name: '公式サイトを見る' })).not.toBeInTheDocument();
   });
 
   it('uses explicit official cancellation status over date calculation', () => {

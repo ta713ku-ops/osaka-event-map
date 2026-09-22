@@ -398,8 +398,9 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline-color:
 .event-related-card > svg { margin: 0 16px 16px auto; color: var(--primary); }
 .event-detail-route-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
 .event-detail-route-actions.is-standalone { margin-top: 0; }
-.event-detail-route-actions button, .event-detail-state button { min-height: 48px; padding: 0 15px; border: 1px solid var(--primary); border-radius: 6px; color: #fff; background: var(--primary); cursor: pointer; font-size: 12px; font-weight: 800; }
+.event-detail-route-actions button, .event-detail-route-actions a, .event-detail-state button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 15px; border: 1px solid var(--primary); border-radius: 6px; color: #fff; background: var(--primary); cursor: pointer; font-size: 12px; font-weight: 800; text-decoration: none; }
 .event-detail-route-actions button + button { color: var(--primary); background: transparent; }
+.event-detail-route-actions .event-detail-official-action { border-color: var(--secondary); color: var(--secondary); background: transparent; }
 .event-detail-route-actions button:disabled { border-color: var(--line); color: var(--muted); background: #ece6de; cursor: not-allowed; }
 .event-detail-state { width: min(560px, calc(100% - 32px)); min-height: 240px; margin: 12vh auto; display: grid; place-content: center; justify-items: start; gap: 14px; padding: 32px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .event-detail-state.is-error { color: var(--danger); }
@@ -441,6 +442,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline-color:
   .event-related-card > svg { grid-column: 3; grid-row: 1; align-self: center; margin: 0 12px 0 0; }
   .event-detail-route-actions { display: none; }
   .event-detail-mobile-actions { position: fixed; z-index: 25; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: 1fr; gap: 8px; padding: 9px 10px calc(9px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: rgba(255,253,248,.96); backdrop-filter: blur(18px); }
+  .event-detail-mobile-actions.has-official { grid-template-columns: 1fr 1fr; }
   .event-detail-mobile-actions button, .event-detail-mobile-actions a { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--primary); border-radius: 6px; color: #fff; background: var(--primary); cursor: pointer; font-size: 12px; font-weight: 800; text-decoration: none; }
   .event-detail-mobile-actions a { color: var(--primary); background: var(--surface); }
   .event-detail-mobile-actions button:disabled { border-color: var(--line); color: var(--muted); background: #eee9e2; }
@@ -452,6 +454,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline-color:
   .event-detail-brand { font-size: 14px; }
   .event-related-card { grid-template-columns: 96px minmax(0, 1fr) auto; }
   .event-preview-actions { grid-template-columns: 1fr; }
+  .event-detail-mobile-actions.has-official { grid-template-columns: 1fr; }
 }
 
 /* Terracotta editorial layer: keeps the existing interaction contract intact. */
