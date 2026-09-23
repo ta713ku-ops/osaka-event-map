@@ -33,7 +33,8 @@ const responseFor = (url: unknown, eventData: unknown = events) => ({ ok: true, 
 
 async function openFirstFeaturedEvent() {
   await screen.findAllByText('中之島ナイトマーケット');
-  const card = document.querySelector<HTMLButtonElement>('.home-event-card');
+  const card = [...document.querySelectorAll<HTMLButtonElement>('.home-event-card')]
+    .find((item) => item.textContent?.includes('中之島ナイトマーケット'));
   expect(card).not.toBeNull();
   fireEvent.click(card!);
 }
@@ -51,8 +52,10 @@ describe('App editorial home integration', () => {
     render(<App />);
     expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
     expect(screen.queryByTestId('event-map')).not.toBeInTheDocument();
-    for (const label of ['今日', '今夜', '明日', '今週末']) expect(screen.getByRole('button', { name: label })).toBeInTheDocument();
+    for (const label of ['今日', '今夜', '明日', '近日開催', '今週末']) expect(screen.getByRole('button', { name: label })).toBeInTheDocument();
     await screen.findAllByText('中之島ナイトマーケット');
+    expect(screen.getByRole('heading', { name: 'イベント一覧' })).toBeInTheDocument();
+    expect(screen.getByText(/件・注目順/)).toBeInTheDocument();
   });
 
   it('filters the home without leaving the editorial surface', async () => {
@@ -194,12 +197,12 @@ describe('App editorial home integration', () => {
     render(<App />);
     await screen.findAllByText('中之島ナイトマーケット');
     fireEvent.click(screen.getByRole('button', { name: '今日' }));
-    expect(screen.queryByText('大阪クラフト展')).not.toBeInTheDocument();
+    expect(document.querySelector('.home-featured-grid')).not.toHaveTextContent('大阪クラフト展');
     fireEvent.click(screen.getByRole('button', { name: '明日' }));
-    expect(screen.queryByText('中之島ナイトマーケット')).not.toBeInTheDocument();
-    expect(screen.getAllByText('大阪クラフト展').length).toBeGreaterThan(0);
+    expect(document.querySelector('.home-featured-grid')).not.toHaveTextContent('中之島ナイトマーケット');
+    expect(document.querySelector('.home-featured-grid')).toHaveTextContent('大阪クラフト展');
     fireEvent.click(screen.getByRole('button', { name: '今夜' }));
-    expect(screen.queryByText('大阪クラフト展')).not.toBeInTheDocument();
+    expect(document.querySelector('.home-featured-grid')).not.toHaveTextContent('大阪クラフト展');
     fireEvent.click(screen.getByRole('button', { name: '今週末' }));
     expect(screen.getByRole('button', { name: '今週末' })).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(screen.getByRole('button', { name: 'これから' }));

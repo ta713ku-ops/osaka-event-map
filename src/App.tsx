@@ -12,6 +12,7 @@ import { CoverageStatus, parseCoverageData, type CoverageData } from './componen
 import {
   appleMapsUrl,
   calculateDistanceKm,
+  eventAttentionScore,
   calculateRecommendationScore,
   CATEGORY_LABELS,
   detailRecommendations,
@@ -33,6 +34,7 @@ type RankedEvent = EventItem & {
   distanceKm?: number;
   travelMinutes?: number;
   recommendation: number;
+  attention: number;
   recommendationReasons: string[];
 };
 
@@ -43,6 +45,7 @@ const TIME_FILTERS: { key: TimeFilter; label: string; accent?: boolean }[] = [
   { key: 'today', label: '今日' },
   { key: 'tonight', label: '今夜', accent: true },
   { key: 'tomorrow', label: '明日' },
+  { key: 'upcoming', label: '近日開催' },
   { key: 'weekend', label: '今週末' },
 ];
 
@@ -211,11 +214,13 @@ export function App() {
           ? calculateDistanceKm(origin, { latitude: event.latitude, longitude: event.longitude })
           : undefined;
         const travelMinutes = distanceKm == null ? undefined : estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train');
+        const recommendation = calculateRecommendationScore(event, userProfile, distanceKm);
         return {
           ...event,
           ...(distanceKm == null ? {} : { distanceKm }),
           ...(travelMinutes == null ? {} : { travelMinutes }),
-          recommendation: calculateRecommendationScore(event, userProfile, distanceKm),
+          recommendation,
+          attention: eventAttentionScore(event, recommendation, now),
           recommendationReasons: recommendationReasons(event, userProfile, distanceKm, now),
         };
       })
@@ -269,7 +274,12 @@ export function App() {
   }));
   const activeTagCount = new Set([...(filters.tags ?? []), ...(filters.free ? ['free'] as const : [])]).size;
   const activeFilterCount = Object.entries(filters).filter(([key, value]) => key !== 'tags' && key !== 'free' && (Array.isArray(value) ? value.length > 0 : value !== undefined && value !== false)).length + activeTagCount;
-  const homeEvents = useMemo<HomeEvent[]>(() => ranked.map((event) => ({
+  const homeRanked = useMemo(() => [...ranked].sort((a, b) => b.attention - a.attention
+    || Number(isOngoing(b, now)) - Number(isOngoing(a, now))
+    || (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity)
+    || a.startDate.localeCompare(b.startDate)
+    || a.id.localeCompare(b.id)), [ranked, now]);
+  const homeEvents = useMemo<HomeEvent[]>(() => homeRanked.map((event) => ({
     id: event.id,
     eventName: event.eventName,
     categoryLabel: CATEGORY_LABELS[event.category] ?? 'イベント',
@@ -280,12 +290,28 @@ export function App() {
     ongoing: isOngoing(event, now),
     description: event.description,
     imageUrl: typeof event.imageUrl === 'string' && event.imageUrl.startsWith('https://') ? event.imageUrl : undefined,
-  })), [now, ranked]);
+  })), [now, homeRanked]);
 
-  const homeRecommendations = useMemo(() => recommendHomeEvents(ranked, now), [ranked, now]);
-  const homeById = new Map(homeEvents.map((event) => [event.id, event]));
-  const largeHomeEvents = homeRecommendations.large.flatMap(({ event }) => homeById.get(event.id) ? [homeById.get(event.id)!] : []);
-  const todayHomeEvents = homeRecommendations.today.flatMap(({ event }) => homeById.get(event.id) ? [homeById.get(event.id)!] : []);
+  const homeRecommendations = useMemo(() => recommendHomeEvents(data?.events ?? [], now, { todayLimit: 4 }), [data, now]);
+  const recommendationHomeEvent = (event: EventItem): HomeEvent => {
+    const distanceKm = hasCoordinates(event)
+      ? calculateDistanceKm(origin, { latitude: event.latitude, longitude: event.longitude })
+      : undefined;
+    return {
+      id: event.id,
+      eventName: event.eventName,
+      categoryLabel: CATEGORY_LABELS[event.category] ?? 'イベント',
+      venueName: event.venueName,
+      timeLabel: timeLabel(event),
+      travelMinutes: distanceKm == null ? undefined : estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train'),
+      recommendation: calculateRecommendationScore(event, userProfile, distanceKm),
+      ongoing: isOngoing(event, now),
+      description: event.description,
+      imageUrl: typeof event.imageUrl === 'string' && event.imageUrl.startsWith('https://') ? event.imageUrl : undefined,
+    };
+  };
+  const largeHomeEvents = homeRecommendations.large.map(({ event }) => recommendationHomeEvent(event));
+  const todayHomeEvents = homeRecommendations.today.map(({ event }) => recommendationHomeEvent(event));
 
   const selectEvent = useCallback((event: { id: string } | null) => setSelectedId(event?.id ?? null), []);
   const openDetail = useCallback((eventId: string) => {

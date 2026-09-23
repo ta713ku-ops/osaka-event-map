@@ -116,7 +116,7 @@ export interface UserProfile {
   maxTravelMinutes?: 30 | 60 | 90 | null;
 }
 
-export type TimeFilter = 'all' | 'today' | 'tomorrow' | 'tonight' | 'weekend';
+export type TimeFilter = 'all' | 'today' | 'tomorrow' | 'tonight' | 'upcoming' | 'weekend';
 export interface Coordinates { latitude: number; longitude: number }
 
 export interface EventDataFile {

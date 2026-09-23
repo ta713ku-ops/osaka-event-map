@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { deduplicateEvents, duplicateKey, filterEvents, isFinished, isOngoing } from './events';
 import { haversineDistance, estimateTravelMinutes } from './geo';
-import { recommendationScore } from './recommend';
+import { eventAttentionScore, recommendationScore } from './recommend';
 import { appleMapsUrl, googleMapsUrl } from './maps';
 import type { EventItem } from '../types';
 
@@ -13,6 +13,14 @@ describe('event time filters', () => {
     expect(filterEvents([event(), event({ id: 't', startDate: '2026-08-31', endDate: '2026-08-31', startAt: '2026-08-31T10:00:00+09:00', endAt: '2026-08-31T12:00:00+09:00' })], 'today', now)).toHaveLength(1);
     expect(filterEvents([event({ id: 't', startDate: '2026-08-31', endDate: '2026-08-31', startAt: '2026-08-31T10:00:00+09:00', endAt: '2026-08-31T12:00:00+09:00' })], 'tomorrow', now)).toHaveLength(1);
     expect(filterEvents([event()], 'weekend', now)).toHaveLength(1);
+  });
+  it('filters events starting within the next seven days as upcoming', () => {
+    const entries = [
+      event({ id: 'today' }),
+      event({ id: 'soon', startDate: '2026-09-03', endDate: '2026-09-03', startAt: undefined, endAt: undefined }),
+      event({ id: 'later', startDate: '2026-09-07', endDate: '2026-09-07', startAt: undefined, endAt: undefined }),
+    ];
+    expect(filterEvents(entries, 'upcoming', now).map((item) => item.id)).toEqual(['soon']);
   });
   it('tonight excludes multi-day events started before today', () => {
     expect(filterEvents([event({ startDate: '2026-08-29', startAt: '2026-08-29T10:00:00+09:00', endDate: '2026-08-31', endAt: '2026-08-31T22:00:00+09:00' })], 'tonight', now)).toHaveLength(0);
@@ -66,6 +74,22 @@ describe('domain helpers', () => {
     const b = event({ eventName: 'ABC', venueName: '会場', address: '大阪市' });
     expect(duplicateKey(a)).toBe(duplicateKey(b));
     expect(deduplicateEvents([a, b])).toHaveLength(1);
+  });
+  it('ranks explicit attention evidence above a plain event', () => {
+    const plain = event({ id: 'plain', eventName: '通常イベント' });
+    const major = event({ id: 'major', eventName: '大阪フェスティバル', officialUrl: 'https://example.test', imageUrl: 'https://example.test/event.jpg', recommendationEvidence: { scale: 'major', official: true } });
+    expect(eventAttentionScore(major, 50, now)).toBeGreaterThan(eventAttentionScore(plain, 50, now));
+  });
+  it('does not elevate an online-only display on information volume alone', () => {
+    const visit = event({ id: 'visit', eventName: '公園フェスティバル', officialUrl: 'https://example.test', imageUrl: 'https://example.test/visit.jpg' });
+    const online = event({ id: 'online', eventName: 'デザイン作品展', officialUrl: 'https://example.test', imageUrl: 'https://example.test/online.jpg', description: '応募作品をWEB上で展示します' });
+    expect(eventAttentionScore(visit, 50, now)).toBeGreaterThan(eventAttentionScore(online, 50, now));
+    expect(eventAttentionScore(online, 50, now)).toBe(0);
+  });
+  it('keeps promotional sales below comparable public events', () => {
+    const publicEvent = event({ eventName: '秋の体験イベント', officialUrl: 'https://example.test', imageUrl: 'https://example.test/image.jpg' });
+    const salesEvent = event({ ...publicEvent, id: 'sales', eventName: '秋の体験受注会' });
+    expect(eventAttentionScore(publicEvent, 50, now)).toBeGreaterThan(eventAttentionScore(salesEvent, 50, now));
   });
   it('creates destination URLs', () => {
     expect(googleMapsUrl(event())).toContain('destination=34.69%2C135.5');

@@ -16,7 +16,7 @@ export type HomeEvent = {
 };
 
 const AUTO_ADVANCE_MS = 3000;
-const STORY_SWITCH_MS = 520;
+const STORY_SWITCH_MS = 640;
 const MANUAL_PAUSE_MS = 10000;
 const SWIPE_THRESHOLD_PX = 45;
 
@@ -78,7 +78,13 @@ export function HomeDiscovery({
   const pointerActiveRef = React.useRef(false);
   const pointerFocusedRef = React.useRef(false);
   const storyTransitionTimerRef = React.useRef<number | undefined>(undefined);
-  const featured = events.slice(0, visibleCount);
+  const highlightedIds = new Set([...(largeEvents ?? []), ...todayEvents].map((event) => event.id));
+  const avoidInitialRepeats = timeFilter === 'all' && !query.trim() && activeFilterCount === 0;
+  const unhighlightedEvents = avoidInitialRepeats ? events.filter((event) => !highlightedIds.has(event.id)) : events;
+  const listedEvents = avoidInitialRepeats
+    ? [...unhighlightedEvents.slice(0, 6), ...events.filter((event) => highlightedIds.has(event.id)), ...unhighlightedEvents.slice(6)]
+    : events;
+  const featured = listedEvents.slice(0, visibleCount);
   const fallbackSpotlights = React.useMemo(() => {
     const imageCandidates = events.filter((event) => event.imageUrl?.trim());
     if (!imageCandidates.length) return events.slice(0, 4);
@@ -126,8 +132,7 @@ export function HomeDiscovery({
   const safeSpotlightIndex = spotlights.length ? Math.min(spotlightIndex, spotlights.length - 1) : 0;
   activeIdRef.current ??= spotlights[safeSpotlightIndex]?.id;
   const spotlight = !loading && !error ? spotlights[safeSpotlightIndex] : undefined;
-  const todayRecommended = todayEvents.slice(0, 6);
-  const upcomingEvents = React.useMemo(() => events.filter((event) => !event.ongoing).slice(0, 4), [events]);
+  const todayRecommended = todayEvents.slice(0, 4);
   const spotlightMotionActive = Boolean(spotlight && storyMotionId === spotlight.id);
   const motionStopped = reducedMotion;
   const motionMode = reducedMotion ? 'reduced' : 'playing';
@@ -291,7 +296,7 @@ export function HomeDiscovery({
         <div className="home-hero__content">
           <p className="home-hero__eyebrow">大阪のイベント案内</p>
           <h1 id="home-title">今日の大阪、<br /><strong>よりみち日和。</strong></h1>
-          <p>今から行きやすい場所を、会期・距離・気分から見つけます。</p>
+          <p>大阪のイベントを、会期・距離・気分から見つけます。</p>
           <button type="button" className="home-map-cta" onClick={onShowMap}>
             <MapPinned size={19} aria-hidden="true" />地図で近さを見る<ArrowRight size={17} aria-hidden="true" />
           </button>
@@ -357,7 +362,7 @@ export function HomeDiscovery({
 
       <div className="home-discovery__body" id="home-results" tabIndex={-1}>
         {!loading && !error && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
-          <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">本日開催のおすすめ</h2></div><span>{todayRecommended.length}件</span></div>
+          <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">今日のピックアップ</h2></div><span>{todayRecommended.length}件</span></div>
             <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}</div>
         </section>}
         <div className="home-discovery__facts" aria-label="イベント概要">
@@ -377,7 +382,7 @@ export function HomeDiscovery({
           </button>
         </div>
 
-        <div className="home-time-filters" aria-label="開催日の絞り込み">
+        <div className="home-time-filters" aria-label="イベント一覧の開催日">
           {timeFilters.map((filter) => (
             <button key={filter.key} type="button" className={`home-time-chip ${timeFilter === filter.key ? 'is-active' : ''} ${filter.accent ? 'is-accent' : ''}`} aria-pressed={timeFilter === filter.key} onClick={() => onTimeFilterChange(filter.key)}>
               {filter.accent && <Sparkles size={14} aria-hidden="true" />}{filter.label}
@@ -390,7 +395,7 @@ export function HomeDiscovery({
         {!loading && !error && events.length === 0 && <div className="home-state-card"><strong>条件に合うイベントがありません</strong><span>検索語や時間、条件を少し広げてみてください。</span><button type="button" onClick={onReset}>すべての候補を見る</button></div>}
 
         {!loading && !error && featured.length > 0 && <>
-          <div className="home-section-heading"><div><p>今から出会う、大阪</p><h2>今から選べる場所</h2></div><span>{events.length}件の候補</span></div>
+          <div className="home-section-heading"><div><p>大阪の催しを探す</p><h2>イベント一覧</h2></div><span>{events.length}件・注目順</span></div>
           <div className="home-featured-grid">
             {featured.map((event) => <button key={event.id} type="button" className="home-event-card" onClick={() => onSelectEvent(event.id)}>
               <span className="home-event-card__media"><EventMedia event={event} /></span>
@@ -415,11 +420,6 @@ export function HomeDiscovery({
               <button type="button" onClick={() => onTimeFilterChange('weekend')}><Sparkles size={25} aria-hidden="true" /><span>週末の予定を探す</span><small>今週末に行ける候補を見る</small><ArrowRight size={17} aria-hidden="true" /></button>
             </div>
           </section>
-
-          {upcomingEvents.length > 0 && <section className="editorial-section editorial-upcoming" aria-labelledby="upcoming-title">
-            <div className="editorial-section__heading"><div><p>次の休みに向けて</p><h2 id="upcoming-title">近日開催のおすすめ</h2></div><span>まだ間に合う</span></div>
-            <div className="editorial-upcoming-grid">{upcomingEvents.map((event) => <button type="button" className="editorial-upcoming-card" key={`upcoming-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-upcoming-card__date">{event.timeLabel}</span><strong>{event.eventName}</strong><small>{event.categoryLabel} ・ {event.venueName ?? '大阪府内'}</small><ArrowRight size={16} aria-hidden="true" /></button>)}</div>
-          </section>}
 
           <aside className="editorial-seasonal"><div><p>OSAKA / SEASONAL NOTE</p><h2>季節の街を、<br />歩いて見つける。</h2><span>会場の空気や街の景色まで、イベントの楽しみ方です。</span></div><button type="button" onClick={onShowMap}>大阪の地図を見る <ArrowRight size={16} aria-hidden="true" /></button></aside>
         </>}

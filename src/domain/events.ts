@@ -40,6 +40,7 @@ export function isFinished(event: EventItem, now = new Date()): boolean {
 export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', now = new Date()): EventItem[] {
   const today = day(now);
   const tomorrow = day(new Date(now.getTime() + 86400000));
+  const upcomingEnd = day(new Date(now.getTime() + 7 * 86400000));
   // Derive the weekend from the Osaka calendar, independent of host locale.
   const osakaParts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tokyo', weekday: 'short' }).format(now);
   const weekdayIndex = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(osakaParts);
@@ -60,6 +61,7 @@ export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', no
     if (filter === 'all') return true;
     if (filter === 'today') return startsOrSpans(today);
     if (filter === 'tomorrow') return startsOrSpans(tomorrow);
+    if (filter === 'upcoming') return dateOnly(e.startDate) > today && dateOnly(e.startDate) <= upcomingEnd;
     if (filter === 'weekend') return [...weekendDates].some(startsOrSpans);
     // Tonight means a record whose published daily clock overlaps 18:00 to
     // midnight. A long startAt/endAt interval alone is a date range, not a

@@ -235,7 +235,7 @@ describe('HomeDiscovery', () => {
 
   it('uses only explicit today events and shows an empty state when absent', () => {
     renderHome({ events: [{ ...event('ongoing'), ongoing: true }], todayEvents: [] });
-    expect(screen.getByRole('heading', { name: '本日開催のおすすめ' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '今日のピックアップ' })).toBeInTheDocument();
     expect(screen.getByText(/本日開催の確定したおすすめはありません/)).toBeInTheDocument();
     cleanup();
     renderHome({ events: [], totalCount: 0, todayEvents: [event('today', '今日だけ')] });
@@ -288,5 +288,13 @@ describe('HomeDiscovery', () => {
     const facts = document.querySelector('.home-discovery__facts')!;
     expect(hero.compareDocumentPosition(today) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(today.compareDocumentPosition(facts) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it('keeps spotlight and today picks out of the first default list cards', () => {
+    const entries = Array.from({ length: 8 }, (_, index) => event(String(index), `催し${index}`));
+    renderHome({ events: entries, largeEvents: [entries[0]], todayEvents: [entries[1]], totalCount: entries.length });
+    const firstCards = [...document.querySelectorAll('.home-event-card > strong')].map((item) => item.textContent);
+    expect(firstCards).toEqual(['催し2', '催し3', '催し4', '催し5', '催し6', '催し7']);
+    expect(screen.getByRole('heading', { name: '今日のピックアップ' })).toBeInTheDocument();
   });
 });
