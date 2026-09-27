@@ -51,7 +51,7 @@ describe('EventDetailPage', () => {
     expect(screen.getByRole('heading', { name: '近くで開催中のイベント' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: '同じ会場・エリアのイベント' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('link', { name: /近くの催し/ }));
-    expect(openEvent).toHaveBeenCalledWith('nearby');
+    expect(openEvent).toHaveBeenCalledWith('nearby', 'related:event-nearby-title:nearby');
   });
 
   it('does not render empty related-event sections', () => {

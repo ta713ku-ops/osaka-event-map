@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ChevronRight, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { DiscoveryHeader } from './components/DiscoveryHeader';
 import { DiscoveryIntro } from './components/DiscoveryIntro';
 import { EventMap } from './components/EventMap';
-import { EventSheet, type EventSheetEvent } from './components/EventSheet';
 import { EventDetailPage, type DetailEvent } from './components/EventDetailPage';
 import { FilterSheet, type EventFilters } from './components/FilterSheet';
 import { ProfileDialog, type Profile } from './components/ProfileDialog';
@@ -25,8 +24,8 @@ import {
   isOngoing,
 } from './domain';
 import { recommendHomeEvents } from './domain/homeRecommendations';
-import { appHomePath, eventIdFromPath, eventPath } from './domain/eventRoutes';
-import type { Coordinates, EventDataFile, EventItem, EventSource, TimeFilter, UserProfile } from './types';
+import { useEventNavigation } from './hooks/useEventNavigation';
+import type { EventDataFile, EventItem, EventSource, TimeFilter, UserProfile } from './types';
 
 type DataFile = EventDataFile;
 
@@ -38,7 +37,6 @@ type RankedEvent = EventItem & {
   recommendationReasons: string[];
 };
 
-const OSAKA_STATION: Coordinates = { latitude: 34.7025, longitude: 135.4959 };
 const STORAGE_KEY = 'dokoiko-osaka-profile-v1';
 const TIME_FILTERS: { key: TimeFilter; label: string; accent?: boolean }[] = [
   { key: 'all', label: 'これから' },
@@ -122,7 +120,6 @@ function timeLabel(event: EventItem) {
 }
 
 export function App() {
-  const [view, setView] = useState<'home' | 'map'>('home');
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [locationNotice, setLocationNotice] = useState('');
   const [data, setData] = useState<DataFile | null>(null);
@@ -130,38 +127,20 @@ export function App() {
   const [coverageError, setCoverageError] = useState('');
   const [coverageAttempt, setCoverageAttempt] = useState(0);
   const [error, setError] = useState('');
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
-  const [query, setQuery] = useState('');
-  const [filters, setFilters] = useState<EventFilters>({});
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile>(() => readProfile());
   const [filterOpen, setFilterOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [origin, setOrigin] = useState<Coordinates>(OSAKA_STATION);
-  const [originLabel, setOriginLabel] = useState('大阪駅から');
-  const [mapListLimit, setMapListLimit] = useState(20);
-  const [railLimit, setRailLimit] = useState(12);
-  const [detailId, setDetailId] = useState<string | null>(() => eventIdFromPath(window.location.pathname));
-  const surfaceScrollRef = useRef(0);
-  const detailTriggerRef = useRef<HTMLElement | null>(null);
-
-  const restoreSurface = useCallback(() => {
-    window.requestAnimationFrame(() => {
-      const shell = document.querySelector<HTMLElement>('.app-shell.is-home');
-      if (shell) shell.scrollTop = surfaceScrollRef.current;
-      if (detailTriggerRef.current?.isConnected) detailTriggerRef.current.focus({ preventScroll: true });
-    });
-  }, []);
-
+  const navigation = useEventNavigation(!!data);
+  const { surface, detailId, updateSurface } = navigation;
+  const { view, query, timeFilter, filters, origin, originLabel, mapListLimit, railLimit } = surface;
+  const setView = (value: 'home' | 'map') => updateSurface('view', value);
+  const setQuery = (value: string) => updateSurface('query', value);
+  const setTimeFilter = (value: TimeFilter) => updateSurface('timeFilter', value);
+  const setFilters = (value: EventFilters) => updateSurface('filters', value);
+  useEffect(() => { setFilterOpen(false); setProfileOpen(false); }, [navigation.entryKey]);
   useEffect(() => {
-    const handlePopState = () => {
-      const nextId = eventIdFromPath(window.location.pathname);
-      setDetailId(nextId);
-      if (!nextId) restoreSurface();
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [restoreSurface]);
+    if (error && detailId) document.querySelector<HTMLElement>('.event-detail-page')?.focus({ preventScroll: true });
+  }, [error, detailId]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -246,13 +225,6 @@ export function App() {
       .sort((a, b) => Number(isOngoing(b, now)) - Number(isOngoing(a, now)) || b.recommendation - a.recommendation || (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity));
   }, [data, filters, now, origin, query, timeFilter, userProfile]);
 
-  const selected = ranked.find((event) => event.id === selectedId) ?? null;
-  const selectedSheet = selected ? {
-    ...selected,
-    ongoing: isOngoing(selected, now),
-    address: selected.address === selected.venueName ? undefined : selected.address,
-    sourceReports: data?.sources,
-  } : null;
   const detailBase = detailId ? data?.events.find((event) => (event.routeId ?? event.id) === detailId || event.id === detailId) ?? null : null;
   const detailEvent = useMemo<DetailEvent | null>(() => {
     if (!detailBase) return null;
@@ -313,21 +285,10 @@ export function App() {
   const largeHomeEvents = homeRecommendations.large.map(({ event }) => recommendationHomeEvent(event));
   const todayHomeEvents = homeRecommendations.today.map(({ event }) => recommendationHomeEvent(event));
 
-  const selectEvent = useCallback((event: { id: string } | null) => setSelectedId(event?.id ?? null), []);
-  const openDetail = useCallback((eventId: string) => {
-    const shell = document.querySelector<HTMLElement>('.app-shell.is-home');
-    surfaceScrollRef.current = shell?.scrollTop ?? 0;
-    detailTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const publicId = data?.events.find((event) => event.id === eventId)?.routeId ?? eventId;
-    window.history.replaceState({ ...(window.history.state ?? {}), dokoikoDetail: true }, '', eventPath(publicId));
-    setSelectedId(null);
-    setDetailId(publicId);
-  }, [data?.events]);
-  const closeDetail = useCallback(() => {
-    window.history.replaceState({}, '', appHomePath());
-    setDetailId(null);
-    restoreSurface();
-  }, [restoreSurface]);
+  const openDetail = useCallback((eventId: string, focus?: string) => {
+    const event = data?.events.find((item) => item.id === eventId);
+    if (event) navigation.open(event.routeId ?? event.id, focus);
+  }, [data?.events, navigation.open]);
   const saveProfile = (next: Profile) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     setProfile(next);
@@ -338,12 +299,12 @@ export function App() {
       return;
     }
     navigator.geolocation.getCurrentPosition(({ coords }) => {
-      setOrigin({ latitude: coords.latitude, longitude: coords.longitude });
-      setOriginLabel('現在地から');
+      updateSurface('origin', { latitude: coords.latitude, longitude: coords.longitude });
+      updateSurface('originLabel', '現在地から');
       setLocationNotice('');
     }, () => setLocationNotice('現在地を取得できませんでした。位置情報の許可を確認してください。'), { timeout: 10000 });
   };
-  const navigate = (provider: 'apple' | 'google', target: EventItem | null = selected) => {
+  const navigate = (provider: 'apple' | 'google', target: EventItem) => {
     if (!target) return;
     window.open(provider === 'apple' ? appleMapsUrl(target) : googleMapsUrl(target), '_blank', 'noopener,noreferrer');
   };
@@ -371,6 +332,8 @@ export function App() {
       />
       {locationNotice && <div className="location-notice" role="status">{locationNotice}<button type="button" onClick={() => setLocationNotice('')}>閉じる</button></div>}
       {view === 'home' ? <HomeDiscovery
+        visibleLimit={surface.homeLimit}
+        onVisibleLimitChange={(value) => updateSurface('homeLimit', value)}
         events={homeEvents}
         largeEvents={largeHomeEvents}
         todayEvents={todayHomeEvents}
@@ -380,7 +343,7 @@ export function App() {
         onQueryChange={setQuery}
         timeFilter={timeFilter}
         timeFilters={TIME_FILTERS}
-        onTimeFilterChange={(key) => { setTimeFilter(key as TimeFilter); setSelectedId(null); }}
+        onTimeFilterChange={(key) => { setTimeFilter(key as TimeFilter); }}
         onShowMap={() => setView('map')}
         onSelectEvent={openDetail}
         onOpenFilters={() => setFilterOpen(true)}
@@ -406,7 +369,7 @@ export function App() {
               type="button"
               className={`time-chip ${timeFilter === item.key ? 'is-active' : ''} ${item.accent ? 'is-tonight' : ''}`}
               aria-pressed={timeFilter === item.key}
-              onClick={() => { setTimeFilter(item.key); setSelectedId(null); }}
+              onClick={() => { setTimeFilter(item.key); }}
             >
               {item.accent && <Sparkles size={15} aria-hidden="true" />}{item.label}
             </button>
@@ -429,7 +392,7 @@ export function App() {
           {data && ranked.length === 0 && <div className="state-card"><strong>条件に合うイベントがありません</strong><span>検索語や時間、条件を少し広げてみてください。</span><button type="button" onClick={() => { setQuery(''); setTimeFilter('all'); setFilters({}); }}>すべての候補を見る</button></div>}
           <div className="event-list">
             {ranked.slice(0, mapListLimit).map((event, index) => (
-              <button key={event.id} type="button" className={`event-row ${selectedId === event.id ? 'is-selected' : ''}`} onClick={() => setSelectedId(event.id)}>
+              <button key={event.id} type="button" className="event-row" data-event-focus={`map-list:${event.id}`} onClick={() => openDetail(event.id, `map-list:${event.id}`)}>
                 <span className={`rank-badge ${isOngoing(event, now) ? 'is-live' : ''}`}>{isOngoing(event, now) ? '開催中' : index + 1}</span>
                 <span className="event-row-copy">
                   <span className="event-row-top"><b>{CATEGORY_LABELS[event.category] ?? 'イベント'}</b><em>おすすめ {event.recommendation}%</em></span>
@@ -440,31 +403,32 @@ export function App() {
               </button>
             ))}
           </div>
-          {mapListLimit < ranked.length && <button type="button" className="map-more-button" onClick={() => setMapListLimit((limit) => Math.min(ranked.length, limit + 20))}>もっと見る（残り {ranked.length - mapListLimit}件）</button>}
+          {mapListLimit < ranked.length && <button type="button" className="map-more-button" onClick={() => updateSurface('mapListLimit', (limit) => Math.min(ranked.length, limit + 20))}>もっと見る（残り {ranked.length - mapListLimit}件）</button>}
           {data && <p className="data-note">公式公開データと公式サイトの情報を利用しています。内容は参加前に公式サイトで確認してください。</p>}
           {data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : null}
           <CoverageStatus data={coverage} loading={!coverage && !coverageError} error={coverageError} onRetry={() => setCoverageAttempt((value) => value + 1)} />
         </aside>
 
-        <section className="map-panel" aria-label="大阪府イベントマップ">
-          <EventMap events={mapEvents} selectedEventId={selectedId} onEventSelect={selectEvent} />
+        <section className="map-panel" tabIndex={-1} aria-label="大阪府イベントマップ">
+          <EventMap events={mapEvents} onEventSelect={(event) => openDetail(event.id, `map-pin:${event.id}`)}
+            viewport={surface.viewport} onViewportChange={(value) => updateSurface('viewport', value)} active={!detailId} />
           <div className="map-summary" aria-live="polite">
             <span><i className="live-indicator" />{liveCount}件が開催中</span>
             <strong><small>{originLabel}</small>今日は、どこへ行く？</strong>
           </div>
-          {!selected && ranked.length > 0 && (
+          {ranked.length > 0 && (
             <div className="discovery-rail" role="region" aria-label="おすすめ候補">
             <div className="rail-title"><span>今から出会う、大阪</span><b>横にスワイプ</b></div>
               <div className="rail-cards">
                 {ranked.slice(0, railLimit).map((event) => (
-                  <button key={event.id} type="button" onClick={() => setSelectedId(event.id)}>
+                  <button key={event.id} type="button" data-event-focus={`map-rail:${event.id}`} onClick={() => openDetail(event.id, `map-rail:${event.id}`)}>
                     <span>{isOngoing(event, now) ? '開催中' : timeLabel(event)} ・ {CATEGORY_LABELS[event.category] ?? 'イベント'}</span>
                     <strong>{event.eventName}</strong>
                     <small>{travelLabel(event.travelMinutes)}　おすすめ {event.recommendation}%</small>
                   </button>
                 ))}
               </div>
-              {railLimit < ranked.length && <button type="button" className="rail-more-button" onClick={() => setRailLimit((limit) => Math.min(ranked.length, limit + 12))}>もっと見る（残り {ranked.length - railLimit}件）</button>}
+              {railLimit < ranked.length && <button type="button" className="rail-more-button" onClick={() => updateSurface('railLimit', (limit) => Math.min(ranked.length, limit + 12))}>もっと見る（残り {ranked.length - railLimit}件）</button>}
             </div>
           )}
           {data && ranked.length === 0 && (
@@ -477,8 +441,7 @@ export function App() {
         </section>
       </div>
       </>}
-      {(selectedSheet || filterOpen || profileOpen) && <div className="modal-scrim" aria-hidden="true" />}
-      <EventSheet event={selectedSheet as EventSheetEvent | null} onClose={() => setSelectedId(null)} onOpenDetail={selected ? () => openDetail(selected.id) : undefined} onNavigate={(provider) => navigate(provider)} />
+      {(filterOpen || profileOpen) && <div className="modal-scrim" aria-hidden="true" />}
       <FilterSheet
         open={filterOpen}
         value={filters}
@@ -489,13 +452,13 @@ export function App() {
       <ProfileDialog open={profileOpen} value={profile} onChange={setProfile} onSave={saveProfile} onClose={() => setProfileOpen(false)} />
     </main>
     </div>
-    {detailId && <EventDetailPage
+    {detailId && <EventDetailPage key={navigation.entryKey}
       event={detailEvent}
       requestedId={detailId}
       loading={!data && !error}
       loadError={error}
       now={now}
-      onBack={closeDetail}
+      onBack={navigation.back}
       onRetry={() => setLoadAttempt((value) => value + 1)}
       onNavigate={navigate}
       onOpenEvent={openDetail}

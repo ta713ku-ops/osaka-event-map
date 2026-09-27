@@ -36,7 +36,9 @@ type Props = {
   timeFilters: Array<{ key: string; label: string; accent?: boolean }>;
   onTimeFilterChange: (key: string) => void;
   onShowMap: () => void;
-  onSelectEvent: (id: string) => void;
+  onSelectEvent: (id: string, focus?: string) => void;
+  visibleLimit?: number;
+  onVisibleLimitChange?: (value: number) => void;
   onOpenFilters: () => void;
   activeFilterCount: number;
   loading: boolean;
@@ -55,9 +57,14 @@ function EventMedia({ event }: { event: HomeEvent }) {
 export function HomeDiscovery({
   events, largeEvents, todayEvents = [], totalCount, liveCount, query, onQueryChange, timeFilter, timeFilters,
   onTimeFilterChange, onShowMap, onSelectEvent, onOpenFilters, activeFilterCount,
-  loading, error, sourceStatus, onReset,
+  loading, error, sourceStatus, onReset, visibleLimit, onVisibleLimitChange,
 }: Props) {
-  const [visibleCount, setVisibleCount] = React.useState(6);
+  const [localVisibleCount, setLocalVisibleCount] = React.useState(6);
+  const visibleCount = visibleLimit ?? localVisibleCount;
+  const setVisibleCount = (update: (count: number) => number) => {
+    const value = update(visibleCount);
+    if (onVisibleLimitChange) onVisibleLimitChange(value); else setLocalVisibleCount(value);
+  };
   const [spotlightIndex, setSpotlightIndex] = React.useState(0);
   const [trackPosition, setTrackPosition] = React.useState(1);
   const [trackTransitioning, setTrackTransitioning] = React.useState(false);
@@ -302,7 +309,7 @@ export function HomeDiscovery({
           </button>
         </div>
         {spotlight && <article className="home-spotlight" ref={spotlightRegionRef} aria-label="注目の大型イベント">
-          <div className="home-spotlight__viewport" role="button" tabIndex={0} aria-label={`注目イベント「${spotlight.eventName}」の詳細を見る`}
+          <div className="home-spotlight__viewport" data-event-focus={`home-spotlight:${spotlight.id}`} role="button" tabIndex={0} aria-label={`注目イベント「${spotlight.eventName}」の詳細を見る`}
           onKeyDown={(e) => {
             pointerFocusedRef.current = false;
             if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
@@ -310,7 +317,7 @@ export function HomeDiscovery({
               manualSpotlightAction(spotlightIndexRef.current + (e.key === 'ArrowRight' ? 1 : -1));
             } else if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              onSelectEvent(spotlight.id);
+              onSelectEvent(spotlight.id, `home-spotlight:${spotlight.id}`);
             }
           }}
           onClick={(e) => {
@@ -319,7 +326,7 @@ export function HomeDiscovery({
               swipedRef.current = false;
               return;
             }
-            onSelectEvent(spotlight.id);
+            onSelectEvent(spotlight.id, `home-spotlight:${spotlight.id}`);
           }}
           onPointerDown={(e) => {
             if (e.button !== 0) return;
@@ -363,7 +370,7 @@ export function HomeDiscovery({
       <div className="home-discovery__body" id="home-results" tabIndex={-1}>
         {!loading && !error && <section className="editorial-section editorial-ongoing" aria-labelledby="ongoing-title">
           <div className="editorial-section__heading"><div><p>今日、足を運べるイベント</p><h2 id="ongoing-title">今日のピックアップ</h2></div><span>{todayRecommended.length}件</span></div>
-            <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} onClick={() => onSelectEvent(event.id)}><span className="editorial-mini-card__media"><EventMedia event={event} /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}</div>
+            <div className="editorial-rail">{todayRecommended.length ? todayRecommended.map((event) => <button type="button" className="editorial-mini-card" key={`today-${event.id}`} data-event-focus={`home-today:${event.id}`} onClick={() => onSelectEvent(event.id, `home-today:${event.id}`)}><span className="editorial-mini-card__media"><EventMedia event={event} /></span><span className="editorial-mini-card__tag">本日開催</span><strong>{event.eventName}</strong><small>{event.venueName ?? '大阪府内'} ・ {event.timeLabel}</small></button>) : <p className="editorial-empty">本日開催の確定したおすすめはありません。</p>}</div>
         </section>}
         <div className="home-discovery__facts" aria-label="イベント概要">
           <span><strong>{totalCount}</strong> 件の候補</span>
@@ -397,7 +404,7 @@ export function HomeDiscovery({
         {!loading && !error && featured.length > 0 && <>
           <div className="home-section-heading"><div><p>大阪の催しを探す</p><h2>イベント一覧</h2></div><span>{events.length}件・注目順</span></div>
           <div className="home-featured-grid">
-            {featured.map((event) => <button key={event.id} type="button" className="home-event-card" onClick={() => onSelectEvent(event.id)}>
+            {featured.map((event) => <button key={event.id} type="button" className="home-event-card" data-event-focus={`home-list:${event.id}`} onClick={() => onSelectEvent(event.id, `home-list:${event.id}`)}>
               <span className="home-event-card__media"><EventMedia event={event} /></span>
               <span className={`home-event-card__status ${event.ongoing ? 'is-live' : ''}`}>{event.ongoing ? '開催期間中' : event.timeLabel}</span>
               <span className="home-event-card__category">{event.categoryLabel}</span>

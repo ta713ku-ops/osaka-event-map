@@ -48,7 +48,7 @@ describe('HomeDiscovery', () => {
     const onSelectEvent = vi.fn();
     renderHome({ onSelectEvent });
     fireEvent.click(screen.getByRole('button', { name: /注目イベント.*詳細/ }));
-    expect(onSelectEvent).toHaveBeenCalledWith('a');
+    expect(onSelectEvent).toHaveBeenCalledWith('a', 'home-spotlight:a');
   });
 
   it('shows loading, error with retry, and empty states', () => {

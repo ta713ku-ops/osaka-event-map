@@ -21,7 +21,7 @@ type Props = {
   onBack: () => void;
   onRetry: () => void;
   onNavigate: (provider: 'apple' | 'google', event: EventItem) => void;
-  onOpenEvent?: (eventId: string) => void;
+  onOpenEvent?: (eventId: string, focus?: string) => void;
   nearbyOngoingEvents?: DetailRecommendation[];
   sameAreaEvents?: DetailRecommendation[];
 };
@@ -74,7 +74,7 @@ function RelatedEventsSection({ id, title, events, onOpenEvent }: {
   id: string;
   title: string;
   events: DetailRecommendation[];
-  onOpenEvent?: (eventId: string) => void;
+  onOpenEvent?: (eventId: string, focus?: string) => void;
 }) {
   if (!events.length) return null;
   return <section className="event-related-section" aria-labelledby={id}>
@@ -83,11 +83,12 @@ function RelatedEventsSection({ id, title, events, onOpenEvent }: {
       {events.map((item) => <a
         key={item.id}
         className="event-related-card"
+        data-event-focus={`related:${id}:${item.id}`}
         href={eventPath(item.routeId ?? item.id)}
         onClick={(clickEvent) => {
           if (!onOpenEvent || clickEvent.button !== 0 || clickEvent.metaKey || clickEvent.ctrlKey || clickEvent.shiftKey || clickEvent.altKey) return;
           clickEvent.preventDefault();
-          onOpenEvent(item.id);
+          onOpenEvent(item.id, `related:${id}:${item.id}`);
         }}
       >
         <span className="event-related-card__media">
@@ -134,11 +135,11 @@ export function EventDetailPage({
     }
   };
 
-  if (loading) return <main className="event-detail-page"><div className="event-detail-state" role="status">イベント情報を読み込んでいます…</div></main>;
-  if (loadError) return <main className="event-detail-page"><div className="event-detail-state is-error" role="alert"><strong>{loadError}</strong><button type="button" onClick={onRetry}>もう一度読み込む</button></div></main>;
-  if (!event) return <main className="event-detail-page"><div className="event-detail-state"><strong>イベントが見つかりません</strong><p>ID「{requestedId}」の情報は終了または更新された可能性があります。</p><button type="button" onClick={onBack}>イベントを探す</button></div></main>;
+  if (loading) return <main tabIndex={-1} className="event-detail-page"><div className="event-detail-state" role="status">イベント情報を読み込んでいます…</div></main>;
+  if (loadError) return <main tabIndex={-1} className="event-detail-page"><div className="event-detail-state is-error" role="alert"><strong>{loadError}</strong><button type="button" onClick={onRetry}>もう一度読み込む</button></div></main>;
+  if (!event) return <main tabIndex={-1} className="event-detail-page"><div className="event-detail-state"><strong>イベントが見つかりません</strong><p>ID「{requestedId}」の情報は終了または更新された可能性があります。</p><button type="button" onClick={onBack}>イベントを探す</button></div></main>;
 
-  return <main className="event-detail-page" id="event-detail">
+  return <main tabIndex={-1} className="event-detail-page" id="event-detail">
     <header className="event-detail-nav">
       <button type="button" onClick={onBack}><ArrowLeft size={18} aria-hidden="true" />戻る</button>
       <a href={import.meta.env.BASE_URL} className="event-detail-brand">どこいこ大阪</a>
