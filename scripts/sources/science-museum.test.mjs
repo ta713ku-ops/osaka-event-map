@@ -15,3 +15,8 @@ test('science museum accepts explicit event years and ignores commented or yearl
   assert.equal(events[0].officialUrl, 'https://www.sci-museum.jp/event/#pl2');
   assert.match(events[0].address, /中之島4-2-1/u);
 });
+
+test('excludes a workshop explicitly held outside the science museum', () => {
+  const html = '<div id="pl123"><h3>試飲付き講演会</h3><table><tr><th>日時</th><td>2026年11月3日 13:30〜16:00</td></tr><tr><th>場所</th><td>白鹿記念酒造博物館（科学館ではありません！）</td></tr></table></div>';
+  assert.equal(parseScienceMuseumPage(html, {checkedAt:'2026-09-28T00:00:00Z'}).length, 0);
+});

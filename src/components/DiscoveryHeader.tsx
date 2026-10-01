@@ -1,4 +1,4 @@
-import { Compass, LocateFixed, UserRound, Map, House } from 'lucide-react';
+import { Compass, LocateFixed, UserRound, Map, House, Bookmark } from 'lucide-react';
 import './discovery-header.css';
 
 type Props = {
@@ -6,13 +6,15 @@ type Props = {
   originLabel: string;
   onLocate: () => void;
   onOpenProfile: () => void;
-  view?: 'home' | 'map';
+  view?: 'home' | 'map' | 'saved';
   onShowHome?: () => void;
   onShowMap?: () => void;
+  onShowSaved?: () => void;
+  savedCount?: number;
 };
 
 /** A compact, warm discovery header. Layout is intentionally delegated to the app stylesheet. */
-export function DiscoveryHeader({ liveCount, originLabel, onLocate, onOpenProfile, view = 'map', onShowHome, onShowMap }: Props) {
+export function DiscoveryHeader({ liveCount, originLabel, onLocate, onOpenProfile, view = 'map', onShowHome, onShowMap, onShowSaved, savedCount = 0 }: Props) {
   return (
     <header className="discovery-header" aria-label="どこいこ大阪">
       <div className="discovery-header__brand">
@@ -29,10 +31,11 @@ export function DiscoveryHeader({ liveCount, originLabel, onLocate, onOpenProfil
         <button type="button" aria-label="地図" className={view === 'map' ? 'is-active' : ''} onClick={onShowMap} aria-current={view === 'map' ? 'page' : undefined}>
           <Map size={16} aria-hidden="true" /><span>地図</span>
         </button>
+        <button type="button" aria-label={`保存したイベント（${savedCount}件）`} className={view === 'saved' ? 'is-active' : ''} onClick={onShowSaved} aria-current={view === 'saved' ? 'page' : undefined}><Bookmark size={16} aria-hidden="true" /><span>保存</span></button>
       </nav>
       <div className="discovery-header__status" aria-live="polite">
         <span className="discovery-header__live-dot" aria-hidden="true" />
-        <span>{originLabel}・開催期間中 {liveCount}件</span>
+        <span>{originLabel}・会期内 {liveCount}件</span>
       </div>
       <div className="discovery-header__actions">
         <button type="button" className="discovery-header__action" onClick={onLocate} aria-label="現在地を基準にする">

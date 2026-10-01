@@ -1,0 +1,650 @@
+[
+  {
+    "id": "festival-hall",
+    "aliases": [
+      "フェスティバルホール"
+    ],
+    "url": "https://www.festivalhall.jp/access/",
+    "fields": {
+      "nearestStation": "京阪中之島線 渡辺橋駅／Osaka Metro四つ橋線 肥後橋駅",
+      "accessByTransit": "京阪中之島線「渡辺橋」駅12番出口直結。Osaka Metro四つ橋線「肥後橋」駅4番出口直結。JR「大阪」駅桜橋口より徒歩15分。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "京阪中之島線 渡辺橋駅／Osaka Metro四つ橋線 肥後橋駅",
+        "sourceUrl": "https://www.festivalhall.jp/access/",
+        "checkedAt": "2026-09-27T23:41:00.927Z"
+      },
+      "accessByTransit": {
+        "text": "京阪中之島線「渡辺橋」駅12番出口直結。Osaka Metro四つ橋線「肥後橋」駅4番出口直結。JR「大阪」駅桜橋口より徒歩15分。",
+        "sourceUrl": "https://www.festivalhall.jp/access/",
+        "checkedAt": "2026-09-27T23:41:00.927Z"
+      }
+    }
+  },
+  {
+    "id": "fenice-sakai",
+    "aliases": [
+      "フェニーチェ堺"
+    ],
+    "roomSuffixes": [
+      "大ホール",
+      "小ホール",
+      "多目的室",
+      "スタジオ",
+      "ガレリア",
+      "ロビー",
+      "リハーサル室",
+      "文化交流室",
+      "展示室",
+      "ホワイエ"
+    ],
+    "url": "https://www.fenice-sacay.jp/access/",
+    "fields": {
+      "nearestStation": "南海高野線 堺東駅",
+      "accessByTransit": "南海高野線「堺東」駅西出口より徒歩約8分。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "南海高野線 堺東駅",
+        "sourceUrl": "https://www.fenice-sacay.jp/access/",
+        "checkedAt": "2026-09-27T23:41:01.498Z"
+      },
+      "accessByTransit": {
+        "text": "南海高野線「堺東」駅西出口より徒歩約8分。",
+        "sourceUrl": "https://www.fenice-sacay.jp/access/",
+        "checkedAt": "2026-09-27T23:41:01.498Z"
+      }
+    }
+  },
+  {
+    "id": "billboard-osaka",
+    "aliases": [
+      "ビルボードライブ大阪"
+    ],
+    "url": "https://www.billboard-live.com/osaka/info/access",
+    "fields": {
+      "nearestStation": "阪神電車 大阪梅田駅／JR大阪駅",
+      "accessByTransit": "阪神電車「大阪梅田」駅西改札から徒歩3分。JR「大阪」駅桜橋口または西口から徒歩5分。",
+      "latitude": 34.6995343,
+      "longitude": 135.4939379
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "阪神電車 大阪梅田駅／JR大阪駅",
+        "sourceUrl": "https://www.billboard-live.com/osaka/info/access",
+        "checkedAt": "2026-09-27T23:41:03.169Z"
+      },
+      "accessByTransit": {
+        "text": "阪神電車「大阪梅田」駅西改札から徒歩3分。JR「大阪」駅桜橋口または西口から徒歩5分。",
+        "sourceUrl": "https://www.billboard-live.com/osaka/info/access",
+        "checkedAt": "2026-09-27T23:41:03.169Z"
+      },
+      "latitude": {
+        "text": "ビルボードライブ大阪。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.6995343, 135.4939379)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://maps.app.goo.gl/K7uZCkBFvTSxYgxF6",
+        "sourceUrl": "https://www.billboard-live.com/osaka/info/access",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "longitude": {
+        "text": "ビルボードライブ大阪。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.6995343, 135.4939379)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://maps.app.goo.gl/K7uZCkBFvTSxYgxF6",
+        "sourceUrl": "https://www.billboard-live.com/osaka/info/access",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "会場公式が案内する地図の施設地点",
+      "url": "https://www.billboard-live.com/osaka/info/access"
+    }
+  },
+  {
+    "id": "nakka-art-museum",
+    "aliases": [
+      "大阪中之島美術館"
+    ],
+    "roomSuffixes": [
+      "5階展示室",
+      "1階ホール",
+      "2階パッサージュ"
+    ],
+    "url": "https://nakka-art.jp/information/access/",
+    "fields": {
+      "nearestStation": "京阪中之島線 渡辺橋駅",
+      "accessByTransit": "京阪中之島線「渡辺橋」駅2番出口より南西へ徒歩約5分。Osaka Metro四つ橋線「肥後橋」駅4番出口より西へ徒歩約10分。",
+      "latitude": 34.6922744800004,
+      "longitude": 135.491425000001
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "京阪中之島線 渡辺橋駅",
+        "sourceUrl": "https://nakka-art.jp/information/access/",
+        "checkedAt": "2026-09-27T23:41:03.012Z"
+      },
+      "accessByTransit": {
+        "text": "京阪中之島線「渡辺橋」駅2番出口より南西へ徒歩約5分。Osaka Metro四つ橋線「肥後橋」駅4番出口より西へ徒歩約10分。",
+        "sourceUrl": "https://nakka-art.jp/information/access/",
+        "checkedAt": "2026-09-27T23:41:03.012Z"
+      },
+      "latitude": {
+        "text": "大阪中之島美術館 / 大阪市北区中之島4-3-1 / 34.6922744800004 (JGD2011)",
+        "sourceUrl": "https://www.mapnavi.city.osaka.lg.jp/osakacity/osakacity/opendatafile/map_1/CSV/opendata_1005.csv",
+        "checkedAt": "2026-09-27T23:46:09.863Z"
+      },
+      "longitude": {
+        "text": "大阪中之島美術館 / 大阪市北区中之島4-3-1 / 135.491425000001 (JGD2011)",
+        "sourceUrl": "https://www.mapnavi.city.osaka.lg.jp/osakacity/osakacity/opendatafile/map_1/CSV/opendata_1005.csv",
+        "checkedAt": "2026-09-27T23:46:09.863Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "大阪市 マップナビおおさか 文化・観光施設ポイント",
+      "url": "https://www.city.osaka.lg.jp/toshikeikaku/page/0000250227.html",
+      "license": "CC BY"
+    }
+  },
+  {
+    "id": "science-museum",
+    "aliases": [
+      "大阪市立科学館"
+    ],
+    "roomSuffixes": [
+      "研修室",
+      "工作室",
+      "プラネタリウム",
+      "展示場"
+    ],
+    "url": "https://www.sci-museum.jp/info/access/",
+    "fields": {
+      "nearestStation": "Osaka Metro四つ橋線 肥後橋駅／JR大阪環状線 福島駅",
+      "accessByTransit": "公式アクセス案内の最寄りはOsaka Metro四つ橋線「肥後橋」駅、JR大阪環状線「福島」駅。出口と徒歩経路は公式案内図でご確認ください。",
+      "latitude": 34.6912721000008,
+      "longitude": 135.491506
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "Osaka Metro四つ橋線 肥後橋駅／JR大阪環状線 福島駅",
+        "sourceUrl": "https://www.sci-museum.jp/info/access/",
+        "checkedAt": "2026-09-27T23:41:00.630Z"
+      },
+      "accessByTransit": {
+        "text": "公式アクセス案内の最寄りはOsaka Metro四つ橋線「肥後橋」駅、JR大阪環状線「福島」駅。出口と徒歩経路は公式案内図でご確認ください。",
+        "sourceUrl": "https://www.sci-museum.jp/info/access/",
+        "checkedAt": "2026-09-27T23:41:00.630Z"
+      },
+      "latitude": {
+        "text": "大阪市立科学館 / 大阪市北区中之島4-2-1 / 34.6912721000008 (JGD2011)",
+        "sourceUrl": "https://www.mapnavi.city.osaka.lg.jp/osakacity/osakacity/opendatafile/map_1/CSV/opendata_1005.csv",
+        "checkedAt": "2026-09-27T23:46:09.863Z"
+      },
+      "longitude": {
+        "text": "大阪市立科学館 / 大阪市北区中之島4-2-1 / 135.491506 (JGD2011)",
+        "sourceUrl": "https://www.mapnavi.city.osaka.lg.jp/osakacity/osakacity/opendatafile/map_1/CSV/opendata_1005.csv",
+        "checkedAt": "2026-09-27T23:46:09.863Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "大阪市 マップナビおおさか 文化・観光施設ポイント",
+      "url": "https://www.city.osaka.lg.jp/toshikeikaku/page/0000250227.html",
+      "license": "CC BY"
+    }
+  },
+  {
+    "id": "expo-park",
+    "aliases": [
+      "万博記念公園"
+    ],
+    "url": "https://www.expo70-park.jp/guide/access/",
+    "fields": {
+      "nearestStation": "大阪モノレール 万博記念公園駅／公園東口駅",
+      "accessByTransit": "大阪モノレール「万博記念公園駅」「公園東口駅」が便利です。阪急南茨木・山田・蛍池、千里中央、大日、門真市の各駅からモノレールへ乗り換え。園内の目的地別の経路は公式案内で確認してください。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "大阪モノレール 万博記念公園駅／公園東口駅",
+        "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+        "checkedAt": "2026-09-28T07:18:02.943Z"
+      },
+      "accessByTransit": {
+        "text": "大阪モノレール「万博記念公園駅」「公園東口駅」が便利です。阪急南茨木・山田・蛍池、千里中央、大日、門真市の各駅からモノレールへ乗り換え。園内の目的地別の経路は公式案内で確認してください。",
+        "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+        "checkedAt": "2026-09-28T07:18:02.943Z"
+      }
+    }
+  },
+  {
+    "id": "hirakata-park",
+    "aliases": [
+      "ひらかたパーク"
+    ],
+    "url": "https://realdgame.jp/s/wizardpark/osaka/",
+    "fields": {
+      "nearestStation": "京阪電車 枚方公園駅",
+      "accessByTransit": "京阪電車「枚方公園駅」下車、徒歩約3分。京阪バス「枚方公園口」下車、徒歩約10分。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "京阪電車 枚方公園駅",
+        "sourceUrl": "https://realdgame.jp/s/wizardpark/osaka/",
+        "checkedAt": "2026-09-28T00:43:33.660Z"
+      },
+      "accessByTransit": {
+        "text": "京阪電車「枚方公園駅」下車、徒歩約3分。京阪バス「枚方公園口」下車、徒歩約10分。",
+        "sourceUrl": "https://realdgame.jp/s/wizardpark/osaka/",
+        "checkedAt": "2026-09-28T00:43:33.660Z"
+      }
+    }
+  },
+  {
+    "id": "atc",
+    "aliases": [
+      "ATC",
+      "ATCホール",
+      "南港サンセットホール、(ITM棟10階)",
+      "ODP 多目的ルーム (大阪南港ATC ITM棟10階 大阪デザイン振興プラザ内)",
+      "ATC海辺のステージ、ステージサイズ:幅7.2mx奥行5.4m/床素材:リノリウム / ※天候により会場変更になる場合があります",
+      "ATCエイジレスセンター(ITM棟11階)",
+      "ATC ビルITM 棟 9F ATC暮らしデザインプラザ セミナールーム",
+      "ATC海辺のステージ、ステージサイズ:幅7.2mx奥行5.4m/床素材:リノリウム / ※天候により会場変更になる場合があります",
+      "ATCエイジレスセンター(ITM棟11階)"
+    ],
+    "url": "https://www.atc-co.com/guide/access",
+    "fields": {
+      "nearestStation": "Osaka Metro ニュートラム トレードセンター前駅",
+      "accessByTransit": "Osaka Metro南港ポートタウン線（ニュートラム）「トレードセンター前」駅から徒歩2分。Osaka Metro中央線「コスモスクエア」駅からニュートラムへ乗り換え。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "Osaka Metro ニュートラム トレードセンター前駅",
+        "sourceUrl": "https://www.atc-co.com/guide/access",
+        "checkedAt": "2026-09-28T07:22:11.786Z"
+      },
+      "accessByTransit": {
+        "text": "Osaka Metro南港ポートタウン線（ニュートラム）「トレードセンター前」駅から徒歩2分。Osaka Metro中央線「コスモスクエア」駅からニュートラムへ乗り換え。",
+        "sourceUrl": "https://www.atc-co.com/guide/access",
+        "checkedAt": "2026-09-28T07:22:11.786Z"
+      }
+    }
+  },
+  {
+    "id": "hamadera-park",
+    "aliases": [
+      "浜寺公園"
+    ],
+    "url": "https://hamadera.osaka-park.or.jp/access/",
+    "fields": {
+      "nearestStation": "南海本線 浜寺公園駅／阪堺線 浜寺駅前駅",
+      "accessByTransit": "南海本線「浜寺公園」駅・阪堺線「浜寺駅前」駅すぐ。JR羽衣線「東羽衣」駅から北西へ450m。",
+      "address": "堺市西区浜寺公園町"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "南海本線 浜寺公園駅／阪堺線 浜寺駅前駅",
+        "sourceUrl": "https://hamadera.osaka-park.or.jp/access/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "accessByTransit": {
+        "text": "南海本線「浜寺公園」駅・阪堺線「浜寺駅前」駅すぐ。JR羽衣線「東羽衣」駅から北西へ450m。",
+        "sourceUrl": "https://hamadera.osaka-park.or.jp/access/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "address": {
+        "text": "堺市西区浜寺公園町",
+        "sourceUrl": "https://hamadera.osaka-park.or.jp/access/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  },
+  {
+    "id": "sennan-satoumi-park",
+    "aliases": [
+      "せんなん里海公園"
+    ],
+    "url": "https://sennan.osaka-park.or.jp/parkingarea/",
+    "fields": {
+      "nearestStation": "南海本線 淡輪駅／箱作駅",
+      "accessByTransit": "南海本線「淡輪」駅から徒歩約15分。「箱作」駅から徒歩約20分。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "南海本線 淡輪駅／箱作駅",
+        "sourceUrl": "https://sennan.osaka-park.or.jp/parkingarea/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "accessByTransit": {
+        "text": "南海本線「淡輪」駅から徒歩約15分。「箱作」駅から徒歩約20分。",
+        "sourceUrl": "https://sennan.osaka-park.or.jp/parkingarea/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  },
+  {
+    "id": "yamadaike-park",
+    "aliases": [
+      "山田池公園"
+    ],
+    "url": "https://yamadaike.osaka-park.or.jp/access",
+    "fields": {
+      "nearestStation": "JR学研都市線 藤阪駅／京阪本線 枚方市駅",
+      "accessByTransit": "JR「藤阪」駅から北西へ700m。京阪「枚方市」駅北口またはJR「長尾」駅から京阪バス「出屋敷」下車。長尾駅からの経路は下車後東へ200m。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "JR学研都市線 藤阪駅／京阪本線 枚方市駅",
+        "sourceUrl": "https://yamadaike.osaka-park.or.jp/access",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "accessByTransit": {
+        "text": "JR「藤阪」駅から北西へ700m。京阪「枚方市」駅北口またはJR「長尾」駅から京阪バス「出屋敷」下車。長尾駅からの経路は下車後東へ200m。",
+        "sourceUrl": "https://yamadaike.osaka-park.or.jp/access",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  },
+  {
+    "id": "sumiyoshi-park",
+    "aliases": [
+      "住吉公園"
+    ],
+    "url": "https://www.toshi-kouen.jp/staticpages/index.php/sumiyoshi_access",
+    "fields": {
+      "nearestStation": "南海本線 住吉大社駅／阪堺線 住吉鳥居前駅",
+      "accessByTransit": "南海本線「住吉大社」駅、阪堺線「住吉鳥居前」駅すぐ。大阪シティバス「住吉公園」すぐ。"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "南海本線 住吉大社駅／阪堺線 住吉鳥居前駅",
+        "sourceUrl": "https://www.toshi-kouen.jp/staticpages/index.php/sumiyoshi_access",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "accessByTransit": {
+        "text": "南海本線「住吉大社」駅、阪堺線「住吉鳥居前」駅すぐ。大阪シティバス「住吉公園」すぐ。",
+        "sourceUrl": "https://www.toshi-kouen.jp/staticpages/index.php/sumiyoshi_access",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  },
+  {
+    "id": "cosmopolitan-osaka",
+    "aliases": [
+      "グランフロント大阪 THE COSMOPOLITAN GRILL|BAR|TERRACE"
+    ],
+    "url": "https://thecosmopolitan.jp/",
+    "fields": {
+      "nearestStation": "JR大阪駅／梅田・大阪梅田駅",
+      "accessByTransit": "JR大阪駅、御堂筋線梅田駅、阪急・阪神の梅田駅、谷町線東梅田駅、四つ橋線西梅田駅より徒歩。",
+      "address": "大阪市北区大深町4-20 グランフロント大阪南館9F"
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "JR大阪駅／梅田・大阪梅田駅",
+        "sourceUrl": "https://thecosmopolitan.jp/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "accessByTransit": {
+        "text": "JR大阪駅、御堂筋線梅田駅、阪急・阪神の梅田駅、谷町線東梅田駅、四つ橋線西梅田駅より徒歩。",
+        "sourceUrl": "https://thecosmopolitan.jp/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "address": {
+        "text": "大阪市北区大深町4-20 グランフロント大阪南館9F",
+        "sourceUrl": "https://thecosmopolitan.jp/",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  },
+  {
+    "id": "aeon-dainichi",
+    "aliases": [
+      "イオンモール大日",
+      "イオンモール大日 B1F 屋外テラス",
+      "イオンモール大日 超冷自販機設置場所:\nイオン棟2F QBハウス横\nイオン棟3F 保険クリニック横\nイオン棟4F 中央お手洗い付近",
+      "イオンモール大日 店内 3F イオン棟サックスバー前",
+      "イオンモール大日 3F BLOOM",
+      "イオンモール大日 1F カルディコーヒーファーム前",
+      "イオンモール大日 3F SHIBANIWA",
+      "イオンモール大日 1F サニーコート",
+      "イオンモール大日 受付:1Fサニーコート\n点灯式:B1F 屋外テラス\n※雨天時:1Fサニーコート",
+      "イオンモール大日 1F 守口市元気発信基地",
+      "イオンモール大日 3F カンドゥー前\nSHIBANIWAランウェイ"
+    ],
+    "url": "https://www.aeon.jp/sc/dainichi/access/",
+    "fields": {
+      "latitude": 34.7495091,
+      "longitude": 135.5804291,
+      "nearestStation": "Osaka Metro谷町線・大阪モノレール 大日駅",
+      "accessByTransit": "Osaka Metro谷町線・大阪モノレール「大日」駅に直結。"
+    },
+    "fieldEvidence": {
+      "latitude": {
+        "text": "イオンモール大日。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.7495091, 135.5804291)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/GiZx3puUgLTSDnnAA",
+        "sourceUrl": "https://www.aeon.jp/sc/dainichi/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "longitude": {
+        "text": "イオンモール大日。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.7495091, 135.5804291)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/GiZx3puUgLTSDnnAA",
+        "sourceUrl": "https://www.aeon.jp/sc/dainichi/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "nearestStation": {
+        "text": "Osaka Metro谷町線・大阪モノレール 大日駅",
+        "sourceUrl": "https://www.aeon.jp/sc/dainichi/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "accessByTransit": {
+        "text": "Osaka Metro谷町線・大阪モノレール「大日」駅に直結。",
+        "sourceUrl": "https://www.aeon.jp/sc/dainichi/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "会場公式が案内する地図の施設地点",
+      "url": "https://www.aeon.jp/sc/dainichi/access/"
+    }
+  },
+  {
+    "id": "aeon-dome",
+    "aliases": [
+      "イオンモール大阪ドームシティ",
+      "イオンモール大阪ドームシティ 1Fフリースペース",
+      "イオンモール大阪ドームシティ 1階「乃が美」前スペース",
+      "イオンモール大阪ドームシティ 3階 キャッスル広場前スペース",
+      "イオンモール大阪ドームシティ 3階 キャッスル広場",
+      "イオンモール大阪ドームシティ 3F キャッスル広場",
+      "イオンモール大阪ドームシティ 3階キャッスル広場",
+      "イオンモール大阪ドームシティ 3階:キャッスル広場",
+      "イオンモール大阪ドームシティ 2F 自動販売機(JINS横)"
+    ],
+    "url": "https://www.aeon.jp/sc/osakadomecity/access/",
+    "fields": {
+      "latitude": 34.6702691,
+      "longitude": 135.477917,
+      "nearestStation": "阪神なんば線 ドーム前駅／Osaka Metro長堀鶴見緑地線 ドーム前千代崎駅",
+      "accessByTransit": "阪神なんば線「ドーム前」駅に地下直結。Osaka Metro長堀鶴見緑地線「ドーム前千代崎」駅から地下通路直結。"
+    },
+    "fieldEvidence": {
+      "latitude": {
+        "text": "イオンモール大阪ドームシティ。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.6702691, 135.477917)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/TxMMVUSc1UGamGrq9",
+        "sourceUrl": "https://www.aeon.jp/sc/osakadomecity/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "longitude": {
+        "text": "イオンモール大阪ドームシティ。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.6702691, 135.477917)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/TxMMVUSc1UGamGrq9",
+        "sourceUrl": "https://www.aeon.jp/sc/osakadomecity/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "nearestStation": {
+        "text": "阪神なんば線 ドーム前駅／Osaka Metro長堀鶴見緑地線 ドーム前千代崎駅",
+        "sourceUrl": "https://www.aeon.jp/sc/osakadomecity/info/shisetuannai.html",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "accessByTransit": {
+        "text": "阪神なんば線「ドーム前」駅に地下直結。Osaka Metro長堀鶴見緑地線「ドーム前千代崎」駅から地下通路直結。",
+        "sourceUrl": "https://www.aeon.jp/sc/osakadomecity/info/shisetuannai.html",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "会場公式が案内する地図の施設地点",
+      "url": "https://www.aeon.jp/sc/osakadomecity/access/"
+    }
+  },
+  {
+    "id": "aeon-hineno",
+    "aliases": [
+      "イオンモール日根野",
+      "イオンモール日根野 1Fジョーシン前",
+      "イオンモール日根野 1F 昔造り辻茂前",
+      "イオンモール日根野 1Fやざき寿司前",
+      "イオンモール日根野 1Fであいの広場",
+      "イオンモール日根野 1F食品側入口横",
+      "イオンモール日根野 1階 グリーンパークストピック横",
+      "イオンモール日根野 2Fブリッジ(メガネの愛眼前)",
+      "イオンモール日根野 1F昔造り辻茂前",
+      "イオンモール日根野 1F であいの広場"
+    ],
+    "url": "https://www.aeon.jp/sc/hineno/access/bus.html",
+    "fields": {
+      "latitude": 34.3931224,
+      "longitude": 135.3345146,
+      "nearestStation": "JR阪和線・関西空港線 日根野駅",
+      "accessByTransit": "JR阪和線・関西空港線「日根野」駅の東口より徒歩約5分。"
+    },
+    "fieldEvidence": {
+      "latitude": {
+        "text": "イオンモール日根野。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.3931224, 135.3345146)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/fRq3XopLJBbpSjeK9",
+        "sourceUrl": "https://www.aeon.jp/sc/hineno/access/bus.html",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "longitude": {
+        "text": "イオンモール日根野。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.3931224, 135.3345146)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/fRq3XopLJBbpSjeK9",
+        "sourceUrl": "https://www.aeon.jp/sc/hineno/access/bus.html",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "nearestStation": {
+        "text": "JR阪和線・関西空港線 日根野駅",
+        "sourceUrl": "https://www.aeon.jp/sc/hineno/access/bus.html",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "accessByTransit": {
+        "text": "JR阪和線・関西空港線「日根野」駅の東口より徒歩約5分。",
+        "sourceUrl": "https://www.aeon.jp/sc/hineno/access/bus.html",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "会場公式が案内する地図の施設地点",
+      "url": "https://www.aeon.jp/sc/hineno/access/bus.html"
+    }
+  },
+  {
+    "id": "aeon-ibaraki",
+    "aliases": [
+      "イオンモール茨木",
+      "イオンモール茨木 1Fサーティンワン前(9/25-9/28西側、9/29-10/4東側)",
+      "イオンモール茨木 1F インフォメーション横",
+      "イオンモール茨木 1Fジョイプラザ前",
+      "イオンモール茨木 1階 ジョイプラザ",
+      "イオンモール茨木 1F ジョイプラザ",
+      "イオンモール茨木 1F ウェルカムプラザ",
+      "イオンモール茨木 1F ウェルカムプラザ・JR側屋外広場",
+      "イオンモール茨木 JR側屋外広場"
+    ],
+    "url": "https://www.aeon.jp/sc/ibaraki/access/",
+    "fields": {
+      "latitude": 34.811035,
+      "longitude": 135.5587837
+    },
+    "fieldEvidence": {
+      "latitude": {
+        "text": "イオンモール茨木。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.811035, 135.5587837)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/pyV4XQhwLxgUmFt36",
+        "sourceUrl": "https://www.aeon.jp/sc/ibaraki/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      },
+      "longitude": {
+        "text": "イオンモール茨木。公式アクセスページからリンクされたGoogleマップの同名施設地点 (34.811035, 135.5587837)。施設単位の位置で、入口や館内会場の位置ではありません。リンク: https://goo.gl/maps/pyV4XQhwLxgUmFt36",
+        "sourceUrl": "https://www.aeon.jp/sc/ibaraki/access/",
+        "checkedAt": "2026-09-29T03:38:46.069Z"
+      }
+    },
+    "coordinateSource": {
+      "name": "会場公式が案内する地図の施設地点",
+      "url": "https://www.aeon.jp/sc/ibaraki/access/"
+    }
+  },
+  {
+    "id": "namba-parks",
+    "aliases": [
+      "なんばパークス"
+    ],
+    "roomSuffixes": [
+      "パークスガーデン",
+      "屋上庭園"
+    ],
+    "url": "https://nambaparks.com/access",
+    "fields": {
+      "accessByCar": "なんばパークス駐車場・なんばCITY駐車場の西側共通入口は「難波中」交差点を南へ進んだ左手。なんばCITY東側入口は「難波中2」交差点を南へ進んだ右手で、21:00～翌7:00は閉鎖。",
+      "parkingInfo": "会場施設の駐車場：なんばパークス地下7:00～23:30（最終入庫23:00）、立体9:00～翌0:30。平日250円/30分（平日最大1,300円）、土日祝500円/30分。なんばCITYは24時間、300円/30分（平日最大1,800円、7:00～23:30）。平日最大料金には利用時間などの条件があります。駐車優待は対象施設での購入額や会員条件を公式サイトで確認してください。",
+      "contact": {
+        "name": "なんばパークス 2Fインフォメーション（施設案内）",
+        "phone": "06-6644-7100"
+      }
+    },
+    "fieldEvidence": {
+      "accessByCar": {
+        "text": "西側共通入口：「難波中」交差点を南へ進むと左手。CITY東側入口：「難波中2」交差点の先、21:00～翌7:00閉鎖。",
+        "sourceUrl": "https://nambaparks.com/access",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      },
+      "parkingInfo": {
+        "text": "なんばパークス地下7:00～23:30（最終入庫23:00）、立体9:00～翌0:30。平日250円/30分（平日最大1,300円）、土日祝500円/30分。なんばCITY24時間、300円/30分（平日最大1,800円、7:00～23:30）。優待は対象店舗の購入金額等の条件あり。",
+        "sourceUrl": "https://nambaparks.com/access",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      },
+      "contact": {
+        "text": "インフォメーション(2F) 受付時間：11:00～21:00 TEL：06-6644-7100",
+        "sourceUrl": "https://nambaparks.com/access",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      }
+    }
+  },
+  {
+    "id": "natural-history-museum",
+    "aliases": [
+      "大阪市立自然史博物館"
+    ],
+    "roomSuffixes": [
+      "ネイチャーホール"
+    ],
+    "url": "https://omnh.jp/guide_top/guide",
+    "fields": {
+      "nearestStation": "Osaka Metro御堂筋線 長居駅／JR阪和線 長居駅",
+      "accessByTransit": "Osaka Metro御堂筋線「長居」駅南改札3号出口から東へ約800m。JR阪和線「長居」駅東出口から東へ約1km。大阪シティバス4系統「長居東」または24系統「長居東2」停留所。",
+      "parkingInfo": "長居公園南の植物園前駐車場と長居公園地下駐車場を利用できます（有料）。植物園前駐車場は2026年10月4日から利用制限あり。空き状況・規制内容は会場公式の案内先で確認してください。",
+      "contact": {
+        "name": "大阪市立自然史博物館（施設代表）",
+        "phone": "06-6697-6221"
+      }
+    },
+    "fieldEvidence": {
+      "nearestStation": {
+        "text": "Osaka Metro御堂筋線「長居」駅、JR阪和線「長居」駅",
+        "sourceUrl": "https://omnh.jp/guide_top/guide",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      },
+      "accessByTransit": {
+        "text": "地下鉄「長居」駅南改札口3号出口から東へ約800m。JR「長居」駅東出口から東へ約1km。大阪シティバス4系統「長居東」または24系統「長居東2」。",
+        "sourceUrl": "https://omnh.jp/guide_top/guide",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      },
+      "parkingInfo": {
+        "text": "長居植物園前（長居公園南）と地下駐車場。2026年10月4日より植物園前駐車場（長居公園南）の利用が制限。",
+        "sourceUrl": "https://omnh.jp/guide_top/guide",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      },
+      "contact": {
+        "text": "大阪市立自然史博物館 電話：06-6697-6221（代表）",
+        "sourceUrl": "https://omnh.jp/guide_top/guide",
+        "checkedAt": "2026-10-01T05:00:00Z"
+      }
+    }
+  }
+]

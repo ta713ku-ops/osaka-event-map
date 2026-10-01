@@ -69,6 +69,9 @@ export interface EventItem {
   endAt?: string;
   startTime?: string;
   endTime?: string;
+  timeInfo?: string;
+  closureInfo?: string;
+  audienceInfo?: string;
   price?: string | number | null;
   freeEvent?: boolean | null;
   indoor?: boolean | null;
@@ -85,6 +88,7 @@ export interface EventItem {
   source?: string;
   sourceUrl?: string;
   sourceId?: string;
+  sourceStatus?: EventSourceStatus;
   tags?: EventTag[];
   tagEvidence?: Record<string, string>;
   provenance?: EventProvenance[];

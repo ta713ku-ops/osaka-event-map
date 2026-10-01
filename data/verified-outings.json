@@ -1,0 +1,625 @@
+{
+  "version": 1,
+  "window": {
+    "startDate": "2026-09-28",
+    "endDate": "2026-10-28"
+  },
+  "occurrences": [
+    {
+      "sourceId": "verified-outings-solaniwa-yokai-2026",
+      "sourceName": "空庭温泉",
+      "eventName": "空庭妖怪祭",
+      "startDate": "2026-08-08",
+      "endDate": "2026-09-30",
+      "venueName": "空庭温泉 OSAKA BAY TOWER",
+      "officialUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+      "description": "館内の「会安通り」を妖怪提灯が灯る回廊にする夏イベント。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+          "text": "空庭妖怪祭 開催概要",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+          "text": "2026年8月8日（土）〜 9月30日（水）",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+          "text": "空庭温泉　OSAKA BAY TOWER",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+          "text": "〒552-0007 大阪府大阪市港区弁天1丁目2-3",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+          "text": "フォトスポット「会安（ホイアン）通り」が、妖怪提灯が灯る幻想的な回廊に！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "address": {
+          "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+          "text": "〒552-0007 大阪府大阪市港区弁天1丁目2-3",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      },
+      "address": "〒552-0007 大阪府大阪市港区弁天1丁目2-3"
+    },
+    {
+      "sourceId": "verified-outings-daizetsumetsu-osaka-2026",
+      "sourceName": "特別展「大絶滅展―生命史のビッグファイブ」実行委員会",
+      "eventName": "特別展「大絶滅展―生命史のビッグファイブ」",
+      "startDate": "2026-07-17",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立自然史博物館 ネイチャーホール",
+      "officialUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+      "description": "地球史で起きた大規模な絶滅現象「ビッグファイブ」と生命進化の歴史を紹介する特別展。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+          "text": "特別展「大絶滅展―生命史のビッグファイブ」",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+          "text": "2026年7月17日（金）～10月12日（月・祝）",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+          "text": "大阪市立自然史博物館　ネイチャーホール（花と緑と自然の情報センター２階）",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+          "text": "〒546-0034 大阪市東住吉区長居公園1-23",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://daizetsumetsu.jp/",
+          "text": "地球史の大絶滅イベント「ビッグファイブ」をテーマとする特別展！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "address": {
+          "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+          "text": "〒546-0034 大阪市東住吉区長居公園1-23",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      },
+      "address": "〒546-0034 大阪市東住吉区長居公園1-23"
+    },
+    {
+      "sourceId": "verified-outings-hokkaido-buffet-2026",
+      "sourceName": "都シティ 大阪天王寺",
+      "eventName": "北海道ブッフェ 第2弾～北の大地の恵みを味わう～",
+      "startDate": "2026-07-01",
+      "endDate": "2026-09-30",
+      "venueName": "スカイレストラン エトワール（都シティ 大阪天王寺）",
+      "officialUrl": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+      "description": "スカイレストラン エトワールで、北海道産食材を使った料理やスイーツを提供するブッフェ企画。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+          "text": "北海道ブッフェ 第2弾～北の大地の恵みを味わう～",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+          "text": "2026年7月1日（水）から9月30日（水）まで",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+          "text": "スカイレストラン エトワール",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+          "text": "都シティ 大阪天王寺は",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+          "text": "北海道産食材を使用したメニューをご用意します。また、北海道産食材をふんだんに使用したスイーツ",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      }
+    },
+    {
+      "sourceId": "verified-outings-jikken-lab-osaka-2026",
+      "sourceName": "SCRAP",
+      "eventName": "リアル脱出ゲーム『ある実験室からの脱出』（リバイバル）",
+      "startDate": "2026-05-21",
+      "endDate": "2026-10-25",
+      "venueName": "リアル脱出ゲーム大阪恵美須町店",
+      "officialUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+      "description": "実験室に閉じ込められた参加者が、20分以内の脱出を目指すリアル脱出ゲーム。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+          "text": "リアル脱出ゲーム『ある実験室からの脱出』（リバイバル）",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+          "text": "2026年5月21日(木)〜2026年10月25日(日)",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+          "text": "リアル脱出ゲーム大阪恵美須町店",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+          "text": "大阪府大阪市浪速区日本橋5-13-5",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+          "text": "世界を救うため、20分以内に脱出せよ！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "address": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+          "text": "大阪府大阪市浪速区日本橋5-13-5",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      },
+      "address": "大阪府大阪市浪速区日本橋5-13-5"
+    },
+    {
+      "sourceId": "verified-outings-tenshiba-oktoberfest-2026",
+      "sourceName": "てんしば",
+      "eventName": "てんしばオクトーバーフェスト2026",
+      "startDate": "2026-09-11",
+      "endDate": "2026-10-04",
+      "venueName": "てんしば",
+      "officialUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+      "description": "ドイツ直輸入の樽生ビールと、世界のワインフェスを同時に楽しめる催し。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+          "text": "てんしばオクトーバーフェスト2026",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+          "text": "2026年9月11日（金）～10月4日（日）",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+          "text": "てんしばオクトーバーフェスト2026",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+          "text": "大阪天王寺公園エントランスエリア“てんしば”",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+          "text": "ドイツ直輸入の樽生ビールが大集結します！日本のビールとは一味ちがう、コクがありながらもスッキリとした風味豊かなドイツビールを多数ご堪能いただけます。さらに、ヨーロッパを中心とした世界のワインが味わえる「世界ワインフェス」も同時開催！！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      }
+    },
+    {
+      "sourceId": "verified-outings-conan-shinsaibashi-2026",
+      "sourceName": "SCRAP",
+      "eventName": "リアル脱出ゲーム×名探偵コナン『疾風の追走からの脱出』",
+      "startDate": "2026-07-09",
+      "endDate": "2026-10-12",
+      "venueName": "リアル脱出ゲーム大阪心斎橋店",
+      "officialUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+      "description": "名探偵コナンの登場人物とともに、制御不能になったバスをめぐる謎に挑むリアル脱出ゲーム。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+          "text": "リアル脱出ゲーム×名探偵コナン『疾風の追走からの脱出』",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+          "text": "2026/7/9(木)〜2026/10/12(月・祝)",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+          "text": "リアル脱出ゲーム大阪心斎橋店",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+          "text": "大阪府大阪市中央区西心斎橋2-11-30 ブルータスビル6F",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+          "text": "横浜で自動運転バスの試乗会に参加したコナン、蘭、世良。しかし突如、蘭を1人乗せたままバスが暴走を始める！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "address": {
+          "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+          "text": "大阪府大阪市中央区西心斎橋2-11-30 ブルータスビル6F",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      },
+      "address": "大阪府大阪市中央区西心斎橋2-11-30 ブルータスビル6F"
+    },
+    {
+      "sourceId": "verified-outings-autumn-fest-osaka-station-city-2026",
+      "sourceName": "大阪ステーションシティ",
+      "eventName": "Autumn Fest 2026 第2弾！",
+      "startDate": "2026-09-26",
+      "endDate": "2026-10-24",
+      "venueName": "OSAKA STATION CITY",
+      "officialUrl": "https://osakastationcity.com/event/6374/",
+      "description": "大阪ステーションシティで街歩き企画や読書イベント、秋のフォトスポットなどを展開する催し。",
+      "lastCheckedAt": "2026-09-29T03:36:42.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://osakastationcity.com/event/6374/",
+          "text": "Autumn Fest 2026 第2弾！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://osakastationcity.com/event/6374/",
+          "text": "2026年09月26日 2026年10月24日",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://osakastationcity.com/event/6374/",
+          "text": "OSAKA STATION CITY",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://osakastationcity.com/event/6374/",
+          "text": "大阪駅直結エリア情報サイト",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        },
+        "description": {
+          "sourceUrl": "https://osakastationcity.com/event/6374/",
+          "text": "読書の秋「読の市」等イベントが多彩！",
+          "checkedAt": "2026-09-29T03:36:42.000Z"
+        }
+      }
+    },
+    {
+      "sourceId": "verified-outings-mucha-returns-2026",
+      "sourceName": "堺 アルフォンス・ミュシャ館",
+      "eventName": "企画展「ミュシャ芸術博覧会リターンズ」",
+      "startDate": "2026-08-01",
+      "endDate": "2026-11-29",
+      "venueName": "堺 アルフォンス・ミュシャ館",
+      "officialUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+      "description": "ポスターから油彩画や彫刻まで、ミュシャの幅広い作品を展示。鑑賞とあわせて展示作りやスタンプラリーも体験できる企画展。",
+      "lastCheckedAt": "2026-09-30T04:06:04.145Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "企画展「ミュシャ芸術博覧会リターンズ」",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "2026/08/01(土)〜2026/11/29(日)",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "会場 堺 アルフォンス・ミュシャ館",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "堺市堺区田出井町1-2-200",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "description": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "ポスター（版画）だけでなくデッサン、挿絵、油絵、壁画、彫刻、ジュエリー、室内装飾など",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "address": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "堺市堺区田出井町1-2-200",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        }
+      },
+      "address": "堺市堺区田出井町1-2-200 ベルマージュ堺弐番館2F～4F"
+    },
+    {
+      "sourceId": "verified-outings-bread-donut-expocity-2026",
+      "sourceName": "ららぽーとEXPOCITY",
+      "eventName": "パンとドーナツの世界",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-12",
+      "venueName": "ららぽーとEXPOCITY 1F 光の広場",
+      "officialUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+      "description": "パンとドーナツの人気店がEXPOCITYに集まる4日間の催し。会場は1F光の広場で、売り切れ次第終了。",
+      "lastCheckedAt": "2026-09-30T04:06:04.145Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+          "text": "パンとドーナツの世界",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+          "text": "2026/10/9(金)～2026/10/12(月・祝)",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+          "text": "会場：1Ｆ光の広場",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/",
+          "text": "大阪府吹田市千里万博公園2-1",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "description": {
+          "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+          "text": "食欲の秋にぴったりの人気店・有名店が大集合！",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "address": {
+          "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/",
+          "text": "大阪府吹田市千里万博公園2-1",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        }
+      },
+      "address": "大阪府吹田市千里万博公園2-1"
+    },
+    {
+      "sourceId": "verified-outings-kyushu-shikoku-fair-sakai-2026",
+      "sourceName": "イオンモール堺北花田",
+      "eventName": "九州四国物産展",
+      "startDate": "2026-09-18",
+      "endDate": "2026-09-30",
+      "venueName": "イオンモール堺北花田 1F ウェルカムコート",
+      "officialUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+      "description": "九州と四国各地の特産品をそろえる期間限定の物産展。最終日は18時まで。",
+      "lastCheckedAt": "2026-09-30T04:06:04.145Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+          "text": "九州四国物産展",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+          "text": "2026/09/18 (金) - 2026/09/30 (水)",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+          "text": "1F ウェルカムコート",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+          "text": "〒591-8008 大阪府堺市北区東浅香山町4丁1-12",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "description": {
+          "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+          "text": "九州、四国各地の特産品を取り揃えております。",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        },
+        "address": {
+          "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+          "text": "〒591-8008 大阪府堺市北区東浅香山町4丁1-12",
+          "checkedAt": "2026-09-30T04:06:04.145Z"
+        }
+      },
+      "address": "〒591-8008 大阪府堺市北区東浅香山町4丁1-12"
+    },
+    {
+      "sourceId": "verified-outings-vintage-market-suita-2026",
+      "sourceName": "万博記念公園",
+      "eventName": "Vintage Market -万博 蚤の市-2026秋",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-25",
+      "venueName": "万博記念公園 東の広場",
+      "officialUrl": "https://www.expo70-park.jp/event/77096/",
+      "description": "万博記念公園の東の広場で開く蚤の市。古道具やアンティークなど約170店が並ぶ。",
+      "lastCheckedAt": "2026-09-30T04:07:12.605Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+          "text": "Vintage Market -万博 蚤の市-2026秋",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+          "text": "2026年10月23日(金)~ 25日(日)",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+          "text": "場所 東の広場",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "text": "大阪府吹田市千里万博公園",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "description": {
+          "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+          "text": "170店が出揃い、アンティーク",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "address": {
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "text": "大阪府吹田市千里万博公園",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        }
+      },
+      "address": "〒565-0826 大阪府吹田市千里万博公園"
+    },
+    {
+      "sourceId": "verified-outings-sakana-japan-suita-2026",
+      "sourceName": "SAKANA&JAPAN FESTIVAL実行委員会",
+      "eventName": "SAKANA&JAPAN FESTIVAL2026 in 万博記念公園",
+      "startDate": "2026-10-02",
+      "endDate": "2026-10-04",
+      "venueName": "万博記念公園 お祭り広場",
+      "officialUrl": "https://37sakana.jp/sjfesosaka/index.html",
+      "description": "全国各地の魚介料理を楽しめるグルメイベント。万博記念公園のお祭り広場で3日間開催。",
+      "lastCheckedAt": "2026-09-30T04:07:12.605Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+          "text": "SAKANA&JAPAN FESTIVAL(魚ジャパンフェス)2026 in 万博記念公園",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+          "text": "2026年10月2日(金)から4日(日)までの3日間",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+          "text": "万博記念公園・お祭り広場",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+          "text": "大阪府吹田市の万博記念公園",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "description": {
+          "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+          "text": "全国各地の魚介料理が堪能できるグルメイベント",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "address": {
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "text": "〒565-0826　大阪府吹田市千里万博公園",
+          "checkedAt": "2026-09-30T04:18:55.181Z"
+        }
+      },
+      "address": "〒565-0826 大阪府吹田市千里万博公園"
+    },
+    {
+      "sourceId": "verified-outings-zumzum-kitchencar-sakai-2026",
+      "sourceName": "カエルスタジオ",
+      "eventName": "ZUMZUM KITCHENCAR FES in 堺市大泉緑地",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-03",
+      "venueName": "大泉緑地 大芝生広場",
+      "officialUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+      "description": "大泉緑地の大芝生広場で音楽とキッチンカーを楽しむ野外フェス。",
+      "price": "入場無料。ステージ前には有料エリアがあります。",
+      "timeInfo": "キッチンカーと会場は11:00から、開演11:30、閉演予定17:00。",
+      "rainPolicy": "雨天決行・荒天中止。中止時は当日11:00までに主催者のXで案内。",
+      "lastCheckedAt": "2026-09-30T10:38:52.000Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "ZUMZUM KITCHENCAR FES in 堺市大泉緑地",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "2026年10月03日(土)",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "大泉緑地特設会場(大泉緑地・大芝生広場)",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "大阪府堺市北区金岡町128",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        },
+        "description": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "with K-3756S SOUND SYSTEM キッチンカー出店",
+          "checkedAt": "2026-09-30T10:38:52.000Z"
+        },
+        "price": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "※入場無料 (ステージ前クラウドファンディング有料エリアあり)",
+          "checkedAt": "2026-09-30T10:38:52.000Z"
+        },
+        "timeInfo": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "キッチンカーオープン 11:00 開演 11:30 閉演予定 17:00",
+          "checkedAt": "2026-09-30T10:38:52.000Z"
+        },
+        "rainPolicy": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "※雨天決行・荒天中止です",
+          "checkedAt": "2026-09-30T10:38:52.000Z"
+        },
+        "address": {
+          "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+          "text": "大阪府堺市北区金岡町128",
+          "checkedAt": "2026-09-30T04:07:12.605Z"
+        }
+      },
+      "address": "大阪府堺市北区金岡町128"
+    },
+    {
+      "sourceId": "verified-outings-seaside-terrace-bbq-sakai-2026",
+      "sourceName": "ドーセット バイ アゴーラ 大阪堺",
+      "eventName": "Seaside Terrace BBQ 2026",
+      "startDate": "2026-07-10",
+      "endDate": "2026-09-30",
+      "venueName": "ドーセット バイ アゴーラ 大阪堺 シーサイドテラス",
+      "officialUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+      "description": "ホテルの屋外シーサイドテラスで海を眺めながら食事を楽しむ予約制のBBQ。",
+      "lastCheckedAt": "2026-09-30T04:14:09.036Z",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+          "text": "Seaside Terrace BBQ 2026",
+          "checkedAt": "2026-09-30T04:14:09.036Z"
+        },
+        "dateRange": {
+          "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+          "text": "2026年7月10日(金)〜2026年9月30日(水)",
+          "checkedAt": "2026-09-30T04:14:09.036Z"
+        },
+        "venueName": {
+          "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+          "text": "屋外ダイニング「シーサイドテラス」",
+          "checkedAt": "2026-09-30T04:14:09.036Z"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+          "text": "〒590-0974 大阪府堺市堺区大浜北町3-1-1",
+          "checkedAt": "2026-09-30T04:14:09.036Z"
+        },
+        "description": {
+          "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+          "text": "海風を感じながら食事を楽しむ特別なダイニング体験",
+          "checkedAt": "2026-09-30T04:14:09.036Z"
+        },
+        "address": {
+          "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+          "text": "〒590-0974 大阪府堺市堺区大浜北町3-1-1",
+          "checkedAt": "2026-09-30T04:14:09.036Z"
+        }
+      },
+      "address": "〒590-0974 大阪府堺市堺区大浜北町3-1-1"
+    }
+  ]
+}

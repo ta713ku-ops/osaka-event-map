@@ -1,0 +1,309 @@
+{
+  "evaluatedAt": "2026-09-28T00:00:00+09:00",
+  "window": {
+    "from": "2026-09-28",
+    "to": "2026-10-28"
+  },
+  "entries": [
+    {
+      "routeId": "81d8b910c6940868b4c9",
+      "eventName": "EXPO’70パビリオン企画展 1970年大阪万博ビフォー・アフター展 ~あのパビリオンはいまどこに?~ 2026",
+      "startDate": "2026-03-14",
+      "endDate": "2027-02-28",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/74555/",
+      "reason": "北摂の展示・秋の屋外体験"
+    },
+    {
+      "routeId": "5cc84be6f471cee4966a",
+      "eventName": "“学びながら巡る万博体験”「EXPO’70スタンプラリー&EFE Global Learning Project」",
+      "startDate": "2026-04-22",
+      "endDate": "2027-02-28",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/75663/",
+      "reason": "北摂の展示・秋の屋外体験"
+    },
+    {
+      "routeId": "3c7133223ebaf5f98f48",
+      "eventName": "コスモス・コキアフェスタ 2026",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-30",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/77306/",
+      "reason": "北摂の展示・秋の屋外体験"
+    },
+    {
+      "routeId": "75da506cca85e1c1fb38",
+      "eventName": "第8回万博スポーツフェスタ<要事前申込>",
+      "startDate": "2026-10-18",
+      "endDate": "2026-10-18",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/77569/",
+      "reason": "北摂の展示・秋の屋外体験"
+    },
+    {
+      "routeId": "f180abf54426d86c0cf3",
+      "eventName": "羊文学 TOUR 2026 “すーーーはーーー”",
+      "startDate": "2026-09-28",
+      "endDate": "2026-09-28",
+      "venueName": "フェスティバルホール",
+      "sourceId": "festival-hall",
+      "officialUrl": "https://www.festivalhall.jp/events/6221/",
+      "reason": "大阪市・堺市の公演比較"
+    },
+    {
+      "routeId": "3dc9ae48354d89cfd192",
+      "eventName": "八神純子 キミの街へ 2026",
+      "startDate": "2026-09-29",
+      "endDate": "2026-09-29",
+      "venueName": "フェスティバルホール",
+      "sourceId": "festival-hall",
+      "officialUrl": "https://www.festivalhall.jp/events/6466/",
+      "reason": "大阪市・堺市の公演比較"
+    },
+    {
+      "routeId": "ff508473cb55cf0f5dc8",
+      "eventName": "読売日本交響楽団 第45回大阪定期演奏会",
+      "startDate": "2026-09-30",
+      "endDate": "2026-09-30",
+      "venueName": "フェスティバルホール",
+      "sourceId": "festival-hall",
+      "officialUrl": "https://www.festivalhall.jp/events/5562/",
+      "reason": "大阪市・堺市の公演比較"
+    },
+    {
+      "routeId": "82cc9a5be963f2071be1",
+      "eventName": "野村ホールディングス株式会社 創立100周年 記念公演 ロンドン交響楽団2026 指揮 サー・アントニオ・パッパーノ",
+      "startDate": "2026-09-30",
+      "endDate": "2026-09-30",
+      "venueName": "フェニーチェ堺 大ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/34444/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "107c7d528b4227079d40",
+      "eventName": "ディズニー・オン・クラシック ~まほうの夜の音楽会 2026",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10",
+      "venueName": "フェニーチェ堺 大ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/35552/",
+      "reason": "大阪市・堺市の公演比較"
+    },
+    {
+      "routeId": "ea88d7faf89153aa3fed",
+      "eventName": "ワカテ de ワカル フェニーチェ文楽 vol.7",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-14",
+      "venueName": "フェニーチェ堺 小ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/35159/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "4d5789eccb8eb98f34fc",
+      "eventName": "桂かい枝独演会",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "venueName": "フェニーチェ堺 小ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/34984/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "1e3c94df2914c92947fc",
+      "eventName": "「カプラ®展」ワークショップ",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-03",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29397",
+      "reason": "科学体験と参加条件の確認"
+    },
+    {
+      "routeId": "1fd94291594dd0ba9385",
+      "eventName": "探究ラボ「クリップ探査機の着地ミッション!」",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29252",
+      "reason": "科学体験と参加条件の確認"
+    },
+    {
+      "routeId": "c271cc74d16d41991f2f",
+      "eventName": "化学実験教室「日本酒を分析する」",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29752",
+      "reason": "科学体験と参加条件の確認"
+    },
+    {
+      "routeId": "b02cc19329172a6989cc",
+      "eventName": "講演会「学芸員の日本酒トーク」",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29757",
+      "reason": "科学体験と参加条件の確認"
+    },
+    {
+      "routeId": "52253554461d3139a613",
+      "eventName": "丹波杜氏による講演会(試飲付き)",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29771",
+      "reason": "科学体験と参加条件の確認"
+    },
+    {
+      "routeId": "9fc27b165ddbe5f76dd1",
+      "eventName": "NHK日曜美術館50年展",
+      "startDate": "2026-10-10",
+      "endDate": "2026-12-20",
+      "venueName": "大阪中之島美術館",
+      "sourceId": "nakka-art-museum",
+      "officialUrl": "https://nakka-art.jp/exhibition-post/nichibiten50/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "63bd6ad0a0823b3fafc6",
+      "eventName": "第39回 ATC咲洲ダンスフェス’26秋グランプリ",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "ATC海辺のステージ、ステージサイズ:幅7.2mx奥行5.4m/床素材:リノリウム / ※天候により会場変更になる場合があります",
+      "sourceId": "atc-events",
+      "officialUrl": "https://www.atc-co.com/event/event-2610/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "c8c1b471bfce81fd973d",
+      "eventName": "関西クラリネットソサエティ特別演奏会 ~ソプラノ 田嶋喜子さんを迎えて~",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-03",
+      "venueName": "南港サンセットホール、(ITM棟10階)",
+      "sourceId": "atc-events",
+      "officialUrl": "https://www.atc-co.com/event/sunset20th/",
+      "reason": "大阪市・堺市の公演比較"
+    },
+    {
+      "routeId": "65dcdfa87071a76f1e12",
+      "eventName": "ナゾトキイベント「ぐわ兵衛とアソビ帝国」",
+      "startDate": "2026-09-12",
+      "endDate": "2026-12-20",
+      "venueName": "浜寺公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://hamadera.osaka-park.or.jp/event-information/%e3%83%8a%e3%82%be%e3%83%88%e3%82%ad%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%8c%e3%81%90%e3%82%8f%e5%85%b5%e8%a1%9b%e3%81%a8%e3%82%a2%e3%82%bd%e3%83%93%e5%b8%9d%e5%9b%bd%e3%80%8d/",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "f8c674b4708f6131aacb",
+      "eventName": "ウミホタル ウォッチング",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "せんなん里海公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://sennan.osaka-park.or.jp/event/",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "62df41ca10511b37deaf",
+      "eventName": "タッチングプール&里海mini縁日",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "せんなん里海公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://sennan.osaka-park.or.jp/2026/03/14/%e3%82%bf%e3%83%83%e3%83%81%e3%83%b3%e3%82%b0%e3%83%97%e3%83%bc%e3%83%ab%ef%bc%86%e9%87%8c%e6%b5%b7mini%e7%b7%91%e6%97%a5/",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "1db9290d02e5e8a2dedb",
+      "eventName": "すみ博2026(すみよし博覧会)",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-17",
+      "venueName": "住吉公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://sumihaku.com/",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "e0d26642814e18a35bcc",
+      "eventName": "第17回山田池公園フェスティバル",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-17",
+      "venueName": "山田池公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://yamadaike.osaka-park.or.jp/",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "71076ea8c1b32be55f91",
+      "eventName": "すみすみマルシェ",
+      "startDate": "2026-10-24",
+      "endDate": "2026-10-24",
+      "venueName": "住吉公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://www.toshi-kouen.jp/staticpages/index.php/sumiyoshi_top",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "8f861513b2d99d2ab18e",
+      "eventName": "久宝寺こうえんマルシェ",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "venueName": "久宝寺緑地",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://kyuhoji-marche.jimdofree.com/",
+      "reason": "府内の公園・祭り・食の地域比較"
+    },
+    {
+      "routeId": "f3ef15b3cbde65aedff8",
+      "eventName": "昼の魔法遊園地と64匹の謎の妖精",
+      "startDate": "2026-09-11",
+      "endDate": "2026-10-18",
+      "venueName": "ひらかたパーク",
+      "sourceId": "hirakata-park",
+      "officialUrl": "https://realdgame.jp/s/wizardpark/day/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "6f3da73d79beab211363",
+      "eventName": "夜の魔法学校からの脱出",
+      "startDate": "2026-09-11",
+      "endDate": "2026-10-18",
+      "venueName": "ひらかたパーク",
+      "sourceId": "hirakata-park",
+      "officialUrl": "https://realdgame.jp/s/wizardpark/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "9d6c95de2a135b4781b7",
+      "eventName": "ORANGE RANGE 25th Anniversary! めんそーれ、ひらパー!",
+      "startDate": "2026-08-29",
+      "endDate": "2026-10-12",
+      "venueName": "ひらかたパーク",
+      "sourceId": "hirakata-park",
+      "officialUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/",
+      "reason": "展示・体験・食の行き先比較"
+    },
+    {
+      "routeId": "45afda0f5a42f244a290",
+      "eventName": "【SOUTHEAST ASIA AFTERNOON TEA】世界を旅するアフタヌーンテ...",
+      "startDate": "2026-08-17",
+      "endDate": "2026-10-15",
+      "venueName": "グランフロント大阪 THE COSMOPOLITAN GRILL|BAR|TERRACE",
+      "sourceId": "grand-front",
+      "officialUrl": "https://www.grandfront-osaka.jp/event/5681/",
+      "reason": "展示・体験・食の行き先比較"
+    }
+  ]
+}

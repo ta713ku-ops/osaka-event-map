@@ -16,6 +16,8 @@ import {
   filterFutureEvents,
   sortEvents,
 } from './lib/events.mjs';
+import { enrichEventDetails } from './lib/event-details.mjs';
+import { enrichVenues, enrichVerifiedFacts } from './lib/venues.mjs';
 import { partitionPublishable, qualitySummary } from './lib/quality.mjs';
 
 export const SOURCE_ID = 'bodik-osaka';
@@ -104,6 +106,8 @@ async function responseBytes(response) {
 async function fetchResponse(fetchImpl, url, {
   timeoutMs = DEFAULT_TIMEOUT_MS,
   headers = {},
+  method,
+  body,
   semaphore,
   consume,
 } = {}) {
@@ -121,6 +125,8 @@ async function fetchResponse(fetchImpl, url, {
     const operation = (async () => {
       const response = await fetchImpl(url, {
         headers: { 'user-agent': 'osaka-event-map/0.2 (+public-data-collector)', ...headers },
+        ...(method ? { method } : {}),
+        ...(body ? { body } : {}),
         signal: controller.signal,
       });
       if (typeof response !== 'string' && response?.ok === false) throw new Error(`HTTP ${response.status ?? 'unknown'}`);
@@ -151,7 +157,7 @@ export function createFetchText({
   cachedTextResolver,
 } = {}) {
   const semaphore = new Semaphore(concurrency);
-  return async function fetchText(url) {
+  async function fetchText(url) {
     if (cached) {
       if (typeof cachedTextResolver === 'function') return cachedTextResolver(url);
       // A cached build is allowed to read only the normalized snapshot (or an
@@ -160,7 +166,20 @@ export function createFetchText({
       throw new Error(`--cached の正規化済みスナップショットがありません: ${url}`);
     }
     return fetchResponse(fetchImpl, url, { timeoutMs, semaphore, consume: responseText });
+  }
+  // Some official booking calendars expose a read-only POST and a CSRF cookie.
+  // Keep it inside the same timeout/concurrency boundary as ordinary sources.
+  fetchText.request = async (url, options = {}) => {
+    if (cached) throw new Error(`--cached の正規化済みスナップショットがありません: ${url}`);
+    return fetchResponse(fetchImpl, url, {
+      timeoutMs, semaphore,
+      method: options.method,
+      body: options.body,
+      headers: options.headers,
+      consume: async (response) => ({ text: await responseText(response), headers: response?.headers }),
+    });
   };
+  return fetchText;
 }
 
 function decodeBodik(bytes) {
@@ -237,13 +256,25 @@ export function assignStableRouteIds(events, previousEvents = []) {
     group.push(event);
     officialGroups.set(key, group);
   }
-  return events.map((event) => {
+  const currentCounts = new Map();
+  for (const event of events) { const key = routeUrl(event.officialUrl); currentCounts.set(key, (currentCounts.get(key) ?? 0) + 1); }
+  const proposed = events.map((event) => {
     const exact = byInternalId.get(event.id);
     const officialMatches = officialGroups.get(routeUrl(event.officialUrl)) ?? [];
-    const previous = exact || (officialMatches.length === 1 ? officialMatches[0] : undefined);
+    const previous = exact || (officialMatches.length === 1 && currentCounts.get(routeUrl(event.officialUrl)) === 1 ? officialMatches[0] : undefined);
     const routeId = textValue(previous?.routeId) || textValue(previous?.id) || event.id;
     return { ...event, routeId };
   });
+  // Repair legacy collisions from generic official landing pages. The event
+  // that owns that id retains it; each other occurrence uses its internal id.
+  const groups = new Map();
+  for (const event of proposed) { const group = groups.get(event.routeId) ?? []; group.push(event); groups.set(event.routeId, group); }
+  const owners = new Map([...groups].map(([route, group]) => {
+    const publishedOwner = byInternalId.get(route);
+    const sameEvent = publishedOwner && group.find(event => event.eventName === publishedOwner.eventName && event.sourceId === publishedOwner.sourceId);
+    return [route, group.find(event => event.id === route) ?? sameEvent ?? group[0]];
+  }));
+  return proposed.map(event => owners.get(event.routeId) === event ? event : {...event, routeId: event.id});
 }
 
 export function rowToEvent(row, checkedAt, sourceStatus = 'success') {
@@ -481,6 +512,7 @@ function normalizeSourceReport(raw, {
     ...(checkedAt ? { checkedAt } : {}),
     ...(error ? { error } : {}),
     ...(raw?.mode ? { mode: textValue(raw.mode) } : {}),
+    ...(raw?.allowCachedFallback === false ? { allowCachedFallback: false } : {}),
   };
 }
 
@@ -580,7 +612,7 @@ function restoreFailedSourceEvents({ events, sources, previousReport, now, maxAg
   if (!previousEvents.length) return { events, sources };
   const restored = [...events];
   const resultSources = sources.map((source) => {
-    if (!['error', 'stale'].includes(source.status)) return source;
+    if (source.allowCachedFallback === false || !['error', 'stale'].includes(source.status)) return source;
     const candidates = previousEvents.filter((event) => {
       if (event?.sourceId !== source.id) {
         const hasProvenance = Array.isArray(event?.provenance) && event.provenance.some((entry) => entry?.sourceId === source.id);
@@ -674,6 +706,7 @@ export async function collectEvents({
   concurrency = DEFAULT_CONCURRENCY,
   cachedTextResolver,
   additionalCollector,
+  detailEnrichment = true,
 } = {}) {
   const now = nowDate(nowInput);
   const nowIso = now.toISOString();
@@ -737,7 +770,8 @@ export async function collectEvents({
   const events = sortEvents(dedupeEvents(futureEvents, { sourceStatuses: { ...sourceStatuses, ...restoredStatuses } }));
   sourceReports.splice(0, sourceReports.length, ...restored.sources);
   const allFailed = sourceReports.length > 0 && sourceReports.every((source) => source.status === 'error');
-  const reusableLastGoodEvents = sortEvents(filterFutureEvents(cachedEventsFor(lastGood, now, maxCacheAgeMs), sourceNow));
+  const withdrawnSources = new Set(sourceReports.filter(source => source.allowCachedFallback === false).map(source => source.id));
+  const reusableLastGoodEvents = sortEvents(filterFutureEvents(cachedEventsFor(lastGood, now, maxCacheAgeMs), sourceNow)).filter(event => !withdrawnSources.has(event.sourceId));
   const hasUsableLastGood = reusableLastGoodEvents.length > 0;
   let retainedEvents = events;
   let usingLastGood = false;
@@ -758,6 +792,18 @@ export async function collectEvents({
     retainedEvents = reusableLastGoodEvents;
   }
 
+  let detailReports = [];
+  if (detailEnrichment && !additionalCollector) {
+    const focus = await readJson(new URL('../data/website-focus.json', import.meta.url));
+    const detail = await enrichEventDetails(retainedEvents, {fetchText, checkedAt:nowIso, focusUrls:focus?.entries?.map(item=>item.officialUrl) ?? []});
+    retainedEvents = detail.events; detailReports = detail.reports;
+  }
+  const venues = await readJson(new URL('../data/venue-registry.json', import.meta.url));
+  retainedEvents = enrichVenues(retainedEvents, Array.isArray(venues) ? venues : []);
+  const reviewedFacts = await readJson(new URL('../data/website-focus-facts.json', import.meta.url));
+  retainedEvents = enrichVerifiedFacts(retainedEvents, Array.isArray(reviewedFacts) ? reviewedFacts : []);
+  const gauntletFacts = await readJson(new URL('../data/gauntlet-reviewed-facts.json', import.meta.url));
+  retainedEvents = enrichVerifiedFacts(retainedEvents, Array.isArray(gauntletFacts) ? gauntletFacts : []);
   const publication = partitionPublishable(retainedEvents);
   retainedEvents = sortEvents(publication.accepted);
 
@@ -767,6 +813,7 @@ export async function collectEvents({
     generatedAt,
     freshness: outputFreshness({ cached, sources: sourceReports, usingLastGood }),
     attribution: attributionFor(sourceReports, lastGood),
+    detailReports,
     sources: sourceReportsWithPublishedCounts(sourceReports, retainedEvents),
     events: assignStableRouteIds(retainedEvents, previousSnapshot?.events),
   };

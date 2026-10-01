@@ -23,6 +23,12 @@ export function parseNhkHallPage(html, { checkedAt, source = SOURCE } = {}) {
       const timeText = plain(dateCell).normalize('NFKC');
       const time = timeText.match(/開演\s*(\d{1,2}):([0-5]\d)/u);
       const startTime = time && Number(time[1]) <= 23 ? `${time[1].padStart(2, '0')}:${time[2]}` : undefined;
+      const endings = [...timeText.matchAll(/終演予定\s*(\d{1,2}):([0-5]\d)/gu)];
+      const endTime = endings.length === 1 && Number(endings[0][1]) <= 23
+        ? `${endings[0][1].padStart(2, '0')}:${endings[0][2]}` : undefined;
+      const cells = [...row[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/giu)];
+      const participationText = plain(cells[2]?.[1]).normalize('NFKC');
+      const registrationClosed = /申込(?:み)?受付は終了しました/u.test(participationText);
       events.push(normalizeEventRecord({
         eventName: title,
         venueName: SOURCE.name,
@@ -31,12 +37,16 @@ export function parseNhkHallPage(html, { checkedAt, source = SOURCE } = {}) {
         startDate: date,
         endDate: date,
         ...(startTime ? { startTime } : {}),
+        ...(endTime ? { endTime } : {}),
+        ...(registrationClosed ? { officialStatus: 'registration_closed', reservationRequired: true, reservationInfo: '申込み受付は終了しました。' } : {}),
         officialUrl: NHK_HALL_URL,
         evidence: { date: `${year}年${month}月${day}日`, venue: SOURCE.name, url: NHK_HALL_URL },
         fieldEvidence: {
           date: { text: `${year}年${month}月${day}日`, sourceUrl: NHK_HALL_URL, checkedAt },
           venue: { text: SOURCE.name, sourceUrl: NHK_HALL_URL, checkedAt },
           ...(startTime ? { time: { text: timeText, sourceUrl: NHK_HALL_URL, checkedAt } } : {}),
+          ...(endTime ? { endTime: { text: timeText, sourceUrl: NHK_HALL_URL, checkedAt } } : {}),
+          ...(registrationClosed ? { reservation: { text: participationText, sourceUrl: NHK_HALL_URL, checkedAt } } : {}),
         },
       }, { sourceId: source.id, sourceName: source.name, sourceUrl: source.url, checkedAt }));
     }

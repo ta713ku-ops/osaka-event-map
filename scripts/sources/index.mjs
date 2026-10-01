@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { eventCategory } from '../lib/events.mjs';
 
 import {
   CULTURAL_SOURCE_DEFINITIONS,
@@ -45,6 +46,7 @@ import {
   SCIENCE_MUSEUM_URL,
   __test__ as scienceMuseumTest,
 } from './science-museum.mjs';
+import { VERIFIED_OUTINGS_SOURCE_DEFINITIONS } from './verified-outings.mjs';
 
 /**
  * Additional first-party event sources.
@@ -328,16 +330,9 @@ function atDate(date, time) {
   return `${date}T${time}:00+09:00`;
 }
 
-function categoryFor(text, fallback = 'seasonal') {
-  const value = String(text);
-  if (/展覧|展示|美術|ギャラリー|アート|博物|作品展|写真展|絵画展|作陶展|企画展|特別展/.test(value)) return 'exhibition';
-  if (/演劇|舞台|ミュージカル|芝居|公演|落語|バレエ/.test(value)) return 'theater';
-  if (/コンサート|ライブ|音楽|演奏|吹奏楽/.test(value)) return 'music';
-  if (/マルシェ|市場|マーケット|物産|フリマ/.test(value)) return 'market';
-  if (/講座|講演|教室|ワークショップ|体験|観察|ヨガ/.test(value)) return 'workshop';
-  if (/フェア|キャンペーン|ポップアップ|POP ?UP|販売|ショッピング/.test(value)) return 'shopping';
-  if (/花火|祭|フェス|盆踊/.test(value)) return 'festival';
-  return fallback;
+function categoryFor(text, fallback = 'seasonal', description = '') {
+  const category = eventCategory(text, description);
+  return category === 'seasonal' ? fallback : category;
 }
 
 function evidence(dateText, extra = {}) {
@@ -672,7 +667,7 @@ function parseAeonIndex(text, { checkedAt, now, source }) {
         range,
         venueName: item.display_event_place ? `${venueNameBase} ${stripTags(item.display_event_place)}` : venueNameBase,
         address: venueAddress,
-        category: categoryFor(`${item.title ?? ''} ${description}`, 'shopping'),
+        category: categoryFor(item.title_oneline || item.title, 'shopping', description),
         description,
         officialUrl,
         imageUrl: absoluteUrl(attachment, source.url),
@@ -724,7 +719,7 @@ function parseHankyuPage(html, { checkedAt, now, source }) {
       range,
       venueName,
       address: FIXED_VENUES.hankyuUmeda.address,
-      category: categoryFor(`${title} ${description}`, 'shopping'),
+      category: categoryFor(title, 'shopping', description),
       description,
       officialUrl,
       imageUrl: absoluteUrl(attr(image, 'src'), source.url),
@@ -885,6 +880,7 @@ SOURCE_DEFINITIONS.push(
   ...FENICE_SOURCE_DEFINITIONS,
   ...NHK_HALL_SOURCE_DEFINITIONS,
   ...SCIENCE_MUSEUM_SOURCE_DEFINITIONS,
+  ...VERIFIED_OUTINGS_SOURCE_DEFINITIONS,
 );
 
 export const ADDITIONAL_SOURCE_DEFINITIONS = SOURCE_DEFINITIONS.map(({ id, name, url }) => ({ id, name, url }));
@@ -925,6 +921,7 @@ export async function collectAdditionalEvents({ fetchText, now = new Date() } = 
       status,
       count: currentEvents.length,
       checkedAt,
+      ...(result?.allowCachedFallback === false ? { allowCachedFallback: false } : {}),
       ...(errors.length ? { error: errors.join('; ') } : {}),
     });
   }

@@ -15,6 +15,8 @@ export function parseScienceMuseumPage(html, { checkedAt, source = SOURCE } = {}
   for (let index = 0; index + 1 < parts.length; index += 2) {
     const id = parts[index];
     const block = parts[index + 1];
+    const place = plain(block.match(/<th\b[^>]*>\s*場所\s*<\/th>\s*<td\b[^>]*>([\s\S]*?)<\/td>/iu)?.[1]);
+    if (/科学館ではありません|兵庫県|西宮市/u.test(place)) continue;
     const title = plain(block.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/iu)?.[1]);
     const dateHtml = block.match(/<th\b[^>]*>\s*日時\s*<\/th>\s*<td\b[^>]*>([\s\S]*?)<\/td>/iu)?.[1] ?? '';
     const dateText = plain(dateHtml).normalize('NFKC');

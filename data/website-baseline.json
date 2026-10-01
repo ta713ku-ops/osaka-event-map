@@ -1,0 +1,604 @@
+{
+  "commit": "f75d968934f5868feb55cc88baca082e8efa24a6",
+  "capturedAt": "2026-09-27T16:51:42.011Z",
+  "evaluatedAt": "2026-09-28T07:20:00.000Z",
+  "dataGeneratedAt": "2026-09-21T07:28:32.169Z",
+  "dataSha256": "d99b6959d9e304ee42ff34fb08187bc7ec90b6953d5ca5c6e084d1d0373ebd80",
+  "snapshot": {
+    "records": 554,
+    "venues": 121,
+    "fields": {
+      "description": {
+        "count": 248,
+        "total": 554,
+        "percentage": 44.8
+      },
+      "price": {
+        "count": 123,
+        "total": 554,
+        "percentage": 22.2
+      },
+      "startTime": {
+        "count": 172,
+        "total": 554,
+        "percentage": 31
+      },
+      "endTime": {
+        "count": 69,
+        "total": 554,
+        "percentage": 12.5
+      },
+      "time": {
+        "count": 172,
+        "total": 554,
+        "percentage": 31
+      },
+      "reservation": {
+        "count": 89,
+        "total": 554,
+        "percentage": 16.1
+      },
+      "coordinates": {
+        "count": 89,
+        "total": 554,
+        "percentage": 16.1
+      },
+      "access": {
+        "count": 0,
+        "total": 554,
+        "percentage": 0
+      }
+    },
+    "categories": {
+      "exhibition": 32,
+      "seasonal": 164,
+      "workshop": 70,
+      "shopping": 99,
+      "music": 134,
+      "festival": 21,
+      "market": 13,
+      "night": 1,
+      "theater": 10,
+      "zoo": 3,
+      "sports": 4,
+      "food": 2,
+      "fleaMarket": 1
+    },
+    "areas": {
+      "hokusetsu": 44,
+      "osaka-bay": 20,
+      "kawachi": 62,
+      "address-unconfirmed": 136,
+      "sakai": 74,
+      "osaka-tennoji": 5,
+      "osaka-kita": 132,
+      "osaka-minami": 44,
+      "osaka-other": 37
+    }
+  },
+  "unexpired": {
+    "records": 419,
+    "venues": 91,
+    "fields": {
+      "description": {
+        "count": 183,
+        "total": 419,
+        "percentage": 43.7
+      },
+      "price": {
+        "count": 90,
+        "total": 419,
+        "percentage": 21.5
+      },
+      "startTime": {
+        "count": 109,
+        "total": 419,
+        "percentage": 26
+      },
+      "endTime": {
+        "count": 38,
+        "total": 419,
+        "percentage": 9.1
+      },
+      "time": {
+        "count": 109,
+        "total": 419,
+        "percentage": 26
+      },
+      "reservation": {
+        "count": 77,
+        "total": 419,
+        "percentage": 18.4
+      },
+      "coordinates": {
+        "count": 77,
+        "total": 419,
+        "percentage": 18.4
+      },
+      "access": {
+        "count": 0,
+        "total": 419,
+        "percentage": 0
+      }
+    },
+    "categories": {
+      "exhibition": 23,
+      "seasonal": 122,
+      "workshop": 53,
+      "shopping": 73,
+      "music": 105,
+      "festival": 18,
+      "night": 1,
+      "theater": 8,
+      "zoo": 1,
+      "food": 2,
+      "market": 9,
+      "fleaMarket": 1,
+      "sports": 3
+    },
+    "areas": {
+      "hokusetsu": 26,
+      "osaka-bay": 8,
+      "kawachi": 44,
+      "address-unconfirmed": 107,
+      "sakai": 59,
+      "osaka-minami": 31,
+      "osaka-other": 32,
+      "osaka-kita": 112
+    }
+  },
+  "next30Days": {
+    "records": 255,
+    "venues": 88,
+    "fields": {
+      "description": {
+        "count": 121,
+        "total": 255,
+        "percentage": 47.5
+      },
+      "price": {
+        "count": 55,
+        "total": 255,
+        "percentage": 21.6
+      },
+      "startTime": {
+        "count": 67,
+        "total": 255,
+        "percentage": 26.3
+      },
+      "endTime": {
+        "count": 30,
+        "total": 255,
+        "percentage": 11.8
+      },
+      "time": {
+        "count": 67,
+        "total": 255,
+        "percentage": 26.3
+      },
+      "reservation": {
+        "count": 45,
+        "total": 255,
+        "percentage": 17.6
+      },
+      "coordinates": {
+        "count": 45,
+        "total": 255,
+        "percentage": 17.6
+      },
+      "access": {
+        "count": 0,
+        "total": 255,
+        "percentage": 0
+      }
+    },
+    "categories": {
+      "exhibition": 13,
+      "seasonal": 80,
+      "workshop": 36,
+      "shopping": 63,
+      "music": 39,
+      "festival": 10,
+      "night": 1,
+      "theater": 2,
+      "zoo": 1,
+      "food": 2,
+      "market": 5,
+      "fleaMarket": 1,
+      "sports": 2
+    },
+    "areas": {
+      "hokusetsu": 25,
+      "osaka-bay": 7,
+      "kawachi": 33,
+      "address-unconfirmed": 73,
+      "sakai": 31,
+      "osaka-minami": 19,
+      "osaka-other": 9,
+      "osaka-kita": 58
+    }
+  },
+  "duplicateRoutes": [
+    [
+      "e0d26642814e18a35bcc",
+      2
+    ],
+    [
+      "30e77a25bb82b74dc356",
+      7
+    ],
+    [
+      "61173c5be6cbafb70690",
+      6
+    ],
+    [
+      "8f861513b2d99d2ab18e",
+      3
+    ]
+  ],
+  "ranking": {
+    "implementation": "f75d968",
+    "home": {
+      "large": [
+        {
+          "name": "NHK日曜美術館50年展",
+          "routeId": "9fc27b165ddbe5f76dd1",
+          "start": "2026-10-10",
+          "end": "2026-12-20",
+          "venue": "大阪中之島美術館"
+        },
+        {
+          "name": "八神純子 キミの街へ 2026",
+          "routeId": "3dc9ae48354d89cfd192",
+          "start": "2026-09-29",
+          "end": "2026-09-29",
+          "venue": "フェスティバルホール"
+        },
+        {
+          "name": "第17回山田池公園フェスティバル",
+          "routeId": "e0d26642814e18a35bcc",
+          "start": "2026-10-17",
+          "end": "2026-10-17",
+          "venue": "山田池公園"
+        },
+        {
+          "name": "EXPO’70パビリオン企画展 1970年大阪万博ビフォー・アフター展 ~あのパビリオンはいまどこに?~ 2026",
+          "routeId": "81d8b910c6940868b4c9",
+          "start": "2026-03-14",
+          "end": "2027-02-28",
+          "venue": "万博記念公園"
+        }
+      ],
+      "today": [
+        {
+          "name": "羊文学 TOUR 2026 “すーーーはーーー”",
+          "routeId": "f180abf54426d86c0cf3",
+          "start": "2026-09-28",
+          "end": "2026-09-28",
+          "venue": "フェスティバルホール"
+        },
+        {
+          "name": "天平キムチ",
+          "routeId": "716dd95ea06cc26816f8",
+          "start": "2026-09-18",
+          "end": "2026-09-28",
+          "venue": "イオンモール日根野 1Fやざき寿司前"
+        },
+        {
+          "name": "SIXPAD期間限定体験受注会",
+          "routeId": "734020d6945c0f6df652",
+          "start": "2026-09-16",
+          "end": "2026-09-29",
+          "venue": "イオンモール大日 店内 3F イオン棟サックスバー前"
+        },
+        {
+          "name": "天平キムチ",
+          "routeId": "f020eff3e16c8a661fc0",
+          "start": "2026-09-25",
+          "end": "2026-10-04",
+          "venue": "イオンモール茨木 1Fサーティンワン前(9/25-9/28西側、9/29-10/4東側)"
+        },
+        {
+          "name": "CiON Billboard Live TOUR “JAZZ SESCiON vol.5”",
+          "routeId": "4c653e3e9beab32fb5bb",
+          "start": "2026-09-28",
+          "end": "2026-09-28",
+          "venue": "ビルボードライブ大阪"
+        },
+        {
+          "name": "【住之江区・咲洲】歩いて健康、歩いて発見 咲洲まちづくりチャレンジウォーク",
+          "routeId": "5f6b5d58712fbb792229",
+          "start": "2026-04-01",
+          "end": "2027-03-31",
+          "venue": "チェックポイント(全5か所) 1スーパーナショナル/ポートタウン西駅 2ATCエイジレスセンター 3西尾レントオール N-Lounge 4森ノ宮医療大学 あおいポート(葵ダイニング)"
+        }
+      ]
+    },
+    "top20": {
+      "today": [
+        {
+          "name": "創作手作り本革鞄展示販売",
+          "routeId": "cd296a0e1e34394fe092",
+          "start": "2026-09-25",
+          "end": "2026-10-01",
+          "venue": "イオンモール日根野 1Fであいの広場"
+        },
+        {
+          "name": "ユニセフ マンスリーサポーター参加者募集キャンペーン",
+          "routeId": "cb2017c439a496521c17",
+          "start": "2026-09-28",
+          "end": "2026-10-01",
+          "venue": "イオンモール茨木 1F インフォメーション横"
+        },
+        {
+          "name": "マイボトルデザインコンテスト受賞作品発表",
+          "routeId": "0696e1623fb5b003dc9e",
+          "start": "2026-09-01",
+          "end": "2026-09-30",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "ガソリン・軽油がおトク コスモ石油×イオンモール茨木",
+          "routeId": "0a31642306f0ec0c2628",
+          "start": "2026-09-01",
+          "end": "2026-09-30",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "【近畿地区在住者限定】ユニバーサル・スタジオ・ジャパンにご招待!",
+          "routeId": "489a051a8e3d447e818f",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "マイボトルデザインコンテスト受賞作品発表",
+          "routeId": "7aeb5ffae1d5c7ac5001",
+          "start": "2026-09-01",
+          "end": "2026-09-30",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "WAON AEON Pay presents キッズダンスOSAKA2026開催記念「WAON AEON Pay 合同キャンペーン」",
+          "routeId": "82c98f57e0b9d6f6e10b",
+          "start": "2026-09-01",
+          "end": "2026-10-05",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+          "routeId": "99f380fcc6d84529dd99",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール大阪ドームシティ"
+        },
+        {
+          "name": "マイボトルデザインコンテスト受賞作品発表",
+          "routeId": "aab1f368525e9077e1a5",
+          "start": "2026-09-01",
+          "end": "2026-09-30",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+          "routeId": "cf56a427132ebbad29f5",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "【近畿地区在住の会員さま限定】ユニバーサル・スタジオ・ジャパンにご招待!",
+          "routeId": "e7d19457faa816a75581",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "イオンゴールドカード会員限定家族カード発行促進キャンペーン 実施中",
+          "routeId": "ee7c2293c7fec8827251",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+          "routeId": "fb2250935e75419550f7",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "スイーツポケット",
+          "routeId": "f0d6e2d5f482b30a6a7d",
+          "start": "2026-09-17",
+          "end": "2026-09-28",
+          "venue": "イオンモール日根野 1F 昔造り辻茂前"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェア なぞときラリー",
+          "routeId": "03758166b80a1137f2e8",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェアなぞときラリー",
+          "routeId": "0e8177c954f8a5c1e461",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェア",
+          "routeId": "3e1efe198729bb0983d0",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "天平キムチ",
+          "routeId": "716dd95ea06cc26816f8",
+          "start": "2026-09-18",
+          "end": "2026-09-28",
+          "venue": "イオンモール日根野 1Fやざき寿司前"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェア",
+          "routeId": "78bc94d56741dcae4830",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "【U29限定】AEON Payはじめてチャージキャンペーン",
+          "routeId": "8e6cd2b98ce441f6ae20",
+          "start": "2026-09-18",
+          "end": "2026-09-30",
+          "venue": "イオンモール大日"
+        }
+      ],
+      "weekend": [
+        {
+          "name": "イオンモール まちのおしごと体験",
+          "routeId": "5865665d324c0c3f1bd0",
+          "start": "2026-10-03",
+          "end": "2026-10-04",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "【近畿地区在住者限定】ユニバーサル・スタジオ・ジャパンにご招待!",
+          "routeId": "489a051a8e3d447e818f",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "WAON AEON Pay presents キッズダンスOSAKA2026開催記念「WAON AEON Pay 合同キャンペーン」",
+          "routeId": "82c98f57e0b9d6f6e10b",
+          "start": "2026-09-01",
+          "end": "2026-10-05",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+          "routeId": "99f380fcc6d84529dd99",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール大阪ドームシティ"
+        },
+        {
+          "name": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+          "routeId": "cf56a427132ebbad29f5",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "【近畿地区在住の会員さま限定】ユニバーサル・スタジオ・ジャパンにご招待!",
+          "routeId": "e7d19457faa816a75581",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "イオンゴールドカード会員限定家族カード発行促進キャンペーン 実施中",
+          "routeId": "ee7c2293c7fec8827251",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "イオンゴールドカード会員限定 家族カード発行促進キャンペーン 実施中",
+          "routeId": "fb2250935e75419550f7",
+          "start": "2026-09-01",
+          "end": "2026-10-31",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェア なぞときラリー",
+          "routeId": "03758166b80a1137f2e8",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール日根野"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェアなぞときラリー",
+          "routeId": "0e8177c954f8a5c1e461",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェア",
+          "routeId": "3e1efe198729bb0983d0",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール大日"
+        },
+        {
+          "name": "わくわく!すみっコカラフルフェア",
+          "routeId": "78bc94d56741dcae4830",
+          "start": "2026-09-18",
+          "end": "2026-10-25",
+          "venue": "イオンモール茨木"
+        },
+        {
+          "name": "BLOOM×AEON CARD 期間中、イオンマークのカード払い・AEON Payのコード決済5,000円(税込)以上ご利用で5%OFF",
+          "routeId": "af7ec13dacee94dedc03",
+          "start": "2026-09-18",
+          "end": "2026-10-31",
+          "venue": "イオンモール大日 3F BLOOM"
+        },
+        {
+          "name": "長野公園で中秋の名月を楽しもう!",
+          "routeId": "27f404e907c711ee7dd7",
+          "start": "2026-09-19",
+          "end": "2026-10-04",
+          "venue": "長野公園"
+        },
+        {
+          "name": "天平キムチ",
+          "routeId": "f020eff3e16c8a661fc0",
+          "start": "2026-09-25",
+          "end": "2026-10-04",
+          "venue": "イオンモール茨木 1Fサーティンワン前(9/25-9/28西側、9/29-10/4東側)"
+        },
+        {
+          "name": "秋の七草展",
+          "routeId": "30e77a25bb82b74dc356",
+          "start": "2026-09-26",
+          "end": "2026-10-05",
+          "venue": "大泉緑地"
+        },
+        {
+          "name": "TVアニメ『正反対な君と僕』POP UP SHOP 開催決定!",
+          "routeId": "7e4cd5193f8b56dc34b5",
+          "start": "2026-09-26",
+          "end": "2026-10-05",
+          "venue": "イオンモール大日 1F カルディコーヒーファーム前"
+        },
+        {
+          "name": "季節の和菓子 食物販イベント",
+          "routeId": "ca05216e8a746ab4d0b9",
+          "start": "2026-09-29",
+          "end": "2026-10-04",
+          "venue": "イオンモール大阪ドームシティ 1階「乃が美」前スペース"
+        },
+        {
+          "name": "長野公園 ハロウィン",
+          "routeId": "d2335dee8b42adde2a18",
+          "start": "2026-10-01",
+          "end": "2026-10-31",
+          "venue": "長野公園"
+        },
+        {
+          "name": "イオンモールのSDGsアクション",
+          "routeId": "15ca85ebc41b1cbfec77",
+          "start": "2026-10-02",
+          "end": "2026-10-04",
+          "venue": "イオンモール日根野"
+        }
+      ]
+    }
+  }
+}

@@ -1,25 +1,25 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-21T07:28:32.169Z",
+  "generatedAt": "2026-09-30T10:40:41.886Z",
   "freshness": "partial",
-  "eventCount": 554,
+  "eventCount": 472,
   "sources": [
     {
       "id": "bodik-osaka",
       "name": "大阪府オープンデータ(BODIK)",
       "url": "https://data.bodik.jp/dataset/270008_event",
       "status": "success",
-      "count": 97,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 89
+      "count": 78,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 75
     },
     {
       "id": "osaka-city-events",
       "name": "大阪市公式イベント",
       "url": "https://www.city.osaka.lg.jp/main/event2/curr.html",
       "status": "success",
-      "count": 3,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
+      "count": 46,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
       "publishedCount": 0
     },
     {
@@ -27,45 +27,46 @@
       "name": "OSAKA-INFO(大阪観光局)",
       "url": "https://osaka-info.jp/event/",
       "status": "success",
-      "count": 21,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 17
+      "count": 4,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 3
     },
     {
       "id": "osaka-art-museum",
       "name": "大阪市立美術館",
       "url": "https://www.osaka-art-museum.jp/planned_exhibition",
-      "status": "success",
-      "count": 5,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 5
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています",
+      "publishedCount": 0
     },
     {
       "id": "nakka-art-museum",
       "name": "大阪中之島美術館",
       "url": "https://nakka-art.jp/exhibition/held/",
       "status": "success",
-      "count": 7,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 7
+      "count": 5,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 5
     },
     {
       "id": "festival-hall",
       "name": "フェスティバルホール",
       "url": "https://www.festivalhall.jp/events/list/",
       "status": "success",
-      "count": 10,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 10
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
     },
     {
       "id": "aeon-osaka-dome-city",
       "name": "イオンモール大阪ドームシティ",
       "url": "https://www.aeon.jp/sc/osakadomecity/event/",
       "status": "success",
-      "count": 35,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 35
+      "count": 33,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 33
     },
     {
       "id": "hankyu-umeda",
@@ -73,7 +74,7 @@
       "url": "https://www.hankyu-dept.co.jp/honten/event/",
       "status": "success",
       "count": 26,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
+      "checkedAt": "2026-09-30T10:40:41.886Z",
       "publishedCount": 26
     },
     {
@@ -81,27 +82,27 @@
       "name": "イオンモール大日",
       "url": "https://www.aeon.jp/sc/dainichi/event/",
       "status": "success",
-      "count": 49,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 49
+      "count": 35,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 35
     },
     {
       "id": "aeon-hineno",
       "name": "イオンモール日根野",
       "url": "https://www.aeon.jp/sc/hineno/event/",
       "status": "success",
-      "count": 30,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 30
+      "count": 23,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 23
     },
     {
       "id": "aeon-ibaraki",
       "name": "イオンモール茨木",
       "url": "https://www.aeon.jp/sc/ibaraki/event/",
       "status": "success",
-      "count": 33,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 33
+      "count": 28,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 28
     },
     {
       "id": "osaka-natural-history-museum",
@@ -109,7 +110,7 @@
       "url": "https://omnh.jp/",
       "status": "stale",
       "count": 2,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
+      "checkedAt": "2026-09-30T10:40:41.886Z",
       "error": "最新取得に失敗したため前回のイベントを使用しています",
       "publishedCount": 2
     },
@@ -117,100 +118,102 @@
       "id": "zepp-namba",
       "name": "Zepp Namba (OSAKA)",
       "url": "https://www.zepp.co.jp/hall/namba/schedule/",
-      "status": "success",
-      "count": 7,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 7
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています",
+      "publishedCount": 0
     },
     {
       "id": "ghibli-park-exhibition-osaka",
       "name": "ジブリパーク展 大阪公式",
       "url": "https://ghiblipark-exhibition.jp/osaka/index.html",
-      "status": "success",
-      "count": 1,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 1
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています",
+      "publishedCount": 0
     },
     {
       "id": "atc-events",
       "name": "ATC公式イベント一覧",
       "url": "https://www.atc-co.com/event/",
       "status": "success",
-      "count": 19,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 19
+      "count": 8,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 8
     },
     {
       "id": "expo-park",
       "name": "万博記念公園",
       "url": "https://www.expo70-park.jp/events/",
       "status": "success",
-      "count": 11,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 11
+      "count": 9,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 9
     },
     {
       "id": "hirakata-park",
       "name": "ひらかたパーク",
       "url": "https://www.hirakatapark.co.jp/topics/?p=event",
       "status": "success",
-      "count": 13,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 13
+      "count": 12,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 12
     },
     {
       "id": "grand-front",
       "name": "グランフロント大阪",
       "url": "https://www.grandfront-osaka.jp/event/",
       "status": "success",
-      "count": 32,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 32
+      "count": 30,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 30
     },
     {
       "id": "namba-parks",
       "name": "なんばパークス",
       "url": "https://nambaparks.com/event",
       "status": "success",
-      "count": 5,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 5
+      "count": 6,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 6
     },
     {
       "id": "lucua",
       "name": "ルクア大阪",
       "url": "https://www.lucua.jp/topics_category/event_info/",
       "status": "success",
-      "count": 15,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 15
+      "count": 14,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 14
     },
     {
       "id": "billboard-osaka",
       "name": "ビルボードライブ大阪",
       "url": "https://www.billboard-live.com/osaka/schedules",
       "status": "success",
-      "count": 83,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 83
+      "count": 80,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 80
     },
     {
       "id": "fenice-sakai",
       "name": "フェニーチェ堺",
       "url": "https://www.fenice-sacay.jp/event/",
       "status": "success",
-      "count": 44,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 44
+      "count": 38,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 38
     },
     {
       "id": "nhk-osaka-hall",
       "name": "NHK大阪ホール",
       "url": "https://www.nhk-osakahall.jp/event/",
       "status": "success",
-      "count": 32,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
-      "publishedCount": 32
+      "count": 27,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 27
     },
     {
       "id": "science-museum",
@@ -218,62 +221,199 @@
       "url": "https://www.sci-museum.jp/event/",
       "status": "success",
       "count": 6,
-      "checkedAt": "2026-09-21T07:28:32.169Z",
+      "checkedAt": "2026-09-30T10:40:41.886Z",
       "publishedCount": 6
+    },
+    {
+      "id": "verified-outings-solaniwa-yokai-2026",
+      "name": "空庭温泉",
+      "url": "https://solaniwa.com/lp/youkai_matsuri_26/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-daizetsumetsu-osaka-2026",
+      "name": "特別展「大絶滅展―生命史のビッグファイブ」実行委員会",
+      "url": "https://daizetsumetsu.jp/outline_osaka.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-hokkaido-buffet-2026",
+      "name": "都シティ 大阪天王寺",
+      "url": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-jikken-lab-osaka-2026",
+      "name": "SCRAP",
+      "url": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-tenshiba-oktoberfest-2026",
+      "name": "てんしば",
+      "url": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-conan-shinsaibashi-2026",
+      "name": "SCRAP",
+      "url": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-autumn-fest-osaka-station-city-2026",
+      "name": "大阪ステーションシティ",
+      "url": "https://osakastationcity.com/event/6374/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-mucha-returns-2026",
+      "name": "堺 アルフォンス・ミュシャ館",
+      "url": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-bread-donut-expocity-2026",
+      "name": "ららぽーとEXPOCITY",
+      "url": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-kyushu-shikoku-fair-sakai-2026",
+      "name": "イオンモール堺北花田",
+      "url": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-vintage-market-suita-2026",
+      "name": "万博記念公園",
+      "url": "https://www.expo70-park.jp/event/77096/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-sakana-japan-suita-2026",
+      "name": "SAKANA&JAPAN FESTIVAL実行委員会",
+      "url": "https://37sakana.jp/sjfesosaka/index.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-zumzum-kitchencar-sakai-2026",
+      "name": "カエルスタジオ",
+      "url": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-seaside-terrace-bbq-sakai-2026",
+      "name": "ドーセット バイ アゴーラ 大阪堺",
+      "url": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+      "status": "error",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "official page fetch failed; retaining last verified timestamp: fetch failed",
+      "allowCachedFallback": false,
+      "publishedCount": 0
+    },
+    {
+      "id": "verified-outings-citysup-nakanoshima-guided-tour",
+      "name": "日本シティサップ協会",
+      "url": "https://www.citysup.jp/walkable_26/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "publishedCount": 1
     }
   ],
   "quality": {
-    "published": 554,
-    "rejected": 5,
-    "sourceCount": 23,
+    "published": 472,
+    "rejected": 47,
+    "sourceCount": 34,
     "duplicateGroups": 0,
     "rejectionReasons": {
-      "venue_evidence": 5
+      "venue_evidence": 47
     },
     "fields": {
       "venueName": {
-        "count": 554,
+        "count": 472,
         "percentage": 100
       },
       "address": {
-        "count": 418,
-        "percentage": 75.5
+        "count": 353,
+        "percentage": 74.8
       },
       "description": {
-        "count": 248,
-        "percentage": 44.8
+        "count": 392,
+        "percentage": 83.1
       },
       "startTime": {
-        "count": 172,
-        "percentage": 31
+        "count": 186,
+        "percentage": 39.4
       },
       "endTime": {
-        "count": 69,
-        "percentage": 12.5
+        "count": 82,
+        "percentage": 17.4
       },
       "price": {
-        "count": 123,
-        "percentage": 22.2
+        "count": 206,
+        "percentage": 43.6
       },
       "image": {
-        "count": 505,
-        "percentage": 91.2
+        "count": 418,
+        "percentage": 88.6
       },
       "coordinates": {
-        "count": 89,
-        "percentage": 16.1
+        "count": 279,
+        "percentage": 59.1
       },
       "reservation": {
-        "count": 89,
-        "percentage": 16.1
+        "count": 173,
+        "percentage": 36.7
       },
       "contact": {
-        "count": 89,
-        "percentage": 16.1
+        "count": 80,
+        "percentage": 16.9
       },
       "fieldEvidence": {
-        "count": 330,
-        "percentage": 59.6
+        "count": 438,
+        "percentage": 92.8
       }
     }
   }

@@ -1,0 +1,229 @@
+[
+  {
+    "sourceId": "bodik-osaka",
+    "eventName": "ナゾトキイベント「ぐわ兵衛とアソビ帝国」",
+    "startDate": "2026-09-12",
+    "fields": {
+      "startTime": "09:30",
+      "endTime": "16:00",
+      "timeInfo": "9:30〜16:00"
+    },
+    "fieldEvidence": {
+      "startTime": {
+        "text": "日時：2026年9月12日（土）～2026年12月20日（日）9：30～16：00",
+        "sourceUrl": "https://hamadera.osaka-park.or.jp/event-information/%e3%83%8a%e3%82%be%e3%83%88%e3%82%ad%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%8c%e3%81%90%e3%82%8f%e5%85%b5%e8%a1%9b%e3%81%a8%e3%82%a2%e3%82%bd%e3%83%93%e5%b8%9d%e5%9b%bd%e3%80%8d/",
+        "checkedAt": "2026-09-27T23:39:30.576Z"
+      },
+      "endTime": {
+        "text": "日時：2026年9月12日（土）～2026年12月20日（日）9：30～16：00",
+        "sourceUrl": "https://hamadera.osaka-park.or.jp/event-information/%e3%83%8a%e3%82%be%e3%83%88%e3%82%ad%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%8c%e3%81%90%e3%82%8f%e5%85%b5%e8%a1%9b%e3%81%a8%e3%82%a2%e3%82%bd%e3%83%93%e5%b8%9d%e5%9b%bd%e3%80%8d/",
+        "checkedAt": "2026-09-27T23:39:30.576Z"
+      },
+      "timeInfo": {
+        "text": "日時：2026年9月12日（土）～2026年12月20日（日）9：30～16：00",
+        "sourceUrl": "https://hamadera.osaka-park.or.jp/event-information/%e3%83%8a%e3%82%be%e3%83%88%e3%82%ad%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%8c%e3%81%90%e3%82%8f%e5%85%b5%e8%a1%9b%e3%81%a8%e3%82%a2%e3%82%bd%e3%83%93%e5%b8%9d%e5%9b%bd%e3%80%8d/",
+        "checkedAt": "2026-09-27T23:39:30.576Z"
+      }
+    }
+  },
+  {
+    "sourceId": "bodik-osaka",
+    "eventName": "タッチングプール&里海mini縁日",
+    "startDate": "2026-10-04",
+    "fields": {
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "timeInfo": "10時から16時まで（最終受付15時）"
+    },
+    "fieldEvidence": {
+      "startTime": {
+        "text": "開催日：10月4日（日） 時間：10時から16時まで（最終受付15時）",
+        "sourceUrl": "https://sennan.osaka-park.or.jp/2026/03/14/%e3%82%bf%e3%83%83%e3%83%81%e3%83%b3%e3%82%b0%e3%83%97%e3%83%bc%e3%83%ab%ef%bc%86%e9%87%8c%e6%b5%b7mini%e7%b7%91%e6%97%a5/",
+        "checkedAt": "2026-09-27T23:39:30.697Z"
+      },
+      "endTime": {
+        "text": "開催日：10月4日（日） 時間：10時から16時まで（最終受付15時）",
+        "sourceUrl": "https://sennan.osaka-park.or.jp/2026/03/14/%e3%82%bf%e3%83%83%e3%83%81%e3%83%b3%e3%82%b0%e3%83%97%e3%83%bc%e3%83%ab%ef%bc%86%e9%87%8c%e6%b5%b7mini%e7%b7%91%e6%97%a5/",
+        "checkedAt": "2026-09-27T23:39:30.697Z"
+      },
+      "timeInfo": {
+        "text": "開催日：10月4日（日） 時間：10時から16時まで（最終受付15時）",
+        "sourceUrl": "https://sennan.osaka-park.or.jp/2026/03/14/%e3%82%bf%e3%83%83%e3%83%81%e3%83%b3%e3%82%b0%e3%83%97%e3%83%bc%e3%83%ab%ef%bc%86%e9%87%8c%e6%b5%b7mini%e7%b7%91%e6%97%a5/",
+        "checkedAt": "2026-09-27T23:39:30.697Z"
+      }
+    }
+  },
+  {
+    "sourceId": "bodik-osaka",
+    "eventName": "すみ博2026(すみよし博覧会)",
+    "startDate": "2026-10-17",
+    "fields": {
+      "endDate": "2026-10-17",
+      "schedule": {
+        "dates": [
+          "2026-10-17"
+        ],
+        "evidence": "住吉公園での開催は10月17日（土）のみ"
+      },
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "timeInfo": "10:00〜16:00（住吉公園は10月17日のみ）"
+    },
+    "fieldEvidence": {
+      "endDate": {
+        "text": "住吉公園での開催は10月17日（土）のみ。10:00〜16:00、花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=2026081617244944",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "schedule": {
+        "text": "住吉公園での開催は10月17日（土）のみ。10:00〜16:00、花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=2026081617244944",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "startTime": {
+        "text": "住吉公園での開催は10月17日（土）のみ。10:00〜16:00、花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=2026081617244944",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "endTime": {
+        "text": "住吉公園での開催は10月17日（土）のみ。10:00〜16:00、花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=2026081617244944",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "timeInfo": {
+        "text": "住吉公園での開催は10月17日（土）のみ。10:00〜16:00、花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=2026081617244944",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  },
+  {
+    "sourceId": "bodik-osaka",
+    "eventName": "久宝寺こうえんマルシェ",
+    "startDate": "2026-10-25",
+    "fields": {
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "timeInfo": "AM10:00〜PM4:00（予定）",
+      "accessByTransit": "JR関西本線（大和路線）「久宝寺」から北へ1.2km、「加美」から東へ1.2km。JRおおさか東線「新加美」から東へ1.2km。近鉄大阪線「久宝寺口」から西へ1.2km。"
+    },
+    "fieldEvidence": {
+      "startTime": {
+        "text": "10月25日（日曜日）AM10:00〜PM4:00。JR久宝寺 北へ1.2km／加美 東へ1.2km／新加美 東へ1.2km／近鉄久宝寺口 西へ1.2km",
+        "sourceUrl": "https://kyuhoji-marche.jimdofree.com/",
+        "checkedAt": "2026-09-27T23:39:32.065Z"
+      },
+      "endTime": {
+        "text": "10月25日（日曜日）AM10:00〜PM4:00。JR久宝寺 北へ1.2km／加美 東へ1.2km／新加美 東へ1.2km／近鉄久宝寺口 西へ1.2km",
+        "sourceUrl": "https://kyuhoji-marche.jimdofree.com/",
+        "checkedAt": "2026-09-27T23:39:32.065Z"
+      },
+      "timeInfo": {
+        "text": "10月25日（日曜日）AM10:00〜PM4:00。JR久宝寺 北へ1.2km／加美 東へ1.2km／新加美 東へ1.2km／近鉄久宝寺口 西へ1.2km",
+        "sourceUrl": "https://kyuhoji-marche.jimdofree.com/",
+        "checkedAt": "2026-09-27T23:39:32.065Z"
+      },
+      "accessByTransit": {
+        "text": "10月25日（日曜日）AM10:00〜PM4:00。JR久宝寺 北へ1.2km／加美 東へ1.2km／新加美 東へ1.2km／近鉄久宝寺口 西へ1.2km",
+        "sourceUrl": "https://kyuhoji-marche.jimdofree.com/",
+        "checkedAt": "2026-09-27T23:39:32.065Z"
+      }
+    }
+  },
+  {
+    "sourceId": "bodik-osaka",
+    "eventName": "ウミホタル ウォッチング",
+    "startDate": "2026-10-04",
+    "fields": {
+      "officialStatus": "registration_closed",
+      "statusEvidence": "公式データ記載の申込締切（2026年9月12日15時）を過ぎています。"
+    },
+    "fieldEvidence": {
+      "officialStatus": {
+        "text": "令和8年9月4日(金)10時から9月12日(土)15時までに電話でお申込みください。抽選発表は9月13日(日)",
+        "sourceUrl": "https://data.bodik.jp/dataset/270008_event",
+        "checkedAt": "2026-09-28T00:42:08.219Z"
+      },
+      "statusEvidence": {
+        "text": "令和8年9月4日(金)10時から9月12日(土)15時までに電話でお申込みください。抽選発表は9月13日(日)",
+        "sourceUrl": "https://data.bodik.jp/dataset/270008_event",
+        "checkedAt": "2026-09-28T00:42:08.219Z"
+      }
+    }
+  },
+  {
+    "sourceId": "hirakata-park",
+    "eventName": "ORANGE RANGE 25th Anniversary! めんそーれ、ひらパー!",
+    "startDate": "2026-08-29",
+    "fields": {
+      "price": "ノベルティ付入園券：当日 おとな（中学生以上）2,300円／こども（2歳〜小学生）1,500円。アトラクション・有料施設は別料金。その他の券種・割引条件は公式確認。",
+      "reservationInfo": "公式のコラボチケット購入ページで販売状況をご確認ください。ライブチケット付き券の抽選販売は受付終了しています。",
+      "reservationUrl": "https://www.asoview.com/channel/ticket/I9vZhmzBsR/ticket0000054185/"
+    },
+    "fieldEvidence": {
+      "price": {
+        "text": "ノベルティ付入園券：当日 おとな（中学生以上）2,300円／こども（2歳〜小学生）1,500円。アトラクション・有料施設は別料金。その他の券種・割引条件は公式確認。",
+        "sourceUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/",
+        "checkedAt": "2026-09-27T23:39:32.915Z"
+      },
+      "reservationInfo": {
+        "text": "公式のコラボチケット購入ページで販売状況をご確認ください。ライブチケット付き券の抽選販売は受付終了しています。",
+        "sourceUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/",
+        "checkedAt": "2026-09-27T23:39:32.915Z"
+      },
+      "reservationUrl": {
+        "text": "https://www.asoview.com/channel/ticket/I9vZhmzBsR/ticket0000054185/",
+        "sourceUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/",
+        "checkedAt": "2026-09-27T23:39:32.915Z"
+      }
+    }
+  },
+  {
+    "sourceId": "expo-park",
+    "eventName": "第8回万博スポーツフェスタ<要事前申込>",
+    "startDate": "2026-10-18",
+    "fields": {
+      "reservationRequired": true,
+      "reservationInfo": "要事前申込。プログラムごとの詳細と申込方法は公式案内先の万博テニスガーデンでご確認ください。"
+    },
+    "fieldEvidence": {
+      "reservationRequired": {
+        "text": "第8回万博スポーツフェスタ＜要事前申込＞。イベント詳細は万博テニスガーデンWEBサイトよりご確認ください。",
+        "sourceUrl": "https://www.expo70-park.jp/event/77569/",
+        "checkedAt": "2026-09-27T23:39:28.550Z"
+      },
+      "reservationInfo": {
+        "text": "第8回万博スポーツフェスタ＜要事前申込＞。イベント詳細は万博テニスガーデンWEBサイトよりご確認ください。",
+        "sourceUrl": "https://www.expo70-park.jp/event/77569/",
+        "checkedAt": "2026-09-27T23:39:28.550Z"
+      }
+    }
+  },
+  {
+    "sourceId": "bodik-osaka",
+    "eventName": "すみすみマルシェ",
+    "startDate": "2026-10-24",
+    "fields": {
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "timeInfo": "10:00〜16:00"
+    },
+    "fieldEvidence": {
+      "startTime": {
+        "text": "2026年10月24日(土) 10:00 JST - 16:00 JST。住吉公園 花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=20260816191639144",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "endTime": {
+        "text": "2026年10月24日(土) 10:00 JST - 16:00 JST。住吉公園 花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=20260816191639144",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      },
+      "timeInfo": {
+        "text": "2026年10月24日(土) 10:00 JST - 16:00 JST。住吉公園 花と水の広場。",
+        "sourceUrl": "https://www.toshi-kouen.jp/calendarjp/event.php?eid=20260816191639144",
+        "checkedAt": "2026-09-28T07:29:57.988Z"
+      }
+    }
+  }
+]

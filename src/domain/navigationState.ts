@@ -6,7 +6,7 @@ import { eventIdFromPath } from './eventRoutes';
 export const NAVIGATION_KEY = 'dokoikoNavigation';
 export type MapViewport = Coordinates & { zoom: number };
 export type SurfaceState = {
-  view: 'home' | 'map'; query: string; timeFilter: TimeFilter; filters: EventFilters;
+  view: 'home' | 'map' | 'saved'; query: string; timeFilter: TimeFilter; filters: EventFilters;
   origin: Coordinates; originLabel: string; viewport: MapViewport;
   mapListLimit: number; railLimit: number; homeLimit: number;
 };
@@ -37,6 +37,10 @@ function validFilters(value: unknown): boolean {
   return Object.entries(value).every(([key, item]) => {
     if (item === undefined) return true;
     if (['free', 'rainOk', 'family', 'date', 'night'].includes(key)) return typeof item === 'boolean';
+    if (key === 'selectedDate') return typeof item === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(item) && Number.isFinite(Date.parse(`${item}T00:00:00Z`)) && new Date(`${item}T00:00:00Z`).toISOString().slice(0, 10) === item;
+    if (key === 'area') return typeof item === 'string' && ['osaka-kita', 'osaka-minami', 'osaka-tennoji', 'osaka-bay', 'osaka-other', 'hokusetsu', 'kawachi', 'sakai'].includes(item);
+    if (key === 'sort') return item === 'attention' || item === 'date';
+    if (key === 'feature') return item === 'season';
     if (key === 'withinMinutes') return item === 30 || item === 60;
     if (key === 'time') return typeof item === 'string' && ['today', 'tomorrow', 'tonight', 'weekend'].includes(item);
     if (key === 'categories') return Array.isArray(item) && item.every(v => typeof v === 'string');
@@ -51,7 +55,7 @@ export function readEntry(state: unknown, pathname: string): NavigationEntry | n
     || !(entry.parentKey === null || (typeof entry.parentKey === 'string' && entry.parentKey && entry.parentKey !== entry.key))
     || entry.detailId !== eventIdFromPath(pathname)) return null;
   const s = entry.surface, p = entry.position;
-  if (!record(s) || !['home', 'map'].includes(String(s.view)) || typeof s.query !== 'string'
+  if (!record(s) || !['home', 'map', 'saved'].includes(String(s.view)) || typeof s.query !== 'string'
     || !timeFilters.includes(String(s.timeFilter)) || !validFilters(s.filters)
     || !coordinates(s.origin) || typeof s.originLabel !== 'string' || !coordinates(s.viewport)
     || !record(s.viewport) || typeof s.viewport.zoom !== 'number' || s.viewport.zoom < 9 || s.viewport.zoom > 17

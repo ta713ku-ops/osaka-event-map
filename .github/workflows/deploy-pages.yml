@@ -27,6 +27,8 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Restore last-good collection snapshot
+        # Release pushes start from the reviewed snapshot committed with the code.
+        if: github.event_name != 'push'
         id: collection-cache-restore
         uses: actions/cache/restore@v4
         with:

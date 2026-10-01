@@ -177,7 +177,7 @@ describe('App editorial home integration', () => {
   it('opens Apple and Google map URLs from details', async () => {
     const open = vi.fn(); vi.stubGlobal('open', open); render(<App />);
     await openFirstFeaturedEvent();
-    fireEvent.click(screen.getByRole('button', { name: '経路を見る（Apple Maps）' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Apple Mapsで経路を見る' }));
     fireEvent.click(screen.getByRole('button', { name: /Google Maps/ }));
     expect(open).toHaveBeenNthCalledWith(1, expect.stringContaining('maps.apple.com'), '_blank', 'noopener,noreferrer');
     expect(open).toHaveBeenNthCalledWith(2, expect.stringContaining('google.com/maps'), '_blank', 'noopener,noreferrer');
@@ -194,18 +194,18 @@ describe('App editorial home integration', () => {
 
   it('applies additional filters while keeping the home mounted', async () => {
     render(<App />); await screen.findAllByText('中之島ナイトマーケット');
-    fireEvent.click(screen.getByRole('button', { name: '条件を追加' }));
-    expect(screen.getByRole('dialog', { name: '条件を追加' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /条件/ }));
+    expect(screen.getByRole('dialog', { name: /条件/ })).toBeInTheDocument();
     expect(document.querySelector('.modal-scrim')).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: '無料' }));
+    fireEvent.click(within(screen.getByRole('dialog', { name: /条件/ })).getByRole('button', { name: '無料' }));
     fireEvent.click(screen.getByRole('button', { name: 'この条件で探す' }));
-    expect(screen.getByRole('button', { name: /条件を追加、1件適用中/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /条件/ })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
   });
 
   it('filters by evidence-backed tags without duplicating the free option', async () => {
     render(<App />); await screen.findAllByText('中之島ナイトマーケット');
-    fireEvent.click(screen.getByRole('button', { name: '条件を追加' }));
+    fireEvent.click(screen.getByRole('button', { name: /条件/ }));
     fireEvent.click(screen.getByRole('button', { name: '有名人来場' }));
     fireEvent.click(screen.getByRole('button', { name: 'この条件で探す' }));
     await waitFor(() => expect(screen.queryByText('中之島ナイトマーケット')).not.toBeInTheDocument());

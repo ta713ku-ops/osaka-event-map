@@ -23,6 +23,14 @@ test('preserves a published route id when mutable event facts change', () => {
   const current = [{ id: 'new-internal', eventName: 'Updated title', officialUrl: 'https://example.test/events/stable/' }];
   assert.equal(assignStableRouteIds(current, previous)[0].routeId, 'published-route');
 });
+test('generic landing pages cannot give different events the same route', () => {
+  const url = 'https://example.test/event-list';
+  const previous = [{id:'old',officialUrl:url}];
+  const current = [{id:'a',officialUrl:url},{id:'b',officialUrl:url}];
+  assert.deepEqual(assignStableRouteIds(current,previous).map(e=>e.routeId), ['a','b']);
+  const collided = [{id:'a',routeId:'a',officialUrl:url},{id:'b',routeId:'a',officialUrl:url}];
+  assert.deepEqual(assignStableRouteIds(collided,collided).map(e=>e.routeId), ['a','b']);
+});
 
 test('normalizes only explicit detail-page facts and evidence', () => {
   const event = normalizeEventRecord(fixtureEvent(70, {
@@ -423,6 +431,23 @@ test('does not extend a failed source cache from a newer duplicate provenance', 
   assert.equal(second.sources.find((source) => source.id === 'fresh-source')?.count, 1);
   assert.equal(second.sources.find((source) => source.id === 'old-source')?.status, 'error');
   assert.equal(second.sources.find((source) => source.id === 'old-source')?.count, 0);
+});
+
+test('confirmed removal from an official page cannot revive last-good cached events',async(t)=>{
+  const directory=await fixtureDir();
+  t.after(()=>rm(directory,{recursive:true,force:true}));
+  const saved=fixtureEvent(904,{sourceId:'withdrawn-source',lastCheckedAt:NOW.toISOString()});
+  await collectIn(directory,{additionalCollector:async()=>({events:[saved],sources:[{id:'withdrawn-source',name:'Official',url:'https://example.test/official',status:'success',count:1,checkedAt:NOW.toISOString()}]})});
+  const next=await collectEvents({
+    now:LATER,
+    fetchImpl:fixedBodikFetch(await readFile(join(directory,'sources','270008_event.csv'))),
+    sourceCachePath:join(directory,'sources','270008_event.csv'),
+    outputPath:join(directory,'second-events.json'),reportPath:join(directory,'second-report.json'),
+    cacheReportPath:join(directory,'sources','collection-report.json'),previousReportPath:join(directory,'sources','collection-report.json'),
+    additionalCollector:async()=>({events:[],sources:[{id:'withdrawn-source',name:'Official',status:'error',count:0,checkedAt:LATER.toISOString(),allowCachedFallback:false,error:'official date removed'}]})
+  });
+  assert.equal(next.events.some(event=>event.sourceId==='withdrawn-source'),false);
+  assert.equal(next.sources.find(source=>source.id==='withdrawn-source').allowCachedFallback,false);
 });
 
 test('cached mode is deterministic and preserves a prior failure status', async (t) => {

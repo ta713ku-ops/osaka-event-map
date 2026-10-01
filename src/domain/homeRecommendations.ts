@@ -1,4 +1,8 @@
 import type { EventItem } from '../types';
+import { filterEvents } from './events';
+import { eventAttentionScore } from './recommend';
+import { eventFreshness, usableEventImage } from './eventPresentation';
+import { isPromotionEvent } from './eventEligibility';
 
 export type RecommendationTier = 'large' | 'large-fallback-90d' | 'large-fallback-quality' | 'today';
 export interface RecommendationCandidate {
@@ -19,7 +23,8 @@ const SINGLE_FACILITY_SOURCES = /^(aeon-|hankyu-|festival-hall|zepp-namba|nakka-
 const jstDate = (date: Date) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(date);
 function validDate(value: unknown): value is string {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  return new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }
 function dateRange(event: EventItem) {
   const start = event.startDate, end = event.endDate ?? start;
@@ -31,9 +36,10 @@ const daysFrom = (date: string, today: string) =>
 const officialInformation = (event: EventItem) =>
   Boolean(event.officialUrl || event.recommendationEvidence?.official || event.provenance?.some(item => item.officialUrl));
 function normalizedImage(event: EventItem) {
-  if (!event.imageUrl) return '';
-  try { const url = new URL(event.imageUrl); url.search = ''; url.hash = ''; return url.toString().toLowerCase(); }
-  catch { return event.imageUrl.split(/[?#]/, 1)[0].toLowerCase(); }
+  const image = usableEventImage(event);
+  if (!image) return '';
+  try { const url = new URL(image); url.search = ''; url.hash = ''; return url.toString().toLowerCase(); }
+  catch { return image.split(/[?#]/, 1)[0].toLowerCase(); }
 }
 function normalizedVenue(event: EventItem) {
   if (event.sourceId && SINGLE_FACILITY_SOURCES.test(event.sourceId)) return event.sourceId;
@@ -41,16 +47,23 @@ function normalizedVenue(event: EventItem) {
     .replace(/[\s　]+/g, '').replace(/(?:第?\d+|[一二三四五六七八九十]+)?(?:階|f).*/i, '');
 }
 const normalizedEvent = (event: EventItem) =>
-  `${event.eventName.normalize('NFKC').toLocaleLowerCase('ja-JP').replace(/[\s　\p{P}\p{S}]+/gu, '')}|${normalizedVenue(event)}`;
+  event.eventName.normalize('NFKC').toLocaleLowerCase('ja-JP').replace(/[\s　\p{P}\p{S}]+/gu, '');
 const eventText = (event: EventItem) => `${event.eventName} ${event.description ?? ''}`;
 function commonExclusions(event: EventItem, today: string) {
   const exclusions: string[] = [], range = dateRange(event), text = eventText(event);
+  const title = event.eventName;
   if (!range) exclusions.push('開催日が不正または不明確');
   else if (range.end < today) exclusions.push('開催終了');
-  if (/(中止|開催中止|延期|受付終了|販売終了)/.test(text)) exclusions.push('中止・終了情報あり');
+  if (event.officialStatus && event.officialStatus !== 'scheduled') exclusions.push('公式ステータスが参加可能な開催ではない');
+  if (/(中止|開催中止|延期|受付終了|販売終了)/.test(title)) exclusions.push('中止・終了情報あり');
   if (/(作品?募集|応募期間|フォトコンテスト|レシート.*応募|web上で.*展示|オンラインのみ)/i.test(text))
     exclusions.push('現地で参加する催しと確認できない');
+  if (isPromotionEvent(event)) exclusions.push('販売・受注・募集が主目的の催し');
   return exclusions;
+}
+const SALES_ONLY_TITLE = /(?:受注会|販売会|展示販売|期間限定販売|ポップアップショップ|POP[ -]?UP (?:SHOP|STORE)|セール|実演販売|商品説明会|(?:公式|オフィシャル)ショップ)/iu;
+function isSalesOnlyTitle(title: string) {
+  return SALES_ONLY_TITLE.test(title);
 }
 function largeSignals(event: EventItem) {
   const title = event.eventName, venue = event.venueName ?? '';
@@ -69,7 +82,9 @@ function scoreLarge(event: EventItem, today: string, windowDays: number, tier: R
   const range = dateRange(event), text = eventText(event), signals = largeSignals(event);
   if (range && daysFrom(range.start, today) > windowDays) candidate.exclusions.push(`${windowDays}日以内ではない`);
   if (!officialInformation(event) || !event.venueName) candidate.exclusions.push('公式情報または会場情報が不足');
-  if (/(ワークショップ|体験教室|相談会|販売会|実演販売|キャンペーン|デモンストレーション)/.test(text))
+  if (!event.description?.trim()) candidate.exclusions.push('紹介文がなく注目枠の判断材料が不足');
+  if (/(ワークショップ|体験教室|相談会|キャンペーン|デモンストレーション)/.test(event.eventName)
+    || isSalesOnlyTitle(event.eventName))
     candidate.exclusions.push('小規模・募集型の可能性が高い');
   if (/(常設展|コレクション展|収蔵品展)/.test(text)) candidate.exclusions.push('常設・収蔵展示');
   if (!qualityFallback && !signals.largeVenue && !signals.museumExhibition && !signals.publicFeature && !signals.evidencedScale)
@@ -82,11 +97,12 @@ function scoreLarge(event: EventItem, today: string, windowDays: number, tier: R
     ? (daysFrom(range.end, today) <= 7 ? 15 : 11) : (daysFrom(range.start, today) <= 7 ? 15 : 8);
   const information = (officialInformation(event) ? 8 : 0) + (event.description ? 4 : 0) + (event.venueName ? 3 : 0);
   const topic = event.tags?.some(tag => ['celebrity', 'limited', 'exhibition'].includes(tag)) ? 10 : 0;
-  candidate.components = { scale, timing, information, topic, visual: event.imageUrl ? 8 : 0, season: event.recommendationEvidence?.season ? 5 : 0 };
+  const image = usableEventImage(event);
+  candidate.components = { scale, timing, information, topic, visual: image ? 8 : 0, season: event.recommendationEvidence?.season ? 5 : 0 };
   candidate.score = Math.min(100, Object.values(candidate.components).reduce((sum, value) => sum + value, 0));
   candidate.reasons.push(signals.largeVenue ? '大型会場の公式催事' : signals.museumExhibition ? '美術館・博物館の注目展' : '季節を代表する催し');
-  candidate.reasons.push(range.start <= today ? '現在開催中' : '近日開催');
-  if (event.imageUrl) candidate.bonuses.push('公式画像あり');
+  candidate.reasons.push(range.start <= today ? '掲載日程の会期内' : '近日開催');
+  if (image) candidate.bonuses.push('公式画像あり');
   if (topic) candidate.bonuses.push('公式タグによる特集性');
   if (range.durationDays > 90) {
     candidate.score -= 12; candidate.components.duration = -12; candidate.penalties.push('長期開催');
@@ -109,13 +125,13 @@ function scoreToday(event: EventItem, today: string, now: Date) {
     exclusions: commonExclusions(event, today), tier: 'today',
   };
   const range = dateRange(event), scheduled = isTodayScheduled(event, today);
+  if (!eventFreshness(event, now)) candidate.exclusions.push('公式情報を48時間以内に正常確認できていない');
   if (!range || today < range.start || today > range.end) candidate.exclusions.push('本日開催ではない');
   if (scheduled === false) candidate.exclusions.push('本日は開催日ではない');
-  const recurringText = /(毎週|毎月|全\d+回|年間|通年|教室|講座)/.test(eventText(event));
-  if (range && range.durationDays > 1 && scheduled === undefined && (!event.startTime || recurringText))
+  if (range && range.durationDays > 1 && scheduled === undefined)
     candidate.exclusions.push('本日の実施を確認できない');
   const localTime = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', hour12: false }).format(now);
-  if (event.endTime && event.endTime.slice(0, 5) <= localTime) candidate.exclusions.push('本日の終了時刻を過ぎた');
+  if (event.endTime && event.endTime.slice(0, 5) <= localTime && (!event.startTime || event.endTime >= event.startTime)) candidate.exclusions.push('本日の終了時刻を過ぎた');
   const endAt = event.endAt ? new Date(event.endAt) : undefined;
   if (endAt && Number.isFinite(endAt.getTime()) && jstDate(endAt) === today) {
     const endAtTime = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', hour12: false }).format(endAt);
@@ -128,7 +144,8 @@ function scoreToday(event: EventItem, today: string, now: Date) {
   const convenience = (publishedHours ? 16 : 0) + (event.address || event.venueName ? 8 : 0) + (priceKnown ? 6 : 0);
   const information = (officialInformation(event) ? 15 : 0) + (event.description ? 6 : 0) + (event.officialUrl ? 4 : 0);
   const urgency = range?.durationDays === 1 ? 10 : range && daysFrom(range.end, today) <= 7 ? 6 : 0;
-  candidate.components = { today: 25, urgency, convenience, information, audience: event.childFriendly || event.dateFriendly ? 10 : 0, visual: event.imageUrl ? 10 : 0 };
+  const image = usableEventImage(event);
+  candidate.components = { today: 25, urgency, convenience, information, audience: event.childFriendly || event.dateFriendly ? 10 : 0, visual: image ? 10 : 0 };
   candidate.score = Math.min(100, Object.values(candidate.components).reduce((sum, value) => sum + value, 0));
   candidate.reasons.push('本日開催を日付情報で確認');
   if (publishedHours) candidate.reasons.push('開催時間を確認');
@@ -138,7 +155,7 @@ function scoreToday(event: EventItem, today: string, now: Date) {
     candidate.score -= 12; candidate.components.duration = -12; candidate.penalties.push('長期開催');
   }
   if (event.childFriendly) candidate.bonuses.push('家族向け情報あり');
-  if (!event.imageUrl) candidate.penalties.push('画像情報なし');
+  if (!image) candidate.penalties.push('イベント画像なし');
   return candidate;
 }
 function selectDiverse(candidates: RecommendationCandidate[], limit: number) {
@@ -176,13 +193,7 @@ function selectDiverse(candidates: RecommendationCandidate[], limit: number) {
 export function recommendHomeEvents(events: EventItem[], now = new Date(), options: { largeLimit?: number; todayLimit?: number } = {}): HomeRecommendationResult {
   const today = jstDate(now), largeLimit = options.largeLimit ?? 4, todayLimit = options.todayLimit ?? 6;
   const diagnosticsLarge = events.map(event => scoreLarge(event, today, 30, 'large'));
-  const largePool = diagnosticsLarge.map((strict, index) => {
-    if (!strict.exclusions.length) return strict;
-    const ninetyDay = scoreLarge(events[index], today, 90, 'large-fallback-90d');
-    if (!ninetyDay.exclusions.length) return ninetyDay;
-    return scoreLarge(events[index], today, 30, 'large-fallback-quality', true);
-  });
-  const selectedLarge = selectDiverse(largePool, largeLimit);
+  const selectedLarge = selectDiverse(diagnosticsLarge, largeLimit);
   const used = new Set(selectedLarge.map(item => item.event.id));
   const diagnosticsToday = events.map(event => {
     const candidate = scoreToday(event, today, now);
@@ -190,4 +201,15 @@ export function recommendHomeEvents(events: EventItem[], now = new Date(), optio
     return candidate;
   });
   return { large: selectedLarge, today: selectDiverse(diagnosticsToday, todayLimit), diagnostics: { large: diagnosticsLarge, today: diagnosticsToday } };
+}
+
+/** Weekend cards use the same exclusions and venue/image diversity as home
+ * picks, so a sales promotion or one repeated venue cannot occupy every slot. */
+export function recommendWeekendEvents(events: EventItem[], now: Date): EventItem[] {
+  const today = jstDate(now);
+  const candidates = filterEvents(events, 'weekend', now).map(event => ({
+    event, score: eventAttentionScore(event, 50, now), components: {}, reasons: [], bonuses: [], penalties: [],
+    exclusions: [...commonExclusions(event, today), ...(!eventFreshness(event, now) ? ['公式確認が古い'] : [])], tier: 'today' as const,
+  }));
+  return selectDiverse(candidates, 4).map(item => item.event);
 }

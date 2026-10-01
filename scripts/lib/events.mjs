@@ -257,22 +257,29 @@ export function classifyTags({ name = '', description = '', price = '', audience
 }
 
 export function eventCategory(name, description = '') {
-  const text = `${textValue(name)} ${textValue(description)}`;
-  if (/花火/u.test(text)) return 'fireworks';
-  if (/祭|フェス|盆踊/u.test(text)) return 'festival';
-  if (/マルシェ|市場|市$/u.test(text)) return 'market';
-  if (/フリマ|フリー.?マーケット/u.test(text)) return 'fleaMarket';
-  if (/展覧|展示|美術|写真展|絵画展|企画展|特別展/u.test(text)) return 'exhibition';
-  if (/演劇|舞台|ミュージカル|芝居|公演/u.test(text)) return 'theater';
-  if (/音楽|コンサート|ライブ|演奏|吹奏楽/u.test(text)) return 'music';
-  if (/博物|資料館|科学館/u.test(text)) return 'museum';
-  if (/スポーツ|選手権|マラソン|競技大会|大会/u.test(text)) return 'sports';
-  if (/動物|いきもの|昆虫|水族|海の生き物/u.test(text)) return 'zoo';
-  if (/イルミ|ライトアップ/u.test(text)) return 'illumination';
-  if (/夜|ナイト|星空|天体/u.test(text)) return 'night';
-  if (/グルメ|飲食|キッチンカー|収穫|食/u.test(text)) return 'food';
-  if (/体験|教室|工作|講座|観察|実習|ヨガ|ウォーキング/u.test(text)) return 'workshop';
-  return 'seasonal';
+  const categoryFrom = (text) => {
+    if (!text) return undefined;
+    // Flower-arranging battles use words such as "花舞台" in their copy;
+    // that is not evidence of a theatre production or a sports event.
+    if (/花いけ/u.test(text)) return 'seasonal';
+    if (/(?:受注会|展示販売|販売会|期間限定販売|ポップアップショップ|POP[ -]?UP (?:SHOP|STORE)|オフィシャルショップ|公式ショップ|商品説明会|実演販売|セール)/iu.test(text)) return 'shopping';
+    if (/花火/u.test(text)) return 'fireworks';
+    if (/祭|フェス|盆踊/u.test(text)) return 'festival';
+    if (/フリマ|フリー.?マーケット/u.test(text)) return 'fleaMarket';
+    if (/マルシェ|市場|朝市|蚤の市/u.test(text)) return 'market';
+    if (/展覧|展示|美術|写真展|絵画展|作陶展|作品展|企画展|特別展/u.test(text)) return 'exhibition';
+    if (/音楽|コンサート|ライブ|演奏|吹奏楽/u.test(text)) return 'music';
+    if (/落語|歌舞伎|文楽|能楽|人形劇|演劇|舞台劇|ミュージカル|芝居/u.test(text)) return 'theater';
+    if (/博物|資料館|科学館/u.test(text)) return 'museum';
+    if (/スポーツ|選手権|マラソン|競技大会|野球|サッカー|バスケットボール|テニス|ラグビー|陸上競技/u.test(text)) return 'sports';
+    if (/動物|いきもの|昆虫|水族|海の生き物/u.test(text)) return 'zoo';
+    if (/イルミ|ライトアップ|プロジェクションマッピング/u.test(text)) return 'illumination';
+    if (/夜|ナイト|星空|天体/u.test(text)) return 'night';
+    if (/グルメ|飲食|キッチンカー|収穫/u.test(text)) return 'food';
+    if (/体験|教室|工作|講座|講演|観察|実習|ヨガ|ウォーキング/u.test(text)) return 'workshop';
+    return undefined;
+  };
+  return categoryFrom(textValue(name)) || categoryFrom(textValue(description)) || 'seasonal';
 }
 
 function explicitBoolean(value) {

@@ -6,7 +6,7 @@ function capture(entry: NavigationEntry): NavigationEntry {
   const position = { ...entry.position };
   const read = (selector: string) => document.querySelector<HTMLElement>(selector);
   if (entry.detailId) position.detail = read('.event-detail-page')?.scrollTop ?? position.detail;
-  else if (entry.surface.view === 'home') position.home = read('.app-shell.is-home')?.scrollTop ?? position.home;
+  else if (entry.surface.view !== 'map') position.home = read('.app-shell.is-home')?.scrollTop ?? position.home;
   else {
     position.list = read('.results-panel')?.scrollTop ?? position.list;
     position.rail = read('.rail-cards')?.scrollLeft ?? position.rail;
@@ -25,7 +25,7 @@ function restore(entry: NavigationEntry) {
     if (node) { if (horizontal) node.scrollLeft = value; else node.scrollTop = value; }
   };
   if (entry.detailId) setScroll('.event-detail-page', entry.position.detail);
-  else if (entry.surface.view === 'home') setScroll('.app-shell.is-home', entry.position.home);
+  else if (entry.surface.view !== 'map') setScroll('.app-shell.is-home', entry.position.home);
   else {
     setScroll('.results-panel', entry.position.list);
     setScroll('.rail-cards', entry.position.rail, true);

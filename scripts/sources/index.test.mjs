@@ -10,6 +10,7 @@ import {
   __test__,
   collectAdditionalEvents,
 } from './index.mjs';
+import {__test__ as outingsTest} from './verified-outings.mjs';
 
 const NOW = new Date('2026-09-04T12:00:00+09:00');
 const FIXTURE_ROOT = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
@@ -65,6 +66,8 @@ test('date and time parsers preserve cross-year ranges and reject ambiguous text
   assert.equal(__test__.categoryFor('陶芸家の作陶展'), 'exhibition');
   assert.equal(__test__.categoryFor('室内楽コンサート'), 'music');
   assert.equal(__test__.categoryFor('落語公演'), 'theater');
+  assert.equal(__test__.categoryFor('まちのおしごと体験', 'shopping', '作品展示と仕事の体験を楽しむ'), 'workshop');
+  assert.equal(__test__.categoryFor('花いけ大会', 'seasonal', '花舞台'), 'seasonal');
 });
 
 test('official HTML adapters parse current records with source URLs and verified fixed venues', async () => {
@@ -240,6 +243,15 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     [SOURCE_URLS.scienceMuseum, '<div id="pl123"><h3 class="tit03">科学館テスト</h3><table><tr><th>日時</th><td>2026年10月21日 13:00～14:00</td></tr></table></div>'],
   ]);
   const aeonJson = await fixture('aeon-osaka-dome-city.json');
+  for(const occurrence of outingsTest.DATA.occurrences){
+    for(const field of Object.keys(occurrence.fieldEvidence)){
+      const evidence=occurrence.fieldEvidence[field];
+      fixtureByUrl.set(evidence.sourceUrl,(fixtureByUrl.get(evidence.sourceUrl)??'')+`<p>${evidence.text}</p>`);
+    }
+    if (occurrence.sourceId === 'verified-outings-jikken-lab-osaka-2026') {
+      fixtureByUrl.set(occurrence.officialUrl, `${fixtureByUrl.get(occurrence.officialUrl)}<p>一般 : 前売券 2,300円 / 当日券 2,600円</p><p>小学生以上のご参加には必ずチケットが必要です</p><p>本イベントはスクラップチケットでのみご購入ができます</p><p>会場に駐車場、駐輪場はございません</p>`);
+    }
+  }
   const aeonByIndexUrl = new Map([
     ['https://www.aeon.jp/sc/osakadomecity/event/index.json', aeonJson],
     ['https://www.aeon.jp/sc/dainichi/event/index.json', fixtureByUrl.get(SOURCE_URLS.aeonDainichi)],
@@ -248,6 +260,8 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
   ]);
   const infoPages = [];
   const fetchText = async (url) => {
+    if (url.startsWith('https://citysup.urkt.in/api/direct/courses/21947/calendars?')) return JSON.stringify([{ date: '2026-09-05', status: 'realtime' }]);
+    if (url === 'https://www.citysup.jp/walkable_26/') return '<h1>水上さんぽガイドツアー 中之島公園ぐるっと</h1><p>ばらぞの橋 桟橋</p><p>大阪市北区中之島1丁目1</p><p>中之島公園のまわりをぐるりと一周します。</p><p>平日 1,500円（税込1,650円）</p><p>予約優先、当日現地受付あり</p><p>大阪メトロ堺筋線「北浜」駅</p><p>雨天でも開催しますが、警報発令時などスタッフが危険と判断した場合は中止します</p>';
     if (url.startsWith('https://osaka-info.jp/api_/orden/get_event_list.php')) {
       infoPages.push(url);
       const page = new URL(url).searchParams.get('page');
@@ -261,6 +275,9 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     if (value === undefined) throw new Error(`unexpected URL: ${url}`);
     return value;
   };
+  fetchText.request = async (url, options) => url.includes('csrf_token')
+    ? { text: JSON.stringify({ token_name: 'csrf_scrapticket_name', csrf_hash: 'fixture' }), headers: { getSetCookie: () => ['scrapticket_csrf_cookie_name=fixture; Path=/'] } }
+    : { text: JSON.stringify({ result: 'OK', target_month: options.body.get('target_month'), days: { '2026-09-05': { cell: 'available', selectable: true } } }) };
 
   const result = await collectAdditionalEvents({ fetchText, now: NOW });
   assert.equal(result.sources.length, ADDITIONAL_SOURCE_DEFINITIONS.length);

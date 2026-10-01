@@ -1,0 +1,34 @@
+import { build } from 'esbuild';
+import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { pathToFileURL } from 'node:url';
+import { createHash } from 'node:crypto';
+const now = new Date(process.argv[2] ?? Date.now());
+if (!Number.isFinite(now.getTime())) throw new Error('Use an ISO date with timezone');
+const file = process.argv[3] ?? 'public/data/events.json';
+const output = process.argv[4] ?? 'data/website-audit.json';
+const dataText = await readFile(file,'utf8');
+const data = JSON.parse(dataText);
+const temp = await mkdtemp(join(tmpdir(),'website-audit-'));
+try {
+ const outfile = join(temp,'domain.mjs');
+ await build({stdin:{contents:'export * from "./src/domain/homeRecommendations.ts"; export * from "./src/domain/recommend.ts"; export * from "./src/domain/events.ts"; export * from "./src/domain/discovery.ts";',resolveDir:process.cwd(),loader:'ts'},outfile,bundle:true,platform:'node',format:'esm'});
+ const {recommendHomeEvents,recommendWeekendEvents,eventAttentionScore,filterEvents,eventArea} = await import(pathToFileURL(outfile));
+ const events = data.events.map(event=>({...event,sourceStatus:data.sources?.find(source=>source.id===event.sourceId)?.status ?? event.sourceStatus}));
+ const today = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(now);
+ const presence = value=>value !== undefined && value !== null && String(value).trim() !== '';
+ const count = (events,predicate)=>{const n=events.filter(predicate).length;return {count:n,total:events.length,percentage:events.length?Math.round(n/events.length*1000)/10:0};};
+ const metrics = events=>({records:events.length,venues:new Set(events.map(e=>e.venueName)).size,fields:{description:count(events,e=>presence(e.description)),price:count(events,e=>presence(e.price)),startTime:count(events,e=>presence(e.startTime)),endTime:count(events,e=>presence(e.endTime)),time:count(events,e=>presence(e.timeInfo)||presence(e.startTime)||presence(e.endTime)),reservation:count(events,e=>presence(e.reservationInfo)||presence(e.reservationRequired)||presence(e.reservationUrl)),coordinates:count(events,e=>Number.isFinite(e.latitude)&&Number.isFinite(e.longitude)),access:count(events,e=>presence(e.accessByTransit)||presence(e.nearestStation))},categories:events.reduce((a,e)=>(a[e.category]=(a[e.category]??0)+1,a),{}),areas:events.reduce((a,e)=>{const key=eventArea(e)??'address-unconfirmed';a[key]=(a[key]??0)+1;return a;},{})});
+ const summary = e=>({routeId:e.routeId??e.id,name:e.eventName,start:e.startDate,end:e.endDate??e.startDate,venue:e.venueName,category:e.category,status:e.officialStatus??'scheduled',sourceStatus:e.sourceStatus,officialUrl:e.officialUrl});
+ const home = recommendHomeEvents(events,now,{todayLimit:4});
+ const top = filter=>filterEvents(events,filter,now).sort((a,b)=>eventAttentionScore(b,50,now)-eventAttentionScore(a,50,now)||a.startDate.localeCompare(b.startDate)||a.id.localeCompare(b.id)).slice(0,20).map(summary);
+ const focus = JSON.parse(await readFile('data/website-focus.json','utf8'));
+ const focusEvents = focus.entries.map(item=>events.find(e=>(e.routeId??e.id)===item.routeId));
+ const fields = {date:e=>presence(e.startDate),venue:e=>presence(e.venueName),description:e=>presence(e.description),price:e=>presence(e.price),time:e=>presence(e.timeInfo)||presence(e.startTime)||presence(e.endTime),reservation:e=>presence(e.reservationInfo)||presence(e.reservationRequired)||presence(e.reservationUrl),access:e=>presence(e.accessByTransit)||presence(e.nearestStation)};
+ const focusAudit = focus.entries.map((item,index)=>{const event=focusEvents[index];const detail=data.detailReports?.find(x=>x.url===item.officialUrl);return {...item,published:Boolean(event),fields:Object.fromEntries(Object.entries(fields).map(([key,test])=>[key,event&&test(event)?'confirmed':'not-acquired'])),detailStatus:detail?.status??'not-attempted',checkedAt:detail?.checkedAt,reason:detail?.reason??detail?.error};});
+ const routeCounts=events.reduce((a,e)=>{const key=e.routeId??e.id;a[key]=(a[key]??0)+1;return a;},{});
+ const report = {evaluatedAt:now.toISOString(),dataGeneratedAt:data.generatedAt,dataSha256:createHash('sha256').update(dataText).digest('hex'),snapshot:metrics(events),unexpired:metrics(events.filter(e=>(e.endDate??e.startDate)>=today)),next30Days:metrics(events.filter(e=>e.startDate<=focus.window.to&&(e.endDate??e.startDate)>=today)),focusMetrics:metrics(focusEvents.filter(Boolean)),focus:focusAudit,mandatoryEvidenceMissing:events.filter(e=>!e.eventName||!e.startDate||!e.venueName||!e.officialUrl||!e.sourceId||!e.lastCheckedAt).map(e=>e.id),duplicateRoutes:Object.entries(routeCounts).filter(([,n])=>n>1),sources:data.sources?.map(({id,status,count,checkedAt,error})=>({id,status,count,checkedAt,error})),home:{large:home.large.map(c=>summary(c.event)),today:home.today.map(c=>summary(c.event)),weekend:recommendWeekendEvents(events,now).map(summary)},top20:{today:top('today'),weekend:top('weekend')}};
+ await writeFile(output,JSON.stringify(report,null,2)+'\n');
+ console.log(JSON.stringify({output,metrics:report.snapshot.fields,focusPublished:focusAudit.filter(e=>e.published).length,duplicateRoutes:report.duplicateRoutes,mandatoryEvidenceMissing:report.mandatoryEvidenceMissing},null,2));
+} finally {await rm(temp,{recursive:true,force:true});}

@@ -23,7 +23,13 @@ import {
   googleMapsUrl,
   isOngoing,
 } from './domain';
-import { recommendHomeEvents } from './domain/homeRecommendations';
+import { recommendHomeEvents, recommendWeekendEvents } from './domain/homeRecommendations';
+import { useBookmarks } from './hooks/useBookmarks';
+import { SearchControls } from './components/SearchControls';
+import { DiscoveryCard } from './components/DiscoveryCard';
+import { editorialFeatures, eventArea } from './domain/discovery';
+import { cardPriceLabel, eventFreshness, eventStatusLabel, usableEventImage } from './domain/eventPresentation';
+import { occursOnDate } from './domain/events';
 import { useEventNavigation } from './hooks/useEventNavigation';
 import type { EventDataFile, EventItem, EventSource, TimeFilter, UserProfile } from './types';
 
@@ -103,9 +109,7 @@ function recommendationReasons(event: EventItem, profile: UserProfile, distanceK
   return reasons.slice(0, 2);
 }
 
-function travelLabel(minutes?: number) {
-  return typeof minutes === 'number' && Number.isFinite(minutes) ? `約${minutes}分` : '場所を確認';
-}
+
 
 function timeLabel(event: EventItem) {
   const formatter = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric', weekday: 'short' });
@@ -127,15 +131,17 @@ export function App() {
   const [coverageError, setCoverageError] = useState('');
   const [coverageAttempt, setCoverageAttempt] = useState(0);
   const [error, setError] = useState('');
+  const loading = !data && !error;
   const [profile, setProfile] = useState<Profile>(() => readProfile());
   const [filterOpen, setFilterOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const navigation = useEventNavigation(!!data);
   const { surface, detailId, updateSurface } = navigation;
   const { view, query, timeFilter, filters, origin, originLabel, mapListLimit, railLimit } = surface;
-  const setView = (value: 'home' | 'map') => updateSurface('view', value);
+  const setView = (value: 'home' | 'map' | 'saved') => updateSurface('view', value);
   const setQuery = (value: string) => updateSurface('query', value);
-  const setTimeFilter = (value: TimeFilter) => updateSurface('timeFilter', value);
+  const setTimeFilter = (value: TimeFilter) => { updateSurface('timeFilter', value); updateSurface('filters', old => ({ ...old, selectedDate: undefined })); };
+  const bookmarks = useBookmarks();
   const setFilters = (value: EventFilters) => updateSurface('filters', value);
   useEffect(() => { setFilterOpen(false); setProfileOpen(false); }, [navigation.entryKey]);
   useEffect(() => {
@@ -150,7 +156,7 @@ export function App() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json() as Promise<DataFile>;
       })
-      .then(setData)
+      .then(payload => setData({ ...payload, events: payload.events.map(event => ({ ...event, sourceStatus: payload.sources?.find(source => source.id === event.sourceId)?.status ?? event.sourceStatus })) }))
       .catch((reason: unknown) => {
         if ((reason as { name?: string }).name !== 'AbortError') setError('イベント情報を読み込めませんでした。通信を確認して再読み込みしてください。');
       });
@@ -187,7 +193,7 @@ export function App() {
   const ranked = useMemo<RankedEvent[]>(() => {
     if (!data) return [];
     const normalizedQuery = query.normalize('NFKC').trim().toLocaleLowerCase('ja');
-    return filterEvents(data.events, timeFilter, now)
+    return filterEvents(data.events, filters.selectedDate ? 'all' : timeFilter, now)
       .map((event) => {
         const distanceKm = hasCoordinates(event)
           ? calculateDistanceKm(origin, { latitude: event.latitude, longitude: event.longitude })
@@ -212,6 +218,9 @@ export function App() {
             .toLocaleLowerCase('ja');
           if (!searchable.includes(normalizedQuery)) return false;
         }
+        if (filters.selectedDate && !occursOnDate(event, filters.selectedDate)) return false;
+        if (filters.area && eventArea(event) !== filters.area) return false;
+        if (filters.feature && !editorialFeatures([event], now).length) return false;
         if (filters.withinMinutes && (event.travelMinutes == null || event.travelMinutes > filters.withinMinutes)) return false;
         if (filters.free && !hasEventTag(event, 'free')) return false;
         if (filters.rainOk && event.rainSupport !== true && event.indoor !== true) return false;
@@ -222,7 +231,7 @@ export function App() {
         if (filters.categories?.length && !filters.categories.includes(event.category)) return false;
         return true;
       })
-      .sort((a, b) => Number(isOngoing(b, now)) - Number(isOngoing(a, now)) || b.recommendation - a.recommendation || (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity));
+      .sort((a, b) => (filters.sort === 'date' ? a.startDate.localeCompare(b.startDate) : b.attention - a.attention) || a.startDate.localeCompare(b.startDate) || a.id.localeCompare(b.id));
   }, [data, filters, now, origin, query, timeFilter, userProfile]);
 
   const detailBase = detailId ? data?.events.find((event) => (event.routeId ?? event.id) === detailId || event.id === detailId) ?? null : null;
@@ -232,8 +241,8 @@ export function App() {
       ? calculateDistanceKm(origin, { latitude: detailBase.latitude, longitude: detailBase.longitude })
       : undefined;
     const travelMinutes = distanceKm == null ? undefined : estimateTravelTimeMinutes(distanceKm, userProfile.transport ?? 'train');
-    return { ...detailBase, ...(distanceKm == null ? {} : { distanceKm }), ...(travelMinutes == null ? {} : { travelMinutes }) };
-  }, [detailBase, origin, userProfile.transport]);
+    return { ...detailBase, originLabel, ...(distanceKm == null ? {} : { distanceKm }), ...(travelMinutes == null ? {} : { travelMinutes }) };
+  }, [detailBase, origin, originLabel, userProfile.transport]);
   const detailRelated = useMemo(() => detailBase && data
     ? detailRecommendations(detailBase, data.events, now)
     : { nearbyOngoing: [], sameArea: [] }, [data, detailBase, now]);
@@ -245,14 +254,15 @@ export function App() {
     displayLabel: index < 4 && hasCoordinates(event),
   }));
   const activeTagCount = new Set([...(filters.tags ?? []), ...(filters.free ? ['free'] as const : [])]).size;
-  const activeFilterCount = Object.entries(filters).filter(([key, value]) => key !== 'tags' && key !== 'free' && (Array.isArray(value) ? value.length > 0 : value !== undefined && value !== false)).length + activeTagCount;
-  const homeRanked = useMemo(() => [...ranked].sort((a, b) => b.attention - a.attention
-    || Number(isOngoing(b, now)) - Number(isOngoing(a, now))
-    || (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity)
-    || a.startDate.localeCompare(b.startDate)
-    || a.id.localeCompare(b.id)), [ranked, now]);
+  const activeFilterCount = Object.entries(filters).filter(([key, value]) => key !== 'tags' && key !== 'free' && key !== 'sort' && (Array.isArray(value) ? value.length > 0 : value !== undefined && value !== false)).length + activeTagCount;
+  const homeRanked = ranked;
   const homeEvents = useMemo<HomeEvent[]>(() => homeRanked.map((event) => ({
     id: event.id,
+    routeId: event.routeId,
+    distanceKm: event.distanceKm,
+    priceLabel: cardPriceLabel(event),
+    statusLabel: eventStatusLabel(event, now),
+    saved: bookmarks.has(event.routeId ?? event.id),
     eventName: event.eventName,
     categoryLabel: CATEGORY_LABELS[event.category] ?? 'イベント',
     venueName: event.venueName,
@@ -261,8 +271,8 @@ export function App() {
     recommendation: event.recommendation,
     ongoing: isOngoing(event, now),
     description: event.description,
-    imageUrl: typeof event.imageUrl === 'string' && event.imageUrl.startsWith('https://') ? event.imageUrl : undefined,
-  })), [now, homeRanked]);
+    imageUrl: usableEventImage(event),
+  })), [now, homeRanked, bookmarks.items]);
 
   const homeRecommendations = useMemo(() => recommendHomeEvents(data?.events ?? [], now, { todayLimit: 4 }), [data, now]);
   const recommendationHomeEvent = (event: EventItem): HomeEvent => {
@@ -271,6 +281,11 @@ export function App() {
       : undefined;
     return {
       id: event.id,
+      routeId: event.routeId,
+      distanceKm,
+      priceLabel: cardPriceLabel(event),
+      statusLabel: eventStatusLabel(event, now),
+      saved: bookmarks.has(event.routeId ?? event.id),
       eventName: event.eventName,
       categoryLabel: CATEGORY_LABELS[event.category] ?? 'イベント',
       venueName: event.venueName,
@@ -279,7 +294,7 @@ export function App() {
       recommendation: calculateRecommendationScore(event, userProfile, distanceKm),
       ongoing: isOngoing(event, now),
       description: event.description,
-      imageUrl: typeof event.imageUrl === 'string' && event.imageUrl.startsWith('https://') ? event.imageUrl : undefined,
+      imageUrl: usableEventImage(event),
     };
   };
   const largeHomeEvents = homeRecommendations.large.map(({ event }) => recommendationHomeEvent(event));
@@ -290,8 +305,8 @@ export function App() {
     if (event) navigation.open(event.routeId ?? event.id, focus);
   }, [data?.events, navigation.open]);
   const saveProfile = (next: Profile) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    setProfile(next);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); setProfile(next); }
+    catch { setLocationNotice('好みを保存できませんでした。ブラウザの保存設定をご確認ください。'); }
   };
   const locate = () => {
     if (!window.isSecureContext || !navigator.geolocation) {
@@ -316,11 +331,21 @@ export function App() {
     if (description) description.content = detailEvent?.description?.slice(0, 150) || '大阪で今日・今夜・週末に行けるイベントを見つける';
   }, [detailEvent]);
 
+  const todayKey = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(now);
+  const resetSearch = () => { setQuery(''); setTimeFilter('all'); setFilters({}); };
+  const toggleSave = (id: string) => { const item = data?.events.find(event => event.id === id); if (item) bookmarks.toggle(item); };
+  const features = editorialFeatures(filterEvents(data?.events ?? [], 'all', now), now);
+  const feature = filters.feature ? features.find(item => item.id === filters.feature) : undefined;
+  const searchControls = <SearchControls filters={filters} onChange={setFilters} onOpenFilters={() => setFilterOpen(true)} onReset={resetSearch}
+    query={query} onClearQuery={() => setQuery('')} today={todayKey}
+    dateLabel={filters.selectedDate ?? (timeFilter !== 'all' ? TIME_FILTERS.find(item => item.key === timeFilter)?.label : undefined)}
+    onClearDate={() => setTimeFilter('all')} />;
+  const weekendEvents = recommendWeekendEvents(data?.events ?? [], now).map(recommendationHomeEvent);
   return (
     <>
     <div className="app-surface" hidden={!!detailId}>
     <main className={`app-shell ${view === 'map' ? 'is-map' : 'is-home'}`}>
-      <a className="skip-link" href={view === 'home' ? '#home-results' : '#event-results'}>候補へ移動</a>
+      <a className="skip-link" href={view !== 'map' ? '#home-results' : '#event-results'}>候補へ移動</a>
       <DiscoveryHeader
         liveCount={liveCount}
         originLabel={originLabel}
@@ -329,12 +354,32 @@ export function App() {
         view={view}
         onShowHome={() => setView('home')}
         onShowMap={() => setView('map')}
+        onShowSaved={() => setView('saved')}
+        savedCount={bookmarks.items.length}
       />
       {locationNotice && <div className="location-notice" role="status">{locationNotice}<button type="button" onClick={() => setLocationNotice('')}>閉じる</button></div>}
-      {view === 'home' ? <HomeDiscovery
+      {bookmarks.notice && <div className="location-notice" role="alert">{bookmarks.notice}<button type="button" onClick={bookmarks.dismiss}>閉じる</button></div>}
+      {view === 'saved' ? <section className="saved-page" id="home-results" tabIndex={-1}><p>また行きたいを、ここに。</p><h1>保存したイベント</h1><p>このブラウザに保存されます。別の端末には同期されません。</p>
+        {!bookmarks.items.length && <div className="home-state-card"><strong>まだ保存したイベントはありません</strong><p>気になるイベントのしおりマークで、予定を残せます。</p><button type="button" onClick={() => setView('home')}>イベントを探す</button></div>}
+        {loading && <p role="status">保存したイベントの最新情報を読み込んでいます。</p>}{error && <p role="alert">{error} 保存時の情報を表示しています。</p>}
+        <div className="saved-grid">{bookmarks.items.map(saved => {
+          const current = data?.events.find(event => (event.routeId ?? event.id) === saved.routeId);
+          if (loading && !current) return null;
+          return current ? <DiscoveryCard key={saved.routeId} event={recommendationHomeEvent(current)} scope="saved" onSelect={openDetail} onSave={toggleSave} />
+            : <article className="saved-unavailable" key={saved.routeId}><small>{(saved.endDate ?? saved.startDate) < todayKey ? '終了' : '最新情報を確認できません'}</small><h2>{saved.eventName}</h2><p>{saved.startDate}{saved.venueName ? ` · ${saved.venueName}` : ''}</p><p>保存時の情報です。掲載内容が変更された可能性があります。</p><button type="button" aria-label={`${saved.eventName}を保存から解除`} onClick={() => bookmarks.remove(saved.routeId)}>保存から解除</button></article>;
+        })}</div></section> : view === 'home' ? <HomeDiscovery
+        originLabel={originLabel}
         visibleLimit={surface.homeLimit}
         onVisibleLimitChange={(value) => updateSurface('homeLimit', value)}
         events={homeEvents}
+        onToggleSave={toggleSave}
+        searchControls={searchControls}
+        weekendEvents={weekendEvents}
+        features={features.map(item => ({ ...item, events: item.events.map(recommendationHomeEvent) }))}
+        onFeatureSelect={id => { setQuery(''); setTimeFilter('all'); setFilters({ feature: id }); document.querySelector('#home-results')?.scrollIntoView({ behavior: 'auto' }); }}
+        featureTitle={feature?.title}
+        featureDescription={feature?.description}
+        sortLabel={filters.sort === 'date' ? '開催日順' : '注目順'}
         largeEvents={largeHomeEvents}
         todayEvents={todayHomeEvents}
         totalCount={ranked.length}
@@ -356,7 +401,7 @@ export function App() {
         </>}
         onReset={() => { setQuery(''); setTimeFilter('all'); setFilters({}); setLoadAttempt((value) => value + 1); }}
       /> : <>
-      <section className="time-toolbar" aria-label="開催日の絞り込み">
+      <div className="map-controls"><section className="time-toolbar" aria-label="開催日の絞り込み">
         <label className="event-search">
           <Search size={18} aria-hidden="true" />
           <span className="sr-only">イベント名や場所を検索</span>
@@ -378,7 +423,7 @@ export function App() {
         <button type="button" className="filter-button" onClick={() => setFilterOpen(true)} aria-label={`条件を追加${activeFilterCount ? `、${activeFilterCount}件適用中` : ''}`}>
           <SlidersHorizontal size={18} /><span>条件</span>{activeFilterCount > 0 && <b>{activeFilterCount}</b>}
         </button>
-      </section>
+      </section>{searchControls}<p className="map-coverage">{originLabel} · 地図に表示 {ranked.filter(hasCoordinates).length}件 · 座標未確認 {ranked.filter(event => !hasCoordinates(event)).length}件（ホームの一覧で確認できます）</p></div>
 
       <div className="workspace">
         <aside className="results-panel" id="event-results" aria-label="イベント候補">
@@ -393,11 +438,11 @@ export function App() {
           <div className="event-list">
             {ranked.slice(0, mapListLimit).map((event, index) => (
               <button key={event.id} type="button" className="event-row" data-event-focus={`map-list:${event.id}`} onClick={() => openDetail(event.id, `map-list:${event.id}`)}>
-                <span className={`rank-badge ${isOngoing(event, now) ? 'is-live' : ''}`}>{isOngoing(event, now) ? '開催中' : index + 1}</span>
+                <span className={`rank-badge ${isOngoing(event, now) ? 'is-live' : ''}`}>{eventFreshness(event, now) && isOngoing(event, now) ? '会期内' : index + 1}</span>
                 <span className="event-row-copy">
                   <span className="event-row-top"><b>{CATEGORY_LABELS[event.category] ?? 'イベント'}</b><em>おすすめ {event.recommendation}%</em></span>
                   <strong>{event.eventName}</strong>
-                  <span>{timeLabel(event)} ・ {travelLabel(event.travelMinutes)} ・ {hasEventTag(event, 'free') ? '無料' : event.price || '料金は公式確認'}</span>
+                  <span>{timeLabel(event)} ・ {event.distanceKm !== undefined ? `直線 ${event.distanceKm.toFixed(1)}km` : '場所は詳細で確認'} ・ {event.price ?? (hasEventTag(event, 'free') ? '無料（条件あり）' : '料金は公式確認')}</span>
                 </span>
                 <ChevronRight size={19} aria-hidden="true" />
               </button>
@@ -413,7 +458,7 @@ export function App() {
           <EventMap events={mapEvents} onEventSelect={(event) => openDetail(event.id, `map-pin:${event.id}`)}
             viewport={surface.viewport} onViewportChange={(value) => updateSurface('viewport', value)} active={!detailId} />
           <div className="map-summary" aria-live="polite">
-            <span><i className="live-indicator" />{liveCount}件が開催中</span>
+            <span><i className="live-indicator" />地図に{ranked.filter(hasCoordinates).length}件</span>
             <strong><small>{originLabel}</small>今日は、どこへ行く？</strong>
           </div>
           {ranked.length > 0 && (
@@ -422,9 +467,9 @@ export function App() {
               <div className="rail-cards">
                 {ranked.slice(0, railLimit).map((event) => (
                   <button key={event.id} type="button" data-event-focus={`map-rail:${event.id}`} onClick={() => openDetail(event.id, `map-rail:${event.id}`)}>
-                    <span>{isOngoing(event, now) ? '開催中' : timeLabel(event)} ・ {CATEGORY_LABELS[event.category] ?? 'イベント'}</span>
+                    <span>{eventStatusLabel(event, now)} ・ {CATEGORY_LABELS[event.category] ?? 'イベント'}</span>
                     <strong>{event.eventName}</strong>
-                    <small>{travelLabel(event.travelMinutes)}　おすすめ {event.recommendation}%</small>
+                    <small>{event.distanceKm !== undefined ? `直線 ${event.distanceKm.toFixed(1)}km` : '場所は詳細で確認'}</small>
                   </button>
                 ))}
               </div>
@@ -452,9 +497,12 @@ export function App() {
       <ProfileDialog open={profileOpen} value={profile} onChange={setProfile} onSave={saveProfile} onClose={() => setProfileOpen(false)} />
     </main>
     </div>
+    {detailId && bookmarks.notice && <div className="bookmark-detail-notice" role="alert">{bookmarks.notice}<button type="button" onClick={bookmarks.dismiss}>閉じる</button></div>}
     {detailId && <EventDetailPage key={navigation.entryKey}
       event={detailEvent}
       requestedId={detailId}
+      saved={!!detailEvent && bookmarks.has(detailEvent.routeId ?? detailEvent.id)}
+      onToggleSave={detailEvent ? () => bookmarks.toggle(detailEvent) : undefined}
       loading={!data && !error}
       loadError={error}
       now={now}

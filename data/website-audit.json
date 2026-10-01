@@ -1,0 +1,1738 @@
+{
+  "evaluatedAt": "2026-09-30T10:45:00.000Z",
+  "dataGeneratedAt": "2026-09-30T10:40:41.886Z",
+  "dataSha256": "b6556965d6be373245612f5a169bab297946a2adf04f507389122c42b5bcdb3b",
+  "snapshot": {
+    "records": 472,
+    "venues": 113,
+    "fields": {
+      "description": {
+        "count": 392,
+        "total": 472,
+        "percentage": 83.1
+      },
+      "price": {
+        "count": 206,
+        "total": 472,
+        "percentage": 43.6
+      },
+      "startTime": {
+        "count": 186,
+        "total": 472,
+        "percentage": 39.4
+      },
+      "endTime": {
+        "count": 80,
+        "total": 472,
+        "percentage": 16.9
+      },
+      "time": {
+        "count": 260,
+        "total": 472,
+        "percentage": 55.1
+      },
+      "reservation": {
+        "count": 171,
+        "total": 472,
+        "percentage": 36.2
+      },
+      "coordinates": {
+        "count": 279,
+        "total": 472,
+        "percentage": 59.1
+      },
+      "access": {
+        "count": 263,
+        "total": 472,
+        "percentage": 55.7
+      }
+    },
+    "categories": {
+      "exhibition": 17,
+      "seasonal": 128,
+      "workshop": 72,
+      "music": 105,
+      "shopping": 95,
+      "night": 3,
+      "festival": 25,
+      "food": 3,
+      "theater": 4,
+      "zoo": 3,
+      "sports": 3,
+      "market": 11,
+      "fleaMarket": 3
+    },
+    "areas": {
+      "hokusetsu": 40,
+      "osaka-bay": 9,
+      "osaka-kita": 121,
+      "kawachi": 47,
+      "sakai": 65,
+      "address-unconfirmed": 119,
+      "osaka-minami": 35,
+      "osaka-other": 36
+    }
+  },
+  "unexpired": {
+    "records": 472,
+    "venues": 113,
+    "fields": {
+      "description": {
+        "count": 392,
+        "total": 472,
+        "percentage": 83.1
+      },
+      "price": {
+        "count": 206,
+        "total": 472,
+        "percentage": 43.6
+      },
+      "startTime": {
+        "count": 186,
+        "total": 472,
+        "percentage": 39.4
+      },
+      "endTime": {
+        "count": 80,
+        "total": 472,
+        "percentage": 16.9
+      },
+      "time": {
+        "count": 260,
+        "total": 472,
+        "percentage": 55.1
+      },
+      "reservation": {
+        "count": 171,
+        "total": 472,
+        "percentage": 36.2
+      },
+      "coordinates": {
+        "count": 279,
+        "total": 472,
+        "percentage": 59.1
+      },
+      "access": {
+        "count": 263,
+        "total": 472,
+        "percentage": 55.7
+      }
+    },
+    "categories": {
+      "exhibition": 17,
+      "seasonal": 128,
+      "workshop": 72,
+      "music": 105,
+      "shopping": 95,
+      "night": 3,
+      "festival": 25,
+      "food": 3,
+      "theater": 4,
+      "zoo": 3,
+      "sports": 3,
+      "market": 11,
+      "fleaMarket": 3
+    },
+    "areas": {
+      "hokusetsu": 40,
+      "osaka-bay": 9,
+      "osaka-kita": 121,
+      "kawachi": 47,
+      "sakai": 65,
+      "address-unconfirmed": 119,
+      "osaka-minami": 35,
+      "osaka-other": 36
+    }
+  },
+  "next30Days": {
+    "records": 294,
+    "venues": 106,
+    "fields": {
+      "description": {
+        "count": 244,
+        "total": 294,
+        "percentage": 83
+      },
+      "price": {
+        "count": 108,
+        "total": 294,
+        "percentage": 36.7
+      },
+      "startTime": {
+        "count": 107,
+        "total": 294,
+        "percentage": 36.4
+      },
+      "endTime": {
+        "count": 64,
+        "total": 294,
+        "percentage": 21.8
+      },
+      "time": {
+        "count": 148,
+        "total": 294,
+        "percentage": 50.3
+      },
+      "reservation": {
+        "count": 85,
+        "total": 294,
+        "percentage": 28.9
+      },
+      "coordinates": {
+        "count": 157,
+        "total": 294,
+        "percentage": 53.4
+      },
+      "access": {
+        "count": 139,
+        "total": 294,
+        "percentage": 47.3
+      }
+    },
+    "categories": {
+      "exhibition": 12,
+      "seasonal": 81,
+      "workshop": 43,
+      "music": 38,
+      "shopping": 80,
+      "night": 3,
+      "festival": 16,
+      "food": 3,
+      "theater": 2,
+      "zoo": 3,
+      "sports": 3,
+      "market": 7,
+      "fleaMarket": 3
+    },
+    "areas": {
+      "hokusetsu": 33,
+      "osaka-bay": 8,
+      "osaka-kita": 62,
+      "kawachi": 36,
+      "sakai": 35,
+      "address-unconfirmed": 85,
+      "osaka-minami": 22,
+      "osaka-other": 13
+    }
+  },
+  "focusMetrics": {
+    "records": 28,
+    "venues": 15,
+    "fields": {
+      "description": {
+        "count": 27,
+        "total": 28,
+        "percentage": 96.4
+      },
+      "price": {
+        "count": 28,
+        "total": 28,
+        "percentage": 100
+      },
+      "startTime": {
+        "count": 19,
+        "total": 28,
+        "percentage": 67.9
+      },
+      "endTime": {
+        "count": 13,
+        "total": 28,
+        "percentage": 46.4
+      },
+      "time": {
+        "count": 25,
+        "total": 28,
+        "percentage": 89.3
+      },
+      "reservation": {
+        "count": 22,
+        "total": 28,
+        "percentage": 78.6
+      },
+      "coordinates": {
+        "count": 13,
+        "total": 28,
+        "percentage": 46.4
+      },
+      "access": {
+        "count": 28,
+        "total": 28,
+        "percentage": 100
+      }
+    },
+    "categories": {
+      "exhibition": 2,
+      "workshop": 5,
+      "festival": 4,
+      "music": 3,
+      "seasonal": 9,
+      "theater": 1,
+      "zoo": 1,
+      "market": 2,
+      "night": 1
+    },
+    "areas": {
+      "hokusetsu": 4,
+      "osaka-kita": 8,
+      "sakai": 5,
+      "osaka-bay": 2,
+      "address-unconfirmed": 6,
+      "kawachi": 3
+    }
+  },
+  "focus": [
+    {
+      "routeId": "81d8b910c6940868b4c9",
+      "eventName": "EXPO’70パビリオン企画展 1970年大阪万博ビフォー・アフター展 ~あのパビリオンはいまどこに?~ 2026",
+      "startDate": "2026-03-14",
+      "endDate": "2027-02-28",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/74555/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "not-acquired",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "5cc84be6f471cee4966a",
+      "eventName": "“学びながら巡る万博体験”「EXPO’70スタンプラリー&EFE Global Learning Project」",
+      "startDate": "2026-04-22",
+      "endDate": "2027-02-28",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/75663/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "not-acquired",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "3c7133223ebaf5f98f48",
+      "eventName": "コスモス・コキアフェスタ 2026",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-30",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/77306/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "not-acquired",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "75da506cca85e1c1fb38",
+      "eventName": "第8回万博スポーツフェスタ<要事前申込>",
+      "startDate": "2026-10-18",
+      "endDate": "2026-10-18",
+      "venueName": "万博記念公園",
+      "sourceId": "expo-park",
+      "officialUrl": "https://www.expo70-park.jp/event/77569/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "f180abf54426d86c0cf3",
+      "eventName": "羊文学 TOUR 2026 “すーーーはーーー”",
+      "startDate": "2026-09-28",
+      "endDate": "2026-09-28",
+      "venueName": "フェスティバルホール",
+      "sourceId": "festival-hall",
+      "officialUrl": "https://www.festivalhall.jp/events/6221/",
+      "published": false,
+      "fields": {
+        "date": "not-acquired",
+        "venue": "not-acquired",
+        "description": "not-acquired",
+        "price": "not-acquired",
+        "time": "not-acquired",
+        "reservation": "not-acquired",
+        "access": "not-acquired"
+      },
+      "detailStatus": "not-attempted"
+    },
+    {
+      "routeId": "3dc9ae48354d89cfd192",
+      "eventName": "八神純子 キミの街へ 2026",
+      "startDate": "2026-09-29",
+      "endDate": "2026-09-29",
+      "venueName": "フェスティバルホール",
+      "sourceId": "festival-hall",
+      "officialUrl": "https://www.festivalhall.jp/events/6466/",
+      "published": false,
+      "fields": {
+        "date": "not-acquired",
+        "venue": "not-acquired",
+        "description": "not-acquired",
+        "price": "not-acquired",
+        "time": "not-acquired",
+        "reservation": "not-acquired",
+        "access": "not-acquired"
+      },
+      "detailStatus": "not-attempted"
+    },
+    {
+      "routeId": "ff508473cb55cf0f5dc8",
+      "eventName": "読売日本交響楽団 第45回大阪定期演奏会",
+      "startDate": "2026-09-30",
+      "endDate": "2026-09-30",
+      "venueName": "フェスティバルホール",
+      "sourceId": "festival-hall",
+      "officialUrl": "https://www.festivalhall.jp/events/5562/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "not-acquired",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "82cc9a5be963f2071be1",
+      "eventName": "野村ホールディングス株式会社 創立100周年 記念公演 ロンドン交響楽団2026 指揮 サー・アントニオ・パッパーノ",
+      "startDate": "2026-09-30",
+      "endDate": "2026-09-30",
+      "venueName": "フェニーチェ堺 大ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/34444/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "107c7d528b4227079d40",
+      "eventName": "ディズニー・オン・クラシック ~まほうの夜の音楽会 2026",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10",
+      "venueName": "フェニーチェ堺 大ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/35552/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "ea88d7faf89153aa3fed",
+      "eventName": "ワカテ de ワカル フェニーチェ文楽 vol.7",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-14",
+      "venueName": "フェニーチェ堺 小ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/35159/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "4d5789eccb8eb98f34fc",
+      "eventName": "桂かい枝独演会",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "venueName": "フェニーチェ堺 小ホール",
+      "sourceId": "fenice-sakai",
+      "officialUrl": "https://www.fenice-sacay.jp/event/34984/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "1e3c94df2914c92947fc",
+      "eventName": "「カプラ®展」ワークショップ",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-03",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29397",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "1fd94291594dd0ba9385",
+      "eventName": "探究ラボ「クリップ探査機の着地ミッション!」",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29252",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "c271cc74d16d41991f2f",
+      "eventName": "化学実験教室「日本酒を分析する」",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29752",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "b02cc19329172a6989cc",
+      "eventName": "講演会「学芸員の日本酒トーク」",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29757",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "52253554461d3139a613",
+      "eventName": "丹波杜氏による講演会(試飲付き)",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "venueName": "大阪市立科学館",
+      "sourceId": "science-museum",
+      "officialUrl": "https://www.sci-museum.jp/event/#pl29771",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "9fc27b165ddbe5f76dd1",
+      "eventName": "NHK日曜美術館50年展",
+      "startDate": "2026-10-10",
+      "endDate": "2026-12-20",
+      "venueName": "大阪中之島美術館",
+      "sourceId": "nakka-art-museum",
+      "officialUrl": "https://nakka-art.jp/exhibition-post/nichibiten50/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "not-acquired",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "63bd6ad0a0823b3fafc6",
+      "eventName": "第39回 ATC咲洲ダンスフェス’26秋グランプリ",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "ATC海辺のステージ、ステージサイズ:幅7.2mx奥行5.4m/床素材:リノリウム / ※天候により会場変更になる場合があります",
+      "sourceId": "atc-events",
+      "officialUrl": "https://www.atc-co.com/event/event-2610/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "not-acquired",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "c8c1b471bfce81fd973d",
+      "eventName": "関西クラリネットソサエティ特別演奏会 ~ソプラノ 田嶋喜子さんを迎えて~",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-03",
+      "venueName": "南港サンセットホール、(ITM棟10階)",
+      "sourceId": "atc-events",
+      "officialUrl": "https://www.atc-co.com/event/sunset20th/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "not-acquired",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "65dcdfa87071a76f1e12",
+      "eventName": "ナゾトキイベント「ぐわ兵衛とアソビ帝国」",
+      "startDate": "2026-09-12",
+      "endDate": "2026-12-20",
+      "venueName": "浜寺公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://hamadera.osaka-park.or.jp/event-information/%e3%83%8a%e3%82%be%e3%83%88%e3%82%ad%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88%e3%80%8c%e3%81%90%e3%82%8f%e5%85%b5%e8%a1%9b%e3%81%a8%e3%82%a2%e3%82%bd%e3%83%93%e5%b8%9d%e5%9b%bd%e3%80%8d/",
+      "reason": "イベント本文の構造に未対応",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "f8c674b4708f6131aacb",
+      "eventName": "ウミホタル ウォッチング",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "せんなん里海公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://sennan.osaka-park.or.jp/event/",
+      "reason": "イベント名を本文で照合できない",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "not-acquired",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "62df41ca10511b37deaf",
+      "eventName": "タッチングプール&里海mini縁日",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "せんなん里海公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://sennan.osaka-park.or.jp/2026/03/14/%e3%82%bf%e3%83%83%e3%83%81%e3%83%b3%e3%82%b0%e3%83%97%e3%83%bc%e3%83%ab%ef%bc%86%e9%87%8c%e6%b5%b7mini%e7%b7%91%e6%97%a5/",
+      "reason": "イベント名を本文で照合できない",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "1db9290d02e5e8a2dedb",
+      "eventName": "すみ博2026(すみよし博覧会)",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-17",
+      "venueName": "住吉公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://sumihaku.com/",
+      "reason": "イベント名を本文で照合できない",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "e0d26642814e18a35bcc",
+      "eventName": "第17回山田池公園フェスティバル",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-17",
+      "venueName": "山田池公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://yamadaike.osaka-park.or.jp/",
+      "reason": "イベント名を本文で照合できない",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "not-acquired",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "71076ea8c1b32be55f91",
+      "eventName": "すみすみマルシェ",
+      "startDate": "2026-10-24",
+      "endDate": "2026-10-24",
+      "venueName": "住吉公園",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://www.toshi-kouen.jp/staticpages/index.php/sumiyoshi_top",
+      "reason": "イベント名を本文で照合できない",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "8f861513b2d99d2ab18e",
+      "eventName": "久宝寺こうえんマルシェ",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "venueName": "久宝寺緑地",
+      "sourceId": "bodik-osaka",
+      "officialUrl": "https://kyuhoji-marche.jimdofree.com/",
+      "reason": "イベント本文の構造に未対応",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "unrecognized",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "f3ef15b3cbde65aedff8",
+      "eventName": "昼の魔法遊園地と64匹の謎の妖精",
+      "startDate": "2026-09-11",
+      "endDate": "2026-10-18",
+      "venueName": "ひらかたパーク",
+      "sourceId": "hirakata-park",
+      "officialUrl": "https://realdgame.jp/s/wizardpark/day/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "6f3da73d79beab211363",
+      "eventName": "夜の魔法学校からの脱出",
+      "startDate": "2026-09-11",
+      "endDate": "2026-10-18",
+      "venueName": "ひらかたパーク",
+      "sourceId": "hirakata-park",
+      "officialUrl": "https://realdgame.jp/s/wizardpark/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "9d6c95de2a135b4781b7",
+      "eventName": "ORANGE RANGE 25th Anniversary! めんそーれ、ひらパー!",
+      "startDate": "2026-08-29",
+      "endDate": "2026-10-12",
+      "venueName": "ひらかたパーク",
+      "sourceId": "hirakata-park",
+      "officialUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "not-acquired",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "routeId": "45afda0f5a42f244a290",
+      "eventName": "【SOUTHEAST ASIA AFTERNOON TEA】世界を旅するアフタヌーンテ...",
+      "startDate": "2026-08-17",
+      "endDate": "2026-10-15",
+      "venueName": "グランフロント大阪 THE COSMOPOLITAN GRILL|BAR|TERRACE",
+      "sourceId": "grand-front",
+      "officialUrl": "https://www.grandfront-osaka.jp/event/5681/",
+      "published": true,
+      "fields": {
+        "date": "confirmed",
+        "venue": "confirmed",
+        "description": "confirmed",
+        "price": "confirmed",
+        "time": "confirmed",
+        "reservation": "confirmed",
+        "access": "confirmed"
+      },
+      "detailStatus": "success",
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    }
+  ],
+  "mandatoryEvidenceMissing": [],
+  "duplicateRoutes": [],
+  "sources": [
+    {
+      "id": "bodik-osaka",
+      "status": "success",
+      "count": 78,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "osaka-city-events",
+      "status": "success",
+      "count": 46,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "osaka-info-events",
+      "status": "success",
+      "count": 4,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "osaka-art-museum",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています"
+    },
+    {
+      "id": "nakka-art-museum",
+      "status": "success",
+      "count": 5,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "festival-hall",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "aeon-osaka-dome-city",
+      "status": "success",
+      "count": 33,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "hankyu-umeda",
+      "status": "success",
+      "count": 26,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "aeon-dainichi",
+      "status": "success",
+      "count": 35,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "aeon-hineno",
+      "status": "success",
+      "count": 23,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "aeon-ibaraki",
+      "status": "success",
+      "count": 28,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "osaka-natural-history-museum",
+      "status": "stale",
+      "count": 2,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています"
+    },
+    {
+      "id": "zepp-namba",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています"
+    },
+    {
+      "id": "ghibli-park-exhibition-osaka",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "最新取得に失敗したため前回のイベントを使用しています"
+    },
+    {
+      "id": "atc-events",
+      "status": "success",
+      "count": 8,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "expo-park",
+      "status": "success",
+      "count": 9,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "hirakata-park",
+      "status": "success",
+      "count": 12,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "grand-front",
+      "status": "success",
+      "count": 30,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "namba-parks",
+      "status": "success",
+      "count": 6,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "lucua",
+      "status": "success",
+      "count": 14,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "billboard-osaka",
+      "status": "success",
+      "count": 80,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "fenice-sakai",
+      "status": "success",
+      "count": 38,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "nhk-osaka-hall",
+      "status": "success",
+      "count": 27,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "science-museum",
+      "status": "success",
+      "count": 6,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-solaniwa-yokai-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-daizetsumetsu-osaka-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-hokkaido-buffet-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-jikken-lab-osaka-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-tenshiba-oktoberfest-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-conan-shinsaibashi-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-autumn-fest-osaka-station-city-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-mucha-returns-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-bread-donut-expocity-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-kyushu-shikoku-fair-sakai-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-vintage-market-suita-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-sakana-japan-suita-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-zumzum-kitchencar-sakai-2026",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    },
+    {
+      "id": "verified-outings-seaside-terrace-bbq-sakai-2026",
+      "status": "error",
+      "count": 0,
+      "checkedAt": "2026-09-30T10:40:41.886Z",
+      "error": "official page fetch failed; retaining last verified timestamp: fetch failed"
+    },
+    {
+      "id": "verified-outings-citysup-nakanoshima-guided-tour",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-09-30T10:40:41.886Z"
+    }
+  ],
+  "home": {
+    "large": [
+      {
+        "routeId": "9fc27b165ddbe5f76dd1",
+        "name": "NHK日曜美術館50年展",
+        "start": "2026-10-10",
+        "end": "2026-12-20",
+        "venue": "大阪中之島美術館",
+        "category": "exhibition",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nakka-art.jp/exhibition-post/nichibiten50/"
+      },
+      {
+        "routeId": "449537d6491618a2fa8f",
+        "name": "特別展「大絶滅展―生命史のビッグファイブ」",
+        "start": "2026-07-17",
+        "end": "2026-10-12",
+        "venue": "大阪市立自然史博物館 ネイチャーホール",
+        "category": "exhibition",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://daizetsumetsu.jp/outline_osaka.html"
+      },
+      {
+        "routeId": "e0d26642814e18a35bcc",
+        "name": "第17回山田池公園フェスティバル",
+        "start": "2026-10-17",
+        "end": "2026-10-17",
+        "venue": "山田池公園",
+        "category": "festival",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://yamadaike.osaka-park.or.jp/"
+      },
+      {
+        "routeId": "fa9467f18c015608e5e9",
+        "name": "空庭妖怪祭",
+        "start": "2026-08-08",
+        "end": "2026-09-30",
+        "venue": "空庭温泉 OSAKA BAY TOWER",
+        "category": "festival",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://solaniwa.com/lp/youkai_matsuri_26/"
+      }
+    ],
+    "today": [
+      {
+        "routeId": "82cc9a5be963f2071be1",
+        "name": "野村ホールディングス株式会社 創立100周年 記念公演 ロンドン交響楽団2026 指揮 サー・アントニオ・パッパーノ",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "venue": "フェニーチェ堺 大ホール",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.fenice-sacay.jp/event/34444/"
+      },
+      {
+        "routeId": "ff508473cb55cf0f5dc8",
+        "name": "読売日本交響楽団 第45回大阪定期演奏会",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "venue": "フェスティバルホール",
+        "category": "music",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.festivalhall.jp/events/5562/"
+      },
+      {
+        "routeId": "c49c82d053e7f9e129c2",
+        "name": "Marcus Miller",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "venue": "ビルボードライブ大阪",
+        "category": "music",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.billboard-live.com/osaka/show?event_id=ev-21370&date=2026-09-30"
+      }
+    ],
+    "weekend": [
+      {
+        "routeId": "5865665d324c0c3f1bd0",
+        "name": "イオンモール まちのおしごと体験",
+        "start": "2026-10-03",
+        "end": "2026-10-04",
+        "venue": "イオンモール日根野",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.aeon.jp/sc/hineno/event/2609oshigotohaku.html"
+      },
+      {
+        "routeId": "0f0bb93b4084c45fe67b",
+        "name": "夢かわレジンアクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5756/"
+      },
+      {
+        "routeId": "27f404e907c711ee7dd7",
+        "name": "長野公園で中秋の名月を楽しもう!",
+        "start": "2026-09-19",
+        "end": "2026-10-04",
+        "venue": "長野公園",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.toshi-kouen.jp/staticpages/index.php/nagano_top"
+      },
+      {
+        "routeId": "30e77a25bb82b74dc356",
+        "name": "秋の七草展",
+        "start": "2026-09-26",
+        "end": "2026-10-05",
+        "venue": "大泉緑地",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://oizumi.osaka-park.or.jp/"
+      }
+    ]
+  },
+  "top20": {
+    "today": [
+      {
+        "routeId": "fa9467f18c015608e5e9",
+        "name": "空庭妖怪祭",
+        "start": "2026-08-08",
+        "end": "2026-09-30",
+        "venue": "空庭温泉 OSAKA BAY TOWER",
+        "category": "festival",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://solaniwa.com/lp/youkai_matsuri_26/"
+      },
+      {
+        "routeId": "45afda0f5a42f244a290",
+        "name": "【SOUTHEAST ASIA AFTERNOON TEA】世界を旅するアフタヌーンテ...",
+        "start": "2026-08-17",
+        "end": "2026-10-15",
+        "venue": "グランフロント大阪 THE COSMOPOLITAN GRILL|BAR|TERRACE",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5681/"
+      },
+      {
+        "routeId": "a8e8e6df550fba4208dd",
+        "name": "なんば雲海",
+        "start": "2026-08-28",
+        "end": "2026-11-01",
+        "venue": "なんばパークス",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nambaparks.com/event/334"
+      },
+      {
+        "routeId": "9d6c95de2a135b4781b7",
+        "name": "ORANGE RANGE 25th Anniversary! めんそーれ、ひらパー!",
+        "start": "2026-08-29",
+        "end": "2026-10-12",
+        "venue": "ひらかたパーク",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/"
+      },
+      {
+        "routeId": "d6127d1046176cb8e280",
+        "name": "NAMBA Parks Autumn",
+        "start": "2026-09-04",
+        "end": "2026-10-18",
+        "venue": "なんばパークス",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nambaparks.com/event/344"
+      },
+      {
+        "routeId": "f3ef15b3cbde65aedff8",
+        "name": "昼の魔法遊園地と64匹の謎の妖精",
+        "start": "2026-09-11",
+        "end": "2026-10-18",
+        "venue": "ひらかたパーク",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://realdgame.jp/s/wizardpark/day/"
+      },
+      {
+        "routeId": "d5ea3f847c6f771e671a",
+        "name": "巡回展『ととのう』展 開催のお知らせ",
+        "start": "2026-09-18",
+        "end": "2026-10-14",
+        "venue": "グランフロント大阪 無印良品",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5715/"
+      },
+      {
+        "routeId": "27f404e907c711ee7dd7",
+        "name": "長野公園で中秋の名月を楽しもう!",
+        "start": "2026-09-19",
+        "end": "2026-10-04",
+        "venue": "長野公園",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.toshi-kouen.jp/staticpages/index.php/nagano_top"
+      },
+      {
+        "routeId": "30e77a25bb82b74dc356",
+        "name": "秋の七草展",
+        "start": "2026-09-26",
+        "end": "2026-10-05",
+        "venue": "大泉緑地",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://oizumi.osaka-park.or.jp/"
+      },
+      {
+        "routeId": "9ad2ae368b0bff66ae3e",
+        "name": "秋のなんばグルメめぐり",
+        "start": "2026-09-28",
+        "end": "2026-11-01",
+        "venue": "なんばパークス",
+        "category": "food",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nambaparks.com/event/339"
+      },
+      {
+        "routeId": "cae29eb6dd4538be221e",
+        "name": "暮らしと香りのスイッチ展",
+        "start": "2026-09-29",
+        "end": "2026-10-05",
+        "venue": "グランフロント大阪 無印良品",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5743/"
+      },
+      {
+        "routeId": "0f0bb93b4084c45fe67b",
+        "name": "夢かわレジンアクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5756/"
+      },
+      {
+        "routeId": "223b6c559a5500b1372f",
+        "name": "ビーズクロッシェアクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5753/"
+      },
+      {
+        "routeId": "790557f7b1e49ff4476a",
+        "name": "◎カスタムブレスレット",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5750/"
+      },
+      {
+        "routeId": "82c498471634c3334464",
+        "name": "パールブレスレット教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5755/"
+      },
+      {
+        "routeId": "82cc9a5be963f2071be1",
+        "name": "野村ホールディングス株式会社 創立100周年 記念公演 ロンドン交響楽団2026 指揮 サー・アントニオ・パッパーノ",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "venue": "フェニーチェ堺 大ホール",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.fenice-sacay.jp/event/34444/"
+      },
+      {
+        "routeId": "8c9c9c43f069e447b914",
+        "name": "レジン・ビーズ刺繍アクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5752/"
+      },
+      {
+        "routeId": "c49c82d053e7f9e129c2",
+        "name": "Marcus Miller",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "venue": "ビルボードライブ大阪",
+        "category": "music",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.billboard-live.com/osaka/show?event_id=ev-21370&date=2026-09-30"
+      },
+      {
+        "routeId": "e5c62c62168594ea4dbe",
+        "name": "手作りレジン教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5751/"
+      },
+      {
+        "routeId": "81d8b910c6940868b4c9",
+        "name": "EXPO’70パビリオン企画展 1970年大阪万博ビフォー・アフター展 ~あのパビリオンはいまどこに?~ 2026",
+        "start": "2026-03-14",
+        "end": "2027-02-28",
+        "venue": "万博記念公園",
+        "category": "exhibition",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.expo70-park.jp/event/74555/"
+      }
+    ],
+    "weekend": [
+      {
+        "routeId": "5865665d324c0c3f1bd0",
+        "name": "イオンモール まちのおしごと体験",
+        "start": "2026-10-03",
+        "end": "2026-10-04",
+        "venue": "イオンモール日根野",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.aeon.jp/sc/hineno/event/2609oshigotohaku.html"
+      },
+      {
+        "routeId": "45afda0f5a42f244a290",
+        "name": "【SOUTHEAST ASIA AFTERNOON TEA】世界を旅するアフタヌーンテ...",
+        "start": "2026-08-17",
+        "end": "2026-10-15",
+        "venue": "グランフロント大阪 THE COSMOPOLITAN GRILL|BAR|TERRACE",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5681/"
+      },
+      {
+        "routeId": "a8e8e6df550fba4208dd",
+        "name": "なんば雲海",
+        "start": "2026-08-28",
+        "end": "2026-11-01",
+        "venue": "なんばパークス",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nambaparks.com/event/334"
+      },
+      {
+        "routeId": "9d6c95de2a135b4781b7",
+        "name": "ORANGE RANGE 25th Anniversary! めんそーれ、ひらパー!",
+        "start": "2026-08-29",
+        "end": "2026-10-12",
+        "venue": "ひらかたパーク",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.hirakatapark.co.jp/topics/orange-range-25th-anniversary/"
+      },
+      {
+        "routeId": "d6127d1046176cb8e280",
+        "name": "NAMBA Parks Autumn",
+        "start": "2026-09-04",
+        "end": "2026-10-18",
+        "venue": "なんばパークス",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nambaparks.com/event/344"
+      },
+      {
+        "routeId": "6f3da73d79beab211363",
+        "name": "夜の魔法学校からの脱出",
+        "start": "2026-09-11",
+        "end": "2026-10-18",
+        "venue": "ひらかたパーク",
+        "category": "night",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://realdgame.jp/s/wizardpark/"
+      },
+      {
+        "routeId": "f3ef15b3cbde65aedff8",
+        "name": "昼の魔法遊園地と64匹の謎の妖精",
+        "start": "2026-09-11",
+        "end": "2026-10-18",
+        "venue": "ひらかたパーク",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://realdgame.jp/s/wizardpark/day/"
+      },
+      {
+        "routeId": "d5ea3f847c6f771e671a",
+        "name": "巡回展『ととのう』展 開催のお知らせ",
+        "start": "2026-09-18",
+        "end": "2026-10-14",
+        "venue": "グランフロント大阪 無印良品",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5715/"
+      },
+      {
+        "routeId": "27f404e907c711ee7dd7",
+        "name": "長野公園で中秋の名月を楽しもう!",
+        "start": "2026-09-19",
+        "end": "2026-10-04",
+        "venue": "長野公園",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.toshi-kouen.jp/staticpages/index.php/nagano_top"
+      },
+      {
+        "routeId": "30e77a25bb82b74dc356",
+        "name": "秋の七草展",
+        "start": "2026-09-26",
+        "end": "2026-10-05",
+        "venue": "大泉緑地",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://oizumi.osaka-park.or.jp/"
+      },
+      {
+        "routeId": "9ad2ae368b0bff66ae3e",
+        "name": "秋のなんばグルメめぐり",
+        "start": "2026-09-28",
+        "end": "2026-11-01",
+        "venue": "なんばパークス",
+        "category": "food",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://nambaparks.com/event/339"
+      },
+      {
+        "routeId": "cae29eb6dd4538be221e",
+        "name": "暮らしと香りのスイッチ展",
+        "start": "2026-09-29",
+        "end": "2026-10-05",
+        "venue": "グランフロント大阪 無印良品",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5743/"
+      },
+      {
+        "routeId": "0f0bb93b4084c45fe67b",
+        "name": "夢かわレジンアクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5756/"
+      },
+      {
+        "routeId": "223b6c559a5500b1372f",
+        "name": "ビーズクロッシェアクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5753/"
+      },
+      {
+        "routeId": "790557f7b1e49ff4476a",
+        "name": "◎カスタムブレスレット",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5750/"
+      },
+      {
+        "routeId": "82c498471634c3334464",
+        "name": "パールブレスレット教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5755/"
+      },
+      {
+        "routeId": "8c9c9c43f069e447b914",
+        "name": "レジン・ビーズ刺繍アクセサリー教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5752/"
+      },
+      {
+        "routeId": "e5c62c62168594ea4dbe",
+        "name": "手作りレジン教室",
+        "start": "2026-09-30",
+        "end": "2026-10-31",
+        "venue": "グランフロント大阪 PARTS CLUB",
+        "category": "workshop",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.grandfront-osaka.jp/event/5751/"
+      },
+      {
+        "routeId": "d2335dee8b42adde2a18",
+        "name": "長野公園 ハロウィン",
+        "start": "2026-10-01",
+        "end": "2026-10-31",
+        "venue": "長野公園",
+        "category": "seasonal",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.toshi-kouen.jp/staticpages/index.php/nagano_top"
+      },
+      {
+        "routeId": "15ca85ebc41b1cbfec77",
+        "name": "イオンモールのSDGsアクション",
+        "start": "2026-10-02",
+        "end": "2026-10-04",
+        "venue": "イオンモール日根野",
+        "category": "zoo",
+        "status": "scheduled",
+        "sourceStatus": "success",
+        "officialUrl": "https://www.aeon.jp/sc/hineno/event/2609sdgs.html"
+      }
+    ]
+  }
+}

@@ -1,4 +1,6 @@
 import type { EventItem, UserProfile } from '../types';
+import { usableEventImage } from './eventPresentation';
+import { isPromotionEvent } from './eventEligibility';
 
 const DAY_MS = 86_400_000;
 
@@ -38,7 +40,7 @@ export function eventAttentionScore(event: EventItem, profileScore = 50, now = n
   if (/(?:特別展|企画展|フェス(?:ティバル)?|花火大会|イルミネーション|博覧会|祭り|祭)$/.test(title)
     || (/(?:展覧会|展)$/.test(title) && /(美術館|博物館|ギャラリー|ミュージアム)/.test(venue))) score += 18;
   if (official) score += 12;
-  if (event.imageUrl) score += 12;
+  if (usableEventImage(event)) score += 12;
   if (event.description) score += 6;
   if (event.venueName) score += 4;
   score += Math.min(12, featuredTags * 6);
@@ -50,7 +52,7 @@ export function eventAttentionScore(event: EventItem, profileScore = 50, now = n
   const eventText = `${event.eventName} ${event.description ?? ''}`;
   if (/(作品?募集|応募期間|フォトコンテスト|レシート.*応募|web上で|オンラインのみ)/i.test(eventText)) return 0;
   if (event.officialStatus && event.officialStatus !== 'scheduled') return 0;
-  if (/(?:受注会|販売会|セール|実演販売|商品説明会)/.test(title)) score -= 30;
+  if (isPromotionEvent(event)) return 0;
   score += (profileScore - 50) * 0.35;
   return Math.max(0, Math.round(score));
 }

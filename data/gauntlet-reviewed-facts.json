@@ -1,0 +1,257 @@
+[
+  {
+    "sourceId": "verified-outings-mucha-returns-2026",
+    "eventName": "企画展「ミュシャ芸術博覧会リターンズ」",
+    "startDate": "2026-08-01",
+    "fields": {
+      "timeInfo": "9:30～17:15（入館は16:30まで）。月曜休館（10月12日は開館、13日は休館）。",
+      "price": "一般510円／高校・大学生310円／小・中学生100円。小学生未満などは公式条件で無料。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "9:30～17:15（入館は16：30まで）",
+        "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      },
+      "price": {
+        "text": "一般510円 〇高校･大学生310円 〇小･中学生100円",
+        "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-bread-donut-expocity-2026",
+    "eventName": "パンとドーナツの世界",
+    "startDate": "2026-10-09",
+    "fields": {
+      "timeInfo": "10:00～18:00。売り切れ次第終了。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "10:00～18:00",
+        "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-kyushu-shikoku-fair-sakai-2026",
+    "eventName": "九州四国物産展",
+    "startDate": "2026-09-18",
+    "fields": {
+      "timeInfo": "10:00～20:00。最終日9月30日は18:00まで。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "10:00～20:00　※最終日のみ18:00まで",
+        "sourceUrl": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-vintage-market-suita-2026",
+    "eventName": "Vintage Market -万博 蚤の市-2026秋",
+    "startDate": "2026-10-23",
+    "fields": {
+      "timeInfo": "9:30～16:30。当日入場券の販売は16:00まで。",
+      "price": "前売券700円／当日券1,000円。小学生以下無料。別途、公園の入園料が必要。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "9:30~16:30(当日入場券販売は16:00まで)",
+        "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      },
+      "price": {
+        "text": "前売券 700円、当日券 1,000円(小学生以下無料) ※別途自然文化園・日本庭園共通入園料が必要",
+        "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-sakana-japan-suita-2026",
+    "eventName": "SAKANA&JAPAN FESTIVAL2026 in 万博記念公園",
+    "startDate": "2026-10-02",
+    "fields": {
+      "timeInfo": "各日9:30～17:00（予定）。",
+      "price": "入場料500円。小学生以下無料。公園入場料と飲食代は別途。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "午前9時30分~午後5時",
+        "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      },
+      "price": {
+        "text": "入場料 500円(税込) ※小学生以下無料 ※万博記念公園入場料、飲食代は別途",
+        "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-zumzum-kitchencar-sakai-2026",
+    "eventName": "ZUMZUM KITCHENCAR FES in 堺市大泉緑地",
+    "startDate": "2026-10-03",
+    "fields": {
+      "timeInfo": "開場・キッチンカー11:00、開演11:30、閉演予定17:00。",
+      "price": "入場無料。ステージ前には有料エリアあり。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "開場 / キッチンカーオープン 11:00 開演 11:30 閉演予定 17:00",
+        "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      },
+      "price": {
+        "text": "※入場無料 (ステージ前クラウドファンディング有料エリアあり)",
+        "sourceUrl": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+        "checkedAt": "2026-09-30T04:10:24.281Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-seaside-terrace-bbq-sakai-2026",
+    "eventName": "Seaside Terrace BBQ 2026",
+    "startDate": "2026-07-10",
+    "fields": {
+      "timeInfo": "18:00～21:00（時間内150分制）。月曜・火曜は除外日。",
+      "price": "Casualプランは通常1名5,000円、会員1名4,500円。ほかのプランは公式情報を確認。",
+      "reservationRequired": true,
+      "reservationInfo": "前日15:00までの完全予約制。9月30日開催分の予約期限は過ぎています。",
+      "officialStatus": "registration_closed",
+      "statusEvidence": "2026年9月30日開催分の予約は前日15:00締切。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "18:00~21:00[時間内150分制]",
+        "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+        "checkedAt": "2026-09-30T04:14:20.298Z"
+      },
+      "price": {
+        "text": "〈Casualプラン〉 〈通常料金〉1名様 ¥5,000 〈会員料金〉1名様 ¥4,500",
+        "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+        "checkedAt": "2026-09-30T04:14:20.298Z"
+      },
+      "reservationRequired": {
+        "text": "※前日15:00までの完全予約制(HPまたは電話)",
+        "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+        "checkedAt": "2026-09-30T04:14:20.298Z"
+      },
+      "reservationInfo": {
+        "text": "※前日15:00までの完全予約制(HPまたは電話)",
+        "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+        "checkedAt": "2026-09-30T04:14:20.298Z"
+      },
+      "officialStatus": {
+        "text": "※前日15:00までの完全予約制(HPまたは電話)",
+        "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+        "checkedAt": "2026-09-30T04:14:20.298Z"
+      },
+      "statusEvidence": {
+        "text": "※前日15:00までの完全予約制(HPまたは電話)",
+        "sourceUrl": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+        "checkedAt": "2026-09-30T04:14:20.298Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-solaniwa-yokai-2026",
+    "eventName": "空庭妖怪祭",
+    "startDate": "2026-08-08",
+    "fields": {
+      "timeInfo": "11:00～23:00。ショーなど個別企画の開催日・時間は公式ページで確認。",
+      "price": "イベント参加は無料。空庭温泉の入館料・大阪市入湯税と飲食代は別途。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "11:00〜23:00",
+        "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      },
+      "price": {
+        "text": "※入館料および大阪市入湯税が 別途必要です。",
+        "sourceUrl": "https://solaniwa.com/lp/youkai_matsuri_26/",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-daizetsumetsu-osaka-2026",
+    "eventName": "特別展「大絶滅展―生命史のビッグファイブ」",
+    "startDate": "2026-07-17",
+    "fields": {
+      "timeInfo": "9:30～17:00（入場は16:30まで）。月曜休館、祝休日は開館し翌平日休館。8月3日・10日は開館。",
+      "price": "大人2,000円／高校・大学生1,500円／小・中学生700円。未就学児は無料。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "9時30分～17時（入場は16時30分まで）",
+        "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      },
+      "price": {
+        "text": "大人2,000円（1,800円）、高校・大学生1,500円（1,300円）、小・中学生700円（500円）",
+        "sourceUrl": "https://daizetsumetsu.jp/outline_osaka.html",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-hokkaido-buffet-2026",
+    "eventName": "北海道ブッフェ 第2弾~北の大地の恵みを味わう~",
+    "startDate": "2026-07-01",
+    "fields": {
+      "timeInfo": "ランチは平日11:30～15:00、土日祝は11:30～13:00／13:30～15:00の2部制。ディナー17:00～21:30（120分制）。",
+      "price": "大人ランチ平日6,000円・土日祝6,500円。大人ディナー平日10,500円・土日祝11,000円。子ども料金あり、4歳未満無料。"
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "〖土日祝〗 1部 11：30～13：00　２部 13：30～15：00　　90分制",
+        "sourceUrl": "https://www.miyakohotels.ne.jp/tennoji/restaurant/skyrestaurant/menu/59778/",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      },
+      "price": {
+        "text": "大　人　￥10,500",
+        "sourceUrl": "https://www.miyakohotels.ne.jp/tennoji/restaurant/skyrestaurant/menu/59778/",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      }
+    }
+  },
+  {
+    "sourceId": "verified-outings-conan-shinsaibashi-2026",
+    "eventName": "リアル脱出ゲーム×名探偵コナン『疾風の追走からの脱出』",
+    "startDate": "2026-07-09",
+    "fields": {
+      "timeInfo": "公演開始時刻は開催日・回によって異なる。受付は各回30分前から、開始10分前までに来場。",
+      "price": "一般チケットは前売3,700円／当日4,000円。子ども・グループなど別料金あり。",
+      "reservationInfo": "参加回のチケットが必要。前売は参加前日23:59まで。完売時は当日券の販売なし。",
+      "reservationRequired": true
+    },
+    "fieldEvidence": {
+      "timeInfo": {
+        "text": "受付開始は、各回30分前となります。",
+        "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      },
+      "price": {
+        "text": "一般チケット  | 3,700円  | 4,000円",
+        "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      },
+      "reservationInfo": {
+        "text": "前売チケットは参加日前日の23:59まで購入可能です。",
+        "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      },
+      "reservationRequired": {
+        "text": "小学生以上のご参加には必ずチケットが必要です。",
+        "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+        "checkedAt": "2026-09-30T04:25:57.209Z"
+      }
+    }
+  }
+]

@@ -54,7 +54,9 @@ function byDistanceThenDate(a: DetailRecommendation, b: DetailRecommendation) {
 }
 
 export function detailRecommendations(current: EventItem, events: EventItem[], now: Date, limit = 3) {
-  const available = events.filter((event) => event.id !== current.id && !isFinished(event, now));
+  const available = events.filter((event) => event.id !== current.id
+    && !isFinished(event, now)
+    && (!event.officialStatus || event.officialStatus === 'scheduled'));
   const nearbyOngoing = available
     .filter((event) => {
       if (!isOngoing(event, now)) return false;
