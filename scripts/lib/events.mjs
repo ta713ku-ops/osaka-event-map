@@ -193,6 +193,16 @@ function freeEvidenceMatch(text) {
   return undefined;
 }
 
+function hasRequiredAdmissionCost(text) {
+  const admission = '(?:入園料|入館料|入場料|観覧料|鑑賞料|施設利用料)';
+  if (new RegExp(`(?:大人有料|要\\s*${admission}|別途[^。！？\\n]{0,30}${admission}|${admission}[^。！？\\n]{0,12}(?:別途|必要|かかり|有料))`, 'u').test(text)) return true;
+  return text.split(/[。！？\n、]/u).some(clause => {
+    const optionalActivity = /(?:ワークショップ|体験|WS|飲食|販売)/iu.test(clause) && /(?:任意|希望者|別売|オプション)/u.test(clause);
+    return [...clause.matchAll(/(大人|一般|中学生以上|高校生以上|参加費|入場料|入園料|入館料|観覧料|鑑賞料)[^。！？\n]{0,10}?(\d[\d,]*)\s*円/gu)]
+      .some(match => !(optionalActivity && match[1] === '参加費') && Number(match[2].replaceAll(',', '')) > 0);
+  });
+}
+
 /**
  * Infer only tags that have an explicit phrase in source text.  In
  * particular, a finite start/end date is not itself evidence of `limited`,
@@ -234,8 +244,14 @@ export function classifyTags({ name = '', description = '', price = '', audience
   }
 
   const freeContextOnly = /(?:駐車場|駐輪場|駐車|駐輪|物販|グッズ|材料費|一部|小学生以下|子ども|こども|子供|大人|体験|ワークショップ)[^。！？\n]{0,12}(?:無料|有料)/u;
-  const freePartial = /(?:一部有料|大人有料|別途有料|物販[^。！？\n]{0,8}有料|(?:体験|ワークショップ)[^。！？\n]{0,8}有料|小学生以下無料)/u;
-  if (!hasNegativeCue(text, /(?:無料|無償|0\s*円|０\s*円|料金\s*なし|参加費\s*なし)/u) && !freePartial.test(text)) {
+  const freePartial = /(?:一部有料|大人有料|別途有料|別途[^。！？\n]{0,30}(?:入園料|入館料|入場料)[^。！？\n]{0,12}(?:必要|別途|かかり)|物販[^。！？\n]{0,8}有料|(?:体験|ワークショップ)[^。！？\n]{0,8}有料|小学生以下無料)/u;
+  // An explicit, unqualified free admission statement allows an outing
+  // without buying optional food or workshops. Required venue admission and
+  // adult/standard ticket fees still prevent a free classification.
+  const freeAdmission = fields.some(field => field.split(/[。！？\n]/u).some(sentence => /^(?:入場(?:料|料金)?|入館料?|観覧料?)\s*(?:は|：|:)?\s*無料/u.test(sentence.trim())));
+  const requiredAdmissionCost = hasRequiredAdmissionCost(text);
+  const optionalCostsOnly = freeAdmission && !requiredAdmissionCost;
+  if (!hasNegativeCue(text, /(?:無料|無償|0\s*円|０\s*円|料金\s*なし|参加費\s*なし)/u) && !requiredAdmissionCost && (!freePartial.test(text) || optionalCostsOnly)) {
     const evidence = freeEvidenceMatch(text);
     const eventLevelEvidence = /(?:入場(?:料|料金)?|参加(?:費|料金)?|料金|入館(?:料)?|観覧(?:料)?|利用料)\s*(?:は|：|:)?\s*(?:無料|無償|なし|不要)/u.test(evidence ?? '');
     if (evidence && (eventLevelEvidence || !freeContextOnly.test(text))) {
@@ -291,11 +307,14 @@ function explicitBoolean(value) {
   return undefined;
 }
 
-function freeValue(price, explicit) {
+function freeValue(price, explicit, admissionContext = '') {
+  if (hasRequiredAdmissionCost(admissionContext)) return false;
   if (typeof explicit === 'boolean') return explicit;
+  if (price === 0) return true;
   const text = textValue(price);
   if (!text) return null;
   if (classifyTags({ price: text }).tags.includes('free')) return true;
+  if (hasRequiredAdmissionCost(text)) return false;
   // A concrete non-zero price is explicit evidence that the event is not
   // free; vague labels such as "要問合せ" remain unknown.
   if (/(?:\d[\d,]*\s*円|有料|参加費あり|料金あり)/u.test(text)) return false;
@@ -436,6 +455,9 @@ function normalizeFieldEvidence(value) {
       ...(textValue(rawEvidence.text) ? { text: textValue(rawEvidence.text) } : {}),
       ...(httpUrl(rawEvidence.sourceUrl) ? { sourceUrl: httpUrl(rawEvidence.sourceUrl) } : {}),
       ...(textValue(rawEvidence.checkedAt) ? { checkedAt: textValue(rawEvidence.checkedAt) } : {}),
+      ...(/^[a-f0-9]{64}$/u.test(rawEvidence.sha256 ?? '') ? { sha256: rawEvidence.sha256 } : {}),
+      ...(textValue(rawEvidence.extractionMethod) ? { extractionMethod: textValue(rawEvidence.extractionMethod) } : {}),
+      ...(['pdf', 'image'].includes(rawEvidence.evidenceKind) ? { evidenceKind: rawEvidence.evidenceKind } : {}),
     };
     return Object.keys(evidence).length ? [[key, evidence]] : [];
   });
@@ -453,9 +475,15 @@ function normalizeSchedule(value) {
   const weekdays = Array.isArray(value.weekdays)
     ? [...new Set(value.weekdays.map(Number).filter((day) => Number.isInteger(day) && day >= 0 && day <= 6))]
     : [];
+  const hoursByDate = value.hoursByDate && typeof value.hoursByDate === 'object'
+    ? Object.fromEntries(Object.entries(value.hoursByDate).flatMap(([date, hours]) => {
+      const normalizedDate = normalizeDate(date), startTime = normalizeTime(hours?.startTime), endTime = normalizeTime(hours?.endTime);
+      return normalizedDate && startTime && endTime ? [[normalizedDate, { startTime, endTime }]] : [];
+    })) : {};
   const schedule = {
     ...(textValue(value.evidence) ? { evidence: textValue(value.evidence) } : {}),
     ...(weekdays.length ? { weekdays } : {}),
+    ...(Object.keys(hoursByDate).length ? { hoursByDate } : {}),
     ...(closedDates.length ? { closedDates } : {}),
     ...(dates.length ? { dates } : {}),
     ...(typeof value.daily === 'boolean' ? { daily: value.daily } : {}),
@@ -496,8 +524,10 @@ export function normalizeEventRecord(raw, {
     inferred.tagEvidence.exhibition = 'category: exhibition';
   }
   const explicitFree = explicitBoolean(raw.freeEvent);
-  const inferredTags = explicitFree === false ? inferred.tags.filter((tag) => tag !== 'free') : inferred.tags;
-  const suppliedTags = normalizeTags(raw.tags, suppliedEvidence).filter((tag) => explicitFree !== false || tag !== 'free');
+  const admissionContext = [price, description, raw.priceDetails, raw.supplementaryInfo].map(textValue).join('\n');
+  const requiredAdmission = hasRequiredAdmissionCost(admissionContext);
+  const inferredTags = explicitFree === false || requiredAdmission ? inferred.tags.filter((tag) => tag !== 'free') : inferred.tags;
+  const suppliedTags = normalizeTags(raw.tags, suppliedEvidence).filter((tag) => !(explicitFree === false || requiredAdmission) || tag !== 'free');
   const tags = [...new Set([...inferredTags, ...suppliedTags])]
     .sort((a, b) => TAG_NAMES.indexOf(a) - TAG_NAMES.indexOf(b));
   const tagEvidence = Object.fromEntries(TAG_NAMES
@@ -536,7 +566,7 @@ export function normalizeEventRecord(raw, {
     ...(startAt ? { startAt } : {}),
     ...(endAt ? { endAt } : {}),
     ...(price !== undefined ? { price } : {}),
-    freeEvent: freeValue(price, trustedExplicitFree ?? (tags.includes('free') ? true : undefined)),
+    freeEvent: freeValue(price, trustedExplicitFree ?? (tags.includes('free') ? true : undefined), admissionContext),
     ...(explicitBoolean(raw.indoor) !== undefined ? { indoor: explicitBoolean(raw.indoor) } : {}),
     ...(explicitBoolean(raw.outdoor) !== undefined ? { outdoor: explicitBoolean(raw.outdoor) } : {}),
     ...(explicitBoolean(raw.rainSupport) !== undefined ? { rainSupport: explicitBoolean(raw.rainSupport) } : {}),
@@ -556,7 +586,7 @@ export function normalizeEventRecord(raw, {
     ...(normalizeOfficialStatus(raw.officialStatus) ? { officialStatus: normalizeOfficialStatus(raw.officialStatus) } : {}),
     ...(textValue(raw.statusEvidence) ? { statusEvidence: textValue(raw.statusEvidence) } : {}),
     ...(explicitBoolean(raw.reservationRequired) !== undefined ? { reservationRequired: explicitBoolean(raw.reservationRequired) } : {}),
-    ...(['reservationInfo', 'rainPolicy', 'parkingInfo', 'nearestStation', 'accessByCar', 'accessByTransit']
+    ...(['timeInfo', 'closureInfo', 'reservationInfo', 'rainPolicy', 'parkingInfo', 'nearestStation', 'accessByCar', 'accessByTransit']
       .reduce((fields, key) => textValue(raw[key]) ? { ...fields, [key]: textValue(raw[key]) } : fields, {})),
     ...(httpUrl(raw.reservationUrl) ? { reservationUrl: httpUrl(raw.reservationUrl) } : {}),
     ...(contact ? { contact } : {}),

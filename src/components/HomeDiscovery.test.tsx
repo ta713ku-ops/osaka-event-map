@@ -4,7 +4,7 @@ import { HomeDiscovery, type HomeEvent } from './HomeDiscovery';
 
 const event = (id: string, name = `イベント${id}`, categoryLabel = 'マルシェ'): HomeEvent => ({
   id, eventName: name, categoryLabel, venueName: '大阪公園', timeLabel: '9月1日 10:00',
-  travelMinutes: 20, recommendation: 80, ongoing: false, description: '開催内容です。',
+  travelMinutes: 20, recommendation: 80, ongoing: false, description: '開催内容です。', imageUrl: `https://example.test/${id}.jpg`,
 });
 
 function renderHome(overrides: Partial<React.ComponentProps<typeof HomeDiscovery>> = {}) {
@@ -23,6 +23,7 @@ describe('HomeDiscovery', () => {
   it('starts with six cards and reveals twelve more without dropping results', () => {
     const events = Array.from({ length: 13 }, (_, index) => event(String(index)));
     renderHome({ events, totalCount: events.length });
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
     const cards = () => document.querySelectorAll('.home-event-card');
     expect(cards()).toHaveLength(6);
     fireEvent.click(screen.getByRole('button', { name: /もっと見る（残り 7件）/ }));
@@ -33,6 +34,7 @@ describe('HomeDiscovery', () => {
   it('reaches every home result beyond the former forty-item cap', () => {
     const events = Array.from({ length: 41 }, (_, index) => event(String(index), `全件イベント${index + 1}`));
     renderHome({ events, totalCount: events.length });
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
     for (let attempt = 0; attempt < 10; attempt += 1) {
       const more = screen.queryByRole('button', { name: /もっと見る/ });
       if (!more) break;
@@ -61,8 +63,9 @@ describe('HomeDiscovery', () => {
     expect(screen.getByText('条件に合うイベントがありません')).toBeInTheDocument();
   });
 
-  it('keeps imagery quiet and falls back to the date panel when an image is missing or fails', () => {
-    renderHome({ events: [{ ...event('market', '市場の催し', 'マルシェ'), imageUrl: 'https://www.pref.osaka.lg.jp/example.jpg' }, event('plain', '読書会', '読書')] });
+  it('keeps failed or missing imagery out of result cards while retaining event facts', () => {
+    renderHome({ events: [{ ...event('market', '市場の催し', 'マルシェ'), imageUrl: 'https://www.pref.osaka.lg.jp/example.jpg' }, { ...event('plain', '読書会', '読書'), imageUrl: undefined }] });
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
     const market = screen.getAllByRole('link', { name: /市場の催し/ }).find((button) => button.classList.contains('home-event-card'))!;
     expect(market.querySelector('img')).toHaveAttribute('alt', '');
     expect(within(market).queryByText('公式画像・出典')).not.toBeInTheDocument();
@@ -73,10 +76,26 @@ describe('HomeDiscovery', () => {
     expect(within(plain).queryByRole('img')).not.toBeInTheDocument();
   });
 
+  it('removes a failed spotlight without losing its event from the result list', () => {
+    renderHome({ events: [event('scene', '写真のある催し')] });
+    fireEvent.error(document.querySelector('.home-spotlight__story img')!);
+    expect(document.querySelector('.home-spotlight')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
+    expect(screen.getByRole('link', { name: /写真のある催し/ })).toBeInTheDocument();
+  });
+
+  it('chooses another event image when the preferred spotlight fails', () => {
+    renderHome({ largeEvents: [event('preferred', '主役の催し')], events: [event('other', '別の写真の催し')] });
+    fireEvent.error(document.querySelector('.home-spotlight__story img')!);
+    expect(screen.getByRole('button', { name: /注目イベント「別の写真の催し」/ })).toBeInTheDocument();
+    expect(document.querySelector('.home-spotlight__track')).toHaveAttribute('style', expect.stringContaining('--spotlight-offset: 0%'));
+  });
+
   it('keeps a small official thumbnail visible without stretching it as a hero photo', () => {
     renderHome({ events: [{ ...event('small', '小さい公式画像'), imageUrl: 'https://example.test/small.jpg' }] });
     const image = document.querySelector('.home-spotlight__story[aria-hidden="false"] img')!;
-    Object.defineProperty(image, 'naturalWidth', { configurable: true, value: 150 });
+    Object.defineProperty(image, 'naturalWidth', { configurable: true, value: 600 });
+    Object.defineProperty(image, 'naturalHeight', { configurable: true, value: 400 });
     fireEvent.load(image);
     expect(image).toHaveClass('is-thumbnail');
     expect(image).toHaveAttribute('src', 'https://example.test/small.jpg');
@@ -99,22 +118,20 @@ describe('HomeDiscovery', () => {
     expect(document.querySelector('.home-spotlight__story[aria-hidden="false"] img')).toHaveAttribute('src', 'https://example.test/shared.jpg');
   });
 
-  it('fills remaining spotlight slots with image-less events after unique images', () => {
+  it('keeps image-less events in the list rather than padding the photographic spotlight', () => {
     const events = [
       { ...event('one', '画像付き1'), imageUrl: 'https://example.test/photo.jpg?width=640' },
-      { ...event('two', '同じ写真', '展覧会'), imageUrl: 'https://example.test/photo.jpg?width=1280' },
-      event('three', '画像なし1'),
-      event('four', '画像なし2'),
-      event('five', '画像なし3'),
+      { ...event('two', '同じ写真'), imageUrl: 'https://example.test/photo.jpg?width=1280' },
+      { ...event('three', '画像なし1'), imageUrl: undefined },
     ];
-    renderHome({ events, totalCount: events.length });
-    expect(screen.getByRole('button', { name: 'おすすめ4件目を表示' })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: 'おすすめ2件目を表示' }));
-    expect(screen.getByRole('heading', { name: '画像なし1' })).toBeInTheDocument();
-    expect(document.querySelector('.home-spotlight__story[aria-hidden="false"] img')).not.toBeInTheDocument();
+    renderHome({ events });
+    expect(screen.queryByRole('button', { name: 'おすすめ2件目を表示' })).not.toBeInTheDocument();
+    expect(document.querySelector('.home-spotlight__track')).toHaveAttribute('style', expect.stringContaining('--spotlight-offset: 0%'));
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
+    expect(screen.getByRole('link', { name: /画像なし1/ })).toBeInTheDocument();
   });
 
-  it('rotates every three seconds and respects explicit pause and resume', () => {
+  it('rotates every eight seconds and respects explicit pause and resume', () => {
     vi.useFakeTimers();
     const events = Array.from({ length: 3 }, (_, index) => ({ ...event(String(index), `物語${index}`), imageUrl: `https://example.test/${index}.jpg` }));
     renderHome({ events, totalCount: events.length });
@@ -123,9 +140,9 @@ describe('HomeDiscovery', () => {
     act(() => vi.advanceTimersByTime(6000));
     expect(screen.getByRole('heading', { name: '物語0' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '自動送りを再開' }));
-    act(() => vi.advanceTimersByTime(3000));
+    act(() => vi.advanceTimersByTime(8000));
     expect(screen.getByRole('heading', { name: '物語1' })).toBeInTheDocument();
-    act(() => vi.advanceTimersByTime(3000));
+    act(() => vi.advanceTimersByTime(8000));
     expect(screen.getByRole('heading', { name: '物語2' })).toBeInTheDocument();
   });
 
@@ -141,11 +158,46 @@ describe('HomeDiscovery', () => {
     expect(document.querySelector('.home-discovery')).toHaveAttribute('data-motion', 'reduced');
   });
 
+  it('pauses offscreen and restarts with a full reading interval on return', () => {
+    vi.useFakeTimers();
+    let notify!: (entries: { isIntersecting: boolean }[]) => void;
+    vi.stubGlobal('IntersectionObserver', class {
+      constructor(callback: typeof notify) { notify = callback; }
+      observe() {}
+      disconnect() {}
+    });
+    renderHome({ events: [event('a', '画面外の物語A'), event('b', '画面外の物語B')] });
+    act(() => notify([{ isIntersecting: false }]));
+    act(() => vi.advanceTimersByTime(16000));
+    expect(screen.getByRole('heading', { name: '画面外の物語A' })).toBeInTheDocument();
+    act(() => notify([{ isIntersecting: true }]));
+    act(() => vi.advanceTimersByTime(7999));
+    expect(screen.getByRole('heading', { name: '画面外の物語A' })).toBeInTheDocument();
+    act(() => vi.advanceTimersByTime(1));
+    expect(screen.getByRole('heading', { name: '画面外の物語B' })).toBeInTheDocument();
+  });
+
+  it('pauses while the document is hidden and resumes after returning', () => {
+    vi.useFakeTimers();
+    const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
+    renderHome({ events: [event('a', '非表示の物語A'), event('b', '非表示の物語B')] });
+    hidden.mockReturnValue(true);
+    fireEvent(document, new Event('visibilitychange'));
+    act(() => vi.advanceTimersByTime(16000));
+    expect(screen.getByRole('heading', { name: '非表示の物語A' })).toBeInTheDocument();
+    hidden.mockReturnValue(false);
+    fireEvent(document, new Event('visibilitychange'));
+    act(() => vi.advanceTimersByTime(8000));
+    expect(screen.getByRole('heading', { name: '非表示の物語B' })).toBeInTheDocument();
+    hidden.mockRestore();
+  });
+
   it('uses a clear fallback when travel time is unavailable and does not mislabel future events as ongoing', () => {
     const future = event('future', 'これからの催し');
     renderHome({ events: [{ ...future, travelMinutes: undefined, ongoing: false }], totalCount: 1, liveCount: 0 });
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
     const card = document.querySelector<HTMLElement>('.home-event-card')!;
-    expect(within(card).getByText(/料金は公式確認/)).toBeInTheDocument();
+    expect(within(card).getByText(/料金は公式情報で確認/)).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: '開催中のイベント' })).not.toBeInTheDocument();
     expect(screen.getByText(/公式公開データ/)).toBeInTheDocument();
   });
@@ -170,7 +222,7 @@ describe('HomeDiscovery', () => {
     renderHome({ events, totalCount: events.length });
     const detail = screen.getByRole('button', { name: /注目イベント.*詳細/ });
     detail.focus();
-    act(() => vi.advanceTimersByTime(3000));
+    act(() => vi.advanceTimersByTime(8000));
     expect(document.activeElement).toBe(detail);
     expect(screen.getByRole('heading', { name: 'フォーカス物語0' })).toBeInTheDocument();
   });
@@ -195,7 +247,7 @@ describe('HomeDiscovery', () => {
     vi.useFakeTimers();
     const initial = Array.from({ length: 2 }, (_, index) => ({ ...event(String(index), `更新前${index}`), imageUrl: `https://example.test/${index}.jpg` }));
     const { rerender, props } = renderHome({ events: initial, totalCount: initial.length });
-    act(() => vi.advanceTimersByTime(2999));
+    act(() => vi.advanceTimersByTime(7999));
     const refreshed = initial.map((item) => ({ ...item, description: '更新後の説明' }));
     rerender(<HomeDiscovery {...props} events={refreshed} />);
     act(() => vi.advanceTimersByTime(1));
@@ -248,9 +300,9 @@ describe('HomeDiscovery', () => {
   it('uses only explicit today events and shows an empty state when absent', () => {
     renderHome({ events: [{ ...event('ongoing'), ongoing: true }], todayEvents: [] });
     expect(screen.getByRole('heading', { name: '今日のピックアップ' })).toBeInTheDocument();
-    expect(screen.getByText(/本日開催の確定したおすすめはありません/)).toBeInTheDocument();
+    expect(screen.getByText(/今日のおすすめはありません/)).toBeInTheDocument();
     cleanup();
-    renderHome({ events: [], totalCount: 0, todayEvents: [event('today', '今日だけ')] });
+    renderHome({ events: [event('today', '今日だけ')], todayEvents: [event('today', '今日だけ')] });
     expect(screen.getByRole('link', { name: /今日だけ/ })).toBeInTheDocument();
   });
 
@@ -293,20 +345,22 @@ describe('HomeDiscovery', () => {
     expect(onSelectEvent).toHaveBeenCalledTimes(2);
   });
 
-  it('places today recommendations immediately after the hero and before facts', () => {
+  it('places the invitation before search and today recommendations', () => {
     renderHome({ todayEvents: [event('today', '今日だけ')] });
     const hero = document.querySelector('.home-hero')!;
     const today = document.querySelector('.editorial-ongoing')!;
-    const facts = document.querySelector('.home-discovery__facts')!;
+    const search = document.querySelector('.home-search-entry')!;
     expect(hero.compareDocumentPosition(today) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(today.compareDocumentPosition(facts) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(hero.compareDocumentPosition(search) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(search.compareDocumentPosition(today) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('keeps the ranked list order independent of spotlight and today sections', () => {
     const entries = Array.from({ length: 8 }, (_, index) => event(String(index), `催し${index}`));
     renderHome({ events: entries, largeEvents: [entries[0]], todayEvents: [entries[1]], totalCount: entries.length });
+    fireEvent.click(screen.getByRole('button', { name: /すべてのイベントを探す/ }));
     const firstCards = [...document.querySelectorAll('.home-featured-grid .home-event-card strong')].map((item) => item.textContent);
     expect(firstCards).toEqual(['催し0', '催し1', '催し2', '催し3', '催し4', '催し5']);
-    expect(screen.getByRole('heading', { name: '今日のピックアップ' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'イベント一覧' })).toBeInTheDocument();
   });
 });

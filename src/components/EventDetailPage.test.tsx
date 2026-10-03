@@ -18,23 +18,28 @@ const renderPage = (overrides: Partial<DetailEvent> = {}, props: Partial<PagePro
 describe('EventDetailPage', () => {
   afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
-  it('places decision facts before the long description and related events last', () => {
-    renderPage({}, {
+  it('shows image and title before quick facts, then participation details and related events', () => {
+    renderPage({ imageUrl: 'https://example.test/landscape.jpg' }, {
       nearbyOngoingEvents: [{ ...event, id: 'nearby', eventName: '近くの催し' }],
       sameAreaEvents: [{ ...event, id: 'same-area', eventName: '同じ地域の催し' }],
     });
-    expect(screen.getByRole('heading', { level: 1, name: '中之島の灯り' })).toBeInTheDocument();
+    const heroImage = screen.getByRole('img', { name: '中之島の灯りの公式画像' });
+    const hero = screen.getByRole('heading', { level: 1, name: '中之島の灯り' });
+    const quickFacts = document.querySelector('.event-detail-quick-facts')!;
     expect(screen.getByText('開催期間中')).toBeInTheDocument();
     const basics = screen.getByRole('heading', { name: '参加の基本情報' });
     const description = screen.getByRole('heading', { name: 'イベントについて' });
     const access = screen.getByRole('heading', { name: 'アクセス' });
     const source = screen.getByRole('heading', { name: '出典と確認日' });
     const related = screen.getByRole('heading', { name: '近くのイベント' });
+    expect(heroImage.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(hero.compareDocumentPosition(quickFacts) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(quickFacts.compareDocumentPosition(basics) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(basics.compareDocumentPosition(description) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(description.compareDocumentPosition(access) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(access.compareDocumentPosition(source) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(source.compareDocumentPosition(related) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.getByText('無料')).toBeInTheDocument();
+    expect(screen.getAllByText('無料')).toHaveLength(2);
     expect(screen.getByText('予約不要')).toBeInTheDocument();
     expect(screen.getByText('淀屋橋駅')).toBeInTheDocument();
     expect(screen.getByText('小雨決行')).toBeInTheDocument();
@@ -45,26 +50,55 @@ describe('EventDetailPage', () => {
 
   it('shows a numeric zero price as free and explicit closed dates', () => {
     renderPage({ price: 0, freeEvent: true, schedule: { closedDates: ['2026-09-07'] } });
-    expect(screen.getByText('無料')).toBeInTheDocument();
+    expect(screen.getAllByText('無料')).toHaveLength(2);
     const basics = screen.getByRole('heading', { name: '参加の基本情報' }).closest('section');
     expect(within(basics!).getByText(/休催日/)).toBeInTheDocument();
     expect(within(basics!).getByText(/9月7日/)).toBeInTheDocument();
   });
+  it('normalizes HTML entities in a published price', () => {
+    renderPage({ price: '&yen;1,200円（&amp;小学生は半額）' });
+    expect(screen.getAllByText('¥1,200円（&小学生は半額）')).toHaveLength(2);
+    expect(screen.queryByText(/&yen;|&amp;/u)).not.toBeInTheDocument();
+  });
+  it('shows discrete verified days instead of presenting their interval as daily opening', () => {
+    renderPage({ startDate: '2026-10-10', endDate: '2026-10-25', schedule: { dates: ['2026-10-10', '2026-10-11', '2026-10-24', '2026-10-25'], evidence: '公式の開催日' } });
+    const basics = screen.getByRole('heading', { name: '参加の基本情報' }).closest('section');
+    expect(within(basics!).getByText(/2026年10月10日.*10月11日.*10月24日.*10月25日/)).toBeInTheDocument();
+    expect(within(basics!).getByText(/期間内の毎日開催ではありません/)).toBeInTheDocument();
+    expect(screen.getByText(/期間内の指定日のみ/)).toBeInTheDocument();
+  });
   it('keeps all discount conditions available without burying the basic price', () => {
     const price = '一般 2,000円 *メンバーシップ無料。' + '詳細な割引条件を証明書で確認してください。'.repeat(12);
     renderPage({ price });
-    expect(screen.getByText('一般 2,000円')).toBeInTheDocument();
+    expect(screen.getAllByText(/^一般 2,000円・条件は詳細$/)).toHaveLength(2);
     const disclosure = screen.getByText('詳しい料金・割引条件').closest('details');
     expect(disclosure).not.toHaveAttribute('open');
     expect(disclosure).toHaveTextContent(price);
   });
   it('keeps details usable when the official image fails', () => {
-    renderPage({ imageUrl: 'https://example.test/photo.jpg' });
+    renderPage({ imageUrl: 'https://example.test/photo.jpg', imageSourceUrl: 'https://example.test/photo-source' });
     const image = screen.getByRole('img', { name: '中之島の灯りの公式画像' });
     fireEvent.error(image);
     expect(screen.queryByRole('img', { name: '中之島の灯りの公式画像' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: '参加の基本情報' })).toBeInTheDocument();
-    expect(document.querySelector('.event-detail-media__fallback')).not.toBeNull();
+    expect(document.querySelector('.event-detail-media')).toBeNull();
+    expect(document.querySelector('.event-detail-hero--none')).not.toBeNull();
+    expect(screen.getByRole('link', { name: '画像の出典' })).toHaveAttribute('href', 'https://example.test/photo-source');
+  });
+
+  it('contains a portrait photo without calling it a poster and marks small source files', () => {
+    renderPage({ imageUrl: 'https://example.test/event-image.jpg' });
+    const image = screen.getByRole('img', { name: '中之島の灯りの公式画像' });
+    Object.defineProperty(image, 'naturalWidth', { configurable: true, value: 360 });
+    Object.defineProperty(image, 'naturalHeight', { configurable: true, value: 600 });
+    fireEvent.load(image);
+    expect(document.querySelector('.event-detail-media')).toHaveAttribute('data-image-kind', 'photo');
+    expect(document.querySelector('.event-detail-media')).toHaveClass('event-detail-media--portrait', 'is-low-resolution');
+  });
+
+  it('identifies a poster from source metadata before its dimensions load', () => {
+    renderPage({ imageUrl: 'https://example.test/notice.jpg', imageSource: '公式ポスター' });
+    expect(document.querySelector('.event-detail-media')).toHaveAttribute('data-image-kind', 'poster');
   });
 
   it('shows reservation guidance, a secure booking link, contact, and a straight-line distance', () => {
@@ -83,7 +117,7 @@ describe('EventDetailPage', () => {
     expect(screen.getByRole('heading', { name: '問い合わせ' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: '06-1234-5678' })).toHaveAttribute('href', 'tel:0612345678');
     expect(screen.getByRole('link', { name: 'info@example.test' })).toHaveAttribute('href', 'mailto:info@example.test');
-    expect(screen.getAllByText(/直線距離 約2\.3km/u)).toHaveLength(2);
+    expect(screen.getAllByText(/直線距離 約2\.3km/u)).toHaveLength(1);
     const save = screen.getByRole('button', { name: 'お気に入りに保存' });
     expect(save).toHaveAttribute('aria-pressed', 'false');
     fireEvent.click(save);

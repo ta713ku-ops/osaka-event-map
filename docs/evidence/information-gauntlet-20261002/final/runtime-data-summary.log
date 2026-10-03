@@ -1,0 +1,18 @@
+{
+  "events": 532,
+  "checks": 13,
+  "retired": [
+    {
+      "name": "季節の和菓子 食物販イベント",
+      "route": "ca05216e8a746ab4d0b9",
+      "source": "aeon-osaka-dome-city",
+      "endDate": "2026-10-04"
+    },
+    {
+      "name": "えほんをたのしもう!守口市立図書館えほんの広場 in イオンモール大日",
+      "route": "733d34e1b58610869cb9",
+      "source": "aeon-dainichi",
+      "endDate": "2026-10-02"
+    }
+  ]
+}

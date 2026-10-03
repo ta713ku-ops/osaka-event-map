@@ -1,0 +1,78 @@
+- main:
+  - link "候補へ移動":
+    - /url: "#home-results"
+  - generic "どこいこ大阪":
+    - paragraph: どこいこ大阪
+    - navigation "メインナビゲーション":
+      - button "ホーム":
+        - generic: ホーム
+      - button "イベントを検索":
+        - generic: 検索
+      - button "地図":
+        - generic: 地図
+      - button "保存したイベント（0件）":
+        - generic: 保存
+    - button "現在地を基準にする":
+    - button "好みを設定":
+  - region "今日の大阪、 よりみち日和。":
+    - region "イベントを探す":
+      - generic: イベント名や場所を検索
+      - textbox "イベント名や場所を検索" [active]:
+        - /placeholder: イベント名や場所から探す
+        - text: なんば雲海
+      - generic "イベント一覧の開催日":
+        - button "これから" [pressed]
+        - button "今日"
+        - button "今夜"
+        - button "明日"
+        - button "近日開催"
+        - button "今週末"
+        - button "条件を選ぶ":
+          - text: 条件を選ぶ
+    - generic "イベントの検索条件":
+      - generic "− 日付・エリア・並び順を選ぶ"
+      - text: 日付を指定
+      - textbox "日付を指定"
+      - text: エリア
+      - combobox "エリア":
+        - option "大阪全域" [selected]
+        - option "梅田・中之島"
+        - option "なんば・心斎橋"
+        - option "天王寺・あべの"
+        - option "大阪ベイエリア"
+        - option "大阪市のその他"
+        - option "北摂"
+        - option "河内"
+        - option "堺・泉州"
+      - text: 並び順
+      - combobox "並び順":
+        - option "注目順" [selected]
+        - option "開催日順"
+      - button "ジャンル・条件"
+      - button "無料" [pressed]
+      - generic "適用中の条件":
+        - button "検索：なんば雲海を解除": 検索：なんば雲海 ×
+        - button "無料を解除": 無料 ×
+        - button "すべて解除"
+    - region "検索結果":
+      - heading "イベント一覧" [level=2]
+      - generic: 1件・注目順
+      - button "ホームのおすすめに戻る"
+      - article:
+        - link "なんば雲海、8/28(金)〜11/1 17:30、なんばパークス":
+          - /url: /osaka-event-map/events/a8e8e6df550fba4208dd/
+          - emphasis: ポスター
+          - generic: 本日開催予定
+          - strong: なんば雲海
+          - generic: なんばパークスの庭園2～8階で、光と雲海を楽しむ夜の散策。6つのスポットを巡り、21:00には全フロアで雲海が同時に発生する約3分の演出があります。提灯レンタルは500円・事前予約制。
+          - text: 8/28(金)〜11/1 17:30
+          - text: なんばパークス
+          - generic: 0円
+        - button "なんば雲海を保存":
+      - button "候補を地図で比べる":
+        - text: 候補を地図で比べる
+    - paragraph:
+      - text: どこいこ大阪
+      - generic: いつもの街で、まだ知らない体験を。
+    - generic "情報源・更新について"
+    - text: ・ ・ ・ ・ ・ ・

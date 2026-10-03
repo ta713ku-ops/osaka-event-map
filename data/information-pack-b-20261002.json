@@ -1,0 +1,1309 @@
+{
+  "retrievedAt": "2026-10-02T06:38:23.000Z",
+  "occurrences": [
+    {
+      "sourceId": "information-pack-b-czech-festival-kansai-2026",
+      "sourceName": "チェコセンター東京",
+      "eventName": "チェコフェスティバル2026 in 関西",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-25",
+      "venueName": "Mina Sakai",
+      "osakaLocation": "大阪府堺市堺区",
+      "address": "Osaka, Sakai, Sakai Ward, Minamikawaramachi, 3−1",
+      "officialUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+      "description": "Návštěvníci se mohou těšit na stánky s českým zbožím a občerstvením a také na workshopy, hudební vystoupení a přednášky s českou tematikou.",
+      "timeInfo": "10月23日（金）16:00–21:00、24日（土）11:00–20:00、25日（日）11:00–19:00",
+      "price": "無料",
+      "schedule": {
+        "dates": [
+          "2026-10-23",
+          "2026-10-24",
+          "2026-10-25"
+        ],
+        "evidence": "pátek 23. října / sobota 24. října / neděle 25. října"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:09.578Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "Český festival v Kansai 2026",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "dateRange": {
+          "text": "pá 23. 10. 2026 – ne 25. 10. 2026",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "venueName": {
+          "text": "Mina Sakai",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "osakaLocation": {
+          "text": "Osaka, Sakai, Sakai Ward, Minamikawaramachi, 3−1",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "address": {
+          "text": "Osaka, Sakai, Sakai Ward, Minamikawaramachi, 3−1",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "description": {
+          "text": "Návštěvníci se mohou těšit na stánky s českým zbožím a občerstvením a také na workshopy, hudební vystoupení a přednášky s českou tematikou.",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "timeInfo": {
+          "text": "pátek 23. října (16:00–21:00)",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "price": {
+          "text": "Vstupné: zdarma",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "schedule": {
+          "text": "pá 23. 10. 2026 – ne 25. 10. 2026",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "timeInfoSaturday": {
+          "text": "sobota 24. října (11:00–20:00)",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "timeInfoSunday": {
+          "text": "neděle 25. října (11:00–19:00)",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "scheduleFriday": {
+          "text": "pátek 23. října",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "scheduleSaturday": {
+          "text": "sobota 24. října",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        },
+        "scheduleSunday": {
+          "text": "neděle 25. října",
+          "sourceUrl": "https://tokyo.czechcentres.gov.cz/program/cesky-festival-2026-v-kansai",
+          "checkedAt": "2026-10-02T06:25:09.578Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-ryusenkyo-social-experiment-2026",
+      "sourceName": "茨木市",
+      "eventName": "安威川ダム上流の竜仙峡広場で広場づくりの社会実験",
+      "startDate": "2026-07-18",
+      "endDate": "2026-10-10",
+      "venueName": "安威川ダム上流の竜仙峡広場",
+      "osakaLocation": "茨木市車作地内",
+      "address": "茨木市車作地内",
+      "officialUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+      "description": "安威川ダム上流の竜仙峡広場の新たな活用方法を検討するため、広場づくりの社会実験を行います。バーベキューをしたり、川を見てのんびりしたり、自由に使って感想を聞かせてください。",
+      "timeInfo": "土日祝 10:00–16:00",
+      "price": "1,000円/テーブル",
+      "reservationRequired": true,
+      "reservationInfo": "事前予約制。茨木市ページの予約フォームまたは二次元コードから申込。",
+      "schedule": {
+        "dates": [
+          "2026-07-18",
+          "2026-07-19",
+          "2026-07-20",
+          "2026-07-25",
+          "2026-07-26",
+          "2026-08-01",
+          "2026-08-02",
+          "2026-08-08",
+          "2026-08-09",
+          "2026-08-11",
+          "2026-08-15",
+          "2026-08-16",
+          "2026-08-22",
+          "2026-08-23",
+          "2026-08-29",
+          "2026-08-30",
+          "2026-09-05",
+          "2026-09-06",
+          "2026-09-12",
+          "2026-09-13",
+          "2026-09-19",
+          "2026-09-20",
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-09-26",
+          "2026-09-27",
+          "2026-10-03",
+          "2026-10-04",
+          "2026-10-10"
+        ],
+        "evidence": "令和8年7月18日～10月10日 土日祝 10時から16時"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:08.461Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "安威川ダム上流の竜仙峡広場で広場づくりの社会実験をします",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "dateRange": {
+          "text": "令和8年7月18日～10月10日 土日祝 10時から16時",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "venueName": {
+          "text": "安威川ダム上流の竜仙峡広場（茨木市車作地内）",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "osakaLocation": {
+          "text": "安威川ダム上流の竜仙峡広場（茨木市車作地内）",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "address": {
+          "text": "安威川ダム上流の竜仙峡広場（茨木市車作地内）",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "description": {
+          "text": "安威川ダム上流の竜仙峡広場の新たな活用方法を検討するため、広場づくりの社会実験を行います。※事前予約制",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "timeInfo": {
+          "text": "日時：令和8年7月18日～10月10日 土日祝 10時から16時",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "price": {
+          "text": "料金：1,000円/テーブル",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "reservationRequired": {
+          "text": "※事前予約制",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "reservationInfo": {
+          "text": "予約方法：次のリンク先または右図の二次元コードからお申し込みください。",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "schedule": {
+          "text": "日時：令和8年7月18日～10月10日 土日祝 10時から16時",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "calendarReference": {
+          "text": "令和8年（2026年）及び令和9年（2027年）の「国民の祝日」",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "descriptionHighlights": {
+          "text": "バーベキューをしたり、川を見てのんびりしたり、自由に使って感想を聞かせてください。",
+          "sourceUrl": "https://www.city.ibaraki.osaka.jp/kikou/toshiseibi/hokubuseibi/menu/aigawadam/65505.html",
+          "checkedAt": "2026-10-02T06:25:08.461Z"
+        },
+        "holiday20260720": {
+          "text": "7月20日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260811": {
+          "text": "8月11日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260921": {
+          "text": "9月21日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260922": {
+          "text": "9月22日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260923": {
+          "text": "9月23日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-toyonaka-archaeology速報展-2026",
+      "sourceName": "豊中市",
+      "eventName": "企画展「令和8年度（2026年度）発掘調査速報展」",
+      "startDate": "2026-07-22",
+      "endDate": "2026-10-04",
+      "venueName": "豊中市立郷土資料館「とよみゅー」 1階企画展示室",
+      "osakaLocation": "大阪府豊中市",
+      "officialUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+      "description": "豊中市内では令和6年度（2024年度）から令和7年度（2025年度）にかけて、内田遺跡・新免遺跡・蛍池東遺跡・原田遺跡で発掘調査を実施しました。今回の展示はそれぞれの発掘調査の成果と出土資料を展示します。特に今年5月に終了したばかりの内田遺跡では、須恵器を多量に廃棄した土坑から瓦片が出土するなど、飛鳥時代前半までの良好な資料が出土しました。いち早く今回の速報展で展示します。",
+      "price": "無料",
+      "schedule": {
+        "daily": true,
+        "closedDates": [
+          "2026-07-27",
+          "2026-08-03",
+          "2026-08-10",
+          "2026-08-17",
+          "2026-08-24",
+          "2026-08-31",
+          "2026-09-07",
+          "2026-09-14",
+          "2026-09-21",
+          "2026-09-28",
+          "2026-08-12",
+          "2026-09-24"
+        ],
+        "evidence": "月曜日、8月12日（水曜）、9月24日（木曜）"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:08.737Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "企画展「令和8年度（2026年度）発掘調査速報展」",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        },
+        "dateRange": {
+          "text": "令和8年（2026年）7月22日（水曜）～10月4日（日曜）",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        },
+        "venueName": {
+          "text": "豊中市立郷土資料館「とよみゅー」　1階企画展示室",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        },
+        "osakaLocation": {
+          "text": "豊中市立郷土資料館「とよみゅー」　1階企画展示室",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        },
+        "description": {
+          "text": "豊中市内では令和6年度（2024年度）から令和7年度（2025年度）にかけて、内田遺跡・新免遺跡・蛍池東遺跡・原田遺跡で発掘調査を実施しました。今回の展示はそれぞれの発掘調査の成果と出土資料を展示します。特に今年5月に終了したばかりの内田遺跡では、須恵器を多量に廃棄した土坑から瓦片が出土するなど、飛鳥時代前半までの良好な資料が出土しました。いち早く今回の速報展で展示します。",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        },
+        "price": {
+          "text": "無料",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        },
+        "schedule": {
+          "text": "月曜日、8月12日（水曜）、9月24日（木曜）",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/hall/kyodosiryokan/sokuhouten.html",
+          "checkedAt": "2026-10-02T06:25:08.737Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-kashiwara-grape-picking-2026",
+      "sourceName": "柏原市観光ぶどうセンター",
+      "eventName": "柏原市観光ぶどうセンター ぶどう狩り",
+      "startDate": "2026-08-16",
+      "endDate": "2026-10-04",
+      "venueName": "柏原市内の観光ぶどう園",
+      "osakaLocation": "大阪府柏原市",
+      "officialUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+      "description": "柏原市内のぶどう園で楽しむ、期間限定のぶどう狩り。ピオーネなど大粒品種とマスカット・ベリーＡを味わえます。",
+      "timeInfo": "平日9:00～13:00受付（閉園14:00、火曜定休・祝日は営業）。土日祝9:00～15:00受付（閉園16:00）。",
+      "price": "一般：大人2,000円・小人1,100円・園児800円。ピオーネなど大粒：大人3,000円・小人2,000円・園児1,200円（園児は3才以上）。",
+      "reservationInfo": "じゃらん遊び体験からオンライン予約可能（「柏原市」で検索）。",
+      "accessByTransit": "駅から現地までの車による送迎はありません。徒歩で訪ねられるぶどう園の案内は柏原市観光ぶどうセンターへ要問合せ。",
+      "schedule": {
+        "dates": [
+          "2026-08-16",
+          "2026-08-17",
+          "2026-08-19",
+          "2026-08-20",
+          "2026-08-21",
+          "2026-08-22",
+          "2026-08-23",
+          "2026-08-24",
+          "2026-08-26",
+          "2026-08-27",
+          "2026-08-28",
+          "2026-08-29",
+          "2026-08-30",
+          "2026-08-31",
+          "2026-09-02",
+          "2026-09-03",
+          "2026-09-04",
+          "2026-09-05",
+          "2026-09-06",
+          "2026-09-07",
+          "2026-09-09",
+          "2026-09-10",
+          "2026-09-11",
+          "2026-09-12",
+          "2026-09-13",
+          "2026-09-14",
+          "2026-09-16",
+          "2026-09-17",
+          "2026-09-18",
+          "2026-09-19",
+          "2026-09-20",
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-09-24",
+          "2026-09-25",
+          "2026-09-26",
+          "2026-09-27",
+          "2026-09-28",
+          "2026-09-30",
+          "2026-10-01",
+          "2026-10-02",
+          "2026-10-03",
+          "2026-10-04"
+        ],
+        "evidence": "令和8年8月16日(日)~10月第1日曜"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:09.116Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "ぶどう狩りのご案内",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "dateRange": {
+          "text": "令和8年8月16日（日）～10月第１日曜",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "venueName": {
+          "text": "ぶどう園マップ 太平寺エリア 大県エリア 横尾エリア",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "osakaLocation": {
+          "text": "〒582-0018 大阪府柏原市大県4丁目17-9",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "description": {
+          "text": "● 品種ごとの食べごろの時期 ・ピオーネなど 8月中旬~9月中旬 ・マスカット・ベリーA 8月中旬~最終日",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "timeInfo": {
+          "text": "平日 　9：00～13：00（閉園時間は14時）",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "price": {
+          "text": "大人 2,000円　小人 1,100円 　園児 800円",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "reservationInfo": {
+          "text": "「じゃらん遊び体験」からオンライン予約も可能です。",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "accessByTransit": {
+          "text": "駅から現地までの車による送迎はございませんのでご注意ください。",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "schedule": {
+          "text": "令和8年8月16日（日）～10月第１日曜",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "timeInfoWeekend": {
+          "text": "土・日・祝　 9：00～15：00（閉園時間は16時）",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "scheduleWeekdayRule": {
+          "text": "※火曜定休（祝日は営業します）",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "priceLargeVariety": {
+          "text": "大人 3,000円　小人 2,000円　園児 1,200円",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "priceAgeNote": {
+          "text": "※園児は3才以上から",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "reservationInstruction": {
+          "text": "※「じゃらん遊び体験」ページから、「柏原市」で検索をお願いします。",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "transitMore": {
+          "text": "電車で来られる方には、駅から徒歩で訪ねられるぶどう園をご紹介します。",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        },
+        "closureInfo": {
+          "text": "天候などにより早期終了する場合があります。",
+          "sourceUrl": "https://www.kashiwara-kankoubudou.info/about001/",
+          "checkedAt": "2026-10-02T06:25:09.116Z"
+        }
+      },
+      "closureInfo": "天候などにより早期終了する場合があります。"
+    },
+    {
+      "sourceId": "information-pack-b-sennan-seine-seafood-bbq-2026-10-04",
+      "sourceName": "一般社団法人KIX泉州ツーリズムビューロー",
+      "eventName": "地引網体験×海鮮バーベキュー in 泉南ロングパーク「海のマルシェ」",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "venueName": "泉南ロングパーク「海のマルシェ」前広場",
+      "osakaLocation": "大阪府泉南市",
+      "address": "〒590-0535 大阪府泉南市りんくう南浜4-201内 泉南りんくう公園",
+      "officialUrl": "https://welcome-to-senshu.jp/event/196",
+      "description": "岡田浦漁協マルシェ事業部と泉南市観光協会の企画。泉南の海で地引網を体験し、海鮮バーベキューを楽しむ催しです。",
+      "timeInfo": "9:30開始（所要約3時間）。公式の流れは9:30体験開始、10:00魚とのふれあい・記念撮影、10:30BBQ、12:30終了。",
+      "price": "19歳以上6,380円、13～18歳5,830円、6～12歳3,850円、3～5歳1,320円、2歳以下無料（BBQ込み）。",
+      "reservationRequired": true,
+      "reservationInfo": "実施日の7日前まで申込。定員に達した場合は早期終了。雨天時は返金対応。",
+      "reservationUrl": "https://shop.welcome-sennan.com/",
+      "accessByTransit": "南海「樽井駅」から徒歩20分。駐車場あり。",
+      "schedule": {
+        "dates": [
+          "2026-10-04"
+        ],
+        "evidence": "2026年10月4日（日）"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:09.535Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "地引網体験×海鮮バーベキュー in 泉南ロングパーク「海のマルシェ」参加者募集！",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "dateRange": {
+          "text": "・2026年10月4日（日）",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "venueName": {
+          "text": "開催場所：泉南ロングパーク「海のマルシェ」前広場",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "osakaLocation": {
+          "text": "〒590-0535 大阪府泉南市りんくう南浜4-201内 泉南りんくう公園",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "address": {
+          "text": "〒590-0535 大阪府泉南市りんくう南浜4-201内 泉南りんくう公園",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "description": {
+          "text": "泉南の海をまるごと楽しむ",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "timeInfo": {
+          "text": "時間：9:30〜（所要約3時間）",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "price": {
+          "text": "大人（19歳以上）：6,380円",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "reservationRequired": {
+          "text": "お申し込み締切：実施日の7日前まで",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "reservationInfo": {
+          "text": "お申し込み締切：実施日の7日前まで",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "reservationUrl": {
+          "text": "https://shop.welcome-sennan.com/",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "accessByTransit": {
+          "text": "電車：南海「樽井駅」から徒歩20分　車：駐車場あり",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "schedule": {
+          "text": "2026年10月4日（日）",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "descriptionOrganizer": {
+          "text": "岡田浦漁協マルシェ事業部",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "timeInfoTimeline": {
+          "text": "9:30　地引網体験スタート！海の恵みを自分たちの手で引き寄せます 10:00　獲れたお魚とふれあい、記念撮影も♪ 10:30　海鮮バーベキュー開始！泉南の海の幸を豪快に味わえます 12:30　終了（思い出とともにお帰りください）",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "priceTeen": {
+          "text": "中高生（13〜18歳）：5,830円",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "priceChild": {
+          "text": "小学生（6〜12歳）：3,850円",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "pricePreschool": {
+          "text": "幼児（3〜5歳）：1,320円",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "priceToddler": {
+          "text": "幼児（2歳以下）：無料",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "reservationCapacity": {
+          "text": "※定員に達し次第、締切前でも受付を終了します。",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "rainPolicy": {
+          "text": "雨天時：返金対応",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "statusEvidence": {
+          "text": "お申し込み締切：実施日の7日前まで",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        },
+        "officialStatus": {
+          "text": "お申し込み締切：実施日の7日前まで",
+          "sourceUrl": "https://welcome-to-senshu.jp/event/196",
+          "checkedAt": "2026-10-02T06:25:09.535Z"
+        }
+      },
+      "rainPolicy": "雨天時は返金対応。",
+      "officialStatus": "registration_closed",
+      "statusEvidence": "お申し込み締切：実施日の7日前まで"
+    },
+    {
+      "sourceId": "information-pack-b-yamato-river-exhibition-2026",
+      "sourceName": "柏原市立歴史資料館",
+      "eventName": "令和8年度 秋季企画展「大和川の流れ~つけかえと新大和川のルート~」",
+      "startDate": "2026-09-08",
+      "endDate": "2026-12-06",
+      "venueName": "柏原市立歴史資料館",
+      "osakaLocation": "大阪府柏原市",
+      "officialUrl": "https://www.city.kashiwara.lg.jp/docs/2019082500016/",
+      "description": "つけかえ前の大和川は、久宝寺川、玉櫛川、平野川などに分かれて流れ、大坂城の北で、もとの淀川（今の大川）に流れこんでいました。洪水を繰り返した大和川は宝永元年（1704）につけかえられ、新しい大和川の流れは家をつぶさず、洪水を避け、工事を進めやすいように決められました。",
+      "timeInfo": "9:30～17:00（入館16:30まで）",
+      "price": "無料",
+      "accessByTransit": "JR大和路線（関西本線）高井田駅から北へ徒歩5分／近鉄大阪線河内国分駅から北へ徒歩15分。",
+      "schedule": {
+        "daily": true,
+        "closedDates": [
+          "2026-09-14",
+          "2026-09-28",
+          "2026-10-05",
+          "2026-10-19",
+          "2026-10-26",
+          "2026-11-02",
+          "2026-11-09",
+          "2026-11-16",
+          "2026-11-30"
+        ],
+        "evidence": "月曜日（祝日の場合は開館、翌日の火曜日も開館）"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:09.475Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "令和8年度 秋季企画展「大和川の流れ~つけかえと新大和川のルート~」",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019082500016/",
+          "checkedAt": "2026-10-02T06:25:09.475Z"
+        },
+        "dateRange": {
+          "text": "9月8日(火)～12月6日(日)",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019082500016/",
+          "checkedAt": "2026-10-02T06:25:09.475Z"
+        },
+        "venueName": {
+          "text": "柏原市立歴史資料館　企画展",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019082500016/",
+          "checkedAt": "2026-10-02T06:25:09.475Z"
+        },
+        "osakaLocation": {
+          "text": "大阪府柏原市安堂町1番55号",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019011500018/",
+          "checkedAt": "2026-10-02T06:25:09.735Z"
+        },
+        "description": {
+          "text": "つけかえ前の大和川は、久宝寺川、玉櫛川、平野川などに分かれて流れ、大坂城の北で、もとの淀川(今の大川)に流れこんでいました。",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019082500016/",
+          "checkedAt": "2026-10-02T06:25:09.475Z"
+        },
+        "timeInfo": {
+          "text": "午前9時30分～午後5時（入館は午後4時30分まで）",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019011500018/",
+          "checkedAt": "2026-10-02T06:25:09.735Z"
+        },
+        "price": {
+          "text": "無料",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019011500018/",
+          "checkedAt": "2026-10-02T06:25:09.735Z"
+        },
+        "accessByTransit": {
+          "text": "JR大和路線（関西本線）高井田駅下車　北へ徒歩5分",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2022030100022/",
+          "checkedAt": "2026-10-02T06:25:09.632Z"
+        },
+        "schedule": {
+          "text": "月曜日（祝日の場合は開館、翌日の火曜日も開館）",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019011500018/",
+          "checkedAt": "2026-10-02T06:25:09.735Z"
+        },
+        "closureDates": {
+          "text": "月曜日（祝日の場合は開館、翌日の火曜日も開館）",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019011500018/",
+          "checkedAt": "2026-10-02T06:25:09.735Z"
+        },
+        "accessByTransitAlternative": {
+          "text": "近鉄大阪線河内国分駅下車　北へ徒歩15分",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2022030100022/",
+          "checkedAt": "2026-10-02T06:25:09.632Z"
+        },
+        "descriptionHistory": {
+          "text": "なんども洪水をおこしていた大和川は、宝永元年(1704)につけかえられました。",
+          "sourceUrl": "https://www.city.kashiwara.lg.jp/docs/2019082500016/",
+          "checkedAt": "2026-10-02T06:25:09.475Z"
+        },
+        "calendarReference": {
+          "text": "令和8年（2026年）の国民の祝日・休日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260921": {
+          "text": "9月21日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20261012": {
+          "text": "10月12日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20261123": {
+          "text": "11月23日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-kaizuka-folktale-illustration-exhibition-2026",
+      "sourceName": "貝塚市教育委員会",
+      "eventName": "「貝塚の民話」絵本原画展2026",
+      "startDate": "2026-09-12",
+      "endDate": "2026-11-22",
+      "venueName": "貝塚市郷土資料展示室（貝塚市民図書館2階）",
+      "osakaLocation": "大阪府貝塚市",
+      "address": "〒597-8585 大阪府貝塚市畠中1丁目12番1号 市民図書館2階",
+      "officialUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+      "description": "貝塚市に伝わる民話27話を題材とした絵本原画20作品を紹介します。会期中の11月1日から22日までは、伊能忠敬の日本地図「大日本沿海輿地全図」大図の原寸大複製（部分）も展示します。",
+      "price": "無料",
+      "accessByTransit": "南海本線「貝塚」駅で水間鉄道に乗換、「貝塚市役所前」駅すぐ。",
+      "schedule": {
+        "weekdays": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6
+        ],
+        "closedDates": [
+          "2026-09-21",
+          "2026-09-23",
+          "2026-09-30",
+          "2026-10-12",
+          "2026-10-31",
+          "2026-11-04"
+        ],
+        "evidence": "休室日：毎火曜日、9月21日（月曜日・祝日）、23日（水曜日・祝日）、30日（水曜日）、10月12日（月曜日・祝日）、31日（土曜日）、11月4日（水曜日）"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:10.026Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "「貝塚の民話」絵本原画展2026",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "dateRange": {
+          "text": "令和8年9月12日（土曜日）から11月22日（日曜日）まで",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "venueName": {
+          "text": "貝塚市郷土資料展示室（貝塚市民図書館2階）",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "osakaLocation": {
+          "text": "大阪府貝塚市畠中1丁目12番1号　市民図書館2階",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "address": {
+          "text": "〒597-8585 大阪府貝塚市畠中1丁目12番1号　市民図書館2階",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "description": {
+          "text": "本展では、令和8年度に大阪府立貝塚高等学校の3年生が制作した「貝塚の民話」を題材とした絵本原画作品を紹介します。",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "price": {
+          "text": "無料",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "accessByTransit": {
+          "text": "南海本線「貝塚」駅のりかえ、水間鉄道「貝塚市役所前」駅すぐ",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "schedule": {
+          "text": "毎火曜日、9月21日（月曜日・祝日）、23日（水曜日・祝日）、30日（水曜日）、10月12日（月曜日・祝日）、31日（土曜日）、11月4日（水曜日）",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        },
+        "descriptionHighlights": {
+          "text": "貝塚市教育委員会発行の冊子『貝塚市 伝承・民話を辿って歩く』に掲載している本市に伝わる民話27話を題材とした絵本原画20作品を紹介します。",
+          "sourceUrl": "https://www.city.kaizuka.lg.jp/bunkazai/event_bunka/kaizukaminwa.html",
+          "checkedAt": "2026-10-02T06:25:10.026Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-okinawa-war-exhibition-toyonaka-2026",
+      "sourceName": "豊中市",
+      "eventName": "平和展示室巡回企画展「語り継ぐ沖縄戦 －沖縄陸軍病院南風原壕群の記憶－」",
+      "startDate": "2026-09-15",
+      "endDate": "2026-11-28",
+      "venueName": "人権平和センター豊中 3階平和展示室",
+      "osakaLocation": "大阪府豊中市",
+      "address": "豊中市岡町北3-13-7",
+      "officialUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+      "description": "本企画展では、沖縄戦において多くの負傷兵や医療従事者が過酷な状況下で活動した「沖縄陸軍病院南風原壕群」の発掘調査出土資料等を展示します。水筒・薬瓶などの発掘調査出土資料のほか、「沖縄陸軍病院南風原壕群」についての解説や南風原文化センターの紹介などのパネルから、当時の医療活動の実態や人々の暮らしに触れ、戦争の実相と平和の尊さについて考える機会とします。",
+      "timeInfo": "9:00～17:00",
+      "price": "無料",
+      "schedule": {
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "closedDates": [
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-10-12",
+          "2026-11-03",
+          "2026-11-23"
+        ],
+        "evidence": "日曜・祝日を除く"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:09.759Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "平和展示室巡回企画展「語り継ぐ沖縄戦 －沖縄陸軍病院南風原壕群の記憶－」",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "dateRange": {
+          "text": "令和8年(2026年)9月15日(火曜)から令和8年(2026年)11月28日(土曜)まで",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "venueName": {
+          "text": "人権平和センター豊中(豊中市岡町北3-13-7) 3階平和展示室",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "osakaLocation": {
+          "text": "人権平和センター豊中(豊中市岡町北3-13-7)",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "address": {
+          "text": "人権平和センター豊中(豊中市岡町北3-13-7)",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "description": {
+          "text": "本企画展では、沖縄戦において多くの負傷兵や医療従事者が過酷な状況下で活動した「沖縄陸軍病院南風原壕群」の発掘調査出土資料等を展示します。水筒・薬瓶などの発掘調査出土資料のほか、「沖縄陸軍病院南風原壕群」についての解説や南風原文化センターの紹介などのパネルから、当時の医療活動の実態や人々の暮らしに触れ、戦争の実相と平和の尊さについて考える機会とします。",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "timeInfo": {
+          "text": "令和8年(2026年)9月15日(火曜)から令和8年(2026年)11月28日(土曜)までの午前9時～午後5時 ※日曜・祝日を除く",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "price": {
+          "text": "無料",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "schedule": {
+          "text": "※日曜・祝日を除く",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "calendarReference": {
+          "text": "令和8年(2026年)及び令和9年(2027年)の「国民の祝日」",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260921": {
+          "text": "9月21日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260922": {
+          "text": "9月22日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20260923": {
+          "text": "9月23日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20261012": {
+          "text": "10月12日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20261103": {
+          "text": "11月3日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20261123": {
+          "text": "11月23日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-okinawa-war-exhibition-hotaru-2026-2027",
+      "sourceName": "豊中市",
+      "eventName": "平和展示室巡回企画展「語り継ぐ沖縄戦 －沖縄陸軍病院南風原壕群の記憶－」",
+      "startDate": "2026-12-10",
+      "endDate": "2027-02-12",
+      "venueName": "人権平和センター蛍池 1階平和展示室分室",
+      "osakaLocation": "大阪府豊中市",
+      "address": "豊中市蛍池北町2-3-1",
+      "officialUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+      "description": "本企画展では、沖縄戦において多くの負傷兵や医療従事者が過酷な状況下で活動した「沖縄陸軍病院南風原壕群」の発掘調査出土資料等を展示します。水筒・薬瓶などの発掘調査出土資料のほか、「沖縄陸軍病院南風原壕群」についての解説や南風原文化センターの紹介などのパネルから、当時の医療活動の実態や人々の暮らしに触れ、戦争の実相と平和の尊さについて考える機会とします。",
+      "timeInfo": "9:00～17:00",
+      "price": "無料",
+      "schedule": {
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "closedDates": [
+          "2026-12-29",
+          "2026-12-30",
+          "2026-12-31",
+          "2027-01-01",
+          "2027-01-02",
+          "2027-01-03",
+          "2027-01-11",
+          "2027-02-11"
+        ],
+        "evidence": "日曜・祝日・年末年始を除く"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:09.759Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "平和展示室巡回企画展「語り継ぐ沖縄戦 －沖縄陸軍病院南風原壕群の記憶－」",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "dateRange": {
+          "text": "令和8年(2026年)12月10日(木曜)から令和9年(2027年)2月12日(金曜)まで",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "venueName": {
+          "text": "人権平和センター蛍池(豊中市蛍池北町2-3-1) 1階平和展示室分室",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "osakaLocation": {
+          "text": "人権平和センター蛍池(豊中市蛍池北町2-3-1)",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "address": {
+          "text": "人権平和センター蛍池(豊中市蛍池北町2-3-1)",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "description": {
+          "text": "本企画展では、沖縄戦において多くの負傷兵や医療従事者が過酷な状況下で活動した「沖縄陸軍病院南風原壕群」の発掘調査出土資料等を展示します。水筒・薬瓶などの発掘調査出土資料のほか、「沖縄陸軍病院南風原壕群」についての解説や南風原文化センターの紹介などのパネルから、当時の医療活動の実態や人々の暮らしに触れ、戦争の実相と平和の尊さについて考える機会とします。",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "timeInfo": {
+          "text": "令和8年(2026年)12月10日(木曜)から令和9年(2027年)2月12日(金曜)までの午前9時～午後5時 ※日曜・祝日・年末年始を除く",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "price": {
+          "text": "無料",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "schedule": {
+          "text": "※日曜・祝日・年末年始を除く",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwa_topics/kataritsuguokinawa.html",
+          "checkedAt": "2026-10-02T06:25:09.759Z"
+        },
+        "closureDates": {
+          "text": "祝・休日、12月29日から1月3日は休み",
+          "sourceUrl": "https://www.city.toyonaka.osaka.jp/jinken_gakushu/hikakuheiwa/heiwatenzisitu.html",
+          "checkedAt": "2026-10-02T06:25:09.978Z"
+        },
+        "calendarReference": {
+          "text": "令和8年(2026年)及び令和9年(2027年)の「国民の祝日」",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20270111": {
+          "text": "1月11日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        },
+        "holiday20270211": {
+          "text": "2月11日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:25:08.418Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-expo-cosmos-kokia-festa-2026",
+      "sourceName": "万博記念公園",
+      "eventName": "コスモス・コキアフェスタ 2026",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-30",
+      "venueName": "自然文化園 花の丘ほか",
+      "osakaLocation": "大阪府吹田市",
+      "address": "〒565-0826 大阪府吹田市千里万博公園",
+      "officialUrl": "https://www.expo70-park.jp/event/77306/",
+      "description": "今年も花の丘が秋の草花に彩られます。約15万本の色とりどりのコスモスとともに約3,600株のコキアの紅葉をお楽しみください。ほかにもピンクのミューレンベルギアや赤ソバなど秋の草花たちをぜひご覧ください。",
+      "timeInfo": "9:30～17:00（最終入園16:30）",
+      "price": "無料（別途自然文化園・日本庭園共通入園料が必要）",
+      "schedule": {
+        "daily": true,
+        "evidence": "2026年10月3日（土）～ 10月30日（金） ※期間中無休"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:10.001Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "コスモス・コキアフェスタ 2026",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        },
+        "dateRange": {
+          "text": "2026年10月3日（土）～ 10月30日（金）",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        },
+        "venueName": {
+          "text": "自然文化園 花の丘ほか",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        },
+        "osakaLocation": {
+          "text": "〒565-0826　大阪府吹田市千里万博公園",
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "checkedAt": "2026-10-02T06:25:10.121Z"
+        },
+        "address": {
+          "text": "〒565-0826　大阪府吹田市千里万博公園",
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "checkedAt": "2026-10-02T06:25:10.121Z"
+        },
+        "description": {
+          "text": "今年も花の丘が秋の草花に彩られます。約15万本の色とりどりのコスモスとともに約3,600株のコキアの紅葉をお楽しみください。ほかにもピンクのミューレンベルギアや赤ソバなど秋の草花たちをぜひご覧ください。",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        },
+        "timeInfo": {
+          "text": "9:30～17:00（最終入園16:30）",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        },
+        "price": {
+          "text": "無料 ※別途自然文化園・日本庭園共通入園料が必要",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        },
+        "schedule": {
+          "text": "※期間中無休",
+          "sourceUrl": "https://www.expo70-park.jp/event/77306/",
+          "checkedAt": "2026-10-02T06:25:10.001Z"
+        }
+      }
+    },
+    {
+      "sourceId": "information-pack-b-banpaku-night-sky-art-fireworks-2026-11-21",
+      "sourceName": "万博記念公園・万博花火プロジェクト実行委員会",
+      "eventName": "第5回 万博夜空がアートになる日 2026",
+      "startDate": "2026-11-21",
+      "endDate": "2026-11-21",
+      "venueName": "万博記念公園 東の広場",
+      "osakaLocation": "大阪府吹田市",
+      "address": "〒565-0826 大阪府吹田市千里万博公園",
+      "officialUrl": "https://www.expo70-park.jp/event/77580/",
+      "description": "関西最大級の15,000発の花火×ドローン×音楽が織りなす新感覚の芸術花火。夜空に広がるアートを指定席で楽しめます。",
+      "timeInfo": "12:00開場、19:00開演。16:30以降の入園はイベントチケット所持者のみ。",
+      "price": "全席指定席・有料。券種等の詳細は公式サイトを参照。",
+      "reservationRequired": true,
+      "reservationInfo": "全席指定席。チケットは売り切れ次第終了。",
+      "schedule": {
+        "dates": [
+          "2026-11-21"
+        ],
+        "evidence": "2026年11月21日（土）"
+      },
+      "lastCheckedAt": "2026-10-02T06:25:10.534Z",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "第5回 万博夜空がアートになる日 2026",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "dateRange": {
+          "text": "2026年11月21日（土）",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "venueName": {
+          "text": "東の広場",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "osakaLocation": {
+          "text": "〒565-0826　大阪府吹田市千里万博公園",
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "checkedAt": "2026-10-02T06:25:10.121Z"
+        },
+        "address": {
+          "text": "〒565-0826　大阪府吹田市千里万博公園",
+          "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+          "checkedAt": "2026-10-02T06:25:10.121Z"
+        },
+        "description": {
+          "text": "関西最大級の15,000発の花火×ドローン×音楽が織りなす新感覚の芸術花火を今年も開催。夜空に広がるアートを指定席でゆっくりお楽しみください。",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "timeInfo": {
+          "text": "［開場］ 12:00 ［開演］ 19:00 ※16:30以降のご入園は、当イベントのチケットをお持ちのお客様のみ",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "price": {
+          "text": "全席指定席のため、チケットなどの詳細は「万博夜空がアートになる日2026」公式サイトをご覧ください。",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "reservationRequired": {
+          "text": "全席指定席",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "reservationInfo": {
+          "text": "全席指定席のため、チケットなどの詳細は「万博夜空がアートになる日2026」公式サイトをご覧ください。※売り切れ次第終了となります。",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "schedule": {
+          "text": "2026年11月21日（土）",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        }
+      }
+    }
+  ],
+  "unverified": [
+    {
+      "eventName": "50万本のコスモス",
+      "sourceName": "堺・緑のミュージアム ハーベストの丘",
+      "officialUrl": "https://farm.or.jp/event/14063",
+      "reason": "公式が開花時期を「2026年11月初旬～下旬予想」、見ごろを「2026年11月中旬ごろ予想」としており、天候で変動すると明記。固定の催事会期は確認できないため掲載日程を確定しない。別掲の花摘み体験も「2026年上旬～中旬ごろに１～２日間開催予定」「料金：未定」で日付未確定。",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "500,000本のコスモス",
+          "sourceUrl": "https://farm.or.jp/event/14063",
+          "checkedAt": "2026-10-02T06:38:23.000Z"
+        },
+        "description": {
+          "text": "開花時期：2026年11月初旬～下旬予想",
+          "sourceUrl": "https://farm.or.jp/event/14063",
+          "checkedAt": "2026-10-02T06:38:23.000Z"
+        },
+        "dateRange": {
+          "text": "開花時期：2026年11月初旬～下旬予想",
+          "sourceUrl": "https://farm.or.jp/event/14063",
+          "checkedAt": "2026-10-02T06:38:23.000Z"
+        },
+        "flowerPickingDates": {
+          "text": "開催日：2026年上旬～中旬ごろに１～２日間開催予定",
+          "sourceUrl": "https://farm.or.jp/event/14063",
+          "checkedAt": "2026-10-02T06:38:23.000Z"
+        },
+        "flowerPickingPrice": {
+          "text": "料　金：未定",
+          "sourceUrl": "https://farm.or.jp/event/14063",
+          "checkedAt": "2026-10-02T06:38:23.000Z"
+        },
+        "weatherNote": {
+          "text": "※天候等により、開花時期は変動する場合がございます",
+          "sourceUrl": "https://farm.or.jp/event/14063",
+          "checkedAt": "2026-10-02T06:38:23.000Z"
+        }
+      }
+    }
+  ],
+  "updates": [
+    {
+      "sourceId": "verified-outings-bread-donut-expocity-2026",
+      "patch": {
+        "timeInfo": "10:00～18:00",
+        "schedule": {
+          "dates": [
+            "2026-10-09",
+            "2026-10-10",
+            "2026-10-11",
+            "2026-10-12"
+          ],
+          "evidence": "2026/10/9(金)～2026/10/12(月・祝)"
+        },
+        "fieldEvidence": {
+          "timeInfo": {
+            "text": "日時：2026/10/9(金)～2026/10/12(月・祝)　10:00～18:00",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          },
+          "schedule": {
+            "text": "2026/10/9(金)～2026/10/12(月・祝)",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T06:38:23.000Z"
+      }
+    },
+    {
+      "sourceId": "verified-outings-vintage-market-suita-2026",
+      "patch": {
+        "timeInfo": "9:30～16:30（当日入場券販売は16:00まで）",
+        "price": "前売券700円、当日券1,000円（小学生以下無料）。別途自然文化園・日本庭園共通入園料が必要。",
+        "schedule": {
+          "dates": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25"
+          ],
+          "evidence": "2026年10月23日（金）～ 25日（日）"
+        },
+        "fieldEvidence": {
+          "timeInfo": {
+            "text": "9:30～16:30（当日入場券販売は16:00まで）",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          },
+          "price": {
+            "text": "前売券 700円、当日券 1,000円（小学生以下無料）※別途自然文化園・日本庭園共通入園料が必要",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          },
+          "schedule": {
+            "text": "2026年10月23日（金）～ 25日（日）",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T06:38:23.000Z"
+      }
+    },
+    {
+      "sourceId": "verified-outings-sakana-japan-suita-2026",
+      "patch": {
+        "timeInfo": "各日9:30～17:00（営業時間は予定）",
+        "price": "入場料500円（税込）、小学生以下無料。万博記念公園入園料・飲食代は別途。",
+        "schedule": {
+          "dates": [
+            "2026-10-02",
+            "2026-10-03",
+            "2026-10-04"
+          ],
+          "evidence": "2026年10月2日（金）～4日（日）"
+        },
+        "fieldEvidence": {
+          "timeInfo": {
+            "text": "2026年10月2日（金）午前9時30分～午後5時　3日（土）午前9時30分～午後5時　4日（日）午前9時30分～午後5時 ※営業時間は予定",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          },
+          "price": {
+            "text": "500円（税込） ※小学生以下無料 ※万博記念公園入場料、飲食代は別途",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          },
+          "schedule": {
+            "text": "2026年10月2日（金）から4日（日）までの3日間",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:38:23.000Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T06:38:23.000Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "checkedDateJST":"2026-10-02",
+  "method":"Codex in-app browser, actual loaded public UI",
+  "url":"https://ta713ku-ops.github.io/osaka-event-map/",
+  "query":"なんば雲海",
+  "steps":[{"condition":"これから","candidates":1,"cardPrice":"0円"},{"condition":"これから + 無料","candidates":0}],
+  "dataset":{"records":504,"generatedAt":"2026-10-01T23:12:29.088Z","frozenPath":"/tmp/osaka-info-gauntlet-20261002/reference/public-baseline.json"},
+  "caution":"Browser clock is real. No simulated future clock or real-device Safari check."
+}

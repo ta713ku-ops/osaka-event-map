@@ -3,6 +3,7 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
+import { __test__ as verifiedOutingsTest } from './sources/verified-outings.mjs';
 import {
   assignStableRouteIds,
   collectEvents,
@@ -309,6 +310,54 @@ test('does not classify a parking-fee campaign as a free event', () => {
   assert.equal(event.tagEvidence?.free, undefined);
 });
 
+test('free exhibit inside a venue with required separate admission is not a free outing', () => {
+  const event = normalizeEventRecord({ eventName: 'コスモス・コキアフェスタ', startDate: '2026-10-03', price: '無料（別途自然文化園・日本庭園共通入園料が必要）' });
+  assert.equal(event.freeEvent, false);
+  assert.equal(event.tags?.includes('free') ?? false, false);
+  const trulyFree = normalizeEventRecord({ eventName: '広場の展示', startDate: '2026-10-03', price: '入場無料' });
+  assert.equal(trulyFree.freeEvent, true);
+  for (const price of ['入場無料。入園料は別途必要', '入場無料（会場入園料別途）', '入場無料。別途施設利用料が必要']) {
+    const mandatory = normalizeEventRecord({ eventName: '施設内の催し', startDate: '2026-10-03', price });
+    assert.equal(mandatory.freeEvent, false, price);
+    assert.equal(mandatory.tags?.includes('free') ?? false, false, price);
+  }
+  for (const price of ['参加費無料（要観覧料）', '参加費無料。別途観覧料が必要', '参加費無料。鑑賞料500円']) {
+    const mandatory = normalizeEventRecord({ eventName: '観覧の催し', startDate: '2026-10-03', price });
+    assert.equal(mandatory.freeEvent, false, price);
+    assert.equal(mandatory.tags?.includes('free') ?? false, false, price);
+  }
+  for (const price of ['無料', 0]) {
+    for (const field of ['description', 'priceDetails', 'supplementaryInfo']) {
+      const mandatory = normalizeEventRecord({ eventName: '施設内の催し', startDate: '2026-10-03', price, freeEvent: true, tags: ['free'], tagEvidence: { free: '入場無料' }, [field]: '会場の入園料は別途必要です。' });
+      assert.equal(mandatory.freeEvent, false, `${price}: ${field}`);
+      assert.equal(mandatory.tags?.includes('free') ?? false, false, `${price}: ${field}`);
+    }
+  }
+});
+
+test('explicit free admission remains searchable when food or workshops are optional purchases', () => {
+  const event = normalizeEventRecord({ eventName: '音楽フェス', startDate: '2026-10-04', price: '入場無料。会場内の飲食・販売・ワークショップは有料の場合あり。' });
+  assert.equal(event.freeEvent, true);
+  assert.equal(event.tags?.includes('free'), true);
+  const optionalWorkshop = normalizeEventRecord({ eventName: '音楽フェス', startDate: '2026-10-04', price: '入場無料。ワークショップ参加費500円（参加任意）' });
+  assert.equal(optionalWorkshop.freeEvent, true);
+  assert.equal(optionalWorkshop.tags?.includes('free'), true);
+  const ageRestricted = normalizeEventRecord({ eventName: '料金条件のある催し', startDate: '2026-10-04', price: '小学生以下無料。一般1,000円。' });
+  assert.equal(ageRestricted.freeEvent, false);
+  assert.equal(ageRestricted.tags?.includes('free') ?? false, false);
+  const inconsistent = normalizeEventRecord({ eventName: '料金条件の不明な催し', startDate: '2026-10-04', price: '入場無料。一般1,000円。' });
+  assert.equal(inconsistent.freeEvent, false);
+  const zeroAdmission = normalizeEventRecord({ eventName: '無料公開', startDate: '2026-10-04', price: '入場無料。一般0円。' });
+  assert.equal(zeroAdmission.freeEvent, true);
+});
+
+test('publication preserves per-date official clocks while rejecting malformed clocks and dates', () => {
+  const event = normalizeEventRecord({ eventName: '日ごとの祭り', startDate: '2026-10-02', endDate: '2026-10-04', schedule: { evidence: '公式の日別時刻', dates: ['2026-10-02', '2026-10-03'], hoursByDate: { '2026-10-02': { startTime: '16:00', endTime: '21:00' }, '2026-10-03': { startTime: '99:00', endTime: '20:00' }, 'not-a-date': { startTime: '11:00', endTime: '19:00' } } } });
+  assert.deepEqual(event.schedule.hoursByDate, { '2026-10-02': { startTime: '16:00', endTime: '21:00' } });
+  assert.equal(event.startTime, undefined);
+  assert.equal(event.endTime, undefined);
+});
+
 test('cached mode requires a normalized snapshot and never parses a raw fixture', async (t) => {
   const directory = await fixtureDir();
   t.after(() => rm(directory, { recursive: true, force: true }));
@@ -448,6 +497,30 @@ test('confirmed removal from an official page cannot revive last-good cached eve
   });
   assert.equal(next.events.some(event=>event.sourceId==='withdrawn-source'),false);
   assert.equal(next.sources.find(source=>source.id==='withdrawn-source').allowCachedFallback,false);
+});
+
+test('an authoritative static snapshot cannot revive an old name from the same source cache', async (t) => {
+  for (const offline of [false, true]) {
+    const directory = await fixtureDir();
+    t.after(() => rm(directory, { recursive: true, force: true }));
+    const assetUrl='https://official.example.test/poster.jpg', officialUrl='https://official.example.test/market';
+    const original=verifiedOutingsTest.DATA.occurrences[0];
+    const fieldEvidence=Object.fromEntries(Object.entries(original.fieldEvidence).map(([key,quote])=>[key,{...quote,sourceUrl:assetUrl,checkedAt:NOW.toISOString()}]));
+    fieldEvidence.eventName.text='PARKLABO by LOCO★MARKET';
+    const text=Object.values(fieldEvidence).map(quote=>quote.text).join('\n');
+    const occurrence={...original,sourceId:'static-market',eventName:fieldEvidence.eventName.text,officialUrl,lastCheckedAt:NOW.toISOString(),fieldEvidence,evidenceAssets:[{url:assetUrl,primaryPage:officialUrl,kind:'image',sha256:'a'.repeat(64),text,checkedAt:NOW.toISOString(),extractionMethod:'manual visual read'}]};
+    const old=verifiedOutingsTest.buildEvent({...occurrence,eventName:'LOCO★MARKET'}, {checkedAt:NOW.toISOString(),stale:true});
+    await collectIn(directory,{additionalCollector:async()=>({events:[old],sources:[{id:occurrence.sourceId,name:'Official market',url:officialUrl,status:'success',count:1,checkedAt:NOW.toISOString()}]})});
+    const fetchText=async()=>{if(offline)throw Error('offline');return '';};
+    fetchText.assetHash=async()=>occurrence.evidenceAssets[0].sha256;
+    const selected=await verifiedOutingsTest.collectOccurrence({now:LATER,fetchText},occurrence);
+    assert.equal(selected.events.length,1);assert.equal(selected.allowCachedFallback,false);
+    const result=await collectEvents({now:LATER,fetchImpl:fixedBodikFetch(await readFile(join(directory,'sources','270008_event.csv'))),sourceCachePath:join(directory,'sources','270008_event.csv'),outputPath:join(directory,'second-events.json'),reportPath:join(directory,'second-report.json'),cacheReportPath:join(directory,'sources','collection-report.json'),previousReportPath:join(directory,'sources','collection-report.json'),additionalCollector:async()=>({events:selected.events,sources:[{id:occurrence.sourceId,name:'Official market',url:officialUrl,status:'stale',count:1,checkedAt:NOW.toISOString(),allowCachedFallback:selected.allowCachedFallback,error:selected.errors.join('; ')}]})});
+    const markets=result.events.filter(event=>event.sourceId===occurrence.sourceId);
+    assert.equal(markets.length,1);assert.equal(markets[0].eventName,'PARKLABO by LOCO★MARKET');
+    assert.equal(markets[0].lastCheckedAt,NOW.toISOString());
+    assert.equal(result.sources.find(source=>source.id===occurrence.sourceId).allowCachedFallback,false);
+  }
 });
 
 test('cached mode is deterministic and preserves a prior failure status', async (t) => {

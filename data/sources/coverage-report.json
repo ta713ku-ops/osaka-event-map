@@ -11,8 +11,8 @@
     "sourceHealthy": 0,
     "sourceWarning": 24,
     "sourceGap": 0,
-    "resolvedCandidates": 12,
-    "pendingCandidates": 1,
+    "resolvedCandidates": 11,
+    "pendingCandidates": 2,
     "highPriorityGaps": 1
   },
   "categories": [
@@ -22,7 +22,7 @@
       "status": "warning",
       "tracked": 3,
       "healthy": 0,
-      "eventCount": 25,
+      "eventCount": 26,
       "sourceIds": [
         "bodik-osaka",
         "osaka-city-events",
@@ -35,7 +35,7 @@
       "status": "warning",
       "tracked": 5,
       "healthy": 0,
-      "eventCount": 17,
+      "eventCount": 25,
       "sourceIds": [
         "osaka-art-museum",
         "nakka-art-museum",
@@ -50,7 +50,7 @@
       "status": "warning",
       "tracked": 3,
       "healthy": 0,
-      "eventCount": 105,
+      "eventCount": 151,
       "sourceIds": [
         "festival-hall",
         "zepp-namba",
@@ -63,7 +63,7 @@
       "status": "warning",
       "tracked": 3,
       "healthy": 0,
-      "eventCount": 4,
+      "eventCount": 3,
       "sourceIds": [
         "festival-hall",
         "fenice-sakai",
@@ -91,7 +91,7 @@
       "status": "warning",
       "tracked": 8,
       "healthy": 0,
-      "eventCount": 11,
+      "eventCount": 13,
       "sourceIds": [
         "hankyu-umeda",
         "aeon-osaka-dome-city",
@@ -109,7 +109,7 @@
       "status": "warning",
       "tracked": 3,
       "healthy": 0,
-      "eventCount": 128,
+      "eventCount": 132,
       "sourceIds": [
         "bodik-osaka",
         "osaka-info-events",
@@ -137,10 +137,9 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 8,
+      "matchedEvents": 7,
       "matchedEventIds": [
         "5f6b5d58712fbb792229",
-        "83cc8e15f1b7239e0d53",
         "c8c1b471bfce81fd973d",
         "63bd6ad0a0823b3fafc6",
         "acc045d94ab63b8d327c",
@@ -152,7 +151,7 @@
         "atc-events",
         "ghibli-park-exhibition-osaka"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "osaka-art",
@@ -162,12 +161,16 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 0,
-      "matchedEventIds": [],
+      "matchedEvents": 3,
+      "matchedEventIds": [
+        "a2700b0e8abdad3a6dfd",
+        "39afc7e1dbcb3460d0ea",
+        "71f9c2b5a9fa9e5a32e3"
+      ],
       "sourceIds": [
         "osaka-art-museum"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "nakka",
@@ -177,18 +180,19 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 5,
+      "matchedEvents": 6,
       "matchedEventIds": [
         "9fc27b165ddbe5f76dd1",
         "696b50d99027503db860",
         "103502595576e00d0a66",
         "07a053d468af334f6cc4",
+        "cbc5f7b839e13008ec50",
         "8b7ddc81a2f3e849af0b"
       ],
       "sourceIds": [
         "nakka-art-museum"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "natural-history",
@@ -200,14 +204,14 @@
       "healthy": false,
       "matchedEvents": 3,
       "matchedEventIds": [
-        "554df3890243bb98ec1d",
+        "4f0a16579e35b237a9f5",
         "ddc36fc83ae74feccf52",
         "fd096abc2cf7790b28da"
       ],
       "sourceIds": [
         "osaka-natural-history-museum"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "festival-hall",
@@ -217,14 +221,39 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 1,
+      "matchedEvents": 26,
       "matchedEventIds": [
-        "ff508473cb55cf0f5dc8"
+        "a9552af851ef09737773",
+        "3975690e07d0df12944b",
+        "12cddb260b0ed0f2c134",
+        "70c7fe64768d320484ae",
+        "4ac9b90614de263f0f97",
+        "7105aa01344e0f8a5c61",
+        "1ada1950eb0a0c01df34",
+        "3ac8586d5ba7affabac5",
+        "f28f39e6b718247676c4",
+        "c54986c5a20b6142dcf1",
+        "49394b622b3cb7a87e28",
+        "7ab624babb55d5b2dcdf",
+        "c6df8f70651e8c4f7990",
+        "683677766de5f8c827de",
+        "8709170d7ec3b2229eb0",
+        "f1eab0ecb37d0001047f",
+        "dbeb4831d829c9ab2f3f",
+        "fa367da099331093f097",
+        "76c7352c30f73481ffec",
+        "72bd984ff3b3a55eb3d1",
+        "cb36c0a2d910a301cefd",
+        "4cce9df24b241416f615",
+        "c08faed274cb0545245a",
+        "1a045c8a6f107e0b773b",
+        "fa7b56a13652b81ed43a",
+        "b2cc4fa05b1e03528907"
       ],
       "sourceIds": [
         "festival-hall"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "zepp-namba",
@@ -234,12 +263,32 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 0,
-      "matchedEventIds": [],
+      "matchedEvents": 19,
+      "matchedEventIds": [
+        "6757b89c339e510526c1",
+        "0274c3db9c051ed46663",
+        "0d4417676a7e77a50d36",
+        "0aab593dbdbb062899f4",
+        "ec4c5c19d0a5cc2f7437",
+        "852c742dc61f42458c5b",
+        "d06463197c2816472854",
+        "49ce0c60604431fe7765",
+        "ab93b5d221ca54e85e3b",
+        "07726dbef57df9bd4289",
+        "11f04ded8a066d2c615c",
+        "d320053f705663aca744",
+        "4c7b30efff6590f96445",
+        "5d028f02e3ab29c047e9",
+        "f29d280e207a864f6898",
+        "7f04cbd85579a6d3041a",
+        "879332526f212ad32414",
+        "a390023072a5d67c6045",
+        "51dd055c3045a5c9a2bf"
+      ],
       "sourceIds": [
         "zepp-namba"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "hankyu-umeda",
@@ -281,7 +330,7 @@
       "sourceIds": [
         "hankyu-umeda"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-dome",
@@ -294,15 +343,15 @@
       "matchedEvents": 33,
       "matchedEventIds": [
         "99f380fcc6d84529dd99",
-        "bd9b18ea7fc772fef99e",
-        "ca05216e8a746ab4d0b9",
         "3d6d5d6ed4d6bc23b2ce",
         "9524e9bd545dde5f09b3",
         "0f28fe9c238f1d80a595",
+        "7c167210953f10dbafbe",
         "253389c85b3adddfa407",
         "0ff7d48e7ab54b1f743f",
         "60ca8d7d7e5cd6f04896",
         "648dc003cbf436c93dc6",
+        "3fff93c988093f8c5c33",
         "f13b0eb588c95ac1746f",
         "3b27e23b7be6ba0f2be6",
         "177a5601475ebfbb0eee",
@@ -330,7 +379,7 @@
       "sourceIds": [
         "aeon-osaka-dome-city"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-dainichi",
@@ -342,31 +391,28 @@
       "healthy": false,
       "matchedEvents": 35,
       "matchedEventIds": [
-        "2ade7019129d802cb250",
-        "b95e45dc2e7d12832119",
-        "cbc88e6771dddfc2ae88",
         "ee7c2293c7fec8827251",
-        "0696e1623fb5b003dc9e",
-        "8e6cd2b98ce441f6ae20",
         "af7ec13dacee94dedc03",
         "3e1efe198729bb0983d0",
         "0e8177c954f8a5c1e461",
         "7e4cd5193f8b56dc34b5",
         "a3f8d1cb93559cf4aff9",
         "873208fc1809cd7d5de6",
-        "733d34e1b58610869cb9",
         "c72265fc34798f9f695c",
         "ece2f19d30b0f6dd7f1b",
         "9de4d089d3382ae38092",
         "7234aa89cb686727a986",
         "786468a317c8117285c0",
+        "69f4282fe86b2ff933d3",
         "df34dcf4e11207e95d41",
         "58cfd7c36b416a160fbd",
+        "389dcb0b61dc0707c575",
         "c64e8a2d7402639dab2a",
         "0b44074f8d8db70c4977",
         "789351b2c8ed4fc49ed7",
         "baa409da2ea11e55eebd",
         "dfc6c56a126606df2a8e",
+        "abb3b68d43de188b3f9f",
         "dac27cb550a768ae0ee9",
         "74b4cfe38ee728adcf23",
         "f2c15bd96f2c34f03d28",
@@ -376,12 +422,15 @@
         "412b750032aa036e178b",
         "315cbb0e1064b1be6039",
         "abaeb1d940d892427d3a",
+        "0b1351bbf369a05c8619",
+        "8ffda525cfdaeb81d9c0",
+        "3bba97c8c62059d01829",
         "3d71f9b996403d25869f"
       ],
       "sourceIds": [
         "aeon-dainichi"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-hineno",
@@ -391,19 +440,12 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 23,
+      "matchedEvents": 19,
       "matchedEventIds": [
-        "7cd2105562478ff77bdf",
-        "6e61916e870ab3477117",
-        "a0b5ade73f2668c6ff85",
         "489a051a8e3d447e818f",
         "82c98f57e0b9d6f6e10b",
         "cf56a427132ebbad29f5",
-        "aab1f368525e9077e1a5",
-        "9047abfdd9ea1c0831b2",
         "03758166b80a1137f2e8",
-        "cd296a0e1e34394fe092",
-        "0cd1f94ff684d09bdf61",
         "15ca85ebc41b1cbfec77",
         "649074392a0433695eaa",
         "5865665d324c0c3f1bd0",
@@ -414,13 +456,16 @@
         "0a114b4e84233c61b2fc",
         "743d7daac2fe757927b6",
         "42382d479161588e4131",
+        "8a8af2e68f4801b0dbae",
         "2885e72b512476034366",
+        "d45128560c061fbb2d5a",
+        "0fa16e1ab25cba756452",
         "b460f317e87be76e5d07"
       ],
       "sourceIds": [
         "aeon-hineno"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-ibaraki",
@@ -430,25 +475,19 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 28,
+      "matchedEvents": 22,
       "matchedEventIds": [
-        "17b9cfa597e87e4437bb",
-        "07ba98039e87295237d1",
-        "5928d92c306df04ebe23",
         "e7d19457faa816a75581",
-        "f434123781541a080c5e",
         "fb2250935e75419550f7",
-        "0a31642306f0ec0c2628",
-        "7aeb5ffae1d5c7ac5001",
-        "a5bf9ed674df4b1c0309",
         "78bc94d56741dcae4830",
         "f020eff3e16c8a661fc0",
-        "cb2017c439a496521c17",
-        "ba517e047753ddf26508",
-        "a9c0fb7ef47826e21001",
         "d7be2458e87ded825319",
+        "cd94989e865f9503dfb1",
         "bd2479ad1250726cf836",
+        "7e3dbce4f528e3b3219e",
+        "c30b5bee48540eaaf4d2",
         "24332be99fe23520a71b",
+        "94f2796db65d416f82b2",
         "831b182ec309b9a3028c",
         "d5dd7058f2d8baae93e9",
         "82550bd8760d91452b5f",
@@ -464,7 +503,7 @@
       "sourceIds": [
         "aeon-ibaraki"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "expo-park",
@@ -474,24 +513,26 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 11,
+      "matchedEvents": 13,
       "matchedEventIds": [
         "81d8b910c6940868b4c9",
         "5cc84be6f471cee4966a",
         "e2d6d869b07f6f7ddb01",
-        "f242ef433c4ee24ed9ec",
         "af179eb30666b59ea99d",
         "3c7133223ebaf5f98f48",
         "2c31a5f7932a5365f45e",
+        "f6c992d7125ad55bcb7e",
         "75da506cca85e1c1fb38",
         "e5453e629eff0d45bbf0",
+        "5e62794a9acdc2495b24",
         "6e994df1bcc91674a1e5",
-        "d1eb15d2c923c6dfb1e9"
+        "d1eb15d2c923c6dfb1e9",
+        "caaf06433d13c55b9a11"
       ],
       "sourceIds": [
         "expo-park"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "hirakata-park",
@@ -501,7 +542,7 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 12,
+      "matchedEvents": 13,
       "matchedEventIds": [
         "a56f3074286f986e5fdc",
         "9d6c95de2a135b4781b7",
@@ -514,12 +555,13 @@
         "18fdfa5746e5bdb80056",
         "f8d8f32d5709cd58f353",
         "8c07faef70fe041e458e",
+        "22370e0a5f868d8b7be8",
         "32e4b5019d28867f84fe"
       ],
       "sourceIds": [
         "hirakata-park"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "osaka-castle",
@@ -553,8 +595,10 @@
       "status": "gap",
       "tracked": false,
       "healthy": false,
-      "matchedEvents": 0,
-      "matchedEventIds": [],
+      "matchedEvents": 1,
+      "matchedEventIds": [
+        "b9f65e22a8a55c7efde4"
+      ],
       "sourceIds": []
     },
     {
@@ -601,7 +645,7 @@
       "sourceIds": [
         "science-museum"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "oriental-ceramics",
@@ -623,9 +667,8 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 27,
+      "matchedEvents": 28,
       "matchedEventIds": [
-        "da70604e02ede7255e85",
         "100984a6532ba6132a49",
         "e3ac1cb84069eef4d226",
         "46809ebde167d9e3be9e",
@@ -642,10 +685,12 @@
         "98354c4870d3200cb72c",
         "0824f3871c91f449c88c",
         "953318f3cfc21efa1f4b",
+        "7656ccf8f7f6246914b5",
         "ecd2f0037eeacbf56973",
         "af61cc52687261616be2",
         "e3ce454a1866d280ce04",
         "bd9b564008b805da43f9",
+        "fa2e42284960aef56004",
         "0859a2514fdde4778be0",
         "8d809ceb878018f26efe",
         "9c34f603c800a9ff2dd2",
@@ -656,7 +701,7 @@
       "sourceIds": [
         "nhk-osaka-hall"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "fenice-sakai",
@@ -666,9 +711,8 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 38,
+      "matchedEvents": 37,
       "matchedEventIds": [
-        "82cc9a5be963f2071be1",
         "cc66f8c83494a0e6c512",
         "c37f14269164d616d426",
         "107c7d528b4227079d40",
@@ -710,7 +754,7 @@
       "sourceIds": [
         "fenice-sakai"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "grand-cube",
@@ -744,10 +788,8 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 80,
+      "matchedEvents": 82,
       "matchedEventIds": [
-        "c49c82d053e7f9e129c2",
-        "b9eb1661aaae2b876039",
         "5a861cd314ab52e67f07",
         "79b06f961313597f4d11",
         "89283a21f39bde1691b0",
@@ -809,6 +851,8 @@
         "e4a419337e04110583ca",
         "12a002ab74feea4dc29b",
         "3b020b88e2a654fe30e8",
+        "fba8d3d09a5f8a545120",
+        "c2031c9258daf80efe15",
         "6ad44e7dedbafddc9903",
         "d46992d0ed65d17a96c1",
         "725222ca7456622bdf2d",
@@ -819,7 +863,9 @@
         "1af453993988708fcb14",
         "74764d1007bcfe33cba3",
         "ba9011b15bdd6e3083a0",
+        "13ac45a729ed70c79990",
         "094628eb8fc0be62f6a3",
+        "50b0aaaacbe3c51c6830",
         "6a5d7d32efe79e4d6227",
         "870ca1ac0dc06d06fd54",
         "24f4bba9c5e1dcd1360a",
@@ -830,7 +876,7 @@
       "sourceIds": [
         "billboard-osaka"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "umeda-arts",
@@ -852,18 +898,14 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 30,
+      "matchedEvents": 29,
       "matchedEventIds": [
-        "eb2f35cbfc7baae1ecad",
-        "19788171ed6de535de4c",
         "d66c15b68c65cc0f6281",
         "b6fc1d0a0d8167982cfa",
         "bb74f10b507b284a3a2c",
         "45afda0f5a42f244a290",
-        "79ccc1825c5091e0ec4b",
-        "b7ca34895bb8bb2dec8c",
+        "7178c12d01eeb1eea9f8",
         "0db7e739dccbc746ef33",
-        "2f2fa2a9f125340b1ee1",
         "d5ea3f847c6f771e671a",
         "cae29eb6dd4538be221e",
         "790557f7b1e49ff4476a",
@@ -874,13 +916,16 @@
         "481b586874d6d8ac44da",
         "e5c62c62168594ea4dbe",
         "0f0bb93b4084c45fe67b",
+        "fbe1b50c043a97a837db",
         "b05b8a2915fd969f339e",
         "66edbaa0b89291895106",
         "7c1c2767979762546c7c",
+        "7d7c64a3df2922272f7f",
         "bfc2fb37373c4bbafc09",
         "1a4a5ba6927cc9afef76",
         "40c6a798cb203753e1ef",
         "8c5238d559f0e883644a",
+        "6f4d95b1ed95841fa11b",
         "cac5226a5318a9cc0396",
         "7fae9334d22fc5e9b2b2",
         "97c7e2dcd74dc51313b1"
@@ -888,7 +933,7 @@
       "sourceIds": [
         "grand-front"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "lucua",
@@ -903,12 +948,12 @@
         "b9f48b12c67ae402f5eb",
         "5aa5f2a745109ce42f87",
         "aae48bb7a7b2ba51999a",
-        "0021c077e1ed4eae9591",
         "f5e5b64634afac0c68e7",
         "238fcc9f0585032b1058",
         "9f39eb07851318b694fb",
-        "918cc8b3e5ea2ee7ac82",
         "9bce3740be340f5e85d2",
+        "a3b92b1ba97c85c190ee",
+        "80fb0448850149ba6fb7",
         "da483a35eb5f4f6c6c3b",
         "8f16feac3ff2f3cf3308",
         "748e63cee58b88a7a77d",
@@ -918,7 +963,7 @@
       "sourceIds": [
         "lucua"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "namba-parks",
@@ -928,19 +973,20 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "matchedEvents": 6,
+      "matchedEvents": 7,
       "matchedEventIds": [
         "a8e8e6df550fba4208dd",
         "25cee3541f4e1dfd4e2c",
         "d6127d1046176cb8e280",
         "9ad2ae368b0bff66ae3e",
+        "022c25309260edbcb716",
         "21169640bfd11495c06a",
         "3071acb54c9f35e02565"
       ],
       "sourceIds": [
         "namba-parks"
       ],
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "abeno-harukas",
@@ -967,7 +1013,7 @@
       "count": 78,
       "publishedCount": 75,
       "eventCount": 75,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "osaka-city-events",
@@ -977,10 +1023,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 46,
+      "count": 54,
       "publishedCount": 0,
       "eventCount": 0,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "osaka-info-events",
@@ -990,10 +1036,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 4,
-      "publishedCount": 3,
-      "eventCount": 3,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 48,
+      "publishedCount": 44,
+      "eventCount": 44,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "osaka-art-museum",
@@ -1002,12 +1048,11 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "collectionStatus": "stale",
-      "count": 0,
-      "publishedCount": 0,
-      "eventCount": 0,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z",
-      "error": "最新取得に失敗したため前回のイベントを使用しています"
+      "collectionStatus": "success",
+      "count": 3,
+      "publishedCount": 3,
+      "eventCount": 3,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "nakka-art-museum",
@@ -1017,10 +1062,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 5,
-      "publishedCount": 5,
-      "eventCount": 5,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 6,
+      "publishedCount": 6,
+      "eventCount": 6,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "festival-hall",
@@ -1030,10 +1075,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 1,
-      "publishedCount": 1,
-      "eventCount": 1,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 26,
+      "publishedCount": 26,
+      "eventCount": 26,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-osaka-dome-city",
@@ -1046,7 +1091,7 @@
       "count": 33,
       "publishedCount": 33,
       "eventCount": 33,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-dainichi",
@@ -1059,7 +1104,7 @@
       "count": 35,
       "publishedCount": 35,
       "eventCount": 35,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-hineno",
@@ -1069,10 +1114,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 23,
-      "publishedCount": 23,
-      "eventCount": 23,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 19,
+      "publishedCount": 19,
+      "eventCount": 19,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "aeon-ibaraki",
@@ -1082,10 +1127,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 28,
-      "publishedCount": 28,
-      "eventCount": 28,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 22,
+      "publishedCount": 22,
+      "eventCount": 22,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "hankyu-umeda",
@@ -1098,7 +1143,7 @@
       "count": 26,
       "publishedCount": 26,
       "eventCount": 26,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "osaka-natural-history-museum",
@@ -1111,7 +1156,7 @@
       "count": 2,
       "publishedCount": 2,
       "eventCount": 2,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z",
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z",
       "error": "最新取得に失敗したため前回のイベントを使用しています"
     },
     {
@@ -1121,12 +1166,11 @@
       "status": "warning",
       "tracked": true,
       "healthy": false,
-      "collectionStatus": "stale",
-      "count": 0,
-      "publishedCount": 0,
-      "eventCount": 0,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z",
-      "error": "最新取得に失敗したため前回のイベントを使用しています"
+      "collectionStatus": "success",
+      "count": 19,
+      "publishedCount": 19,
+      "eventCount": 19,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "ghibli-park-exhibition-osaka",
@@ -1139,7 +1183,7 @@
       "count": 0,
       "publishedCount": 0,
       "eventCount": 0,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z",
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z",
       "error": "最新取得に失敗したため前回のイベントを使用しています"
     },
     {
@@ -1150,10 +1194,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 8,
-      "publishedCount": 8,
-      "eventCount": 8,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 7,
+      "publishedCount": 7,
+      "eventCount": 7,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "expo-park",
@@ -1166,7 +1210,7 @@
       "count": 9,
       "publishedCount": 9,
       "eventCount": 9,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "hirakata-park",
@@ -1176,10 +1220,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 12,
-      "publishedCount": 12,
-      "eventCount": 12,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 13,
+      "publishedCount": 13,
+      "eventCount": 13,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "grand-front",
@@ -1189,10 +1233,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 30,
-      "publishedCount": 30,
-      "eventCount": 30,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 29,
+      "publishedCount": 29,
+      "eventCount": 29,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "namba-parks",
@@ -1202,10 +1246,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 6,
-      "publishedCount": 6,
-      "eventCount": 6,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 7,
+      "publishedCount": 7,
+      "eventCount": 7,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "lucua",
@@ -1218,7 +1262,7 @@
       "count": 14,
       "publishedCount": 14,
       "eventCount": 14,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "billboard-osaka",
@@ -1228,10 +1272,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 80,
-      "publishedCount": 80,
-      "eventCount": 80,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 82,
+      "publishedCount": 82,
+      "eventCount": 82,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "fenice-sakai",
@@ -1241,10 +1285,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 38,
-      "publishedCount": 38,
-      "eventCount": 38,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 37,
+      "publishedCount": 37,
+      "eventCount": 37,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "nhk-osaka-hall",
@@ -1254,10 +1298,10 @@
       "tracked": true,
       "healthy": false,
       "collectionStatus": "success",
-      "count": 27,
-      "publishedCount": 27,
-      "eventCount": 27,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "count": 28,
+      "publishedCount": 28,
+      "eventCount": 28,
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     },
     {
       "id": "science-museum",
@@ -1270,7 +1314,7 @@
       "count": 6,
       "publishedCount": 6,
       "eventCount": 6,
-      "lastCheckedAt": "2026-09-30T10:40:41.886Z"
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z"
     }
   ],
   "discovery": [
@@ -1368,8 +1412,7 @@
       "discoveredFrom": "万博記念公園イベント",
       "officialCandidateUrl": "https://www.expo70-park.jp/event/75641/",
       "detectedAt": "2026-09-28T07:18:40.241Z",
-      "status": "resolved",
-      "matchedEventId": "f242ef433c4ee24ed9ec"
+      "status": "pending"
     },
     {
       "id": "candidate-dff57be2bdc875",

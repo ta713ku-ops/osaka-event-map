@@ -13,15 +13,21 @@ export const EVENT_TAG_LABELS: Record<EventTag, string> = {
  * Only boolean/category fields with an unambiguous meaning are used as fallbacks;
  * celebrity and limited remain opt-in data fields rather than guesses.
  */
-export function hasEventTag(event: Pick<EventItem, 'tags' | 'freeEvent' | 'childFriendly' | 'category'>, tag: EventTag): boolean {
+type TaggableEvent = Pick<EventItem, 'tags' | 'freeEvent' | 'childFriendly' | 'category' | 'price'>;
+
+export function hasEventTag(event: TaggableEvent, tag: EventTag): boolean {
+  if (tag === 'free' && event.freeEvent === false) return false;
   if (event.tags?.includes(tag)) return true;
-  if (tag === 'free') return event.freeEvent === true;
+  // Older snapshots can contain an explicit zero admission price without the
+  // derived flag. Keep search consistent with that fact, while respecting a
+  // deliberate non-free flag (for example, an event with conditional fees).
+  if (tag === 'free') return event.freeEvent === true || (event.freeEvent !== false && event.price === 0);
   if (tag === 'family') return event.childFriendly === true;
   if (tag === 'exhibition') return event.category === 'exhibition';
   return false;
 }
 
-export function eventTagLabels(event: Pick<EventItem, 'tags' | 'freeEvent' | 'childFriendly' | 'category'>): string[] {
+export function eventTagLabels(event: TaggableEvent): string[] {
   return (Object.keys(EVENT_TAG_LABELS) as EventTag[])
     .filter((tag) => hasEventTag(event, tag))
     .map((tag) => EVENT_TAG_LABELS[tag]);

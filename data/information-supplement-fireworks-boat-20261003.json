@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-03T04:49:01.000Z",
+  "retrievalMethod": "web_extract",
+  "patches": [
+    {
+      "recordIdentity": {
+        "recordId": "caaf06433d13c55b9a11",
+        "sourceId": "information-pack-b-banpaku-night-sky-art-fireworks-2026-11-21",
+        "eventName": "第5回 万博夜空がアートになる日 2026",
+        "startDate": "2026-11-21",
+        "endDate": "2026-11-21",
+        "officialUrl": "https://www.expo70-park.jp/event/77580/",
+        "identityReadFrom": "public/data/events.json",
+        "currentLastCheckedAt": "2026-10-02T12:20:30.504Z"
+      },
+      "fieldsPatch": {
+        "price": "全席指定席。プレミアムフロントシート26,000円、ダイナミックシート12,000円、パノラマシート大人9,600円・子ども4,800円、VIPシート55,000円、カメラシート35,000円、車いすシート24,000円〜48,000円（税込）。子ども席はパノラマシートのみ（3歳以上・小学生以下）。未就学児は大人1名につき1名まで膝上無料。座席利用は別途チケットが必要。",
+        "timeInfo": "12:00開場、19:00開演（予定）。16:30以降は当イベントのチケット所持者のみ入園。",
+        "startTime": "19:00",
+        "accessByTransit": "最寄りは大阪モノレール「万博記念公園駅」。阪急線の南茨木・山田・蛍池、御堂筋線（北大阪急行線）の千里中央、谷町線の大日、京阪本線の門真市から大阪モノレールに接続。16:30以降は中央口のみが入口のため「公園東口駅」ではなく「万博記念公園駅」から来園。公園内駐車場・周辺道路の混雑が予想されるため公共交通機関を推奨。本公演専用駐車場なし。",
+        "fieldEvidence": {
+          "price": {
+            "sourceUrl": "https://banpakuhanabi.jp/",
+            "quotes": [
+              "プレミアムフロントシート",
+              "1名 26,000円 （税込）",
+              "ダイナミックシート",
+              "1名 12,000円 （税込）",
+              "パノラマシート",
+              "大人 9,600円／子ども 4,800円 （税込）",
+              "VIPシート",
+              "1名 55,000円 （税込）",
+              "カメラシート",
+              "1名 35,000円 （税込）",
+              "車いすシート",
+              "24,000円〜48,000円 （税込）",
+              "※ 子ども席は「パノラマシート」のみ",
+              "※ 子ども席の対象は「3歳以上・小学生以下」となります。",
+              "未就学児（小学校入学前）は、大人1名につき1名まで、膝の上で無料観覧いただけます。お席で観覧させたい場合は別途 座席チケットが必要です。"
+            ],
+            "checkedAt": "2026-10-03T04:46:29.000Z"
+          },
+          "timeInfo": {
+            "sourceUrl": "https://banpakuhanabi.jp/",
+            "quotes": [
+              "2026年11月21日（土）12:00開場、19:00開演（予定）",
+              "［開場］ 12:00",
+              "［開演］ 19:00 ※16:30以降のご入園は、当イベントのチケットをお持ちのお客様のみとさせていただきます。"
+            ],
+            "checkedAt": "2026-10-03T04:46:29.000Z"
+          },
+          "startTime": {
+            "sourceUrl": "https://banpakuhanabi.jp/",
+            "text": "2026年11月21日（土）12:00開場、19:00開演（予定）",
+            "checkedAt": "2026-10-03T04:46:29.000Z"
+          },
+          "accessByTransit": {
+            "sourceUrl": "https://banpakuhanabi.jp/",
+            "quotes": [
+              "大阪モノレール「万博記念公園駅」です。当日16:30以降は公園入口が中央口のみとなるため、「公園東口駅」ではなく「万博記念公園駅」からお越しください。",
+              "公園内駐車場・周辺道路の混雑が予想されます。公共交通機関をご利用ください。",
+              "本公演専用の駐車場はありません。公共交通機関をご利用ください。",
+              "「南茨木駅」、「山田駅」、「蛍池駅」から大阪モノレール「万博記念公園駅」",
+              "「千里中央駅」から大阪モノレール「万博記念公園駅」",
+              "「大日駅」から大阪モノレール「万博記念公園駅」",
+              "「門真市駅」から大阪モノレール「万博記念公園駅」"
+            ],
+            "checkedAt": "2026-10-03T04:46:29.000Z"
+          }
+        }
+      }
+    },
+    {
+      "recordIdentity": {
+        "recordId": "f6bff9476044759156fe",
+        "sourceId": "verified-outings-citysup-nakanoshima-guided-tour",
+        "eventName": "水上さんぽガイドツアー 中之島公園ぐるっと",
+        "startDate": "2026-10-07",
+        "endDate": "2026-10-31",
+        "venueName": "ばらぞの橋 桟橋",
+        "officialUrl": "https://www.citysup.jp/walkable_26/",
+        "identityReadFrom": "public/data/events.json",
+        "currentLastCheckedAt": "2026-10-02T12:20:30.504Z"
+      },
+      "fieldsPatch": {
+        "price": "デイタイム（昼〜夕）：大人（中学生以上）平日1,650円／土日祝2,200円、小人（小学生以下）平日1,100円／土日祝1,650円（税込）。14日前予約10%OFF、7日前まで5%OFF。",
+        "timeInfo": "デイタイム（昼〜夕）。所要約20分。",
+        "fieldEvidence": {
+          "price": {
+            "sourceUrl": "https://www.citysup.jp/walkable_26/",
+            "quotes": [
+              "大人｜中学生以上  | 平日 1,500円（税込1,650円）  | 土日祝 2,000円（税込2,200円）",
+              "小人｜小学生以下  | 平日 1,000円（税込1,100円）  | 土日祝 1,500円（税込1,650円）",
+              "※14日前のご予約で10%OFF、7日前までのご予約で5%OFFに！"
+            ],
+            "checkedAt": "2026-10-03T04:46:29.000Z"
+          },
+          "timeInfo": {
+            "sourceUrl": "https://www.citysup.jp/walkable_26/",
+            "quotes": [
+              "デイタイム｜昼〜夕",
+              "所要時間  | デイタイム約20分"
+            ],
+            "checkedAt": "2026-10-03T04:46:29.000Z"
+          },
+          "startTime": {
+            "sourceUrl": "https://www.citysup.jp/walkable_26/",
+            "text": "デイタイム｜昼〜夕。所要時間  | デイタイム約20分",
+            "checkedAt": "2026-10-03T04:46:29.000Z",
+            "status": "not-stated"
+          }
+        }
+      }
+    }
+  ],
+  "unknown": [
+    {
+      "recordId": "caaf06433d13c55b9a11",
+      "sourceId": "information-pack-b-banpaku-night-sky-art-fireworks-2026-11-21",
+      "field": "endTime",
+      "status": "unknown",
+      "reason": "公式サイトには開場と開演の時刻はあるが、終了の時計時刻はない。FAQは「打ち上げ終了後から退出可能」と案内するだけなので、終了時刻を設定しない。",
+      "sourceUrl": "https://banpakuhanabi.jp/",
+      "checkedAt": "2026-10-03T04:46:29.000Z"
+    },
+    {
+      "recordId": "f6bff9476044759156fe",
+      "sourceId": "verified-outings-citysup-nakanoshima-guided-tour",
+      "field": "startTime",
+      "status": "unknown",
+      "reason": "公式ページは昼〜夕の時間帯とデイタイムの所要約20分を示すが、出発時計時刻を掲載していない。所要時間から開始・終了時計を作らない。",
+      "sourceUrl": "https://www.citysup.jp/walkable_26/",
+      "checkedAt": "2026-10-03T04:46:29.000Z"
+    }
+  ]
+}

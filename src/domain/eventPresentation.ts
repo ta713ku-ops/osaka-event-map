@@ -3,15 +3,84 @@ import { occursOnDate } from './events';
 
 const FRESHNESS_WINDOW_MS = 48 * 60 * 60 * 1000;
 
+const HTML_ENTITIES: Record<string, string> = {
+  amp: '&', apos: "'", quot: '"', lt: '<', gt: '>', nbsp: ' ',
+  yen: '¥', cent: '¢', pound: '£', euro: '€', copy: '©', reg: '®',
+  middot: '·', times: '×', divide: '÷', ndash: '–', mdash: '—',
+  hellip: '…', bull: '•', lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”',
+};
+
+/** Decode common HTML entities into plain text without parsing or rendering markup. */
+export function normalizeDisplayText(value: string): string {
+  return value.replace(/&(#(?:x[\da-f]+|\d+)|[a-z][\da-z]+);/giu, (entity, token: string) => {
+    if (token.startsWith('#')) {
+      const hexadecimal = /^#x/i.test(token);
+      const codePoint = Number.parseInt(token.slice(hexadecimal ? 2 : 1), hexadecimal ? 16 : 10);
+      if (!Number.isFinite(codePoint) || codePoint <= 0 || codePoint > 0x10ffff
+        || (codePoint >= 0xd800 && codePoint <= 0xdfff)) return entity;
+      try { return String.fromCodePoint(codePoint); } catch { return entity; }
+    }
+    return HTML_ENTITIES[token.toLocaleLowerCase('en-US')] ?? entity;
+  });
+}
+
+export type EventMediaKind = 'photo' | 'poster' | 'none';
+export type EventImageDimensions = { width: number; height: number };
+
+/** A tall image gets a portrait layout without being labeled as a poster. */
+export function eventImageIsPortrait(dimensions: EventImageDimensions): boolean {
+  return dimensions.width > 0 && dimensions.height > dimensions.width * 1.15;
+}
+
+/** Distinguish source-backed media using explicit poster clues, not image shape alone. */
+export function eventMediaKind(
+  event: Pick<EventItem, 'imageUrl' | 'imageSource'>,
+  _dimensions?: EventImageDimensions,
+): EventMediaKind {
+  const image = usableEventImage(event);
+  if (!image) return 'none';
+  const sourceClues = normalizeDisplayText(event.imageSource ?? '');
+  let pathClues = image;
+  try { pathClues = decodeURIComponent(new URL(image).pathname); } catch { /* usableEventImage already checked the URL. */ }
+  if (/(?:ポスター|チラシ|フライヤー|告知画像|バナー|poster|flyer|banner|bannner|(?:^|[/_. -])kv(?:[/_.@ -]|$)|key.?visual)/iu.test(`${sourceClues} ${pathClues}`.normalize('NFC'))) return 'poster';
+  return 'photo';
+}
+
+/** A layout hint for images that may soften when enlarged in a large detail frame. */
+export function isLowResolutionEventImage(dimensions: EventImageDimensions): boolean {
+  return dimensions.width > 0 && dimensions.height > 0
+    && Math.max(dimensions.width, dimensions.height) < 640;
+}
+
 export function cardPriceLabel(event: EventItem): string | undefined {
   if (typeof event.price === 'number') return `${event.price.toLocaleString('ja-JP')}円`;
   if (typeof event.price === 'string' && event.price.trim()) {
-    const text = event.price.trim();
-    if (text.length <= 80) return text;
-    const prefix = text.split(/[*※]/u)[0].trim();
-    return `${prefix.slice(0, 70)}${prefix.length > 70 ? '…' : ''}（条件は詳細）`;
+    const text = normalizeDisplayText(event.price).replace(/[\s\u3000]+/gu, ' ').trim();
+    if (/^(?:なし|未定|未掲載|[-—])$/u.test(text)) return undefined;
+    if (text.length <= 32) return text;
+
+    const base = (text.split(/[※*\n\r。]/u, 1)[0] ?? text).replace(/^[⚫︎●・\s]+/u, '').trim();
+    const conditionPatterns = [
+      /(?:要(?:事前)?(?:予約|申込)|(?:事前)?(?:予約|申込)(?:必須|が必要|制)|予約必須|申込必須)/u,
+      /(?:抽選|先着(?:順)?|整理券)/u,
+      /(?:未就学児|幼児|[0-9０-９]+歳以下|小学生以下|中学生以下|高校生以下)[^、。，;；\n]{0,12}(?:無料|割引|同伴)/u,
+      /別途[^、。，;；\n]{0,18}(?:料金|入園料|入場料|入館料|費|必要)/u,
+      /保護者[^、。，;；\n]{0,12}(?:同伴|必要|必須)/u,
+      /現金のみ/u,
+    ];
+    const conditions = conditionPatterns
+      .map((pattern) => text.match(pattern)?.[0])
+      .filter((condition): condition is string => Boolean(condition && !base.includes(condition)));
+    // An event can be free while entry to its venue is required and paid.
+    // Keep that cost visible when the first sentence only says "催事は無料".
+    const admission = text.match(/(?:入園|入館|入場|観覧|鑑賞|施設利用)(?:料|料金)[^。;；\n]{0,80}/u)?.[0]
+      ?.split(/[、,]/u, 1)[0]?.trim();
+    if (event.freeEvent === false && /無料/u.test(base) && admission && /[1-9][\d,]*円/u.test(admission)
+      && !base.includes(admission) && !conditions.includes(admission)) conditions.unshift(admission);
+    const summary = base.length > 32 ? `${base.slice(0, 31).trimEnd()}…` : base;
+    return [summary, ...conditions, '条件は詳細'].filter(Boolean).join('・');
   }
-  return event.freeEvent === true ? '無料（条件は詳細で確認）' : undefined;
+  return event.freeEvent === true ? '無料' : undefined;
 }
 
 const jstDate = (date: Date) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(date);
@@ -20,7 +89,7 @@ const jstTime = (date: Date) => new Intl.DateTimeFormat('en-GB', {
 }).format(date);
 
 /** Returns the source-backed event image URL, or undefined for generic assets. */
-export function usableEventImage(event: EventItem): string | undefined {
+export function usableEventImage(event: Pick<EventItem, 'imageUrl' | 'imageSource'>): string | undefined {
   const value = event.imageUrl?.trim();
   if (!value) return undefined;
   let url: URL;

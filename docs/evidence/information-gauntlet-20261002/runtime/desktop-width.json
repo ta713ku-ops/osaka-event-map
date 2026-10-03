@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-10-03T05:04:31.147Z",
+  "observation": {
+    "scripts": [
+      "http://127.0.0.1:4343/osaka-event-map/assets/index-BoLB4LhV.js"
+    ],
+    "scrollWidth": 1280,
+    "viewportHeight": 800,
+    "viewportWidth": 1280
+  }
+}

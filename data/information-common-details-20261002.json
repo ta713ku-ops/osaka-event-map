@@ -1,0 +1,265 @@
+{
+  "reviewedAt": "2026-10-02T11:27:13.029Z",
+  "updates": [
+    {
+      "match": {
+        "sourceId": "verified-outings-sakana-japan-suita-2026",
+        "eventName": "SAKANA&JAPAN FESTIVAL2026 in 万博記念公園",
+        "startDate": "2026-10-02"
+      },
+      "patch": {
+        "fields": {
+          "price": "入場料500円（税込）、小学生以下無料。別途、公園共通入園料：高校生以上450円、中学生以下無料。飲食代は別途。",
+          "accessByTransit": "大阪モノレール「万博記念公園駅」から中央口へ北に徒歩約5分、または「公園東口駅」から東口へ西に徒歩約5分。各ゲートから会場へは園内を移動します。",
+          "schedule": {
+            "dates": [
+              "2026-10-02",
+              "2026-10-03",
+              "2026-10-04"
+            ],
+            "evidence": "2026年10月2日（金）～4日（日）",
+            "hoursByDate": {
+              "2026-10-02": {
+                "startTime": "09:30",
+                "endTime": "17:00"
+              },
+              "2026-10-03": {
+                "startTime": "09:30",
+                "endTime": "17:00"
+              },
+              "2026-10-04": {
+                "startTime": "09:30",
+                "endTime": "17:00"
+              }
+            }
+          },
+          "description": "旬の魚介の海鮮丼、漁師飯、海鮮ラーメンなど全国の魚料理を楽しむグルメフェス。福島の「常磐もの」の魚介や、特産フルーツのスイーツも紹介します。",
+          "contact": {
+            "name": "SAKANA&JAPAN FESTIVAL実行委員会",
+            "phone": "03-6811-1135"
+          }
+        },
+        "fieldEvidence": {
+          "price": {
+            "text": "500円（税込） ※小学生以下無料 ※万博記念公園入場料、飲食代は別途",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:39:42.628Z"
+          },
+          "parkAdmission": {
+            "text": "一般 大人 (高校生以上) 450円 小人 (中学生以下) 無料",
+            "sourceUrl": "https://www.expo70-park.jp/guide/fee/",
+            "checkedAt": "2026-10-02T11:22:21.055Z"
+          },
+          "accessByTransit": {
+            "text": "自然文化園 電車でお越しの方 万博記念公園駅~(北へ徒歩約5分)〜中央口 公園東口駅~(西へ徒歩約5分)〜東口",
+            "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+            "checkedAt": "2026-10-02T11:22:20.699Z"
+          },
+          "schedule": {
+            "text": "2026年10月2日（金）から4日（日）までの3日間",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:39:42.628Z"
+          },
+          "scheduleHours": {
+            "text": "2026年10月2日（金）午前9時30分～午後5時　3日（土）午前9時30分～午後5時　4日（日）午前9時30分～午後5時 ※営業時間は予定",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:39:42.628Z"
+          },
+          "description": {
+            "text": "旬で新鮮な魚介の海鮮丼、全国各地の郷土料理や漁師飯、海鮮ラーメンや海鮮お好み焼きなど、バラエティ豊かな絶品魚介グルメがお楽しみいただけます。",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:39:42.628Z"
+          },
+          "descriptionFukushima": {
+            "text": "ヒラメやノドグロなど「常磐もの」と呼ばれる福島県産の魚介の海鮮丼",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:39:42.628Z"
+          },
+          "contact": {
+            "text": "≪一般の方からのお問い合わせ受付≫ TEL:03-6811-1135(平日10時~18時)",
+            "sourceUrl": "https://37sakana.jp/sjfesosaka/index.html",
+            "checkedAt": "2026-10-02T06:39:42.628Z"
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "sourceId": "verified-outings-vintage-market-suita-2026",
+        "eventName": "Vintage Market -万博 蚤の市-2026秋",
+        "startDate": "2026-10-23"
+      },
+      "patch": {
+        "fields": {
+          "price": "前売券700円、当日券1,000円（小学生以下無料）。別途、公園共通入園料：高校生以上450円、中学生以下無料。",
+          "accessByTransit": "大阪モノレール「万博記念公園駅」から中央口へ北に徒歩約5分、または「公園東口駅」から東口へ西に徒歩約5分。各ゲートから会場へは園内を移動します。",
+          "schedule": {
+            "dates": [
+              "2026-10-23",
+              "2026-10-24",
+              "2026-10-25"
+            ],
+            "evidence": "2026年10月23日（金）～ 25日（日）",
+            "hoursByDate": {
+              "2026-10-23": {
+                "startTime": "09:30",
+                "endTime": "16:30"
+              },
+              "2026-10-24": {
+                "startTime": "09:30",
+                "endTime": "16:30"
+              },
+              "2026-10-25": {
+                "startTime": "09:30",
+                "endTime": "16:30"
+              }
+            }
+          },
+          "description": "約170店のアンティーク、ヴィンテージ雑貨、家具、古着、レコードやフードが集まる蚤の市。太陽の塔の横顔を望む東の広場で、長く受け継がれた品々と出会えます。",
+          "contact": {
+            "name": "シティライフNEW",
+            "phone": "06-6338-0641"
+          }
+        },
+        "fieldEvidence": {
+          "price": {
+            "text": "前売券 700円、当日券 1,000円（小学生以下無料）※別途自然文化園・日本庭園共通入園料が必要",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:39:42.693Z"
+          },
+          "parkAdmission": {
+            "text": "一般 大人 (高校生以上) 450円 小人 (中学生以下) 無料",
+            "sourceUrl": "https://www.expo70-park.jp/guide/fee/",
+            "checkedAt": "2026-10-02T11:22:21.055Z"
+          },
+          "accessByTransit": {
+            "text": "自然文化園 電車でお越しの方 万博記念公園駅~(北へ徒歩約5分)〜中央口 公園東口駅~(西へ徒歩約5分)〜東口",
+            "sourceUrl": "https://www.expo70-park.jp/guide/access/",
+            "checkedAt": "2026-10-02T11:22:20.699Z"
+          },
+          "schedule": {
+            "text": "2026年10月23日（金）～ 25日（日）",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:39:42.693Z"
+          },
+          "scheduleHours": {
+            "text": "9:30～16:30（当日入場券販売は16:00まで）",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:39:42.693Z"
+          },
+          "description": {
+            "text": "今回の開催では、170店が出揃い、アンティークやヴィンテージ雑貨、家具、食器、ジュエリー、古着、古書・レコードそしてこだわりのフードまで、幅広いジャンルのショップが軒を連ねます。",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:39:42.693Z"
+          },
+          "descriptionLocation": {
+            "text": "会場となる万博記念公園 東の広場は、太陽の塔の横顔を望める開放的なロケーション。",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:39:42.693Z"
+          },
+          "contact": {
+            "text": "シティライフNEW 電話:06-6338-0641",
+            "sourceUrl": "https://www.expo70-park.jp/event/77096/",
+            "checkedAt": "2026-10-02T06:39:42.693Z"
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "sourceId": "verified-outings-bread-donut-expocity-2026",
+        "eventName": "パンとドーナツの世界",
+        "startDate": "2026-10-09"
+      },
+      "patch": {
+        "fields": {
+          "description": "朝食や夕食向けのパンから、甘くこってりしたパン・ドーナツまで人気店の味が集まる催し。食品サンプル作りやドーナツのデコレーションも日別に開催します。",
+          "timeInfo": "各日10:00～18:00。食品サンプルは10/10、ドーナツデコレーションは10/11に複数回開催。",
+          "price": "入場料は公式本文に記載なし。購入代は商品ごと。10/11ドーナツワークショップは1,300円/名（現金のみ）。",
+          "reservationInfo": "食品サンプル作り（10/10）はキッズクラブ会員向け、当日10時から整理券配布。ドーナツWS（10/11）は店舗または06-6879-1601で事前予約、空きがあれば当日参加可、年齢制限なし。各回24名。通常の販売イベントの入場予約条件は公式本文に記載なし。",
+          "accessByTransit": "大阪モノレール「万博記念公園駅」から徒歩約2分。",
+          "schedule": {
+            "dates": [
+              "2026-10-09",
+              "2026-10-10",
+              "2026-10-11",
+              "2026-10-12"
+            ],
+            "evidence": "2026/10/9(金)～2026/10/12(月・祝)",
+            "hoursByDate": {
+              "2026-10-09": {
+                "startTime": "10:00",
+                "endTime": "18:00"
+              },
+              "2026-10-10": {
+                "startTime": "10:00",
+                "endTime": "18:00"
+              },
+              "2026-10-11": {
+                "startTime": "10:00",
+                "endTime": "18:00"
+              },
+              "2026-10-12": {
+                "startTime": "10:00",
+                "endTime": "18:00"
+              }
+            }
+          }
+        },
+        "fieldEvidence": {
+          "description": {
+            "text": "朝食だけじゃなく夕食にもぴったりなパンや背徳感満載の甘~く、こってりなパンやドーナツも。 食欲の秋にぴったりの人気店・有名店が大集合!",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T11:22:20.730Z"
+          },
+          "timeInfo": {
+            "text": "日時：2026/10/9(金)～2026/10/12(月・祝)　10:00～18:00",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T06:39:44.012Z"
+          },
+          "price": {
+            "text": "参加費用:1,300円/名 ※現金のみ",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T11:22:20.730Z"
+          },
+          "reservationInfo": {
+            "text": "受付方法:店舗もしくはお電話(06-6879-1601)にて事前予約 ※当日空きがある場合は事前予約なしでもご参加可能。 ※年齢制限はありません。",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T11:22:20.730Z"
+          },
+          "reservationSample": {
+            "text": "参加条件:みついショッピングパークキッズクラブ会員(当日新規ご入会も参加可能) 会場でアンケートへの回答が必要になります。 受付方法:当日10:00より各回分の整理券を配布します。",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T11:22:20.730Z"
+          },
+          "reservationCapacity": {
+            "text": "定員:144名様(各回24名様)",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T11:22:20.730Z"
+          },
+          "workshopDates": {
+            "text": "日時2026/10/11(日) 11:00~/12:00~/13:00~/14:00~/15:00~/16:00~",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T11:22:20.730Z"
+          },
+          "accessByTransit": {
+            "text": "大阪モノレール「万博記念公園」駅徒歩約２分。",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/access/train.html",
+            "checkedAt": "2026-10-02T11:23:31.545Z",
+            "extractionMethod": "html-meta-description"
+          },
+          "schedule": {
+            "text": "2026/10/9(金)～2026/10/12(月・祝)",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T06:39:44.012Z"
+          },
+          "scheduleHours": {
+            "text": "日時：2026/10/9(金)～2026/10/12(月・祝)　10:00～18:00",
+            "sourceUrl": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+            "checkedAt": "2026-10-02T06:39:44.012Z"
+          }
+        }
+      }
+    }
+  ]
+}

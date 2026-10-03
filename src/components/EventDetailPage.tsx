@@ -4,7 +4,10 @@ import {
   Heart, Mail, MapPin, Navigation, Phone, Share2,
 } from 'lucide-react';
 import { CATEGORY_LABELS, EVENT_TAG_LABELS, hasCoordinates, type DetailRecommendation } from '../domain';
-import { eventFreshness, eventStatusLabel, usableEventImage } from '../domain/eventPresentation';
+import {
+  cardPriceLabel, eventFreshness, eventImageIsPortrait, eventMediaKind, eventStatusLabel, isLowResolutionEventImage,
+  normalizeDisplayText, usableEventImage,
+} from '../domain/eventPresentation';
 import { eventPath } from '../domain/eventRoutes';
 import type { EventItem } from '../types';
 import { MapProviderDialog } from './MapProviderDialog';
@@ -79,14 +82,18 @@ function scheduleLabel(event: EventItem) {
     : formatDate(event.startDate, true);
   const startTime = event.startTime?.slice(0, 5) || timeFromTimestamp(event.startAt);
   const endTime = event.endTime?.slice(0, 5) || timeFromTimestamp(event.endAt);
-  const time = event.timeInfo || (startTime ? `${startTime}${endTime ? ` 〜 ${endTime}` : ''}` : '開催時間は未確認');
-  return { range, time };
+  const datedHours = Object.entries(event.schedule?.hoursByDate ?? {}).sort(([a], [b]) => a.localeCompare(b));
+  const time = event.timeInfo || (datedHours.length ? datedHours.map(([date, hours]) => `${formatDate(date)} ${hours.startTime}〜${hours.endTime}`).join('、') : (startTime ? `${startTime}${endTime ? ` 〜 ${endTime}` : ''}` : '開催時間は未確認'));
+  const dates = [...new Set(event.schedule?.dates ?? [])].sort();
+  const confirmedDates = dates.length ? dates.map((date, index) => formatDate(date, index === 0 || date.slice(0, 4) !== dates[0].slice(0, 4))).join('、') : undefined;
+  return { range, time, confirmedDates };
 }
 
 function priceLabel(event: EventItem) {
   if (typeof event.price === 'number' && Number.isFinite(event.price)) return event.price === 0 ? '無料' : `${event.price.toLocaleString('ja-JP')}円`;
   if (typeof event.price === 'string' && event.price.trim()) {
-    const raw = event.price.trim();
+    const raw = normalizeDisplayText(event.price.trim());
+    if (/^(?:なし|未定|未掲載|[-—])$/u.test(raw)) return '料金は公式情報で確認';
     return /^0(?:\.0+)?$/u.test(raw) ? '無料' : raw;
   }
   if (event.freeEvent === true) return '無料';
@@ -118,7 +125,7 @@ function StatusState({ title, message, onBack, onRetry }: { title: string; messa
       <span aria-hidden="true" />
     </header>
     <section className={`event-detail-state${onRetry ? ' is-error' : ''}`} role={onRetry ? 'alert' : 'status'}>
-      <p className="event-detail-section-kicker">EVENT INFORMATION</p>
+      <p className="event-detail-section-kicker">イベント情報</p>
       <h1>{title}</h1>
       {message && <p>{message}</p>}
       <div className="event-detail-state-actions">
@@ -137,7 +144,7 @@ function RelatedEventsSection({ id, title, events, onOpenEvent }: {
 }) {
   if (!events.length) return null;
   return <section className="event-related-section" aria-labelledby={id}>
-    <div className="event-related-heading"><div><p className="event-detail-section-kicker">MORE OSAKA</p><h2 id={id}>{title}</h2></div><span>{events.length}件</span></div>
+    <div className="event-related-heading"><div><p className="event-detail-section-kicker">あわせて見たい</p><h2 id={id}>{title}</h2></div><span>{events.length}件</span></div>
     <div className="event-related-grid">
       {events.map((item) => {
         const image = usableEventImage(item);
@@ -153,7 +160,7 @@ function RelatedEventsSection({ id, title, events, onOpenEvent }: {
           }}
         >
           <span className="event-related-card__media">
-            <span className="event-related-card__fallback" aria-hidden="true">OSAKA</span>
+            <span className="event-related-card__fallback" aria-hidden="true">大阪の催し</span>
             {image && <img src={image} alt="" loading="lazy" referrerPolicy="no-referrer" onError={(imageEvent) => imageEvent.currentTarget.remove()} />}
           </span>
           <span className="event-related-card__copy">
@@ -177,7 +184,8 @@ export function EventDetailPage({
   const [shareNotice, setShareNotice] = useState('');
   const [mapChoiceOpen, setMapChoiceOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
-  useEffect(() => { setImageFailed(false); }, [event?.imageUrl, event?.id]);
+  const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number }>();
+  useEffect(() => { setImageFailed(false); setImageDimensions(undefined); }, [event?.imageUrl, event?.id]);
   useEffect(() => { headingRef.current?.focus({ preventScroll: true }); }, [requestedId, event?.id]);
 
   if (loading) return <StatusState title="イベント情報を読み込んでいます" message="公式情報を確認しています。" onBack={onBack} />;
@@ -188,6 +196,9 @@ export function EventDetailPage({
   const status = eventStatusLabel(event, now);
   const fresh = eventFreshness(event, now);
   const image = imageFailed ? undefined : usableEventImage(event);
+  const imageKind = image ? eventMediaKind(event, imageDimensions) : 'none';
+  const imageLayout = imageKind === 'photo' && imageDimensions && eventImageIsPortrait(imageDimensions) ? 'portrait' : imageKind;
+  const lowResolutionImage = !!imageDimensions && isLowResolutionEventImage(imageDimensions);
   const imageSourceHref = safeExternalHref(event.imageSourceUrl);
   const officialHref = safeExternalHref(event.officialUrl);
   const reservationHref = safeExternalHref(event.reservationUrl);
@@ -195,8 +206,7 @@ export function EventDetailPage({
   const checkedAt = formatCheckedAt(event.lastCheckedAt ?? event.provenance?.find((item) => item.lastCheckedAt)?.lastCheckedAt);
   const closedDates = closedDateLabel(event);
   const fullPrice = priceLabel(event);
-  const priceBeforeNotes = fullPrice.split(/[*※]/u)[0].trim();
-  const shortPrice = fullPrice.length > 180 && priceBeforeNotes ? priceBeforeNotes + (/無料/.test(priceBeforeNotes) ? '（条件は下記で確認）' : '') : fullPrice;
+  const shortPrice = event.price === 0 ? fullPrice : cardPriceLabel(event) ?? fullPrice;
   const canNavigate = hasCoordinates(event) || present(event.address) || present(event.venueName);
   const hasEndedReservation = event.officialStatus === 'sold_out' || event.officialStatus === 'registration_closed';
   const eventUnavailable = event.officialStatus === 'cancelled' || event.officialStatus === 'postponed';
@@ -205,6 +215,7 @@ export function EventDetailPage({
   const sourceLinks = [
     ...(officialHref ? [{ href: officialHref, label: '公式サイトを開く' }] : []),
     ...(sourceHref && sourceHref !== officialHref ? [{ href: sourceHref, label: event.source || '掲載元を開く' }] : []),
+    ...(!image && imageSourceHref && imageSourceHref !== officialHref && imageSourceHref !== sourceHref ? [{ href: imageSourceHref, label: '画像の出典' }] : []),
   ];
   const hasContact = !!(event.contact?.name || event.contact?.phone || event.contact?.email);
 
@@ -230,38 +241,49 @@ export function EventDetailPage({
     {shareNotice && <p className="event-share-notice" role="status">{shareNotice}</p>}
 
     <article className="event-detail-article">
-      <header className="event-detail-hero">
+      <header className={`event-detail-hero event-detail-hero--${imageLayout}${lowResolutionImage ? ' is-low-resolution' : ''}`}>
+        {image && <figure className={`event-detail-media event-detail-media--${imageLayout}${lowResolutionImage ? ' is-low-resolution' : ''}`} data-image-kind={imageKind}>
+          <img
+            src={image}
+            alt={`${event.eventName}の公式画像`}
+            fetchPriority="high"
+            referrerPolicy="no-referrer"
+            width="1200"
+            height="800"
+            onLoad={(imageEvent) => setImageDimensions({ width: imageEvent.currentTarget.naturalWidth, height: imageEvent.currentTarget.naturalHeight })}
+            onError={() => setImageFailed(true)}
+          />
+          <figcaption>
+            <a href={image} target="_blank" rel="noopener noreferrer" aria-label={`${event.eventName}の公式画像を大きく見る`}>画像を大きく見る <ExternalLink size={13} aria-hidden="true" /></a>
+            {imageSourceHref && <a href={imageSourceHref} target="_blank" rel="noopener noreferrer">画像の出典 <ExternalLink size={13} aria-hidden="true" /></a>}
+          </figcaption>
+        </figure>}
         <div className="event-detail-hero__copy">
-          <p className="event-detail-kicker">{CATEGORY_LABELS[event.category] ?? 'イベント'} <span aria-hidden="true">/</span> OSAKA</p>
+          <p className="event-detail-kicker">{CATEGORY_LABELS[event.category] ?? '大阪のイベント'}</p>
+          <h1 ref={headingRef} tabIndex={-1}>{normalizeDisplayText(event.eventName)}</h1>
           <p className={`event-status ${statusTone(event, fresh)}`}><span aria-hidden="true" />{status}</p>
           {!!event.statusEvidence && <p className="event-detail-status-evidence">{event.statusEvidence}</p>}
-          <h1 ref={headingRef} tabIndex={-1}>{event.eventName}</h1>
-          <p className="event-detail-hero__essentials">
-            <span>{formatDate(event.startDate, true)}{event.endDate && event.endDate !== event.startDate ? ` 〜 ${formatDate(event.endDate)}` : ''}</span>
-            <span>{event.venueName}</span>
-          </p>
-          {event.description && <p className="event-detail-hero__summary">{event.description}</p>}
-          <div className="event-detail-title-actions">
-            {onToggleSave && <button type="button" className={`event-save-button${saved ? ' is-saved' : ''}`} aria-pressed={saved} aria-label={saved ? 'お気に入りから削除' : 'お気に入りに保存'} onClick={onToggleSave}>
-              {saved ? <Check size={18} aria-hidden="true" /> : <Bookmark size={18} aria-hidden="true" />}{saved ? '保存済み' : 'お気に入りに保存'}
-            </button>}
-            {Number.isFinite(event.distanceKm) && <span className="event-distance"><Navigation size={16} aria-hidden="true" />直線距離 約{event.distanceKm!.toFixed(1)}km</span>}
-          </div>
+      <dl className="event-detail-quick-facts" aria-label="イベント概要">
+        <div><CalendarDays size={18} aria-hidden="true" /><dt>日程</dt><dd>{schedule.range}{schedule.confirmedDates && '（期間内の指定日のみ）'}</dd></div>
+        <div><MapPin size={18} aria-hidden="true" /><dt>会場</dt><dd>{event.venueName || '会場情報は未確認'}</dd></div>
+        <div><span className="event-fact-mark" aria-hidden="true">¥</span><dt>料金</dt><dd>{shortPrice}</dd></div>
+      </dl>
         </div>
-        <figure className="event-detail-media">
-          {image
-            ? <img src={image} alt={`${event.eventName}の公式画像`} fetchPriority="high" referrerPolicy="no-referrer" onError={() => setImageFailed(true)} />
-            : <div className="event-detail-media__fallback" aria-hidden="true"><span>{CATEGORY_LABELS[event.category] ?? '大阪のイベント'} · {formatDate(event.startDate)}</span><strong>{event.eventName}</strong></div>}
-          {(image || imageSourceHref) && <figcaption>{image && <a href={image} target="_blank" rel="noopener noreferrer" aria-label={`${event.eventName}の公式画像を大きく見る`}>画像を大きく見る <ExternalLink size={13} aria-hidden="true" /></a>}{imageSourceHref && <a href={imageSourceHref} target="_blank" rel="noopener noreferrer">画像の出典 <ExternalLink size={13} aria-hidden="true" /></a>}</figcaption>}
-        </figure>
       </header>
+
+
+      {onToggleSave && <div className="event-detail-save-row">
+        <button type="button" className={`event-save-button${saved ? ' is-saved' : ''}`} aria-pressed={saved} aria-label={saved ? 'お気に入りから削除' : 'お気に入りに保存'} onClick={onToggleSave}>
+          {saved ? <Check size={18} aria-hidden="true" /> : <Bookmark size={18} aria-hidden="true" />}{saved ? '保存済み' : 'お気に入りに保存'}
+        </button>
+      </div>}
 
       <div className="event-detail-layout">
         <div className="event-detail-main">
           <section className="event-participation" aria-labelledby="event-participation-title">
-            <div className="event-section-heading"><div><p className="event-detail-section-kicker">PLAN YOUR VISIT</p><h2 id="event-participation-title">参加の基本情報</h2></div><p>日時・費用・参加方法</p></div>
+            <div className="event-section-heading"><div><p className="event-detail-section-kicker">参加前に確認</p><h2 id="event-participation-title">参加の基本情報</h2></div><p>日時・費用・参加方法</p></div>
             <dl className="event-facts-grid">
-              <div className="event-fact event-fact--schedule"><CalendarDays size={19} aria-hidden="true" /><div><dt>開催日</dt><dd>{schedule.range}</dd><p><Clock3 size={15} aria-hidden="true" />{schedule.time}</p>{closedDates && <p className="event-fact-note"><span>休催日</span>{closedDates}</p>}{event.closureInfo && <p className="event-fact-note">{event.closureInfo}</p>}</div></div>
+              <div className="event-fact event-fact--schedule"><CalendarDays size={19} aria-hidden="true" /><div><dt>開催日</dt><dd>{schedule.confirmedDates ?? schedule.range}</dd>{schedule.confirmedDates && <p className="event-fact-note">公式で確認した指定日のみ。期間内の毎日開催ではありません。</p>}<p><Clock3 size={15} aria-hidden="true" />{schedule.time}</p>{closedDates && <p className="event-fact-note"><span>休催日</span>{closedDates}</p>}{event.closureInfo && <p className="event-fact-note">{event.closureInfo}</p>}</div></div>
               <div className="event-fact"><MapPin size={19} aria-hidden="true" /><div><dt>会場</dt><dd>{event.venueName || '会場情報は未確認'}</dd><p>{event.address || '住所は未確認'}</p></div></div>
               <div className="event-fact"><span className="event-fact-mark" aria-hidden="true">¥</span><div><dt>料金</dt><dd>{shortPrice}</dd>{fullPrice !== shortPrice && <details className="event-price-conditions"><summary>詳しい料金・割引条件</summary><p>{fullPrice}</p></details>}{present(event.price) && event.freeEvent === true && <p>表示の料金条件を公式情報でご確認ください。</p>}</div></div>
               <div className="event-fact event-fact--reservation"><Bookmark size={19} aria-hidden="true" /><div><dt>予約</dt><dd>{event.reservationRequired === true ? '予約が必要' : event.reservationRequired === false ? '予約不要' : '予約情報は未確認'}</dd>
@@ -277,8 +299,8 @@ export function EventDetailPage({
           </section>
 
           <section className="event-description-section" aria-labelledby="event-overview-title">
-            <p className="event-detail-section-kicker">ABOUT THE EVENT</p><h2 id="event-overview-title">イベントについて</h2>
-            {present(event.description) ? <p className="event-detail-description">{event.description}</p> : <p className="event-detail-missing">紹介文は未掲載です。内容は公式情報でご確認ください。</p>}
+            <p className="event-detail-section-kicker">開催内容</p><h2 id="event-overview-title">イベントについて</h2>
+            {present(event.description) ? <p className="event-detail-description">{normalizeDisplayText(event.description ?? '')}</p> : <p className="event-detail-missing">紹介文は未掲載です。内容は公式情報でご確認ください。</p>}
             {!!event.tags?.length && <ul className="event-detail-tags" aria-label="確認されているイベントの特徴">{event.tags.filter((tag) => EVENT_TAG_LABELS[tag]).map((tag) => <li key={tag}>{EVENT_TAG_LABELS[tag]}</li>)}</ul>}
             {(event.rainPolicy || event.parkingInfo || typeof event.parking === 'boolean') && <dl className="event-notes-list">
               {event.rainPolicy && <div><dt>雨天時</dt><dd>{event.rainPolicy}</dd></div>}
@@ -288,7 +310,7 @@ export function EventDetailPage({
           </section>
 
           <section aria-labelledby="event-access-title" className="event-access-section">
-            <p className="event-detail-section-kicker">ACCESS</p><h2 id="event-access-title">アクセス</h2>
+            <p className="event-detail-section-kicker">会場へ行く</p><h2 id="event-access-title">アクセス</h2>
             <div className="event-access-card">
               <div className="event-access-place"><MapPin size={20} aria-hidden="true" /><div><strong>{event.venueName || '会場情報は未確認'}</strong><p>{event.address || '住所は未確認'}</p></div></div>
               {(event.nearestStation || event.accessByTransit || event.accessByCar) && <dl className="event-access-details">
@@ -306,7 +328,7 @@ export function EventDetailPage({
           </section>
 
           {hasContact && <section className="event-contact-section" aria-labelledby="event-contact-title">
-            <p className="event-detail-section-kicker">CONTACT</p><h2 id="event-contact-title">問い合わせ</h2>
+            <p className="event-detail-section-kicker">主催者へ</p><h2 id="event-contact-title">問い合わせ</h2>
             <div className="event-contact-card">
               {event.contact?.name && <p className="event-contact-name">{event.contact.name}</p>}
               {event.contact?.phone && <p><Phone size={17} aria-hidden="true" />{contactPhoneHref(event.contact.phone) ? <a href={contactPhoneHref(event.contact.phone)}>{event.contact.phone}</a> : <span>{event.contact.phone}</span>}</p>}
@@ -315,7 +337,7 @@ export function EventDetailPage({
           </section>}
 
           <section className="event-source-section" aria-labelledby="event-source-title">
-            <p className="event-detail-section-kicker">SOURCES</p><h2 id="event-source-title">出典と確認日</h2>
+            <p className="event-detail-section-kicker">情報を確かめる</p><h2 id="event-source-title">出典と確認日</h2>
             <div className="event-source-card">
               <p className={`event-source-freshness${fresh ? ' is-fresh' : ' is-stale'}`}><span aria-hidden="true" />{fresh ? '公式情報を確認済み' : '最新状況は公式情報でご確認ください'}</p>
               {checkedAt ? <p className="event-source-checked">最終確認 <time dateTime={event.lastCheckedAt ?? event.provenance?.find((item) => item.lastCheckedAt)?.lastCheckedAt}>{checkedAt}</time></p> : <p className="event-source-checked">確認日を記録していません</p>}

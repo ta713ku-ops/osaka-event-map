@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "run_id": "information-20261002-v2",
+  "workspace": "/Users/taku/開発/地図",
+  "workspace_key": "run-75d3da874faf",
+  "status": "active",
+  "goal": "大阪のお出かけ情報の掲載範囲・公式整合・検索と参加判断を改善する",
+  "bar": "Walkerplus大阪・堺・吹田・枚方と祭りどころ大阪の固定実情報",
+  "bar_sources": [
+    {
+      "locator": "/private/tmp/osaka-info-gauntlet-20261002/reference",
+      "kind": "path",
+      "sha256": "957598ab64bc22aca9d7a97fcd87af2a861a557188706c9c2302db560b57002b"
+    },
+    {
+      "locator": "https://www.walkerplus.com/event_list/ar0727/",
+      "kind": "url",
+      "sha256": null
+    },
+    {
+      "locator": "https://www.matsuri-dokoro.jp/ja/events?prefecture=%E5%A4%A7%E9%98%AA%E5%BA%9C",
+      "kind": "url",
+      "sha256": null
+    }
+  ],
+  "judge_question": "同じ固定催事と検索日時条件で、大阪のお出かけ先を実際に選び参加可否を判断する情報として、どちらが全体で優れているか",
+  "gates": [
+    "official_evidence",
+    "coverage",
+    "schedule_correctness",
+    "search_consistency",
+    "regression_tests",
+    "production_build",
+    "browser_runtime"
+  ],
+  "pieces": [
+    {
+      "name": "coverage",
+      "status": "pending"
+    },
+    {
+      "name": "search",
+      "status": "pending"
+    },
+    {
+      "name": "details",
+      "status": "pending"
+    },
+    {
+      "name": "overall",
+      "status": "passed"
+    }
+  ],
+  "round_count": 2,
+  "latest_round": {
+    "round": 2,
+    "at": "2026-10-03T04:42:17Z",
+    "scope": "overall",
+    "verdict": "ours",
+    "confidence": "medium",
+    "change": "38主題の公式情報補完と日程・費用・画像の統合修正",
+    "gap": "比較対象はART最終日16時閉場を欠き、終了後来場を招く",
+    "evidence": [
+      "独立Sol6.1が全38主題を確認し改善版優位、全7ゲート合格。改善版のミュシャ休館例外等の不足も指摘"
+    ],
+    "next": "公式一次情報で残存の休館例外・料金情報を確認し再判定",
+    "gates": {
+      "official_evidence": "pass",
+      "coverage": "pass",
+      "schedule_correctness": "pass",
+      "search_consistency": "pass",
+      "regression_tests": "pass",
+      "production_build": "pass",
+      "browser_runtime": "pass"
+    },
+    "candidate": {
+      "path": "/private/tmp/osaka-info-gauntlet-20261002/packets/candidate-round2.json",
+      "sha256": "c11ff1ac18c4a4f871705c8dfa00b188e1b1a8d321c0b5e8c934d8a9a90209e2"
+    },
+    "bar_artifact": {
+      "path": "/private/tmp/osaka-info-gauntlet-20261002/packets/reference-fixed.json",
+      "sha256": "c618e3012c11e6723fc926bc921c3b82bdc09a9e7bfc179051ab1256201b4f93"
+    },
+    "artifacts": [
+      "/private/tmp/osaka-info-gauntlet-20261002/critic-round2.json"
+    ]
+  },
+  "events": [
+    {
+      "at": "2026-10-02T06:01:56Z",
+      "type": "initialized",
+      "reason": "Run created"
+    }
+  ],
+  "created_at": "2026-10-02T06:01:56Z",
+  "updated_at": "2026-10-03T04:42:17Z",
+  "finished_at": null,
+  "finish_reason": null
+}

@@ -1,0 +1,70 @@
+{
+  "applied": true,
+  "runAt": "2026-10-03T05:01:48.603Z",
+  "packSha256": "c329ce681b8c6e1b961daa5d33471f62bfd8f631d47d02879386e88dabca9a4d",
+  "targetCount": 4,
+  "eventCount": 532,
+  "collectionGeneratedAtUnchanged": "2026-10-02T12:20:30.504Z",
+  "records": [
+    {
+      "id": "78005611b3094567a856",
+      "routeId": "dac7c82375dd1e4cd214",
+      "sourceId": "verified-outings-mucha-returns-2026",
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z",
+      "fields": [
+        "schedule",
+        "startTime",
+        "endTime",
+        "timeInfo",
+        "closureInfo",
+        "price"
+      ],
+      "detailCheckedAts": [
+        "2026-10-03T04:42:18.934Z"
+      ]
+    },
+    {
+      "id": "830ec0990e83e86e31e8",
+      "routeId": "830ec0990e83e86e31e8",
+      "sourceId": "official-pack-a-kuboso-western-paintings-2026",
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z",
+      "fields": [
+        "price"
+      ],
+      "detailCheckedAts": [
+        "2026-10-03T04:49:52.000Z",
+        "2026-10-03T04:45:27Z"
+      ]
+    },
+    {
+      "id": "caaf06433d13c55b9a11",
+      "routeId": "caaf06433d13c55b9a11",
+      "sourceId": "information-pack-b-banpaku-night-sky-art-fireworks-2026-11-21",
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z",
+      "fields": [
+        "price",
+        "timeInfo",
+        "startTime",
+        "accessByTransit"
+      ],
+      "detailCheckedAts": [
+        "2026-10-03T04:47:49.294Z",
+        "2026-10-02T06:25:10.534Z"
+      ]
+    },
+    {
+      "id": "f6bff9476044759156fe",
+      "routeId": "de6639d8b6041e5ed984",
+      "sourceId": "verified-outings-citysup-nakanoshima-guided-tour",
+      "lastCheckedAt": "2026-10-02T12:20:30.504Z",
+      "fields": [
+        "price",
+        "timeInfo",
+        "reservationInfo"
+      ],
+      "detailCheckedAts": [
+        "2026-10-03T04:47:49.533Z"
+      ]
+    }
+  ]
+}

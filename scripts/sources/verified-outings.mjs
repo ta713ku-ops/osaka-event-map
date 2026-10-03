@@ -3,8 +3,11 @@ import { eventCategory, httpUrl, normalize, normalizeEventRecord, normalizeDate,
 
 const OSAKA_TIME_ZONE = 'Asia/Tokyo';
 const REQUIRED_EVIDENCE_FIELDS = Object.freeze(['eventName', 'dateRange', 'venueName', 'osakaLocation', 'description']);
+const OPTIONAL_EVENT_FIELDS = Object.freeze(['price', 'freeEvent', 'timeInfo', 'reservationInfo', 'reservationRequired', 'reservationUrl', 'contact', 'accessByTransit', 'accessByCar', 'nearestStation', 'rainPolicy', 'parkingInfo', 'closureInfo', 'startTime', 'endTime', 'schedule', 'officialStatus', 'statusEvidence']);
 const DATA_URL = new URL('../../data/verified-outings.json', import.meta.url);
 const DATA = JSON.parse(readFileSync(DATA_URL, 'utf8'));
+const CITYSUP_DETAILS = JSON.parse(readFileSync(new URL('../../data/information-supplement-integrated-20261003.json', import.meta.url), 'utf8'))
+  .updates.find((item) => item.match.sourceId === 'verified-outings-citysup-nakanoshima-guided-tour');
 const CITYSUP_PAGE = 'https://www.citysup.jp/walkable_26/';
 const CITYSUP_CALENDAR = 'https://citysup.urkt.in/api/direct/courses/21947/calendars';
 const SCRAP_TICKET_PAGE = 'https://scrapticket.jp/events/?content_code=20jikken&shop_id=95';
@@ -86,15 +89,23 @@ function assertDataset(occurrences) {
         throw new TypeError(`missing ${field} evidence for ${occurrence.sourceId}`);
       }
     }
-    if (occurrence.address) {
-      const addressEvidence = occurrence.fieldEvidence?.address;
-      if (!httpUrl(addressEvidence?.sourceUrl) || !String(addressEvidence?.text ?? '').trim()
-        || !Number.isFinite(new Date(addressEvidence?.checkedAt).getTime())) {
-        throw new TypeError(`missing address evidence for ${occurrence.sourceId}`);
+    for (const field of ['address', ...OPTIONAL_EVENT_FIELDS].filter((field) => occurrence[field] !== undefined)) {
+      const evidence = occurrence.fieldEvidence?.[field];
+      if (!httpUrl(evidence?.sourceUrl) || !String(evidence?.text ?? '').trim()
+        || !Number.isFinite(new Date(evidence?.checkedAt).getTime())) {
+        throw new TypeError(`missing ${field} evidence for ${occurrence.sourceId}`);
       }
     }
-    if (occurrence.fieldEvidence.eventName.sourceUrl !== occurrence.officialUrl) {
+    if (occurrence.fieldEvidence.eventName.sourceUrl !== occurrence.officialUrl
+      && !(occurrence.evidenceAssets ?? []).some((asset) => asset.url === occurrence.fieldEvidence.eventName.sourceUrl && asset.primaryPage === occurrence.officialUrl)) {
       throw new TypeError(`event name evidence must come from officialUrl for ${occurrence.sourceId}`);
+    }
+    for (const asset of occurrence.evidenceAssets ?? []) {
+      if (!httpUrl(asset?.url) || !/^[a-f0-9]{64}$/u.test(asset?.sha256 ?? '')
+        || !String(asset?.text ?? '').trim() || !['pdf', 'image'].includes(asset?.kind)
+        || !String(asset?.extractionMethod ?? '').trim() || !Number.isFinite(new Date(asset?.checkedAt).getTime())) {
+        throw new TypeError(`invalid reviewed official attachment for ${occurrence.sourceId}`);
+      }
     }
   }
   return occurrences;
@@ -106,13 +117,24 @@ function getPage(pages, url) {
   return pages instanceof Map ? pages.get(url) : pages?.[url];
 }
 
+function declaredMetaDescription(html) {
+  const clean = String(html ?? '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/giu, '');
+  for (const tag of clean.match(/<meta\b[^>]*>/giu) ?? []) {
+    const name = /\bname\s*=\s*(["'])(.*?)\1/iu.exec(tag)?.[2];
+    if (name?.toLowerCase() !== 'description') continue;
+    return visibleText(/\bcontent\s*=\s*(["'])(.*?)\1/iu.exec(tag)?.[2] ?? '');
+  }
+  return '';
+}
+
 /** Check each stored field against the official page named by its evidence. */
 export function validateOccurrenceEvidence(pages, occurrence) {
   const missing = [];
   for (const field of Object.keys(occurrence?.fieldEvidence ?? {})) {
     const evidence = occurrence?.fieldEvidence?.[field];
     const page = evidence ? getPage(pages, evidence.sourceUrl) : undefined;
-    const pageText = normalizeEvidenceText(visibleText(page));
+    const pageText = normalizeEvidenceText(evidence?.extractionMethod === 'html-meta-description'
+      ? declaredMetaDescription(page) : visibleText(page));
     const evidenceText = normalizeEvidenceText(evidence?.text);
     if (!pageText || !evidenceText || !pageText.includes(evidenceText)) missing.push(field);
   }
@@ -153,6 +175,9 @@ function buildEvent(occurrence, { checkedAt, stale = false }) {
       text: stored.text,
       sourceUrl: stored.sourceUrl,
       checkedAt: stale ? stored.checkedAt : checkedAt,
+      ...(stored.sha256 ? { sha256: stored.sha256 } : {}),
+      ...(stored.extractionMethod ? { extractionMethod: stored.extractionMethod } : {}),
+      ...(stored.evidenceKind ? { evidenceKind: stored.evidenceKind } : {}),
     }];
   }));
   return normalizeEventRecord({
@@ -160,7 +185,7 @@ function buildEvent(occurrence, { checkedAt, stale = false }) {
     venueName: occurrence.venueName,
     description: occurrence.description,
     ...(occurrence.address ? { address: occurrence.address } : {}),
-    ...Object.fromEntries(['price', 'timeInfo', 'reservationInfo', 'reservationRequired', 'accessByTransit', 'rainPolicy', 'parkingInfo']
+    ...Object.fromEntries(OPTIONAL_EVENT_FIELDS
       .filter((field) => occurrence[field] !== undefined)
       .map((field) => [field, occurrence[field]])),
     category: eventCategory(occurrence.eventName, occurrence.description),
@@ -192,13 +217,24 @@ async function collectOccurrence(context, occurrence) {
   if (!isCurrent(occurrence, now)) return { events: [], errors: [], recognized: true, allowCachedFallback: false };
 
   const urls = [...new Set([
+    ...(occurrence.evidenceAssets ?? []).map((asset) => asset.url),
     occurrence.officialUrl,
-    ...REQUIRED_EVIDENCE_FIELDS.map((field) => occurrence.fieldEvidence[field].sourceUrl),
-    ...(occurrence.address ? [occurrence.fieldEvidence.address.sourceUrl] : []),
+    ...Object.values(occurrence.fieldEvidence).map((evidence) => evidence.sourceUrl),
   ])];
   const pages = new Map();
+  const assets = new Map((occurrence.evidenceAssets ?? []).map((asset) => [asset.url, asset]));
+  if (assets.size) {
+    const ages = [...assets.values()].map((asset) => now.getTime() - new Date(asset.checkedAt).getTime());
+    if (ages.some((age) => age < 0 || age > 14 * 86400000)) return { events: [], errors: ['reviewed attachment snapshot has expired; manual reread required'], recognized: false, allowCachedFallback: false };
+  }
   try {
-    for (const url of urls) pages.set(url, await context.fetchText(url));
+    for (const url of urls) {
+      const asset = assets.get(url);
+      if (!asset) { pages.set(url, await context.fetchText(url)); continue; }
+      if (typeof context.fetchText.assetHash !== 'function') throw new TypeError('reviewed official attachment requires assetHash(url)');
+      if (await context.fetchText.assetHash(url) !== asset.sha256) return { events: [], errors: ['official attachment changed; manual reread required'], recognized: false, allowCachedFallback: false };
+      pages.set(url, asset.text);
+    }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const age = now.getTime() - new Date(occurrence.lastCheckedAt).getTime();
@@ -206,6 +242,9 @@ async function collectOccurrence(context, occurrence) {
       events: age >= 0 && age <= 14 * 86400000 ? [buildEvent(occurrence, { checkedAt: occurrence.lastCheckedAt, stale: true })] : [],
       errors: [`official page fetch failed; retaining last verified timestamp: ${message}`],
       recognized: true,
+      // This one-occurrence manifest has already selected its bounded snapshot.
+      // Generic recovery must not add older names/ids from the same source.
+      allowCachedFallback: false,
     };
   }
 
@@ -220,13 +259,14 @@ async function collectOccurrence(context, occurrence) {
   }
 
   return {
-    events: [buildEvent(occurrence, { checkedAt: operationCheckedAt(context) })],
-    errors: [],
+    events: [buildEvent(occurrence, { checkedAt: operationCheckedAt(context), stale: assets.size > 0 })],
+    errors: assets.size ? ['official attachment hash matches; text remains a dated manually reviewed snapshot, not an automatic reread'] : [],
     recognized: true,
+    allowCachedFallback: false,
   };
 }
 
-/** A dated booking slot, rather than an inferred start/end for this ongoing tour. */
+/** Preserve every verified bookable day; the interval never proves unlisted days. */
 async function collectCitySup(context) {
   if (typeof context?.fetchText !== 'function') throw new TypeError('CitySUP source requires fetchText(url)');
   const today = osakaDate(context.now);
@@ -241,19 +281,21 @@ async function collectCitySup(context) {
   if (!Array.isArray(days)) throw new TypeError('CitySUP calendar must be an array');
   const available = days
     .filter((day) => validDateRange(day?.date) && day.date >= today && day.date <= end && day.status === 'realtime')
-    .sort((a, b) => a.date.localeCompare(b.date))[0];
-  if (!available) return { events: [], errors: [], recognized: true };
+    .sort((a, b) => a.date.localeCompare(b.date));
+  if (!available.length) return { events: [], errors: [], recognized: true, allowCachedFallback: false };
+  const dates = [...new Set(available.map((day) => day.date))];
   const checkedAt = operationCheckedAt(context);
   const evidence = (sourceUrl, text) => ({ sourceUrl, text, checkedAt });
   const occurrence = {
     sourceId: 'verified-outings-citysup-nakanoshima-guided-tour',
     sourceName: '日本シティサップ協会',
     eventName: '水上さんぽガイドツアー 中之島公園ぐるっと',
-    startDate: available.date,
-    endDate: available.date,
+    startDate: dates[0],
+    endDate: dates.at(-1),
+    schedule: { dates, evidence: '公式予約カレンダーで予約枠を確認した日のみ。未掲載日・満席日は開催を断定しない。' },
     venueName: 'ばらぞの橋 桟橋',
     officialUrl: CITYSUP_PAGE,
-    description: '中之島公園のまわりを船で一周するガイド付きツアー。掲載日は公式予約カレンダーで予約枠を確認した日です。',
+    description: '中之島公園のまわりを船で一周するガイド付きツアー。開催日は公式予約カレンダーで予約枠を確認した日のみを掲載しています。',
     address: '大阪市北区中之島1丁目1',
     price: 'デイタイム：大人 平日1,650円、土日祝2,200円。小人料金・早期予約割引は公式ページで確認。',
     reservationRequired: false,
@@ -263,7 +305,9 @@ async function collectCitySup(context) {
     lastCheckedAt: checkedAt,
     fieldEvidence: {
       eventName: evidence(CITYSUP_PAGE, '水上さんぽガイドツアー 中之島公園ぐるっと'),
-      dateRange: evidence(calendarUrl, `"date":"${available.date}"`),
+      dateRange: evidence(calendarUrl, `"date":"${dates[0]}"`),
+      schedule: evidence(calendarUrl, `"date":"${dates[0]}"`),
+      ...Object.fromEntries(dates.map((date) => [`schedule_${date}`, evidence(calendarUrl, `"date":"${date}","status":"realtime"`)])),
       venueName: evidence(CITYSUP_PAGE, 'ばらぞの橋 桟橋'),
       osakaLocation: evidence(CITYSUP_PAGE, '大阪市北区中之島1丁目1'),
       description: evidence(CITYSUP_PAGE, '中之島公園のまわりをぐるりと一周します。'),
@@ -275,16 +319,49 @@ async function collectCitySup(context) {
       rainPolicy: evidence(CITYSUP_PAGE, '雨天でも開催しますが、警報発令時などスタッフが危険と判断した場合は中止します'),
     },
   };
+  // These are independently checked daytime details, never calendar dates or
+  // departure clocks. Validate every quote against this same live page below.
+  Object.assign(occurrence, CITYSUP_DETAILS.fields);
+  Object.assign(occurrence.fieldEvidence, CITYSUP_DETAILS.fieldEvidence);
   const validation = validateOccurrenceEvidence(new Map([[CITYSUP_PAGE, page], [calendarUrl, calendarText]]), occurrence);
   if (!validation.valid) throw new Error(`CitySUP evidence changed: ${validation.missing.join(', ')}`);
   return { events: [buildEvent(occurrence, { checkedAt })], errors: [], recognized: true };
 }
 
-/** Use SCRAP's own bookable day, since its landing page no longer states an end date. */
+/** The night tour has a different route/boarding venue and its own calendar. */
+async function collectCitySupNight(context, stored) {
+  if (typeof context?.fetchText !== 'function') throw new TypeError('CitySUP night source requires fetchText');
+  const today = osakaDate(context.now);
+  if (today > stored.endDate) return { events: [], errors: [], recognized: true, allowCachedFallback: false };
+  const end = stored.endDate;
+  const calendarUrl = `https://citysup.urkt.in/api/direct/courses/16569/calendars?start_date=${today}&end_date=${end}&language_type=ja`;
+  const urls = [...new Set([stored.officialUrl, ...Object.entries(stored.fieldEvidence)
+    .filter(([key]) => !['dateRange', 'schedule'].includes(key) && !key.startsWith('schedule_')).map(([, evidence]) => evidence.sourceUrl)])];
+  const pages = new Map();
+  for (const url of urls) pages.set(url, await context.fetchText(url));
+  const calendarText = await context.fetchText(calendarUrl);
+  const days = JSON.parse(calendarText);
+  if (!Array.isArray(days)) throw new TypeError('CitySUP night calendar must be an array');
+  const dates = [...new Set(days.filter((day) => validDateRange(day?.date) && day.date >= today && day.date <= end && day.status === 'realtime').map((day) => day.date))].sort();
+  if (!dates.length) return { events: [], errors: [], recognized: true, allowCachedFallback: false };
+  const checkedAt = operationCheckedAt(context);
+  const occurrence = { ...stored, startDate: dates[0], endDate: dates.at(-1),
+    schedule: { dates, evidence: '夜のツアー専用の公式予約カレンダーで予約枠を確認した日のみ。満席・未確認日は補間しない。' },
+    fieldEvidence: { ...Object.fromEntries(Object.entries(stored.fieldEvidence).filter(([key]) => !key.startsWith('schedule_'))),
+      dateRange: { sourceUrl: calendarUrl, text: `"date":"${dates[0]}"`, checkedAt },
+      schedule: { sourceUrl: calendarUrl, text: `"date":"${dates[0]}"`, checkedAt },
+      ...Object.fromEntries(dates.map((date) => [`schedule_${date}`, { sourceUrl: calendarUrl, text: `"date":"${date}","status":"realtime"`, checkedAt }])),
+    }, lastCheckedAt: checkedAt };
+  pages.set(calendarUrl, calendarText);
+  const validation = validateOccurrenceEvidence(pages, occurrence);
+  if (!validation.valid) return { events: [], errors: [`CitySUP night official evidence changed: ${validation.missing.join(', ')}`], recognized: false, allowCachedFallback: false };
+  return { events: [buildEvent(occurrence, { checkedAt })], errors: [], recognized: true };
+}
+
+/** Use only SCRAP's verified bookable days, without extending its old stored period. */
 async function collectScrapCalendar(context, stored) {
   if (typeof context?.fetchText !== 'function') throw new TypeError('SCRAP calendar requires fetchText');
   const now = validNow(context.now);
-  if (!isCurrent(stored, now)) return { events: [], errors: [], recognized: true, allowCachedFallback: false };
   const page = await context.fetchText(stored.officialUrl);
   if (typeof context.fetchText.request !== 'function') throw new TypeError('SCRAP calendar requires a request-capable fetchText');
   const pageText = normalizeEvidenceText(visibleText(page));
@@ -304,10 +381,12 @@ async function collectScrapCalendar(context, stored) {
     ?.split(';', 1)[0];
   if (!cookie) throw new Error('SCRAP CSRF cookie missing');
   const today = osakaDate(now);
-  const first = new Date(Date.parse(`${today}T00:00:00Z`) + 86400000).toISOString().slice(0, 10);
+  const first = today;
   const last = new Date(Date.parse(`${today}T00:00:00Z`) + 31 * 86400000).toISOString().slice(0, 10);
   const months = [...new Set([first.slice(0, 7), last.slice(0, 7)])];
-  let selected;
+  const dates = [];
+  const calendarBodies = [];
+  const dateEvidence = {};
   for (const month of months) {
     const form = new FormData();
     for (const [key, value] of Object.entries({ shop_id: '95', content_code: '20jikken', target_month: month, display_lang: 'japanese' })) form.append(key, value);
@@ -315,32 +394,50 @@ async function collectScrapCalendar(context, stored) {
     const response = await context.fetchText.request(SCRAP_MONTH_URL, { method: 'POST', headers: { cookie, referer: SCRAP_TICKET_PAGE }, body: form });
     const calendar = JSON.parse(response.text);
     if (typeof calendar.csrf_hash === 'string' && calendar.csrf_hash) token.csrf_hash = calendar.csrf_hash;
-    if (calendar.result !== 'OK' || calendar.target_month !== month || !calendar.days || typeof calendar.days !== 'object') continue;
-    const date = Object.keys(calendar.days).sort().find((day) => day >= first && day <= last && calendar.days[day]?.cell === 'available' && calendar.days[day]?.selectable === true);
-    if (date) { selected = { date, body: response.text }; break; }
+    if (calendar.result !== 'OK' || calendar.target_month !== month || !calendar.days || typeof calendar.days !== 'object' || Array.isArray(calendar.days)) {
+      throw new TypeError(`SCRAP calendar response was not recognized for ${month}`);
+    }
+    const verified = Object.keys(calendar.days).sort().filter((day) => validDateRange(day) && day.startsWith(month) && day >= first && day <= last && calendar.days[day]?.cell === 'available' && calendar.days[day]?.selectable === true);
+    dates.push(...verified);
+    calendarBodies.push(response.text);
+    for (const date of verified) dateEvidence[`schedule_${date}`] = {
+      sourceUrl: SCRAP_MONTH_URL, text: `"${date}"`, checkedAt: operationCheckedAt(context),
+    };
   }
-  if (!selected) return { events: [], errors: [], recognized: true };
+  const closedDates = stored.schedule?.closedDates ?? [];
+  const verifiedDates = [...new Set(dates)].filter((date) => !closedDates.includes(date)).sort();
+  if (!verifiedDates.length) return { events: [], errors: [], recognized: true, allowCachedFallback: false };
+  const calendarEvidence = calendarBodies.join('\n');
   const checkedAt = operationCheckedAt(context);
   const occurrence = {
     ...stored,
-    startDate: selected.date,
-    endDate: selected.date,
-    description: `${stored.description} 掲載日は公式チケットカレンダーで予約可能な日です。`,
-    price: '一般（平日）前売2,300円・当日2,600円。土日祝やグループ料金は公式サイトで確認。',
+    startDate: verifiedDates[0],
+    endDate: verifiedDates.at(-1),
+    schedule: { dates: verifiedDates, ...(closedDates.length ? { closedDates } : {}), evidence: '公式チケットカレンダーで予約可能と確認した日のみ。未確認日・販売なし・満席・公式休業の日は開催を断定しない。' },
+    description: `${stored.description} 開催日は公式チケットカレンダーで予約可能と確認した日のみを掲載しています。`,
+    price: stored.price ?? '一般（平日）前売2,300円・当日2,600円。土日祝やグループ料金は公式サイトで確認。',
     reservationRequired: true,
-    reservationInfo: '参加にはチケットが必要。スクラップチケットで購入し、各回の空席を確認してください。',
-    parkingInfo: '会場に駐車場・駐輪場はありません。',
+    reservationInfo: stored.reservationInfo ?? '参加にはチケットが必要。スクラップチケットで購入し、各回の空席を確認してください。',
+    parkingInfo: stored.parkingInfo ?? '会場に駐車場・駐輪場はありません。',
     lastCheckedAt: checkedAt,
     fieldEvidence: {
-      ...stored.fieldEvidence,
-      dateRange: { sourceUrl: SCRAP_MONTH_URL, text: `"${selected.date}"`, checkedAt },
-      price: { sourceUrl: stored.officialUrl, text: '一般 : 前売券 2,300円 / 当日券 2,600円', checkedAt },
+      ...Object.fromEntries(Object.entries(stored.fieldEvidence).filter(([key]) => !key.startsWith('schedule_'))),
+      // Calendar responses contain rotating CSRF material. Publish only the
+      // verified date keys as provenance, never the session response body.
+      dateRange: { sourceUrl: SCRAP_MONTH_URL, text: `"${verifiedDates[0]}"`, checkedAt },
+      schedule: { sourceUrl: SCRAP_MONTH_URL, text: `"${verifiedDates[0]}"`, checkedAt },
+      ...(closedDates.length ? { scheduledClosures: stored.fieldEvidence.schedule } : {}),
+      ...dateEvidence,
+      price: stored.fieldEvidence.price ?? { sourceUrl: stored.officialUrl, text: '一般 : 前売券 2,300円 / 当日券 2,600円', checkedAt },
       reservationRequired: { sourceUrl: stored.officialUrl, text: '小学生以上のご参加には必ずチケットが必要です', checkedAt },
-      reservationInfo: { sourceUrl: stored.officialUrl, text: '本イベントはスクラップチケットでのみご購入ができます', checkedAt },
-      parkingInfo: { sourceUrl: stored.officialUrl, text: '会場に駐車場、駐輪場はございません', checkedAt },
+      reservationInfo: stored.fieldEvidence.reservationInfo ?? { sourceUrl: stored.officialUrl, text: '本イベントはスクラップチケットでのみご購入ができます', checkedAt },
+      parkingInfo: stored.fieldEvidence.parkingInfo ?? { sourceUrl: stored.officialUrl, text: '会場に駐車場、駐輪場はございません', checkedAt },
     },
   };
-  const pages = new Map([[stored.officialUrl, page], [SCRAP_MONTH_URL, selected.body]]);
+  const pages = new Map([[stored.officialUrl, page], [SCRAP_MONTH_URL, calendarEvidence]]);
+  for (const url of new Set(Object.values(occurrence.fieldEvidence).map((evidence) => evidence.sourceUrl))) {
+    if (!pages.has(url)) pages.set(url, await context.fetchText(url));
+  }
   const validation = validateOccurrenceEvidence(pages, occurrence);
   if (!validation.valid) throw new Error(`SCRAP evidence changed: ${validation.missing.join(', ')}`);
   return { events: [buildEvent(occurrence, { checkedAt })], errors: [], recognized: true };
@@ -352,6 +449,8 @@ export const VERIFIED_OUTINGS_SOURCE_DEFINITIONS = Object.freeze([...DATA.occurr
   url: occurrence.officialUrl,
   collect: (context) => occurrence.sourceId === 'verified-outings-jikken-lab-osaka-2026'
     ? collectScrapCalendar(context, occurrence)
+    : occurrence.sourceId === 'verified-outings-citysup-night-nakanoshima-2026'
+      ? collectCitySupNight(context, occurrence)
     : collectOccurrence(context, occurrence),
 })), Object.freeze({
   id: 'verified-outings-citysup-nakanoshima-guided-tour',
@@ -367,6 +466,7 @@ export const __test__ = Object.freeze({
   buildEvent,
   collectOccurrence,
   collectCitySup,
+  collectCitySupNight,
   collectScrapCalendar,
   isCurrent,
 });

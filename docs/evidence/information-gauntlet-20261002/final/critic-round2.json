@@ -1,0 +1,54 @@
+{
+  "verdict": "B",
+  "single_biggest_gap": "AのART FLASHは、公式ポスターが明記する最終日10月4日の16時閉場を欠き、日祝17時までと案内しているため、終了後の来場を招く。",
+  "evidence": [
+    "両JSONの全38件を確認した。subject集合は完全一致し、全件listed=true。SHA256はgate-evidence.json記載値と一致した。以下は固定38件内の比較であり、市場全体の網羅性評価ではない。",
+    "hold-589873：evidence/official-art-poster.jpg左下は会期9月20日〜10月4日、最終日のみ16時閉場、9月28日休館を示す。BのtimeInfoとschedule.hoursByDate['2026-10-04']は一致。Aは開始日9月21日、最終日例外なしで、descriptionも来場者向け展示内容より終了済みの出展募集を説明している。",
+    "cosmos：BのfieldEvidence.periodTextは公式の『11月初旬〜下旬予想』を保存し、listingKind=undated_official_forecast、確定開催日なしを明示。Aは11月1日〜30日をdateInfoに確定日程として掲載する。Bは9月18日時点の成長状況も本日の状況と区別している。",
+    "night-boat：Aの18:20〜21:00に対し、Bは公式引用に対応する9月5日以降の17:50・19:20発と各10分前集合を掲載。完全予約制、約70分、小学生以下の保護者同乗、2日前からキャンセル料100%を区別し、予約カレンダーで確認した5日だけをschedule.datesに保持している。",
+    "laboratory：Aは予約不要・時刻は公式参照。Bは日時指定チケット、受付締切、年齢条件、具体的公演時刻を掲載する。ただしBの確認済みカレンダー日は10月3日のみでsourceStatus=stale。lastCheckedAt=2026-10-01T23:12:29.088ZはJSTでは10月2日8時12分であり、再取得済みの空席保証とは扱えない。",
+    "unkai：Bは無料・申込不要の雲海と、500円・事前予約制の提灯レンタルを分離。AのsupplementaryInfoにも500円レンタルはあるが、その予約条件がない。evidence/namba-detail.txtの実DOMはBの区別を利用者に表示している。",
+    "料金情報の量だけではBを勝ちとしない。hold-415742ではAも必要入園料450円を正しく掲載している。Bの実DOMとmobile-cosmos-final.jpgも『催事は無料・入園料450円』を表示し、無料検索から除外している。一方、kubosoの具体的観覧料、hold-523279の券種別金額・終了予定・交通情報はAの方が充実している。",
+    "Bにも残る弱点がある。muchaはtimeInfoで一般的な月曜休館と10月12・13日の例外だけを説明し、Aが掲載する11月2日開館・11月4日休館等を欠く。Bの当該fieldEvidenceにも休館日引用がなく、この催事の例外日を十分には裏付けられない。boatは確認した予約日を示すが、公演時刻と小人料金は不足する。",
+    "evidence/official-oktober-poster.jpg下部で平日15時・土日祝11時開始、20時30分終了、LO20時、雨天決行・荒天中止・持込禁止を確認した。Bはこれを反映する。official-parklabo-poster.jpg右上で10月17・18日10〜17時を確認したが、入場無料の記載は見当たらず、BのfreeEvent=nullは資料の範囲に忠実。",
+    "Bの優位は、現在の展示内容、確認された日付、集合・申込締切、年齢条件、必須費用と任意購入、予想と確定の区別が実際の参加判断に結び付く点にある。全催事でBの情報が多い、または予約可能であるという結論ではない。"
+  ],
+  "gate_results": [
+    {
+      "name": "official_evidence",
+      "status": "pass",
+      "evidence": "B各subjectのfieldEvidenceの引用・公式URL・確認日時を確認し、ART、Oktoberfest、PARKLABOは添付一次ポスターとも照合した。staleを保持した記録、未知の料金・休館具体日を補わない記録も確認。個々の未裏付け補足がすべて解消されたという意味ではない。"
+    },
+    {
+      "name": "coverage",
+      "status": "pass",
+      "evidence": "両実JSONに同一の38 subjectが重複なく存在。Bは37件のdated subjectと1件のundated_official_forecastを分離し、undated-map-zero.txtでは『50万本』検索が地図0件。532件という全体件数を固定比較の優位根拠には使っていない。"
+    },
+    {
+      "name": "schedule_correctness",
+      "status": "pass",
+      "evidence": "runtime-data-checks.jsonの13チェックは全pass。B実データのナイトZOO14指定日、自然史博物館10月5日休館・10月12日開館、wizardの10月2日休催、Oktoberfestの日別時刻、ART最終日16時を確認し、night-zoo-detail.txtの『本日開催なし』とも整合。提供チェックの合格であり、muchaを含む全例外日の完全性までは証明しない。"
+    },
+    {
+      "name": "search_consistency",
+      "status": "pass",
+      "evidence": "namba-free-one.txtは無料条件付き1件・0円、cosmos-free-zero.txtは無料条件付き0件、night-zoo-weekend-zero.txtは今週末0件、undated-map-zero.txtは予想subjectの地図0件。cosmos-detail-final.txtの必要入園料表示と無料検索除外は一致する。"
+    },
+    {
+      "name": "regression_tests",
+      "status": "pass",
+      "evidence": "ui-tests-final.logは21ファイル・156テスト合格。collector-tests-final.logは96合格・fail/skippedとも0で、無料催事と必要入園料、離散日、古い予約カレンダー、確認日時保持、変更された公式事実の扱い等の個別成功行を確認。typecheck-final.logにはtsc実行記録があり、診断出力なし。UIログは個別テスト名を含まない。"
+    },
+    {
+      "name": "production_build",
+      "status": "pass",
+      "evidence": "production-build-final.logでキャッシュ532件再現、tsc、Viteの1665モジュール処理、index-aa9avtvI.js生成、built成功、532詳細ページ生成を確認。stale取得元とpartial状態はログに残っている。publicとbuiltのバイト一致はmanifestの報告であり、元データファイルが同梱されていないため独立再計算はしていない。"
+    },
+    {
+      "name": "browser_runtime",
+      "status": "pass",
+      "evidence": "提供された実DOMで検索条件、結果、日付・料金・予約条件、公式リンク、直接詳細再読込後の内容を確認。mobile-namba.jpgとmobile-cosmos-final.jpgも読込済み詳細を表示し、後者は10月3日開始催事を開催中と表示する。観測範囲は供給されたChromiumキャプチャで、コンソール無エラー、戻る操作による状態復元、desktop幅測定は独立ログがなくmanifest報告の範囲。Safari/VoiceOverは対象外。"
+    }
+  ],
+  "confidence": "medium"
+}

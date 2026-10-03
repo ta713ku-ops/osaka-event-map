@@ -1,0 +1,1 @@
+Sol 6.1 requested final technical reviewer returned: 最終技術確認で残る不整合はありません。公開・snapshot・distはbyte単位で一致（SHA-256 1ec25ef5debac8b50f5717873904c79997136ddbba923dfbc700dccdec2456f9）。非対象528件と対象の保護項目は不変。ミュシャ15休館・5例外、保存済み公式引用、無料分類、未知時刻の保持を確認。単一桁時計修正は最終asset index-BoLB4LhV.js に反映、532静的詳細も一致。collector100/100、UI157/157、build成功。

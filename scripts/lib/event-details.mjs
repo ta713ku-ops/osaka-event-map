@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { normalize, textValue } from './events.mjs';
+import { normalize, textValue, normalizeEventRecord } from './events.mjs';
 
 const AEON_SOURCES = new Set(['aeon-osaka-dome-city', 'aeon-dainichi', 'aeon-hineno', 'aeon-ibaraki']);
 const SUPPORTED = new Set(['expo-park', 'science-museum', 'fenice-sakai', 'festival-hall', 'nakka-art-museum', 'atc-events', 'grand-front', 'lucua', 'billboard-osaka', 'hirakata-park', 'namba-parks', ...AEON_SOURCES]);
@@ -25,13 +25,27 @@ function hasExactHeading(root, eventName) {
   return Boolean(title && [...(root?.querySelectorAll(headingTags) ?? [])].some(item => normalize(plain(item)) === title));
 }
 
+/** Shared site furniture is not evidence of an event photograph or poster. */
+export function isPlaceholderDetailImageUrl(value) {
+  if (typeof value !== 'string' || !value.trim() || /^(?:null|undefined)$/iu.test(value.trim())) return true;
+  let path;
+  try { path = new URL(value).pathname; } catch { return true; }
+  return /\/(?:null|undefined)\/?$/iu.test(path)
+    || /\/(?:themes?|templates?)\//iu.test(path)
+    || /(?:^|[/_-])(?:btn|button|nav|navigation|menu|arrow|access|parking)(?:[-_.]|$)/iu.test(path)
+    || /\/(?:ogp|default|no[-_]?image)(?:[@_.-]|$)/iu.test(path)
+    || /logo|icon|favicon|og[-_]?image|badge|banner|cloud_|deco\//iu.test(path);
+}
+
 function detailImageUrl(doc, scope, baseUrl) {
   let origin;
   try { origin = new URL(baseUrl).origin; } catch { return undefined; }
   const candidates = [];
   const add = (href, width = 0, priority = 0) => {
-    const url = absolute(href, baseUrl);
-    if (!url || /logo|icon|favicon|og[-_]?image|badge|banner|cloud_|deco\//iu.test(new URL(url).pathname) || /(?:^|[-_/])\d{2,4}x\d{2,4}(?=\.|[-_/]|$)/iu.test(new URL(url).pathname) || /(?:[?&](?:w|width)=)(?:1[0-9]{2}|200)(?:&|$)/iu.test(url)) return;
+    // Missing DOM attributes are null; URL(null, base) would invent /null.
+    if (typeof href !== 'string' || !href.trim() || /^(?:null|undefined)$/iu.test(href.trim())) return;
+    const url = absolute(href.trim(), baseUrl);
+    if (!url || isPlaceholderDetailImageUrl(url) || /(?:^|[-_/])\d{2,4}x\d{2,4}(?=\.|[-_/]|$)/iu.test(new URL(url).pathname) || /(?:[?&](?:w|width)=)(?:1[0-9]{2}|200)(?:&|$)/iu.test(url)) return;
     candidates.push({ url, width, priority });
   };
   for (const meta of doc.querySelectorAll('meta[property="og:image"],meta[name="twitter:image"]')) add(meta.getAttribute('content'), 0, 2);
@@ -298,7 +312,14 @@ export function parseWizardOsakaDetails(html, event, url, checkedAt) {
 
 export function mergeEventDetails(event, detail) {
   // Identity and published date/venue stay owned by the source adapter.
-  return { ...event, ...detail.fields, fieldEvidence: { ...event.fieldEvidence, ...detail.fields?.fieldEvidence } };
+  const merged = { ...event, ...detail.fields, fieldEvidence: { ...event.fieldEvidence, ...detail.fields?.fieldEvidence } };
+  if (Object.hasOwn(detail.fields ?? {}, 'price')) {
+    const { free: obsoleteFree, ...tagEvidence } = merged.tagEvidence ?? {};
+    const normalized = normalizeEventRecord({ ...merged, freeEvent: detail.fields.freeEvent,
+      tags: (merged.tags ?? []).filter(tag => tag !== 'free'), tagEvidence });
+    if (normalized) Object.assign(merged, { freeEvent: normalized.freeEvent, tags: normalized.tags, tagEvidence: normalized.tagEvidence });
+  }
+  return merged;
 }
 
 export async function enrichEventDetails(events, {fetchText, checkedAt, focusUrls = []}) {

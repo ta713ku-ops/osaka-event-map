@@ -45,7 +45,13 @@ const coverage = {
 
 const responseFor = (url: unknown, eventData: unknown = events) => ({ ok: true, json: async () => String(url).includes('coverage.json') ? coverage : eventData });
 
+async function browseEvents() {
+  const entry = screen.queryByRole('button', { name: /すべてのイベントを探す/ }) ?? await screen.findByRole('button', { name: /すべてのイベントを探す/ });
+  fireEvent.click(entry);
+}
+
 async function openFirstFeaturedEvent() {
+  await browseEvents();
   await screen.findAllByText('中之島ナイトマーケット');
   const card = [...document.querySelectorAll<HTMLButtonElement>('.home-event-card')]
     .find((item) => item.textContent?.includes('中之島ナイトマーケット'));
@@ -54,7 +60,7 @@ async function openFirstFeaturedEvent() {
 }
 
 async function openMapSurface() {
-  fireEvent.click(await screen.findByRole('button', { name: /地図で近さを見る/ }));
+  fireEvent.click(await screen.findByRole('button', { name: /^地図$/ }));
   expect(screen.getByTestId('event-map')).toBeInTheDocument();
 }
 
@@ -80,9 +86,10 @@ describe('App editorial home integration', () => {
 
   it('mounts the editorial home first with primary discovery controls', async () => {
     render(<App />);
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
     expect(screen.queryByTestId('event-map')).not.toBeInTheDocument();
-    for (const label of ['今日', '今夜', '明日', '近日開催', '今週末']) expect(screen.getByRole('button', { name: label })).toBeInTheDocument();
+    for (const label of ['今日', '今週末']) expect(screen.getByRole('button', { name: label })).toBeInTheDocument();
+    await browseEvents();
     await screen.findAllByText('中之島ナイトマーケット');
     expect(screen.getByRole('heading', { name: 'イベント一覧' })).toBeInTheDocument();
     expect(screen.getByText(/件・注目順/)).toBeInTheDocument();
@@ -93,13 +100,30 @@ describe('App editorial home integration', () => {
     const search = screen.getByPlaceholderText('イベント名や場所から探す');
     fireEvent.change(search, { target: { value: 'ナイト' } });
     await waitFor(() => expect(screen.queryAllByText('大阪クラフト展')).toHaveLength(0));
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
+  });
+
+  it('finds an undated official forecast separately and excludes it from today and free results', async () => {
+    const eventData = { ...events, seasonalGuides: [{ id: 'cosmos-forecast', title: '50万本のコスモス｜開花予想', venueName: 'ハーベストの丘', address: '大阪府堺市南区', periodText: '11月初旬〜下旬予想', description: '開花時期は予想です。', bloomStatus: '成長中（9/18時点）', priceInfo: '中学生以上1,500円', timeInfo: '通常営業時間10:00〜17:00', accessByTransit: '泉ヶ丘駅からバス', parkingInfo: '無料・入園は有料', contact: '公式の問い合わせ', officialUrl: 'https://official.example/cosmos', lastCheckedAt: new Date().toISOString(), sourceStatus: 'success', validThroughMonth: '2099-11', fieldEvidence: {} }] };
+    vi.stubGlobal('fetch', vi.fn(async url => responseFor(url, eventData)));
+    render(<App />);
+    fireEvent.change(screen.getByPlaceholderText('イベント名や場所から探す'), { target: { value: 'コスモス' } });
+    expect(await screen.findByRole('heading', { name: '50万本のコスモス｜開花予想' })).toBeInTheDocument();
+    expect(screen.getByText('日時が確定したイベントはありません')).toBeInTheDocument();
+    expect(screen.getByText(/0件・注目順/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /^今日$/ }));
+    expect(screen.queryByRole('heading', { name: '50万本のコスモス｜開花予想' })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /^これから$/ }));
+    expect(screen.getByRole('heading', { name: '50万本のコスモス｜開花予想' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /^無料$/ }));
+    expect(screen.queryByRole('heading', { name: '50万本のコスモス｜開花予想' })).not.toBeInTheDocument();
   });
 
   it('pushes one stable public detail entry when the same home candidate is clicked twice', async () => {
     const replaceState = vi.spyOn(window.history, 'replaceState');
     const pushState = vi.spyOn(window.history, 'pushState');
     render(<App />);
+    await browseEvents();
     await screen.findAllByText('中之島ナイトマーケット');
     const card = [...document.querySelectorAll<HTMLButtonElement>('.home-event-card')]
       .find((item) => item.textContent?.includes('中之島ナイトマーケット'));
@@ -123,7 +147,7 @@ describe('App editorial home integration', () => {
     await waitForPath('/');
     expect(back).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole('heading', { level: 1, name: '中之島ナイトマーケット' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
   });
 
   it('retries a failed event load in place', async () => {
@@ -189,23 +213,23 @@ describe('App editorial home integration', () => {
     window.history.back();
     await waitForPath('/');
     expect(screen.queryByRole('heading', { level: 1, name: '中之島ナイトマーケット' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
   });
 
   it('applies additional filters while keeping the home mounted', async () => {
-    render(<App />); await screen.findAllByText('中之島ナイトマーケット');
-    fireEvent.click(screen.getByRole('button', { name: /条件/ }));
+    render(<App />); await browseEvents(); await screen.findAllByText('中之島ナイトマーケット');
+    fireEvent.click(screen.getByRole('button', { name: '条件を選ぶ' }));
     expect(screen.getByRole('dialog', { name: /条件/ })).toBeInTheDocument();
     expect(document.querySelector('.modal-scrim')).toBeInTheDocument();
     fireEvent.click(within(screen.getByRole('dialog', { name: /条件/ })).getByRole('button', { name: '無料' }));
     fireEvent.click(screen.getByRole('button', { name: 'この条件で探す' }));
-    expect(screen.getByRole('button', { name: /条件/ })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '条件を選ぶ' })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
   });
 
   it('filters by evidence-backed tags without duplicating the free option', async () => {
-    render(<App />); await screen.findAllByText('中之島ナイトマーケット');
-    fireEvent.click(screen.getByRole('button', { name: /条件/ }));
+    render(<App />); await browseEvents(); await screen.findAllByText('中之島ナイトマーケット');
+    fireEvent.click(screen.getByRole('button', { name: '条件を選ぶ' }));
     fireEvent.click(screen.getByRole('button', { name: '有名人来場' }));
     fireEvent.click(screen.getByRole('button', { name: 'この条件で探す' }));
     await waitFor(() => expect(screen.queryByText('中之島ナイトマーケット')).not.toBeInTheDocument());
@@ -213,7 +237,7 @@ describe('App editorial home integration', () => {
   });
 
   it('keeps an unknown-coordinate event in the list and detail without a broken route', async () => {
-    render(<App />); await screen.findAllByText('場所未確認の音楽会');
+    render(<App />); await browseEvents(); await screen.findAllByText('場所未確認の音楽会');
     const card = [...document.querySelectorAll<HTMLButtonElement>('.home-event-card')].find((item) => item.textContent?.includes('場所未確認の音楽会'));
     expect(card).toBeTruthy();
     fireEvent.click(card!);
@@ -306,7 +330,7 @@ describe('App editorial home integration', () => {
     fireEvent.scroll(detailPage);
     window.history.back();
     await waitForPath('/');
-    expect(await screen.findByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
 
     firstMount.unmount();
     render(<App />);
@@ -324,7 +348,7 @@ describe('App editorial home integration', () => {
     fireEvent.click(screen.getByRole('button', { name: '戻る' }));
     await waitForPath('/');
     expect(back).not.toHaveBeenCalled();
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
   });
 
   it('ignores invalid navigation state and treats the URL as a direct detail entry', async () => {
@@ -333,12 +357,13 @@ describe('App editorial home integration', () => {
     await waitForDetail('中之島ナイトマーケット', '/events/public-event-a/');
     fireEvent.click(screen.getByRole('button', { name: '戻る' }));
     await waitForPath('/');
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
     expect(screen.queryByTestId('event-map')).not.toBeInTheDocument();
   });
 
   it('shows source health in a compact disclosure', async () => {
-    render(<App />); await screen.findAllByText('中之島ナイトマーケット');
+    render(<App />); await browseEvents(); await screen.findAllByText('中之島ナイトマーケット');
+    fireEvent.click(screen.getByText('情報源・更新について'));
     const summary = screen.getByText(/公式ソース 1\/2件を確認/);
     expect(summary.parentElement).not.toHaveAttribute('open');
     fireEvent.click(summary);
@@ -393,6 +418,7 @@ describe('App editorial home integration', () => {
     ] };
     vi.stubGlobal('fetch', vi.fn().mockImplementation(async url => responseFor(url, fixture)));
     render(<App />);
+    await browseEvents();
     await screen.findAllByText('中之島ナイトマーケット');
     fireEvent.click(screen.getByRole('button', { name: '今日' }));
     expect(document.querySelector('.home-featured-grid')).not.toHaveTextContent('大阪クラフト展');
@@ -404,18 +430,18 @@ describe('App editorial home integration', () => {
     fireEvent.click(screen.getByRole('button', { name: '今週末' }));
     expect(screen.getByRole('button', { name: '今週末' })).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(screen.getByRole('button', { name: 'これから' }));
-    fireEvent.click(screen.getByRole('button', { name: /好きなことから探す/ }));
+    fireEvent.click(screen.getByRole('button', { name: /条件を選ぶ/ }));
     expect(screen.getByRole('button', { name: 'この条件で探す' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'この条件で探す' }));
-    fireEvent.click(screen.getByRole('button', { name: /場所から探す/ }));
+    fireEvent.click(screen.getByRole('button', { name: /^地図$/ }));
     expect(screen.getByTestId('event-map')).toBeInTheDocument();
   });
 
   it('moves from home to map and back', async () => {
     render(<App />);
-    fireEvent.click(await screen.findByRole('button', { name: /地図で近さを見る/ }));
+    fireEvent.click(await screen.findByRole('button', { name: /^地図$/ }));
     expect(screen.getByTestId('event-map')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'ホーム' }));
-    expect(screen.getByRole('heading', { name: /よりみち日和/ })).toBeInTheDocument();
+    expect(document.querySelector('.app-shell')).toHaveClass('is-home');
   });
 });

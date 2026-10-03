@@ -1,0 +1,70 @@
+- main:
+  - link "候補へ移動":
+    - /url: "#home-results"
+  - generic "どこいこ大阪":
+    - paragraph: どこいこ大阪
+    - paragraph: いつもの街で、まだ知らない体験を。
+    - navigation "メインナビゲーション":
+      - button "ホーム":
+        - generic: ホーム
+      - button "イベントを検索":
+        - generic: 検索
+      - button "地図":
+        - generic: 地図
+      - button "保存したイベント（0件）":
+        - generic: 保存
+    - generic: 大阪駅から・会期内 1件
+    - button "現在地を基準にする":
+    - button "好みを設定":
+      - generic: あなた向け
+  - region "今日の大阪、よりみち日和。":
+    - region "イベントを探す":
+      - generic: イベント名や場所を検索
+      - textbox "イベント名や場所を検索":
+        - /placeholder: イベント名や場所から探す
+        - text: コスモス・コキア
+      - generic "イベント一覧の開催日":
+        - button "これから" [pressed]
+        - button "今日"
+        - button "今夜"
+        - button "明日"
+        - button "近日開催"
+        - button "今週末"
+        - button "条件を選ぶ":
+          - text: 条件を選ぶ
+    - generic "イベントの検索条件":
+      - generic "＋ 日付・エリア・並び順を選ぶ"
+      - option "大阪全域" [selected]
+      - option "梅田・中之島"
+      - option "なんば・心斎橋"
+      - option "天王寺・あべの"
+      - option "大阪ベイエリア"
+      - option "大阪市のその他"
+      - option "北摂"
+      - option "河内"
+      - option "堺・泉州"
+      - option "注目順" [selected]
+      - option "開催日順"
+      - generic "適用中の条件":
+        - button "検索：コスモス・コキアを解除": 検索：コスモス・コキア ×
+        - button "すべて解除"
+    - region "検索結果":
+      - heading "イベント一覧" [level=2]
+      - generic: 1件・注目順
+      - button "ホームのおすすめに戻る"
+      - article:
+        - link "コスモス・コキアフェスタ 2026、10/3(土)〜10/30 9:30、自然文化園 花の丘ほか" [active]:
+          - /url: /osaka-event-map/events/3c7133223ebaf5f98f48/
+          - generic: 開催中
+          - strong: コスモス・コキアフェスタ 2026
+          - text: 10/3(土)〜10/30 9:30
+          - text: 自然文化園 花の丘ほか
+          - generic: 催事は無料・入園料：高校生以上450円・中学生以下無料・条件は詳細
+        - button "コスモス・コキアフェスタ 2026を保存":
+      - button "候補を地図で比べる":
+        - text: 候補を地図で比べる
+    - paragraph:
+      - text: どこいこ大阪
+      - generic: いつもの街で、まだ知らない体験を。
+    - generic "情報源・更新について"
+    - text: ・ ・ ・ ・ ・ ・

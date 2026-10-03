@@ -1,0 +1,73 @@
+- text: − ・ ・ ・ ・ ・ ・
+- main:
+  - button "戻る":
+    - text: 戻る
+  - link "どこいこ大阪":
+    - /url: /osaka-event-map/
+  - button "共有":
+    - text: 共有
+  - article:
+    - paragraph: 展覧会
+    - heading "企画展「ミュシャ芸術博覧会リターンズ」" [active] [level=1]
+    - paragraph: 開催中
+    - generic "イベント概要":
+      - term: 日程
+      - definition: 2026年8月1日(土) 〜 11月29日(日)
+      - term: 会場
+      - definition: 堺 アルフォンス・ミュシャ館
+      - generic: ¥
+      - term: 料金
+      - definition: 一般510円／高校・大学生310円／小・中学生100円・条件は詳細
+    - button "お気に入りに保存":
+      - text: お気に入りに保存
+    - region "参加の基本情報":
+      - paragraph: 参加前に確認
+      - heading "参加の基本情報" [level=2]
+      - paragraph: 日時・費用・参加方法
+      - term: 開催日
+      - definition: 2026年8月1日(土) 〜 11月29日(日)
+      - paragraph:
+        - text: 9:30~17:15(入館16:30まで)。月曜休館。ただし8/10・9/21・10/12・11/2・11/23は開館。10/13・11/4・11/24は休館。
+      - paragraph:
+        - generic: 休催日
+        - text: 8月3日(月)、8月17日(月)、8月24日(月)、8月31日(月)、9月7日(月)、9月14日(月)、9月28日(月)、10月5日(月)、10月13日(火)、10月19日(月)、10月26日(月)、11月4日(水)、11月9日(月)、11月16日(月)、11月24日(火)
+      - paragraph: 月曜休館。ただし8/10・9/21・10/12・11/2・11/23は開館。10/13・11/4・11/24は休館。
+      - term: 会場
+      - definition: 堺 アルフォンス・ミュシャ館
+      - paragraph: 堺市堺区田出井町1-2-200 ベルマージュ堺弐番館2F~4F
+      - generic: ¥
+      - term: 料金
+      - definition: 一般510円／高校・大学生310円／小・中学生100円・条件は詳細
+      - generic "詳しい料金・割引条件"
+      - term: 予約
+      - definition: 予約情報は未確認
+      - link "公式情報を確認":
+        - /url: https://mucha.sakai-bunshin.com/event/mucha2026ex2/
+        - text: 公式情報を確認
+    - region "イベントについて":
+      - paragraph: 開催内容
+      - heading "イベントについて" [level=2]
+      - paragraph: ポスターから油彩画や彫刻まで、ミュシャの幅広い作品を展示。鑑賞とあわせて展示作りやスタンプラリーも体験できる企画展。
+      - list "確認されているイベントの特徴":
+        - listitem: 展覧会
+    - region "アクセス":
+      - paragraph: 会場へ行く
+      - heading "アクセス" [level=2]
+      - strong: 堺 アルフォンス・ミュシャ館
+      - paragraph: 堺市堺区田出井町1-2-200 ベルマージュ堺弐番館2F~4F
+      - button "Apple Mapsで経路を見る":
+        - text: Apple Mapsで経路を見る
+      - button "Google Mapsで見る":
+        - text: Google Mapsで見る
+    - region "出典と確認日":
+      - paragraph: 情報を確かめる
+      - heading "出典と確認日" [level=2]
+      - paragraph: 公式情報を確認済み
+      - paragraph:
+        - text: 最終確認
+        - time: 2026年10月2日 21:20
+      - paragraph: 情報元：堺 アルフォンス・ミュシャ館
+      - list:
+        - link "公式サイトを開く":
+          - /url: https://mucha.sakai-bunshin.com/event/mucha2026ex2/
+          - text: 公式サイトを開く

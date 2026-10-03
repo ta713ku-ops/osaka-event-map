@@ -7,6 +7,8 @@ import { EventDetailPage, type DetailEvent } from './components/EventDetailPage'
 import { FilterSheet, type EventFilters } from './components/FilterSheet';
 import { ProfileDialog, type Profile } from './components/ProfileDialog';
 import { HomeDiscovery, type HomeEvent } from './components/HomeDiscovery';
+import { OfficialGuides } from './components/OfficialGuides';
+import { visibleSeasonalGuides } from './domain/seasonalGuides';
 import { CoverageStatus, parseCoverageData, type CoverageData } from './components/CoverageStatus';
 import {
   appleMapsUrl,
@@ -120,7 +122,7 @@ function timeLabel(event: EventItem) {
   const end = event.endDate && event.endDate !== event.startDate
     ? `〜${new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', year: event.endDate.slice(0, 4) !== event.startDate.slice(0, 4) ? 'numeric' : undefined, month: 'numeric', day: 'numeric' }).format(new Date(`${event.endDate}T00:00:00+09:00`))}`
     : '';
-  return `${date}${end}${time}`;
+  return `${date}${end}${time}${event.schedule?.dates?.length ? '（指定日開催）' : ''}`;
 }
 
 export function App() {
@@ -190,6 +192,7 @@ export function App() {
     return () => { window.clearInterval(timer); document.removeEventListener('visibilitychange', refresh); };
   }, []);
   const userProfile = useMemo(() => domainProfile(profile), [profile]);
+  const seasonalGuides = useMemo(() => visibleSeasonalGuides(data?.seasonalGuides ?? [], query, timeFilter, filters, now), [data, query, timeFilter, filters, now]);
   const ranked = useMemo<RankedEvent[]>(() => {
     if (!data) return [];
     const normalizedQuery = query.normalize('NFKC').trim().toLocaleLowerCase('ja');
@@ -272,6 +275,8 @@ export function App() {
     ongoing: isOngoing(event, now),
     description: event.description,
     imageUrl: usableEventImage(event),
+    imageSource: event.imageSource,
+    reservationRequired: event.reservationRequired ?? undefined,
   })), [now, homeRanked, bookmarks.items]);
 
   const homeRecommendations = useMemo(() => recommendHomeEvents(data?.events ?? [], now, { todayLimit: 4 }), [data, now]);
@@ -295,9 +300,17 @@ export function App() {
       ongoing: isOngoing(event, now),
       description: event.description,
       imageUrl: usableEventImage(event),
+      imageSource: event.imageSource,
+      reservationRequired: event.reservationRequired ?? undefined,
     };
   };
-  const largeHomeEvents = homeRecommendations.large.map(({ event }) => recommendationHomeEvent(event));
+  // An editorial scene uses only this event's existing official image and facts.
+  // If it is no longer listed, return to the ordinary event recommendations.
+  const scene = filterEvents(data?.events ?? [], 'all', now).find(event => event.id === 'b6fc1d0a0d8167982cfa'
+    && (!event.officialStatus || event.officialStatus === 'scheduled') && usableEventImage(event));
+  const largeHomeEvents = scene
+    ? [{ ...recommendationHomeEvent(scene), invitation: 'いつもの広場が、霧に包まれる。' }]
+    : homeRecommendations.large.filter(({ event }) => usableEventImage(event)).map(({ event }) => recommendationHomeEvent(event));
   const todayHomeEvents = homeRecommendations.today.map(({ event }) => recommendationHomeEvent(event));
 
   const openDetail = useCallback((eventId: string, focus?: string) => {
@@ -336,7 +349,7 @@ export function App() {
   const toggleSave = (id: string) => { const item = data?.events.find(event => event.id === id); if (item) bookmarks.toggle(item); };
   const features = editorialFeatures(filterEvents(data?.events ?? [], 'all', now), now);
   const feature = filters.feature ? features.find(item => item.id === filters.feature) : undefined;
-  const searchControls = <SearchControls filters={filters} onChange={setFilters} onOpenFilters={() => setFilterOpen(true)} onReset={resetSearch}
+  const searchControls = <SearchControls compact={view === 'home'} filters={filters} onChange={setFilters} onOpenFilters={() => setFilterOpen(true)} onReset={resetSearch}
     query={query} onClearQuery={() => setQuery('')} today={todayKey}
     dateLabel={filters.selectedDate ?? (timeFilter !== 'all' ? TIME_FILTERS.find(item => item.key === timeFilter)?.label : undefined)}
     onClearDate={() => setTimeFilter('all')} />;
@@ -352,9 +365,22 @@ export function App() {
         onLocate={locate}
         onOpenProfile={() => setProfileOpen(true)}
         view={view}
-        onShowHome={() => setView('home')}
+        searchActive={view === 'home' && Boolean(surface.browseAll || query || timeFilter !== 'all' || activeFilterCount || feature)}
+        onShowHome={() => {
+          setView('home'); resetSearch(); updateSurface('browseAll', false);
+          window.requestAnimationFrame(() => document.querySelector('.home-hero')?.scrollIntoView?.({ block: 'start', behavior: 'auto' }));
+        }}
         onShowMap={() => setView('map')}
         onShowSaved={() => setView('saved')}
+        onSearch={() => {
+          setView('home');
+          updateSurface('browseAll', true);
+          window.requestAnimationFrame(() => {
+            const input = document.querySelector<HTMLInputElement>('.home-search input');
+            input?.scrollIntoView?.({ block: 'center', behavior: 'auto' });
+            input?.focus({ preventScroll: true });
+          });
+        }}
         savedCount={bookmarks.items.length}
       />
       {locationNotice && <div className="location-notice" role="status">{locationNotice}<button type="button" onClick={() => setLocationNotice('')}>閉じる</button></div>}
@@ -370,10 +396,14 @@ export function App() {
         })}</div></section> : view === 'home' ? <HomeDiscovery
         originLabel={originLabel}
         visibleLimit={surface.homeLimit}
+        browseAll={surface.browseAll ?? false}
+        onBrowseAllChange={value => updateSurface('browseAll', value)}
         onVisibleLimitChange={(value) => updateSurface('homeLimit', value)}
         events={homeEvents}
         onToggleSave={toggleSave}
         searchControls={searchControls}
+        officialGuides={<OfficialGuides guides={seasonalGuides} />}
+        hasOfficialGuides={seasonalGuides.length > 0}
         weekendEvents={weekendEvents}
         features={features.map(item => ({ ...item, events: item.events.map(recommendationHomeEvent) }))}
         onFeatureSelect={id => { setQuery(''); setTimeFilter('all'); setFilters({ feature: id }); document.querySelector('#home-results')?.scrollIntoView({ behavior: 'auto' }); }}
@@ -449,6 +479,7 @@ export function App() {
             ))}
           </div>
           {mapListLimit < ranked.length && <button type="button" className="map-more-button" onClick={() => updateSurface('mapListLimit', (limit) => Math.min(ranked.length, limit + 20))}>もっと見る（残り {ranked.length - mapListLimit}件）</button>}
+          <OfficialGuides guides={seasonalGuides} />
           {data && <p className="data-note">公式公開データと公式サイトの情報を利用しています。内容は参加前に公式サイトで確認してください。</p>}
           {data?.sources?.length ? <SourceStatusDetails sources={data.sources} /> : null}
           <CoverageStatus data={coverage} loading={!coverage && !coverageError} error={coverageError} onRetry={() => setCoverageAttempt((value) => value + 1)} />

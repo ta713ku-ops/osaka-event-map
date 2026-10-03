@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { createHash } from 'node:crypto';
 import {
   parseCsv,
   textValue,
@@ -177,6 +178,14 @@ export function createFetchText({
       body: options.body,
       headers: options.headers,
       consume: async (response) => ({ text: await responseText(response), headers: response?.headers }),
+    });
+  };
+  // Binary first-party attachments are revalidated by exact bytes, without
+  // pretending a reviewed PDF/image transcript was automatically re-read.
+  fetchText.assetHash = async (url) => {
+    if (cached) throw new Error(`--cached の正規化済みスナップショットがありません: ${url}`);
+    return fetchResponse(fetchImpl, url, { timeoutMs, semaphore,
+      consume: async (response) => createHash('sha256').update(await responseBytes(response)).digest('hex'),
     });
   };
   return fetchText;
@@ -801,13 +810,16 @@ export async function collectEvents({
   const venues = await readJson(new URL('../data/venue-registry.json', import.meta.url));
   retainedEvents = enrichVenues(retainedEvents, Array.isArray(venues) ? venues : []);
   const reviewedFacts = await readJson(new URL('../data/website-focus-facts.json', import.meta.url));
-  retainedEvents = enrichVerifiedFacts(retainedEvents, Array.isArray(reviewedFacts) ? reviewedFacts : []);
+  retainedEvents = enrichVerifiedFacts(retainedEvents, Array.isArray(reviewedFacts) ? reviewedFacts : [], { now });
   const gauntletFacts = await readJson(new URL('../data/gauntlet-reviewed-facts.json', import.meta.url));
-  retainedEvents = enrichVerifiedFacts(retainedEvents, Array.isArray(gauntletFacts) ? gauntletFacts : []);
+  retainedEvents = enrichVerifiedFacts(retainedEvents, Array.isArray(gauntletFacts) ? gauntletFacts : [], { now });
   const publication = partitionPublishable(retainedEvents);
   retainedEvents = sortEvents(publication.accepted);
 
   const generatedAt = generatedAtFor({ cached, sources: sourceReports, nowIso, lastGood: usingLastGood ? lastGood : undefined });
+  const { collectSeasonalGuides } = await import('./sources/seasonal-guides.mjs');
+  const seasonalGuides = cached ? (previousSnapshot?.seasonalGuides ?? [])
+    : await collectSeasonalGuides({ fetchText, now: new Date(nowIso) });
   const envelope = {
     schemaVersion: 3,
     generatedAt,
@@ -816,6 +828,7 @@ export async function collectEvents({
     detailReports,
     sources: sourceReportsWithPublishedCounts(sourceReports, retainedEvents),
     events: assignStableRouteIds(retainedEvents, previousSnapshot?.events),
+    seasonalGuides,
   };
   envelope.quality = qualitySummary(envelope.events, { rejected: publication.rejected });
   await writeJsonAtomic(outputPath, envelope);

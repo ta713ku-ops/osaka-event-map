@@ -1,0 +1,1241 @@
+{
+  "retrievedAt": "2026-10-02T06:44:54.517Z",
+  "occurrences": [
+    {
+      "sourceId": "official-pack-a-baraike-flea-market-2026-10",
+      "sourceName": "日本スワップミート協会（主催：ばらいけ NEXT 創発パートナーズ）",
+      "eventName": "ばらいけ公園 de フリマ",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10",
+      "venueName": "原池公園多目的広場および周辺 特設会場",
+      "officialUrl": "https://swapmeet.ne.jp/info/baraike_park",
+      "description": "堺市中区、人気の運動公園でフリマ開催！",
+      "lastCheckedAt": "2026-10-02T06:51:49.732Z",
+      "startTime": "11:00",
+      "endTime": "15:00",
+      "timeInfo": "11:00～15:00（予定）。雨天順延。",
+      "price": "入場無料。",
+      "accessByTransit": "南海泉北線「深井駅」から南西へ約1.2km。南海バス「久世小学校前」から南西へ約250m。",
+      "address": "大阪府堺市中区八田寺町320",
+      "schedule": {
+        "dates": [
+          "2026-10-10"
+        ],
+        "evidence": "主催者掲載の開催日は10月10日。雨天振替日は11月14日のため通常の開催日には追加していません。"
+      },
+      "fieldEvidence": {
+        "eventName": {
+          "text": "ばらいけ公園 de フリマ",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "dateRange": {
+          "text": "2026/10/10(土)",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "venueName": {
+          "text": "原池公園多目的広場および周辺 特設会場",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "osakaLocation": {
+          "text": "（大阪府堺市中区八田寺町320）",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "description": {
+          "text": "堺市中区、人気の運動公園でフリマ開催！",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "schedule": {
+          "text": "2026/10/10(土)",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "rainTransferDate": {
+          "text": "2026/11/14",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "startTime": {
+          "text": "11時～15時（予定）［雨天順延］",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "endTime": {
+          "text": "11時～15時（予定）［雨天順延］",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "timeInfo": {
+          "text": "11時～15時（予定）［雨天順延］",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "price": {
+          "text": "無料",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "accessByTransit": {
+          "text": "南海泉北線「深井駅」より南西へ1.2キロメートル",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "accessBus": {
+          "text": "南海バス　久世小学校前より南西へ250メートル",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "address": {
+          "text": "（大阪府堺市中区八田寺町320）",
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z"
+        },
+        "rainPolicy": {
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z",
+          "text": "雨天順延"
+        },
+        "parkingInfo": {
+          "sourceUrl": "https://swapmeet.ne.jp/info/baraike_park",
+          "checkedAt": "2026-10-02T06:51:49.732Z",
+          "text": "原池公園駐車場 30分まで無料。2時間まで200円。以降１時間毎に100円。 （１日最大1,000円）"
+        }
+      },
+      "rainPolicy": "雨天順延（10月10日の振替日は11月14日）。",
+      "parkingInfo": "原池公園駐車場：30分まで無料、2時間まで200円、以後1時間ごと100円、1日最大1,000円。"
+    },
+    {
+      "sourceId": "official-pack-a-hokusai-hiroshige-2026",
+      "sourceName": "大阪浮世絵美術館",
+      "eventName": "北斎・広重づくし",
+      "startDate": "2026-07-28",
+      "endDate": "2027-01-24",
+      "venueName": "大阪浮世絵美術館",
+      "officialUrl": "https://osaka-ukiyoe-museum.com/exhibition.html",
+      "description": "葛飾北斎の冨嶽三十六景や柱絵、歌川広重の名所江戸百景・関西の名所作品を、江戸～明治期のオリジナル版画で紹介します。",
+      "lastCheckedAt": "2026-10-02T06:23:57.192Z",
+      "schedule": {
+        "evidence": "館公式案内では年末年始・展示替え日が休館。年末年始の具体日付は掲載されていないため、日付を補っていません。"
+      },
+      "timeInfo": "10:00～17:00（最終入館16:30）。",
+      "price": "展示観覧料：大人1,000円、学生600円（学生証提示）、小学生300円。ポストカード付は大人1,200円、学生800円。障がい者手帳提示で本人と付き添い1名まで1割引。",
+      "address": "〒542-0085 大阪市中央区心斎橋筋2-2-23 不二家心斎橋ビル3F",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "北斎・広重づくし",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/exhibition.html",
+          "checkedAt": "2026-10-02T06:23:57.192Z"
+        },
+        "dateRange": {
+          "text": "展示期間：2026年7月28日（火）～2027年1月24日（日）",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/exhibition.html",
+          "checkedAt": "2026-10-02T06:23:57.192Z"
+        },
+        "venueName": {
+          "text": "大阪浮世絵美術館",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/exhibition.html",
+          "checkedAt": "2026-10-02T06:23:57.192Z"
+        },
+        "osakaLocation": {
+          "text": "〒542-0085 大阪市中央区心斎橋筋2-2-23 不二家心斎橋ビル3F",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/exhibition.html",
+          "checkedAt": "2026-10-02T06:23:57.192Z"
+        },
+        "description": {
+          "text": "展示作品はすべて江戸から明治期に摺られたオリジナルの浮世絵版画です。",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/exhibition.html",
+          "checkedAt": "2026-10-02T06:23:57.192Z"
+        },
+        "schedule": {
+          "text": "年末年始、展示替え日(2026年7月27日、2027年1月25日)",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/userguide.html",
+          "checkedAt": "2026-10-02T06:23:57.225Z"
+        },
+        "timeInfo": {
+          "text": "10:00～17:00(最終入館16:30)",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/userguide.html",
+          "checkedAt": "2026-10-02T06:23:57.225Z"
+        },
+        "price": {
+          "text": "大人 1,000円 1,200円 学生 学生証提示 600円 800円 小学生 300円",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/userguide.html",
+          "checkedAt": "2026-10-02T06:23:57.225Z"
+        },
+        "priceConditions": {
+          "text": "障がい者手帳ご提示でご本人様とお付き添い1名様まで1割引き。",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/userguide.html",
+          "checkedAt": "2026-10-02T06:23:57.225Z"
+        },
+        "address": {
+          "text": "〒542-0085 大阪市中央区心斎橋筋2-2-23 不二家心斎橋ビル3F",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/userguide.html",
+          "checkedAt": "2026-10-02T06:23:57.225Z"
+        },
+        "closureInfo": {
+          "text": "年末年始、展示替え日(2026年7月27日、2027年1月25日)",
+          "sourceUrl": "https://osaka-ukiyoe-museum.com/userguide.html",
+          "checkedAt": "2026-10-02T06:23:57.225Z"
+        }
+      },
+      "closureInfo": "年末年始・展示替え日は休館。年末年始の具体的な休館日は公式案内で未公表です。"
+    },
+    {
+      "sourceId": "official-pack-a-intangible-food-culture-panel-2026",
+      "sourceName": "堺市博物館（堺市）",
+      "eventName": "無形文化遺産パネル展「美味しい無形文化遺産－アジアの多彩な食文化－」",
+      "startDate": "2026-09-19",
+      "endDate": "2027-01-24",
+      "venueName": "堺市博物館 文化遺産展示室",
+      "officialUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+      "description": "和食や中国の製茶文化など、アジアを中心とする食文化と、フランス・メキシコ・地中海地域の食文化を紹介するパネル展です。",
+      "lastCheckedAt": "2026-10-02T06:34:52.956183Z",
+      "schedule": {
+        "daily": true,
+        "closedDates": [
+          "2026-09-28",
+          "2026-10-05",
+          "2026-10-19",
+          "2026-10-26",
+          "2026-11-02",
+          "2026-11-09",
+          "2026-11-16",
+          "2026-11-30",
+          "2026-12-07",
+          "2026-12-14",
+          "2026-12-21",
+          "2026-12-28",
+          "2026-12-29",
+          "2026-12-30",
+          "2026-12-31",
+          "2027-01-01",
+          "2027-01-02",
+          "2027-01-03",
+          "2027-01-04",
+          "2027-01-18"
+        ],
+        "evidence": "公式案内の月曜休館・年末年始休館（12/28～1/4）および祝日開館日を反映。9/21、10/12、11/23、2027/1/11は開館。"
+      },
+      "timeInfo": "9:30～17:15（入館は16:30まで）。月曜休館、年末年始（12月28日～2027年1月4日）休館。9/21、10/12、11/23、2027/1/11は開館。",
+      "price": "一般200円、高校・大学生100円、小・中学生50円。堺市在住・在学の小・中学生、堺市在住65歳以上、障害のある方は無料（確認資料が必要）。11月14・15日は関西文化の日として無料。",
+      "address": "〒590-0802 堺市堺区百舌鳥夕雲町2丁 大仙公園内",
+      "accessByTransit": "JR阪和線「百舌鳥」駅から500m。南海バス「堺市博物館前」から280m。",
+      "fieldEvidence": {
+        "eventName": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "無形文化遺産パネル展「美味しい無形文化遺産－アジアの多彩な食文化－」を開催します。",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "dateRange": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "令和 8 年 9 月 19 日（土）～令和 9 年 1 月 24 日（日）",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "venueName": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "堺市博物館 文化遺産展示室",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "osakaLocation": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "堺市堺区百舌鳥夕雲町 2 丁 大仙公園内",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "description": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "本展示は、「和食；日本人の伝統的な食文化」、「中国の伝統的な製茶技術と関連の社会的慣習」等のアジア\nの多彩な食文化を中心に紹介します。",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "schedule": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "休館日：月曜日、年末年始（12 月 28 日～令和 9 年 1 月 4 日）\n※9 月 21 日、10 月 12 日、11 月 23 日、令和 9 年 1 月 11 日は開館",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "timeInfo": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "開館時間：午前 9 時 30 分～午後 5 時 15 分（入館は午後 4 時 30 分まで）",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "startTime": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "開館時間：午前 9 時 30 分",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "endTime": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "午後 5 時 15 分（入館は午後 4 時 30 分まで）",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "price": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "text": "一般 200円 160円 高校生 大学生 100円 70円 小学生 中学生 50円 30円",
+          "checkedAt": "2026-10-02T06:35:14.656Z"
+        },
+        "priceConditions": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "text": "※堺市在住・在学の小・中学生は無料です。 ※堺市在住の65歳以上の方は無料です。",
+          "checkedAt": "2026-10-02T06:35:14.656Z"
+        },
+        "priceSpecial": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "text": "※令和 8 年 11 月 14 日（土）・15 日（日）は「関西文化の日」として無料で観覧いただけます。",
+          "checkedAt": "2026-10-02T06:34:52.956183Z",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "evidenceKind": "pdf"
+        },
+        "address": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "text": "〒590-0802 堺市堺区百舌鳥夕雲町2丁 大仙公園内",
+          "checkedAt": "2026-10-02T06:35:14.656Z"
+        },
+        "accessByTransit": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "text": "JR阪和線「百舌鳥」駅から500メートル 南海バス「堺市博物館前」から280メートル",
+          "checkedAt": "2026-10-02T06:35:14.656Z"
+        },
+        "contact": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "text": "電話番号:072-245-6201",
+          "checkedAt": "2026-10-02T06:35:14.656Z"
+        },
+        "priceDisabled": {
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "text": "※障害のある方は無料です。(障害者手帳などをご提示ください。)",
+          "checkedAt": "2026-10-02T06:35:14.656Z"
+        }
+      },
+      "evidenceAssets": [
+        {
+          "url": "https://www.city.sakai.lg.jp/shisei/koho/hodo/hodoteikyoshiryo/kakohodo/r8/r809/080910_02.files/0910_02.pdf",
+          "sha256": "e63a22e75a5d19e5d4964f65f644d41aee68119f920c02e63cb7ba200a49d33d",
+          "text": " \n堺市報道提供資料 \n令和 8 年 9 月 10 日提供 \n \n無形文化遺産パネル展 \n「美味しい無形文化遺産－アジアの多彩な食文化－」を開催します \n \n堺市博物館では、無形文化遺産パネル展「美味しい無形文化遺産－アジアの多彩な食文化－」を開催します。 \n本パネル展は、来館者に文化の多様性や無形文化遺産保護への理解を深めていただくことを目的に、ユネスコ無\n形文化遺産に登録されている和食をはじめアジアの多彩な食文化を中心に紹介します。 \nまた関連事業として、食文化をテーマとする無形文化遺産理解セミナー、ワークショップを開催します。 \n \n1 概要 \n展示名 美味しい無形文化遺産－アジアの多彩な食文化－ \n期  間 \n令和 8 年 9 月 19 日（土）～令和 9 年 1 月 24 日（日） \n開館時間：午前 9 時 30 分～午後 5 時 15 分（入館は午後 4 時 30 分まで） \n休館日：月曜日、年末年始（12 月 28 日～令和 9 年 1 月 4 日） \n※9 月 21 日、10 月 12 日、11 月 23 日、令和 9 年 1 月 11 日は開館 \n会  場 堺市博物館 文化遺産展示室（堺市堺区百舌鳥夕雲町 2 丁 大仙公園内） \n協  力 アジア太平洋無形文化遺産研究センター（IRCI） \n※堺市博物館の観覧料が必要です。観覧料は以下の堺市ホームページをご確認ください。 \nhttps://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html \n※令和 8 年 11 月 14 日（土）・15 日（日）は「関西文化の日」として無料で観覧いただけます。 \n※同時開催する企画展の特典として、観覧者全員に堺伝匠館で 2,000 円以上お買い上げ時に使えるノベルティ\n引換券を進呈します（12 月 13 日（日）まで）。 \n \n2 内容 \n食は生命の持続に必要な栄養を提供するだけでなく、いつ、どこで、だれと、なにを、どのように食するかは社会的慣\n習、儀礼や儀式等の文化的な意義を有し、食文化は無形文化遺産の重要な内容です。 \n本展示は、「和食；日本人の伝統的な食文化」、「中国の伝統的な製茶技術と関連の社会的慣習」等のアジア\nの多彩な食文化を中心に紹介します。加えて、食文化として最初にユネスコ無形文化遺産に登録された「フランス\nの美食術」、「メキシコ伝統料理」、「地中海料理」も紹介します。 \nパネルのリストは以下の堺市ホームページをご確認ください。 \nhttps://www.city.sakai.lg.jp/kanko/hakubutsukan/unesco/renkei/mukeir8.html \n \n \n \n3 関連イベント \n  食文化をテーマとする無形文化遺産理解セミナー、ワークショップを開催します。 \n（1）ワークショップ「季節の和菓子を作って、煎茶と一緒にいただこう－登録無形文化財「菓銘をもつ生菓子 \n（煉切・こなし）」と「手揉み製茶」－」 \n日 時 令和 8 年 10 月 4 日（日）午後 1 時 30 分～午後 3 時 30 分 \n講 師 \n有限会社宝泉菓子舗 前田 崇之 氏 \n清風流 煎茶教室 主宰 中賀 祐子 氏 \n会 場 堺市茶室 伸庵（堺区百舌鳥夕雲町 2 丁（大仙公園内）） \n内 容 \n登録無形文化財「菓銘をもつ生菓子（煉切・こなし）」と「手揉み製茶」に関するミニレクチャーの \n後、和菓子作りと煎茶の飲み方を体験いただきます。 \n定 員 15 人（先着順・事前申込制） \n対 象 小学生以上（小学生は保護者同伴） \n参加 費 1,500 円 \n申込方法等 \n申込開始日時：9 月 11 日（金）午前 10 時 \n電話（堺市博物館：072-245-6201）でのみ受け付けます。 \n \n（2）セミナー「フィリピンの食文化遺産－水牛のミルクとチーズ」 \n日 時 令和 8 年 11 月 1 日（日）午後 1 時 30 分～午後 3 時 \n講 師 帯広畜産大学人間科学研究部門 客員研究員 辻 貴志 氏 \n会 場 堺市博物館ホール \n内 容 \nフィリピンにおける水牛乳利用とチーズ加工を事例に、無形文化遺産登録における課題や国家政 \n策が食文化にもたらす影響、また SDGs の観点から見る食文化と無形文化遺産理念の接点を \n考察します。 \n定 員 60 人（先着順・事前申込制） \n対   象 小学生以上（小学生は保護者同伴） \n参加 費 無料 \n申込方法等 \n申込開始日時：10 月 1 日（木）午前 10 時 \n電話（堺市博物館：072-245-6201）または以下の堺市電子申請システムでお申し込みくだ \nさい。 \nhttps://lgpos.task-asp.net/cu/271403/ea/residents/procedures/apply/68b291a0-9177-454e-ac6c-479e84b40edf/start \n \n \n \n \n（3）セミナー「東アジアの婚礼と食」 \n日 時 令和 8 年 12 月 6 日（日）午後 1 時 30 分～午後 3 時 \n講 師 国立民族学博物館 名誉教授 韓 敏 氏 \n会 場 堺市博物館ホール \n内 容 \n中国、日本、韓国等の事例から、婚約から結婚までの過程における食べ物を比較することにより、 \n人間が自然の恵みに与える象徴的意味を探り、文化の多様性を考えます。 \n定 員 60 人（先着順・事前申込制） \n対 象 小学生以上（小学生は保護者同伴） \n参加 費 無料 \n申込方法等 \n申込開始日時：11 月 4 日（水）午前 10 時 \n電話（堺市博物館：072-245-6201）または以下の堺市電子申請システムでお申し込みくだ \nさい。 \nhttps://lgpos.task-asp.net/cu/271403/ea/residents/procedures/apply/8e4721d9-0cc9-470e-9eda-24b4ce4b91d2/start \n \n（4）ギャラリートーク「ユネスコ無形文化遺産に登録された食文化」 \n日 時 \n令和 8 年 11 月 1 日（日）、12 月 6 日（日）午後 3 時 30 分から（20 分程度） \n※（2）（3）のセミナー終了後 \n会 場 堺市博物館文化遺産展示室 無形文化遺産パネル展示スペース \n内 容 当館担当職員がパネル展「美味しい無形文化遺産」の展示を解説します。 \n参加 費 無料（要観覧料） \n申込方法 事前申込不要です。直接会場にお越しください。 \n \n4 その他 \n・堺市博物館企画展「「おいしい」をつくる－堺の食と庖丁商い－」も同時期に開催します。 \n企画展の詳細は、以下の堺市ホームページをご確認ください。 \nhttps://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html \n・令和 9 年 2 月 2 日（火）から 3 月 14 日（日）まで、堺市立みはら歴史博物館 M・C ギャラリー（堺市美\n原区黒山 281）でも無形文化遺産のパネル展示を行います。 \n \n問\nい\n合\nわ\nせ\n先 \n担当 課：文化観光局 歴史遺産活用部 博物館 学芸課 \n電 話：072-245-6201 \nフ ァ ッ ク ス：072-245-6263 \n ",
+          "kind": "pdf",
+          "extractionMethod": "pypdf text extraction; human reviewed extracted text",
+          "checkedAt": "2026-10-02T06:34:52.956183Z"
+        }
+      ],
+      "startTime": "09:30",
+      "endTime": "17:15",
+      "contact": {
+        "name": "堺市博物館",
+        "phone": "072-245-6201"
+      }
+    },
+    {
+      "sourceId": "official-pack-a-kuboso-western-paintings-2026",
+      "sourceName": "和泉市久保惣記念美術館",
+      "eventName": "初！全点一挙公開 久保惣の西洋絵画 ─モネ・ルノワール・ゴッホをはじめとして─",
+      "startDate": "2026-07-05",
+      "endDate": "2026-10-04",
+      "venueName": "和泉市久保惣記念美術館",
+      "officialUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+      "description": "寄託品を含む館蔵の西洋美術を初めて全点まとめて公開し、モネ、ルノワール、ゴッホらの作品を紹介する特別展です。",
+      "lastCheckedAt": "2026-10-02T06:23:56.703Z",
+      "schedule": {
+        "daily": true,
+        "closedDates": [
+          "2026-07-06",
+          "2026-07-13",
+          "2026-07-21",
+          "2026-07-27",
+          "2026-08-03",
+          "2026-08-10",
+          "2026-08-17",
+          "2026-08-24",
+          "2026-08-31",
+          "2026-09-07",
+          "2026-09-14",
+          "2026-09-24",
+          "2026-09-28"
+        ],
+        "evidence": "館公式の休館日ルールを適用。月曜休館、祝日の月曜は開館し次の平日に休館。9月の祝休日連続後の休館日は9月24日。"
+      },
+      "timeInfo": "10:00～17:00（入館は16:30まで）。月曜休館（祝日の場合は開館し翌平日休館）。年末年始・陳列替期間は休館。",
+      "address": "〒594-1156 大阪府和泉市内田町三丁目6番12号",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "初!全点一挙公開 久保惣の西洋絵画 ─モネ・ルノワール・ゴッホをはじめとして─",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "dateRange": {
+          "text": "令和8年7月5日（日）〜10月4日（日）",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "venueName": {
+          "text": "和泉市久保惣記念美術館",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "osakaLocation": {
+          "text": "〒594-1156 大阪府和泉市内田町三丁目6番12号",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "description": {
+          "text": "美術館が所蔵する、寄託品も含めた西洋美術を一挙公開する展覧会を開催します。",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "schedule": {
+          "text": "休館日 月曜日（祝日の場合は開館、翌平日休館）陳列替期間 年末年始",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "scheduleHolidays": {
+          "text": "海の日 7月20日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:23:56.861Z"
+        },
+        "timeInfo": {
+          "text": "午前10時～午後5時（入館は4時30分まで）",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "address": {
+          "text": "〒594-1156 大阪府和泉市内田町三丁目6番12号",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+          "checkedAt": "2026-10-02T06:23:56.703Z"
+        },
+        "accessByTransit": {
+          "sourceUrl": "https://www.ikm-art.jp/access/",
+          "checkedAt": "2026-10-02T06:53:08.061Z",
+          "text": "南海泉北線「和泉中央駅」下車、南海バス1「美術館前」行乗り場より乗車、バス停「美術館前」下車すぐ"
+        },
+        "scheduleHolidaysSeptember": {
+          "text": "敬老の日 9月21日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:23:56.861Z"
+        },
+        "scheduleHolidaysIntervening": {
+          "text": "休日 9月22日 祝日法第3条第3項による休日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:23:56.861Z"
+        },
+        "scheduleHolidaysEquinox": {
+          "text": "秋分の日 9月23日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:23:56.861Z"
+        },
+        "accessByCar": {
+          "sourceUrl": "https://www.ikm-art.jp/access/",
+          "checkedAt": "2026-10-02T06:53:08.061Z",
+          "text": "阪和自動車道 岸和田・和泉インターより約3分"
+        },
+        "parkingInfo": {
+          "sourceUrl": "https://www.ikm-art.jp/access/",
+          "checkedAt": "2026-10-02T06:53:08.061Z",
+          "text": "無料駐車場有"
+        },
+        "contact": {
+          "sourceUrl": "https://www.ikm-art.jp/access/",
+          "checkedAt": "2026-10-02T06:53:08.061Z",
+          "text": "TEL 0725-54-0001"
+        },
+        "startTime": {
+          "sourceUrl": "https://www.ikm-art.jp/access/",
+          "checkedAt": "2026-10-02T06:53:08.061Z",
+          "text": "開館時間 午前10時~午後5時"
+        },
+        "endTime": {
+          "sourceUrl": "https://www.ikm-art.jp/access/",
+          "checkedAt": "2026-10-02T06:53:08.061Z",
+          "text": "開館時間 午前10時~午後5時"
+        }
+      },
+      "accessByTransit": "南海泉北線「和泉中央駅」から南海バス1「美術館前」行きに乗り、同停留所下車すぐ。",
+      "accessByCar": "阪和自動車道 岸和田・和泉インターより約3分。",
+      "parkingInfo": "無料駐車場あり。",
+      "contact": {
+        "name": "和泉市久保惣記念美術館",
+        "phone": "0725-54-0001"
+      },
+      "startTime": "10:00",
+      "endTime": "17:00"
+    },
+    {
+      "sourceId": "official-pack-a-made-in-sakai-2026",
+      "sourceName": "堺商工会議所（堺市公式案内）",
+      "eventName": "メイドインさかいフェア2026",
+      "startDate": "2026-11-14",
+      "endDate": "2026-11-15",
+      "venueName": "堺商工会議所、堺市産業振興センター周辺",
+      "officialUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+      "description": "堺の食品・雑貨などの展示販売に加え、親子で体験できるワークショップ等を楽しめる催しです。",
+      "lastCheckedAt": "2026-10-02T06:23:57.819Z",
+      "timeInfo": "両日10:00～16:00。",
+      "price": "入場無料。雨天決行。",
+      "schedule": {
+        "dates": [
+          "2026-11-14",
+          "2026-11-15"
+        ],
+        "evidence": "堺市公式案内の開催日2日だけを登録。"
+      },
+      "fieldEvidence": {
+        "eventName": {
+          "text": "メイドインさかいフェア2026",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "dateRange": {
+          "text": "令和8年11月14日（土曜日）・15日（日曜日）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "venueName": {
+          "text": "堺商工会議所、堺市産業振興センター周辺",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "osakaLocation": {
+          "text": "堺商工会議所、堺市産業振興センター周辺",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "description": {
+          "text": "堺の優れた食品・雑貨等に出会うことができます。",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "schedule": {
+          "text": "令和8年11月14日（土曜日）・15日（日曜日）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "timeInfo": {
+          "text": "10時から16時",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        },
+        "price": {
+          "text": "入場無料、雨天決行",
+          "sourceUrl": "https://www.city.sakai.lg.jp/sangyo/shienyuushi/shien/madein2026.html",
+          "checkedAt": "2026-10-02T06:23:57.819Z"
+        }
+      }
+    },
+    {
+      "sourceId": "official-pack-a-sakai-food-culture-2026",
+      "sourceName": "堺市博物館（堺市）",
+      "eventName": "企画展「「おいしい」をつくる－堺の食と庖丁商い－」",
+      "startDate": "2026-09-19",
+      "endDate": "2026-12-13",
+      "venueName": "堺市博物館 展示場",
+      "officialUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+      "description": "堺名産の食材や食文化、伝統の庖丁商い、四季の行事食を通して、現在につながる堺の食の歴史を紹介します。",
+      "lastCheckedAt": "2026-10-02T06:23:57.671Z",
+      "schedule": {
+        "daily": true,
+        "closedDates": [
+          "2026-09-28",
+          "2026-10-05",
+          "2026-10-19",
+          "2026-10-26",
+          "2026-11-02",
+          "2026-11-09",
+          "2026-11-16",
+          "2026-11-30",
+          "2026-12-07"
+        ],
+        "evidence": "月曜日休館。公式に開館と明記された祝日（9/21、10/12、11/23）は閉館日に含めず、会期内の他の月曜を閉館日として展開。"
+      },
+      "timeInfo": "9:30～17:15（入館は16:30まで）。月曜休館（9/21、10/12、11/23は開館）。",
+      "price": "一般200円（団体160円）／高校・大学生100円（団体70円）／小・中学生50円（団体30円）。堺市在住・在学の小中学生、堺市在住の65歳以上、障害のある方は条件により無料。11月14・15日は無料観覧。",
+      "address": "〒590-0802 堺市堺区百舌鳥夕雲町2丁 大仙公園内",
+      "accessByTransit": "JR阪和線「百舌鳥」駅から500m。南海バス「堺市博物館前」から280m。",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "企画展「「おいしい」をつくる－堺の食と庖丁商い－」",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "dateRange": {
+          "text": "令和8年9月19日（土曜）～12月13日（日曜）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "venueName": {
+          "text": "堺市博物館展示場",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "osakaLocation": {
+          "text": "〒590-0802 堺市堺区百舌鳥夕雲町2丁 大仙公園内",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "description": {
+          "text": "堺名産の食材や食文化から、今につながる「おいしい」の歴史をひもときます。",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "schedule": {
+          "text": "月曜日（※9月21日、10月12日、11月23日（月・祝）は開館）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "timeInfo": {
+          "text": "午前9時30分～午後5時15分（入館は午後4時30分まで）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "price": {
+          "text": "一般 200円（160円）／高校・大学生 100円（70円）／小・中学生 50円（30円）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "address": {
+          "text": "〒590-0802 堺市堺区百舌鳥夕雲町2丁 大仙公園内",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "accessByTransit": {
+          "text": "JR阪和線「百舌鳥」駅から500メートル",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "checkedAt": "2026-10-02T06:23:57.642Z"
+        },
+        "priceConditions": {
+          "text": "※（ ）内は､20人以上の団体料金",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "priceChildrenFree": {
+          "text": "※堺市在住・在学の小中学生は無料",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "priceAgeDisabilityFree": {
+          "text": "※堺市在住の65歳以上の方、障害のある方は無料（要証明書）",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "priceFreeDates": {
+          "text": "11月14日（土曜）・15日（日曜）は「関西文化の日」として無料でご観覧いただけます。",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/exhibition/kikaku_tokubetsu/oishii.html",
+          "checkedAt": "2026-10-02T06:23:57.671Z"
+        },
+        "accessByBus": {
+          "text": "南海バス「堺市博物館前」から280メートル",
+          "sourceUrl": "https://www.city.sakai.lg.jp/kanko/hakubutsukan/annai/kaikanzikan.html",
+          "checkedAt": "2026-10-02T06:23:57.642Z"
+        }
+      }
+    },
+    {
+      "sourceId": "official-pack-a-tennoji-night-zoo-2026",
+      "sourceName": "地方独立行政法人天王寺動物園",
+      "eventName": "2026 ナイトZOO",
+      "startDate": "2026-08-14",
+      "endDate": "2026-10-25",
+      "venueName": "天王寺動物園",
+      "officialUrl": "https://www.tennojizoo.jp/event-info/46679/",
+      "description": "普段は見ることができない動物たちの夜の姿を観覧し、生態をより深く知るイベントです。",
+      "lastCheckedAt": "2026-10-02T06:23:57.174Z",
+      "schedule": {
+        "dates": [
+          "2026-08-14",
+          "2026-08-15",
+          "2026-08-16",
+          "2026-09-19",
+          "2026-09-20",
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-10-10",
+          "2026-10-11",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-24",
+          "2026-10-25"
+        ],
+        "evidence": "開催日は公式ページ記載の離散日だけを登録。天候や動物の体調等で変更・中止の可能性あり。"
+      },
+      "timeInfo": "9:30～20:00（最終入園19:30）。17時頃からライトアップ。動物舎によって観覧終了時刻が異なります。",
+      "reservationInfo": "入園チケットは動物園ゲートまたは公式ウェブサイトで購入。",
+      "address": "〒543-0063 大阪市天王寺区茶臼山町1-108",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "天王寺動物園 2026ナイトZOOを実施します!",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "dateRange": {
+          "text": "開催日 8月14日(金曜日)、8月15日(土曜日)、8月16日(日曜日) 9月19日(土曜日)、9月20日(日曜日)、9月21日(月曜日・祝日) 9月22日(火曜日・祝日)、9月23日(水曜日・祝日) 10月10日(土曜日)、10月11日(日曜日)、10月17日(土曜日)、10月18日(日曜日) 10月24日(土曜日)、10月25日(日曜日)",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "venueName": {
+          "text": "天王寺動物園",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "osakaLocation": {
+          "text": "〒543-0063 大阪市天王寺区茶臼山町1-108",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "description": {
+          "text": "普段は見ることができない動物たちの夜の姿をご覧いただき、動物の生態をより深く理解していただくことができるイベントです。",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "schedule": {
+          "text": "開催日 8月14日(金曜日)、8月15日(土曜日)、8月16日(日曜日) 9月19日(土曜日)、9月20日(日曜日)、9月21日(月曜日・祝日) 9月22日(火曜日・祝日)、9月23日(水曜日・祝日) 10月10日(土曜日)、10月11日(日曜日)、10月17日(土曜日)、10月18日(日曜日) 10月24日(土曜日)、10月25日(日曜日)",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "timeInfo": {
+          "text": "9時30分から20時まで(最終入園19時30分)",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "reservationInfo": {
+          "text": "入園チケットは、当園ゲートもしくはWEBサイトからお買い求めください。",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "address": {
+          "text": "〒543-0063 大阪市天王寺区茶臼山町1-108",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "timeInfoLights": {
+          "text": "17時頃からライトアップを行うため",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "startTime": {
+          "text": "9時30分から20時まで(最終入園19時30分)",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "endTime": {
+          "text": "9時30分から20時まで(最終入園19時30分)",
+          "sourceUrl": "https://www.tennojizoo.jp/event-info/46679/",
+          "checkedAt": "2026-10-02T06:23:57.174Z"
+        },
+        "price": {
+          "text": "大人 800円",
+          "sourceUrl": "https://www.tennojizoo.jp/info/outline/",
+          "checkedAt": "2026-10-02T06:44:53.100Z"
+        },
+        "priceChild": {
+          "text": "大阪市外 の小・中学生 200円",
+          "sourceUrl": "https://www.tennojizoo.jp/info/outline/",
+          "checkedAt": "2026-10-02T06:44:53.100Z"
+        },
+        "pricePreschool": {
+          "text": "未就学児(幼児) 無料",
+          "sourceUrl": "https://www.tennojizoo.jp/info/outline/",
+          "checkedAt": "2026-10-02T06:44:53.100Z"
+        },
+        "priceExempt": {
+          "text": "大阪市内 の小・中学生 ※1 無料",
+          "sourceUrl": "https://www.tennojizoo.jp/info/outline/",
+          "checkedAt": "2026-10-02T06:44:53.100Z"
+        },
+        "priceSenior": {
+          "text": "大阪市内在住の65歳以上の方 ※2 無料",
+          "sourceUrl": "https://www.tennojizoo.jp/info/outline/",
+          "checkedAt": "2026-10-02T06:44:53.100Z"
+        },
+        "priceDisabled": {
+          "text": "身体障がい者手帳・精神障がい者保健福祉手帳・被爆者健康手帳・戦傷病者手帳・療育手帳をお持ちの方 ※3 無料",
+          "sourceUrl": "https://www.tennojizoo.jp/info/outline/",
+          "checkedAt": "2026-10-02T06:44:53.100Z"
+        },
+        "accessByTransit": {
+          "text": "各駅から徒歩5分~10分",
+          "sourceUrl": "https://www.tennojizoo.jp/inquiry/frequently/",
+          "checkedAt": "2026-10-02T06:44:52.848Z"
+        }
+      },
+      "startTime": "09:30",
+      "endTime": "20:00",
+      "price": "大人800円、大阪市外の小・中学生200円、未就学児無料。大阪市内在住・在学等の小・中学生、市内在住65歳以上、対象の障がい者手帳等をお持ちの方は無料（証明等の条件あり）。",
+      "accessByTransit": "Osaka Metro「動物園前」「恵美須町」「天王寺」、JR・南海「新今宮」、JR「天王寺」、近鉄「大阪阿部野橋」などから徒歩5〜10分。"
+    },
+    {
+      "sourceId": "official-pack-a-hirakata-kawasemi-music-festival-2026-10-10",
+      "sourceName": "枚方市",
+      "eventName": "KAWASEMI MUSIC FESTIVAL 2026",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10",
+      "venueName": "ニッペパーク岡東中央",
+      "address": "枚方市岡東町7番",
+      "officialUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+      "description": "音楽フェスやライブハウスなどで活躍するバンド funnySkashが、メンバーゆかりの地・枚方で数多くのアーティストとともに開催する音楽フェス。マルシェやキッチンカー、ワークショップ、物販も。",
+      "lastCheckedAt": "2026-10-02T06:44:54.406Z",
+      "schedule": {
+        "dates": [
+          "2026-10-10"
+        ],
+        "evidence": "KAWASEMI MUSIC FESTIVAL 2026 10月10日(土) 10:30~19:00 ※荒天中止 KAWASEMI MUSIC FESTIVAL 実行委員会 音楽フェスやライブハウスなどで活躍するバンド funnySkashが、メンバーゆかりの地・枚方で数多くのアーティストとともに開催する音楽フェス。マルシェやキッチンカー、ワークショップ、物販も。"
+      },
+      "startTime": "10:30",
+      "endTime": "19:00",
+      "timeInfo": "10:30～19:00。荒天中止。",
+      "price": "入場無料。会場内の飲食・販売・ワークショップは有料の場合あり。",
+      "accessByTransit": "京阪電車・枚方市駅「東口」から徒歩2分。",
+      "nearestStation": "京阪電車・枚方市駅",
+      "rainPolicy": "荒天中止。",
+      "contact": {
+        "phone": "050(6868)6167"
+      },
+      "fieldEvidence": {
+        "eventName": {
+          "text": "KAWASEMI MUSIC FESTIVAL 2026",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "dateRange": {
+          "text": "KAWASEMI MUSIC FESTIVAL 2026 10月10日(土) 10:30~19:00 ※荒天中止",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "venueName": {
+          "text": "ニッペパーク岡東中央",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "osakaLocation": {
+          "text": "枚方市岡東町7番",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "description": {
+          "text": "音楽フェスやライブハウスなどで活躍するバンド funnySkashが、メンバーゆかりの地・枚方で数多くのアーティストとともに開催する音楽フェス。マルシェやキッチンカー、ワークショップ、物販も。",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "schedule": {
+          "text": "KAWASEMI MUSIC FESTIVAL 2026 10月10日(土) 10:30~19:00 ※荒天中止 KAWASEMI MUSIC FESTIVAL 実行委員会 音楽フェスやライブハウスなどで活躍するバンド funnySkashが、メンバーゆかりの地・枚方で数多くのアーティストとともに開催する音楽フェス。マルシェやキッチンカー、ワークショップ、物販も。",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "startTime": {
+          "text": "10月10日(土) 10:30~19:00 ※荒天中止",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "endTime": {
+          "text": "10月10日(土) 10:30~19:00 ※荒天中止",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "timeInfo": {
+          "text": "10月10日(土) 10:30~19:00 ※荒天中止",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "price": {
+          "text": "にぎわい空間創出事業イベントは全て入場は無料です。(会場内での飲食や販売、ワークショップは有料の場合があります。イベントごとに異なるので各イベント主催者に確認下さい)",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "accessByTransit": {
+          "text": "京阪電車・枚方市駅「東口」から徒歩2分。",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "nearestStation": {
+          "text": "京阪電車・枚方市駅「東口」",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "rainPolicy": {
+          "text": "10月10日(土) 10:30~19:00 ※荒天中止",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "contact": {
+          "text": "050(6868)6167",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        },
+        "address": {
+          "text": "にぎわい空間創出事業の開催会場は「ニッペパーク岡東中央」(枚方市岡東町7番)です。",
+          "sourceUrl": "https://www.city.hirakata.osaka.jp/odekake/0000053535.html",
+          "checkedAt": "2026-10-02T06:44:54.406Z"
+        }
+      }
+    },
+    {
+      "sourceId": "official-pack-a-hirakata-art-flash-126-2026-09",
+      "sourceName": "枚方市立御殿山生涯学習美術センター",
+      "eventName": "ART FLASH vol.126 荒井美桜 個展「うすい景色」",
+      "startDate": "2026-09-20",
+      "endDate": "2026-10-04",
+      "venueName": "枚方市立御殿山生涯学習美術センター 1階ギャラリースペース",
+      "officialUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+      "description": "第126回目となる本展では、彫刻と写真など異なる素材や技法を複合させたミクストメディア作品を制作している荒井美桜さんの作品を展示します。",
+      "lastCheckedAt": "2026-10-02T06:44:54.573Z",
+      "schedule": {
+        "daily": true,
+        "closedDates": [
+          "2026-09-28"
+        ],
+        "evidence": "○会期 2026年9月20日(日)~10月4日(日) ※9月28日(月)は休館日",
+        "hoursByDate": {
+          "2026-09-20": {
+            "startTime": "09:00",
+            "endTime": "17:00"
+          },
+          "2026-09-21": {
+            "startTime": "09:00",
+            "endTime": "17:00"
+          },
+          "2026-09-22": {
+            "startTime": "09:00",
+            "endTime": "17:00"
+          },
+          "2026-09-23": {
+            "startTime": "09:00",
+            "endTime": "17:00"
+          },
+          "2026-09-24": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-09-25": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-09-26": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-09-27": {
+            "startTime": "09:00",
+            "endTime": "17:00"
+          },
+          "2026-09-29": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-09-30": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-10-01": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-10-02": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-10-03": {
+            "startTime": "09:00",
+            "endTime": "21:00"
+          },
+          "2026-10-04": {
+            "startTime": "09:00",
+            "endTime": "16:00"
+          }
+        }
+      },
+      "timeInfo": "月曜～土曜9:00～21:00、日曜・祝日9:00～17:00。最終日は16:00まで。",
+      "fieldEvidence": {
+        "eventName": {
+          "text": "2026年9月20日(日)~10月4日(日) ART FLASH vol.126 荒井美桜 個展「うすい景色」",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "dateRange": {
+          "text": "2026年9月20日(日)~10月4日(日)",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "venueName": {
+          "text": "枚方市立御殿山生涯学習美術センター 1階ギャラリースペース",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "osakaLocation": {
+          "text": "枚方市立御殿山生涯学習美術センター",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "description": {
+          "text": "第126回目となる本展では、 彫刻と写真など異なる素材や技法を複合させたミクストメディア作品を制作している荒井美桜さんの作品を展示します。",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "schedule": {
+          "text": "○会期 2026年9月20日(日)~10月4日(日) ※9月28日(月)は休館日",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "timeInfo": {
+          "text": "○会期 2026年9月20日(日)~10月4日(日) ※9月28日(月)は休館日 ※最終日は16時まで ○会場 枚方市立御殿山生涯学習美術センター 1階ギャラリースペース ○開館時間 月曜~土曜 9:00~21:00 日曜・祝日 9:00~17:00 ※毎月第4月曜は休館日(祝日の場合は開館)",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "scheduleHours": {
+          "text": "○会期 2026年9月20日(日)~10月4日(日) ※9月28日(月)は休館日 ※最終日は16時まで ○会場 枚方市立御殿山生涯学習美術センター 1階ギャラリースペース ○開館時間 月曜~土曜 9:00~21:00 日曜・祝日 9:00~17:00 ※毎月第4月曜は休館日(祝日の場合は開館)",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/42?b_id=387&detail=1&r_id=1155",
+          "checkedAt": "2026-10-02T06:44:54.573Z"
+        },
+        "calendarReference": {
+          "text": "敬老の日 9月21日 休日 9月22日 祝日法第3条第3項による休日 秋分の日 9月23日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:06:19.411Z"
+        },
+        "calendarYear": {
+          "text": "〇令和8年(2026年)の国民の祝日・休日",
+          "sourceUrl": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+          "checkedAt": "2026-10-02T06:06:19.411Z"
+        },
+        "address": {
+          "text": "〒573-1182 大阪府枚方市御殿山町10−16",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/51/",
+          "checkedAt": "2026-10-02T11:15:39.392Z"
+        },
+        "accessByTransit": {
+          "text": "京阪電車御殿山駅下車、東へ徒歩5分",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/51/",
+          "checkedAt": "2026-10-02T11:15:39.392Z"
+        },
+        "contact": {
+          "text": "電話050-7102-3135",
+          "sourceUrl": "https://www.hira-manatsuna.jp/pages/51/",
+          "checkedAt": "2026-10-02T11:15:39.392Z"
+        }
+      },
+      "address": "〒573-1182 大阪府枚方市御殿山町10-16",
+      "accessByTransit": "京阪電車「御殿山駅」下車、東へ徒歩5分。",
+      "contact": {
+        "name": "御殿山生涯学習美術センター",
+        "phone": "050-7102-3135"
+      }
+    }
+  ],
+  "unverified": [
+    {
+      "eventName": "夜の水上さんぽガイドツアー（中之島公園コース）",
+      "officialUrl": "https://www.citysup.jp/guidedtour-night-sum/",
+      "checkedAt": "2026-10-02T06:11:32.970Z",
+      "reason": "会期未確認だがオーケストラが公式予約日方式で追加。公式ページはコース、集合場所、出発時刻等を掲載する一方、開催期間の終期を明示していないため、このパックでは日付を補間しない。日付は親担当が公式予約APIの取得日だけで追加予定。",
+      "evidenceFile": "docs/evidence/information-gauntlet-20261002/nightboat-official.json"
+    },
+    {
+      "eventName": "PARKLABO By:LOCOMARKET（10月）",
+      "officialUrl": "https://www.instagram.com/locofestival.sakai/",
+      "checkedAt": "2026-10-02T11:54:50.000Z",
+      "reason": "9/13主催者公式画像を親CUAが実読して名称・会期・時刻・会場・主催者を確認済み。来場料金・予約・雨天条件は記載なしのため未確認。",
+      "fields": [
+        "price",
+        "reservationInfo",
+        "rainPolicy"
+      ],
+      "evidenceFile": "docs/evidence/information-gauntlet-20261002/parklabo-official-identity.json"
+    }
+  ],
+  "updates": [
+    {
+      "match": {
+        "sourceId": "hirakata-park",
+        "eventName": "戦慄迷宮:迷 怪異覚醒",
+        "startDate": "2026-07-11"
+      },
+      "patch": {
+        "fields": {
+          "description": "期間限定で登場する、最新XRホラー体験『戦慄迷宮:迷』。",
+          "timeInfo": "10:00～17:00。営業時間・休園日はひらかたパークに準じます。",
+          "startTime": "10:00",
+          "endTime": "17:00",
+          "price": "前売り・税込（日本語版）体験のみ：大人2,200円、中高生1,700円、7歳～小学生1,700円。入園券付き：大人4,100円、中高生3,600円、7歳～小学生2,800円。",
+          "reservationInfo": "チケットは専用チケット販売サイトで購入。",
+          "accessByTransit": "京阪本線「枚方公園」駅南口から徒歩約5分。京阪バス「枚方公園口」から徒歩約10分。",
+          "nearestStation": "京阪本線 枚方公園駅",
+          "parkingInfo": "ひらかたパークの駐車場を利用。",
+          "closureInfo": "日程は変更となる可能性があります。営業時間・休園日は施設に準じます。"
+        },
+        "fieldEvidence": {
+          "description": {
+            "text": "期間限定で登場する、最新XRホラー体験『戦慄迷宮:迷』。",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "timeInfo": {
+            "text": "開催期間 2026/7/11 〜 2027/2/28 ※日程は変更となる可能性があります 営業時間 10:00 〜 17:00 ※営業時間・休園日は施設に準じます",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "startTime": {
+            "text": "開催期間 2026/7/11 〜 2027/2/28 ※日程は変更となる可能性があります 営業時間 10:00 〜 17:00 ※営業時間・休園日は施設に準じます",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "endTime": {
+            "text": "開催期間 2026/7/11 〜 2027/2/28 ※日程は変更となる可能性があります 営業時間 10:00 〜 17:00 ※営業時間・休園日は施設に準じます",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "price": {
+            "text": "前売り・税込 種別 体験のみ 入園券付き 日本語版 大人 ¥2,200 ¥4,100 中高生 ¥1,700 ¥3,600 7歳〜小学生 ¥1,700 ¥2,800",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "reservationInfo": {
+            "text": "チケットは専用チケット販売サイトよりご購入ください。団体のお客様に対する特別なご対応は致しかねますが、チケットをご購入いただければ、ご体験いただくことは可能です。",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "accessByTransit": {
+            "text": "京阪本線 枚方公園(ひらかたこうえん)駅(南口から徒歩約5分) (バスをご利用の場合) 京阪バス 枚方公園口(ひらかたこうえんぐち)バス停(徒歩約10分) (JR高槻駅・阪急高槻市駅方面から)",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "nearestStation": {
+            "text": "京阪本線 枚方公園(ひらかたこうえん)駅(南口から徒歩約5分)",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "parkingInfo": {
+            "text": "駐車場はありますか? ひらかたパークの駐車場をご利用ください。",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          },
+          "closureInfo": {
+            "text": "開催期間 2026/7/11 〜 2027/2/28 ※日程は変更となる可能性があります 営業時間 10:00 〜 17:00 ※営業時間・休園日は施設に準じます",
+            "sourceUrl": "https://hirapar.senritsuxr.abal.jp/",
+            "checkedAt": "2026-10-02T06:44:54.499Z"
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "sourceId": "hirakata-park",
+        "eventName": "30周年記念展「ALL OF EVANGELION」",
+        "startDate": "2026-10-18"
+      },
+      "patch": {
+        "fields": {
+          "venueName": "ひらかたパーク イベントホール",
+          "description": "本展では、これまでまとまって展示されてこなかったTVシリーズの色鮮やかなセル画や、緻密に描かれた『新劇場版』の原画など、作品の根幹にかかわる制作資料を展示します。",
+          "timeInfo": "10:00～17:00（最終入場16:30）。10月18日は日時指定制（10:00～16:00の指定枠）。",
+          "startTime": "10:00",
+          "endTime": "17:00",
+          "schedule": {
+            "daily": true,
+            "closedDates": [
+              "2026-10-22",
+              "2026-10-29",
+              "2026-11-05",
+              "2026-11-12",
+              "2026-11-19",
+              "2026-11-26",
+              "2026-11-30",
+              "2026-12-01",
+              "2026-12-02",
+              "2026-12-03",
+              "2026-12-04",
+              "2026-12-07",
+              "2026-12-08",
+              "2026-12-09",
+              "2026-12-10",
+              "2026-12-11",
+              "2026-12-17",
+              "2027-01-01",
+              "2027-01-07"
+            ],
+            "evidence": "開催期間 2026年10月18日(日)〜2027年1月11日(月・祝) ※期間中休業日あり。 開催時間 10:00〜17:00(最終入場16:30) ※10月18日(日)は日時指定のみ。 10:00〜、11:00〜、12:00〜、13:00〜、14:00〜、15:00〜、16:00〜 休業日 10月22日(木)、29日(木)、11月5日(木)、12日(木)、19日(木)、26日(木)、30日(月)~12月4日(金)、7日(月)~11日(金)、17日(木)、 1月1日(金・祝)、7日(木)"
+          },
+          "price": "前売：一般2,200円・中高大生1,600円・4歳～小学生1,000円（入場券）。入園券付きは3,200円・2,600円・1,600円。 当日：一般2,400円・中高大生1,700円・4歳～小学生1,100円（入場券）、入園券付きは3,400円・2,700円・1,700円。3歳以下は入場無料。",
+          "reservationInfo": "前売券はオンラインチケットサイト「アソビュー！」で販売。10月18日は日時指定制。当日券はオンラインまたは会場入口で販売し、会場入口販売は残数がある場合のみ。",
+          "accessByTransit": "京阪電車「枚方公園」駅より徒歩約3分。",
+          "nearestStation": "京阪電車「枚方公園」駅"
+        },
+        "fieldEvidence": {
+          "venueName": {
+            "text": "ひらかたパーク イベントホール",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "description": {
+            "text": "本展では、これまでまとまって展示されてこなかったTVシリーズの色鮮やかなセル画や、緻密に描かれた『新劇場版』の原画など、作品の根幹にかかわる制作資料を展示します。",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "timeInfo": {
+            "text": "開催時間 10:00〜17:00(最終入場16:30) ※10月18日(日)は日時指定のみ。 10:00〜、11:00〜、12:00〜、13:00〜、14:00〜、15:00〜、16:00〜",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "startTime": {
+            "text": "開催時間 10:00〜17:00(最終入場16:30) ※10月18日(日)は日時指定のみ。 10:00〜、11:00〜、12:00〜、13:00〜、14:00〜、15:00〜、16:00〜",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "endTime": {
+            "text": "開催時間 10:00〜17:00(最終入場16:30) ※10月18日(日)は日時指定のみ。 10:00〜、11:00〜、12:00〜、13:00〜、14:00〜、15:00〜、16:00〜",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "schedule": {
+            "text": "開催期間 2026年10月18日(日)〜2027年1月11日(月・祝) ※期間中休業日あり。 開催時間 10:00〜17:00(最終入場16:30) ※10月18日(日)は日時指定のみ。 10:00〜、11:00〜、12:00〜、13:00〜、14:00〜、15:00〜、16:00〜 休業日 10月22日(木)、29日(木)、11月5日(木)、12日(木)、19日(木)、26日(木)、30日(月)~12月4日(金)、7日(月)~11日(金)、17日(木)、 1月1日(金・祝)、7日(木)",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "price": {
+            "text": "前売券 前売券なら当日券より 最大200円おトクにご購入いただけます 販売場所 / オンラインチケットサイト「アソビュー!」 販売日時 / 2026年9月1日(火)10:00~10月17日(土)23:59 ●10月18日(日)は、「日時指定制」です。「10:00~」「11:00~」「12:00~」「13:00~」「14:00~」「15:00~」「16:00~」の時間指定になります。 入場券 入園券付 入場券 一般 ¥2,200 ¥3,200 中高大生 ¥1,600 ¥2,600 4歳〜小学生 ¥1,000 ¥1,600 ◀︎ チケットご購入はこちら ▶︎ 当日券 販売場所 / オンラインチケットサイト「アソビュー!」、イベント会場入口 販売日時 / 2026年10月18日(日)0:00~2027年1月11日(月・祝)16:30 入場券 入園券付 入場券 ※アソビュー!のみ 一般 ¥2,400 ¥3,400 中高大生 ¥1,700 ¥2,700 4歳〜小学生 ¥1,100 ¥1,700 ※本展はひらかたパークにご入園いただかなくてもご入場いただけます。 ※3歳以下は入場無料。ただし、ひらかたパークの入園は2歳から有料です。 ※「入園券付入場券」はオンラインチケットサイト「アソビュー!」のみで販売します。 ※10月18日(日)は日時指定制です。チケット残数がある場合のみ当日イベント会場入口で販売します。 ※物販コーナーへの入場にもチケットが必要です。 ※障がい者手帳(身体障がい者手帳、療育手帳、精神障がい者保健福祉手帳)をお持ちの方1名につき、同伴者1名(18歳以上)が入場無料となります。 ※小学生以下のお子さまは必ず保護者(18歳以上)同伴でご入場ください。同伴される保護者の方も入場料が必要です。 ※中学生・高校生・大学生は学生証の提示が必要です。",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "reservationInfo": {
+            "text": "販売場所 / オンラインチケットサイト「アソビュー!」 販売日時 / 2026年9月1日(火)10:00~10月17日(土)23:59 ●10月18日(日)は、「日時指定制」です。「10:00~」「11:00~」「12:00~」「13:00~」「14:00~」「15:00~」「16:00~」の時間指定になります。 入場券 入園券付 入場券 一般 ¥2,200 ¥3,200 中高大生 ¥1,600 ¥2,600 4歳〜小学生 ¥1,000 ¥1,600 ◀︎ チケットご購入はこちら ▶︎ 当日券 販売場所 / オンラインチケットサイト「アソビュー!」、イベント会場入口 販売日時 / 2026年10月18日(日)0:00~2027年1月11日(月・祝)16:30 入場券 入園券付 入場券 ※アソビュー!のみ 一般 ¥2,400 ¥3,400 中高大生 ¥1,700 ¥2,700 4歳〜小学生 ¥1,100 ¥1,700 ※本展はひらかたパークにご入園いただかなくてもご入場いただけます。 ※3歳以下は入場無料。ただし、ひらかたパークの入園は2歳から有料です。 ※「入園券付入場券」はオンラインチケットサイト「アソビュー!」のみで販売します。 ※10月18日(日)は日時指定制です。チケット残数がある場合のみ当日イベント会場入口で販売します。 ※物販コーナーへの入場にもチケットが必要です。 ※障がい者手帳(身体障がい者手帳、療育手帳、精神障がい者保健福祉手帳)をお持ちの方1名につき、同伴者1名(18歳以上)が入場無料となります。 ※小学生以下のお子さまは必ず保護者(18歳以上)同伴でご入場ください。同伴される保護者の方も入場料が必要です。 ※中学生・高校生・大学生は学生証の提示が必要です。",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "accessByTransit": {
+            "text": "京阪電車「枚方公園」駅より徒歩約3分",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          },
+          "nearestStation": {
+            "text": "京阪電車「枚方公園」駅",
+            "sourceUrl": "https://www.hirakatapark.co.jp/topics/ao-eva/",
+            "checkedAt": "2026-10-02T06:44:54.517Z"
+          }
+        }
+      }
+    }
+  ],
+  "orchestratorReviewedAt": "2026-10-02T11:20:48.846Z"
+}

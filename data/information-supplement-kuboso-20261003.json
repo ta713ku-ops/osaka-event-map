@@ -1,0 +1,43 @@
+{
+  "reviewedAt": "2026-10-03T04:49:52.000Z",
+  "updates": [
+    {
+      "match": {
+        "sourceId": "official-pack-a-kuboso-western-paintings-2026",
+        "eventName": "初！全点一挙公開 久保惣の西洋絵画 ─モネ・ルノワール・ゴッホをはじめとして─",
+        "startDate": "2026-07-05"
+      },
+      "patch": {
+        "fields": {
+          "price": "一般1,000円／高大生600円／中学生以下無料。20名以上の団体と65歳以上は2割引。各種障がい者手帳・ミライロID提示時は本人と介助者1名無料。"
+        },
+        "fieldEvidence": {
+          "price": {
+            "text": "入館料：一般1,000円　高大生600円　中学生以下無料",
+            "sourceUrl": "https://www.ikm-art.jp/tenrankai/kUBOSo_sEIYOh_A4.pdf",
+            "checkedAt": "2026-10-03T04:49:52.000Z",
+            "sha256": "010f350acfc0700e5b7d673a6287f00620d4a2448923b97b395c5f182f3437f7",
+            "extractionMethod": "manual-pdf-read",
+            "evidenceKind": "pdf"
+          },
+          "participationConditions": {
+            "text": "※ 団体（有料入館20名以上）は２割引\n※ 65歳以上は２割引（運転免許証など年齢のわかるものをご提示ください）\n※ 各種障がい者手帳、ミライロIDを提示された場合、本人及び介助者１名は無料",
+            "sourceUrl": "https://www.ikm-art.jp/riyou/",
+            "checkedAt": "2026-10-03T04:45:27Z"
+          }
+        },
+        "evidenceAssets": [
+          {
+            "url": "https://www.ikm-art.jp/tenrankai/kUBOSo_sEIYOh_A4.pdf",
+            "sha256": "010f350acfc0700e5b7d673a6287f00620d4a2448923b97b395c5f182f3437f7",
+            "text": "入館料：一般1,000円　高大生600円　中学生以下無料",
+            "kind": "pdf",
+            "extractionMethod": "manual-pdf-read",
+            "checkedAt": "2026-10-03T04:49:52.000Z",
+            "primaryPage": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html"
+          }
+        ]
+      }
+    }
+  ]
+}

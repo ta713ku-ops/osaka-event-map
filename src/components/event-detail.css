@@ -55,6 +55,11 @@
 .event-detail-nav button:last-child { justify-self: end; }
 .event-detail-nav button:hover { color: var(--detail-rust); background: rgba(160, 68, 45, .06); }
 .event-detail-brand {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
   color: var(--detail-ink);
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
   font-size: 18px;
@@ -76,27 +81,27 @@
   transform: translateX(-50%);
   font-size: 13px;
 }
-.event-detail-article { width: min(1160px, 100%); margin: 0 auto; padding: 30px 28px 100px; }
+.event-detail-article { width: min(1160px, 100%); margin: 0 auto; padding: 0 28px 100px; }
 .event-detail-hero {
-  display: grid;
-  grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
-  min-height: 400px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 28px;
+}
+.event-detail-hero--none .event-detail-hero__copy,
+.event-detail-hero--photo .event-detail-hero__copy {
   border: 1px solid var(--detail-line);
   background: var(--detail-card);
 }
-.event-detail-hero__copy { align-self: center; padding: clamp(32px, 5vw, 64px); }
+.event-detail-hero__copy { min-width: 0; padding: clamp(25px, 4.5vw, 54px); }
 .event-detail-kicker, .event-detail-section-kicker {
   margin: 0 0 12px;
   color: var(--detail-rust);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 10px;
-  font-weight: 750;
-  letter-spacing: .16em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
   line-height: 1.5;
-  text-transform: uppercase;
 }
-.event-detail-kicker span { margin: 0 .45em; color: var(--detail-muted); }
 .event-status {
   width: fit-content;
   min-height: 30px;
@@ -127,18 +132,16 @@
   margin: 0;
   color: var(--detail-ink);
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: clamp(34px, 4.2vw, 56px);
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: .015em;
   overflow-wrap: anywhere;
   text-wrap: pretty;
 }
-.event-detail-hero h1:focus { outline: 0; }
-.event-detail-hero__essentials { display:flex; flex-direction:column; gap:4px; margin:16px 0 0; color:var(--detail-forest); font-size:13px; font-weight:700; line-height:1.6; }
-.event-detail-hero__essentials span + span { color:var(--detail-muted); font-size:12px; font-weight:400; }
-.event-detail-hero__summary { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; max-width:42ch; margin:12px 0 0; color:var(--detail-muted); font-size:13px; line-height:1.7; }
-.event-detail-title-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 28px; }
+.event-detail-hero h1:focus { outline: none; }
+.event-detail-hero__copy .event-status { margin-top: 20px; margin-bottom: 0; }
+.event-detail-save-row { display: flex; justify-content: flex-start; margin-top: 14px; }
 .event-save-button {
   min-height: 44px;
   display: inline-flex;
@@ -156,18 +159,36 @@
   transition: border-color .18s ease, color .18s ease, background .18s ease;
 }
 .event-save-button:hover, .event-save-button.is-saved { border-color: var(--detail-forest); color: var(--detail-forest); background: #f1f5f0; }
-.event-distance { display: inline-flex; align-items: center; gap: 6px; color: var(--detail-forest); font-size: 12px; font-weight: 700; }
-.event-detail-media { position: relative; display:flex; flex-direction:column; min-width: 0; min-height: 400px; margin: 0; overflow: hidden; background: #e8e1d5; }
+.event-detail-media { position: relative; display:flex; flex-direction:column; min-width: 0; margin: 0; overflow: hidden; background: #e8e1d5; }
+.event-detail-media--photo { width: 100%; aspect-ratio: 2.15 / 1; max-height: 540px; }
+:is(.event-detail-media--poster, .event-detail-media--portrait) { width: 100%; aspect-ratio: 3 / 4; max-height: 650px; background: #e9e1d5; }
 .event-detail-media img { width: 100%; height: 100%; min-height: 0; flex:1; display: block; object-fit: contain; }
-.event-detail-media::after { position: absolute; inset: 0; content: ""; pointer-events: none; box-shadow: inset 18px 0 36px rgba(40, 32, 25, .07); }
-.event-detail-media figcaption { position: relative; inset:auto; flex-shrink:0; z-index: 1; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; padding:8px 12px; background:#e8e1d5; }
-.event-detail-media figcaption a { min-height: 34px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; color: white; background: rgba(35, 33, 29, .8); font-size: 11px; text-decoration: none; }
-.event-detail-media__fallback { position:relative; isolation:isolate; width:100%; height:100%; min-height:400px; display:flex; flex-direction:column; justify-content:flex-end; gap:12px; padding:40px; overflow:hidden; color:#fffdf6; background:radial-gradient(circle at 72% 22%,#e7d4a4 0,#e7d4a400 25%),linear-gradient(145deg,#58705e,#314e45 56%,#1e3b37); }
-.event-detail-media__fallback::before { content:''; position:absolute; z-index:-1; width:115%; height:55%; left:-5%; top:20%; border-radius:50%; background:linear-gradient(90deg,#f7ecdc9c,#f8efe2e0,#f8efe267); filter:blur(22px); transform:rotate(-8deg); }
-.event-detail-media__fallback::after { content:''; position:absolute; z-index:-1; width:120%; height:32%; right:-10%; bottom:-14%; border-radius:50%; background:#e6d9bd77; filter:blur(18px); }
-.event-detail-media__fallback span { font:700 11px ui-monospace,monospace; letter-spacing:.12em; text-shadow:0 1px 8px #1e3b3780; }
-.event-detail-media__fallback strong { max-width:12ch; font:500 clamp(32px,4vw,48px)/1.25 "Hiragino Mincho ProN","Yu Mincho",Georgia,serif; text-shadow:0 2px 18px #1e3b3799; }
-.event-detail-layout { padding: 48px clamp(0px, 2.5vw, 24px) 0; }
+.event-detail-media--photo img { object-fit: cover; }
+.event-detail-media.is-low-resolution img { width: auto; height: auto; max-width: 100%; max-height: 100%; flex: 0 1 auto; align-self: center; margin: auto; object-fit: contain; }
+.event-detail-media figcaption { position: relative; flex-shrink:0; z-index: 1; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; padding:8px 12px; background:#e8e1d5; }
+.event-detail-media figcaption a { min-height: 44px; display: inline-flex; align-items: center; gap: 5px; padding: 0 7px; color: #783b2b; background: transparent; font-size: 10px; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) { display: grid; grid-template-columns: minmax(320px, .86fr) minmax(0, 1.14fr); align-items: stretch; }
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-media { height: 100%; min-height: 420px; max-height: 650px; }
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-hero__copy { display: flex; flex-direction: column; justify-content: center; border: 1px solid var(--detail-line); border-left: 0; background: var(--detail-card); }
+.event-detail-hero.is-low-resolution:not(:is(.event-detail-hero--poster, .event-detail-hero--portrait)) { display: grid; grid-template-columns: minmax(260px, .9fr) minmax(0, 1.1fr); align-items: stretch; }
+.event-detail-hero.is-low-resolution:not(:is(.event-detail-hero--poster, .event-detail-hero--portrait)) .event-detail-media { min-height: 300px; aspect-ratio: 4 / 3; max-height: 440px; }
+.event-detail-hero.is-low-resolution:not(:is(.event-detail-hero--poster, .event-detail-hero--portrait)) .event-detail-hero__copy { display: flex; flex-direction: column; justify-content: center; border: 1px solid var(--detail-line); border-left: 0; background: var(--detail-card); }
+.event-detail-hero--photo .event-detail-hero__copy { border-top: 0; }
+.event-detail-hero--none .event-detail-hero__copy { margin-top: 28px; }
+.event-detail-hero--none .event-detail-kicker { margin-bottom: 10px; }
+.event-detail-quick-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 18px 0 0;
+  border: 1px solid var(--detail-line);
+  background: var(--detail-card);
+}
+.event-detail-quick-facts > div { min-width: 0; display: grid; grid-template-columns: 23px minmax(0, 1fr); align-content: start; column-gap: 9px; row-gap: 4px; padding: 17px 19px; color: var(--detail-forest); }
+.event-detail-quick-facts > div + div { border-left: 1px solid var(--detail-line); }
+.event-detail-quick-facts svg, .event-detail-quick-facts .event-fact-mark { grid-row: span 2; margin-top: 2px; }
+.event-detail-quick-facts dt { color: var(--detail-muted); font-size: 11px; font-weight: 700; }
+.event-detail-quick-facts dd { min-width: 0; margin: 0; color: var(--detail-ink); font-size: 13px; font-weight: 700; line-height: 1.6; overflow-wrap: anywhere; }
+.event-detail-layout { padding: 34px clamp(0px, 2.5vw, 24px) 0; }
 .event-detail-main { display: grid; gap: 52px; }
 .event-detail-main > section { min-width: 0; scroll-margin-top: 82px; }
 .event-detail-main h2 { margin: 0; color: var(--detail-ink); font: 500 clamp(25px, 3vw, 34px)/1.3 "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif; letter-spacing: .015em; }
@@ -203,7 +224,7 @@
 .event-fact-mark { width: 23px; height: 23px; display: grid; place-items: center; border: 1px solid #c2b29f; border-radius: 50%; color: var(--detail-rust); font-family: Georgia, serif; font-size: 15px; font-weight: 700; }
 .event-reservation-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .event-reservation-actions a, .event-reservation-actions button {
-  min-height: 40px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -245,14 +266,14 @@
 .event-contact-card { display: grid; gap: 11px; }
 .event-contact-card > p { display: flex; align-items: start; gap: 9px; margin: 0; color: var(--detail-forest); font-size: 13px; line-height: 1.7; }
 .event-contact-card .event-contact-name { color: var(--detail-ink); font-weight: 700; }
-.event-contact-card a { color: #315344; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.event-contact-card a { min-height: 44px; display: inline-flex; align-items: center; padding: 4px 0; color: #315344; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .event-source-card { display: grid; gap: 9px; }
 .event-source-freshness { display: flex; align-items: center; gap: 8px; margin: 0; color: #78591c; font-size: 13px; font-weight: 700; }
 .event-source-freshness.is-fresh { color: var(--detail-forest); }
 .event-source-freshness.is-stale > span { background: #b47a18; }
 .event-source-checked, .event-source-name { margin: 0; color: var(--detail-muted); font-size: 12px; }
 .event-source-card ul { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 5px 0 0; padding: 13px 0 0; border-top: 1px solid var(--detail-line); list-style: none; }
-.event-source-card li a { min-height: 40px; display: inline-flex; align-items: center; gap: 6px; color: var(--detail-forest); font-size: 12px; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.event-source-card li a { min-height: 44px; display: inline-flex; align-items: center; gap: 6px; padding: 0 4px; color: var(--detail-forest); font-size: 12px; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .event-detail-related { display: grid; gap: 36px; }
 .event-related-heading { display: flex; align-items: end; justify-content: space-between; gap: 15px; margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--detail-line); }
 .event-related-heading .event-detail-section-kicker { margin-bottom: 5px; }
@@ -291,18 +312,28 @@
   .event-detail-nav { min-height: calc(60px + env(safe-area-inset-top)); padding: max(8px, env(safe-area-inset-top)) 9px 8px; }
   .event-detail-nav button { gap: 5px; padding: 0 6px; font-size: 12px; }
   .event-detail-brand { font-size: 16px; }
-  .event-detail-article { width: 100%; padding: 0 0 calc(88px + env(safe-area-inset-bottom)); }
-  .event-detail-hero { display: flex; flex-direction: column; min-height: 0; border: 0; border-bottom: 1px solid var(--detail-line); }
-  .event-detail-hero__copy { padding: 23px 19px 22px; }
-  .event-detail-hero h1 { font-size: clamp(31px, 8.5vw, 42px); line-height: 1.28; }
-  .event-detail-title-actions { margin-top: 19px; }
-  .event-detail-media { min-height: 0; height: clamp(205px, 62vw, 340px); }
-  .event-detail-media:has(.event-detail-media__fallback) { height: 160px; }
-  .event-detail-media img, .event-detail-media__fallback { min-height: 0; height: 100%; }
-  .event-detail-media__fallback { padding: 22px 24px; }
-  .event-detail-media__fallback strong { font-size: 28px; }
-  .event-detail-media::after { box-shadow: inset 0 -20px 32px rgba(40, 32, 25, .07); }
-  .event-detail-layout { padding: 34px 18px 0; }
+  .event-detail-article { width: 100%; padding: 0 0 calc(96px + env(safe-area-inset-bottom)); }
+  .event-detail-hero, :is(.event-detail-hero--poster, .event-detail-hero--portrait), .event-detail-hero.is-low-resolution:not(:is(.event-detail-hero--poster, .event-detail-hero--portrait)) { display: flex; flex-direction: column; gap: 0; padding-top: 0; border: 0; }
+  .event-detail-hero__copy { padding: 22px 19px 23px; }
+  .event-detail-kicker { margin-bottom: 4px; }
+  .event-detail-hero__copy .event-status { margin-top: 12px; }
+  .event-detail-hero--none .event-detail-hero__copy { margin: 0; }
+  :is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-hero__copy, .event-detail-hero.is-low-resolution:not(:is(.event-detail-hero--poster, .event-detail-hero--portrait)) .event-detail-hero__copy { border: 0; border-bottom: 1px solid var(--detail-line); }
+  .event-detail-hero--photo .event-detail-hero__copy { border-right: 0; border-bottom: 1px solid var(--detail-line); border-left: 0; }
+  .event-detail-hero h1 { font-size: 20px; line-height: 1.45; text-align: left; }
+  .event-detail-media { width: 100%; min-height: 0; }
+  .event-detail-media--photo { aspect-ratio: 1.38 / 1; max-height: 390px; }
+  :is(.event-detail-media--poster, .event-detail-media--portrait) { height: auto; aspect-ratio: auto; max-height: none; }
+  :is(.event-detail-media--poster, .event-detail-media--portrait) img { width: auto; height: auto; max-width: 100%; max-height: 100vw; flex: 0 0 auto; align-self: center; margin: 0 auto; object-fit: contain; }
+  .event-detail-hero.is-low-resolution:not(:is(.event-detail-hero--poster, .event-detail-hero--portrait)) .event-detail-media { min-height: 0; aspect-ratio: 4 / 3; max-height: 390px; }
+  .event-detail-media figcaption { justify-content: flex-start; padding: 0 10px; }
+  .event-detail-quick-facts { grid-template-columns: minmax(0, 1fr); margin: 12px 16px 0; }
+  .event-detail-quick-facts > div { grid-template-columns: 24px 48px minmax(0, 1fr); align-items: center; padding: 10px 13px; }
+  .event-detail-quick-facts > div + div { border-top: 1px solid var(--detail-line); border-left: 0; }
+  .event-detail-quick-facts svg, .event-detail-quick-facts .event-fact-mark { grid-row: auto; margin-top: 0; }
+  .event-detail-quick-facts dd { font-size: 13px; }
+  .event-detail-save-row { margin: 11px 16px 0; }
+  .event-detail-layout { padding: 30px 18px 0; }
   .event-detail-main { gap: 39px; }
   .event-section-heading { display: block; margin-bottom: 14px; }
   .event-section-heading > p { margin: 7px 0 0; }
@@ -363,6 +394,8 @@
 @media (max-width: 370px) {
   .event-detail-nav { gap: 4px; }
   .event-detail-brand { font-size: 14px; }
+  .event-detail-hero__copy { padding-right: 16px; padding-left: 16px; }
+  .event-detail-quick-facts { margin-right: 12px; margin-left: 12px; }
   .event-related-card { grid-template-columns: 92px minmax(0, 1fr) auto; }
   .event-detail-mobile-actions.has-secondary { grid-template-columns: 1fr; }
 }
@@ -372,3 +405,9 @@
 
 .event-price-conditions summary { min-height:44px; padding:10px 0; font-size:13px; cursor:pointer; color:#435747; }
 .event-price-conditions p { font-size:13px; line-height:1.8; overflow-wrap:anywhere; }
+
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-quick-facts { grid-template-columns:1fr; margin-top:28px; }
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-quick-facts > div { grid-template-columns:24px 48px minmax(0,1fr); align-items:center; padding:14px; }
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-quick-facts > div + div { border-left:0; border-top:1px solid var(--detail-line); }
+:is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-quick-facts svg, :is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-quick-facts .event-fact-mark { grid-row:auto; }
+@media(max-width:760px) { .event-detail-hero__copy .event-detail-quick-facts { margin:16px 0 0; } :is(.event-detail-hero--poster, .event-detail-hero--portrait) .event-detail-quick-facts > div { padding:10px 13px; } }

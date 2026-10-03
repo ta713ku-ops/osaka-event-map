@@ -11,6 +11,7 @@ import {
   collectAdditionalEvents,
 } from './index.mjs';
 import {__test__ as outingsTest} from './verified-outings.mjs';
+import { normalizeEventRecord } from '../lib/events.mjs';
 
 const NOW = new Date('2026-09-04T12:00:00+09:00');
 const FIXTURE_ROOT = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
@@ -124,7 +125,10 @@ test('official HTML adapters parse current records with source URLs and verified
   assert.equal(museumEvent[0].venueName, '大阪市立自然史博物館 本館（受付：ナウマンホール）');
   assert.equal(museumEvent[0].address, '〒546-0034 大阪市東住吉区長居公園1-23');
   assert.deepEqual([museumEvent[0].startTime, museumEvent[0].endTime], ['10:00', '16:30']);
-  assert.equal(museumEvent[0].tagEvidence?.free, '無料');
+  // Participation is free, but the official page requires museum admission.
+  assert.equal(normalizeEventRecord(museumEvent[0]).freeEvent, false);
+  assert.equal(museumEvent[0].tags?.includes('free') ?? false, false);
+  assert.equal(museumEvent[0].tagEvidence?.free, undefined);
   assertOfficialLinks(museumEvent);
 
   const festivalEvent = __test__.parseNaturalHistoryDetailPage(await fixture('omnh-event-14237.html'), {
@@ -246,7 +250,10 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
   for(const occurrence of outingsTest.DATA.occurrences){
     for(const field of Object.keys(occurrence.fieldEvidence)){
       const evidence=occurrence.fieldEvidence[field];
-      fixtureByUrl.set(evidence.sourceUrl,(fixtureByUrl.get(evidence.sourceUrl)??'')+`<p>${evidence.text}</p>`);
+      const escaped = evidence.text.replace(/&/gu, '&amp;').replace(/"/gu, '&quot;').replace(/</gu, '&lt;').replace(/>/gu, '&gt;');
+      const markup = evidence.extractionMethod === 'html-meta-description'
+        ? `<meta name="description" content="${escaped}">` : `<p>${escaped}</p>`;
+      fixtureByUrl.set(evidence.sourceUrl,(fixtureByUrl.get(evidence.sourceUrl)??'')+markup);
     }
     if (occurrence.sourceId === 'verified-outings-jikken-lab-osaka-2026') {
       fixtureByUrl.set(occurrence.officialUrl, `${fixtureByUrl.get(occurrence.officialUrl)}<p>一般 : 前売券 2,300円 / 当日券 2,600円</p><p>小学生以上のご参加には必ずチケットが必要です</p><p>本イベントはスクラップチケットでのみご購入ができます</p><p>会場に駐車場、駐輪場はございません</p>`);
@@ -259,9 +266,12 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
     ['https://www.aeon.jp/sc/ibaraki/event/index.json', fixtureByUrl.get(SOURCE_URLS.aeonIbaraki)],
   ]);
   const infoPages = [];
+  const citySupDetails = JSON.parse(await readFile(new URL('../../data/information-supplement-integrated-20261003.json', import.meta.url), 'utf8'))
+    .updates.find((item) => item.match.sourceId === 'verified-outings-citysup-nakanoshima-guided-tour');
+  const citySupDetailFixture = Object.values(citySupDetails.fieldEvidence).map((quote) => `<p>${quote.text}</p>`).join('');
   const fetchText = async (url) => {
-    if (url.startsWith('https://citysup.urkt.in/api/direct/courses/21947/calendars?')) return JSON.stringify([{ date: '2026-09-05', status: 'realtime' }]);
-    if (url === 'https://www.citysup.jp/walkable_26/') return '<h1>水上さんぽガイドツアー 中之島公園ぐるっと</h1><p>ばらぞの橋 桟橋</p><p>大阪市北区中之島1丁目1</p><p>中之島公園のまわりをぐるりと一周します。</p><p>平日 1,500円（税込1,650円）</p><p>予約優先、当日現地受付あり</p><p>大阪メトロ堺筋線「北浜」駅</p><p>雨天でも開催しますが、警報発令時などスタッフが危険と判断した場合は中止します</p>';
+    if (/^https:\/\/citysup\.urkt\.in\/api\/direct\/courses\/(?:21947|16569)\/calendars\?/u.test(url)) return JSON.stringify([{ date: '2026-09-05', status: 'realtime' }]);
+    if (url === 'https://www.citysup.jp/walkable_26/') return '<h1>水上さんぽガイドツアー 中之島公園ぐるっと</h1><p>ばらぞの橋 桟橋</p><p>大阪市北区中之島1丁目1</p><p>中之島公園のまわりをぐるりと一周します。</p><p>平日 1,500円（税込1,650円）</p><p>予約優先、当日現地受付あり</p><p>大阪メトロ堺筋線「北浜」駅</p><p>雨天でも開催しますが、警報発令時などスタッフが危険と判断した場合は中止します</p>' + citySupDetailFixture;
     if (url.startsWith('https://osaka-info.jp/api_/orden/get_event_list.php')) {
       infoPages.push(url);
       const page = new URL(url).searchParams.get('page');
@@ -281,7 +291,11 @@ test('collectAdditionalEvents returns the contract and visits every declared OSA
 
   const result = await collectAdditionalEvents({ fetchText, now: NOW });
   assert.equal(result.sources.length, ADDITIONAL_SOURCE_DEFINITIONS.length);
-  assert.deepEqual([...new Set(result.sources.map((item) => item.status))], ['success']);
+  const datedSnapshots = new Set(outingsTest.DATA.occurrences.filter((item) => item.evidenceAssets?.length).map((item) => item.sourceId));
+  for (const report of result.sources) {
+    assert.equal(report.status, datedSnapshots.has(report.id) ? 'error' : 'success');
+    if (datedSnapshots.has(report.id)) assert.match(report.error, /manual reread required/u);
+  }
   assert.ok(result.events.length > 0);
   assert.ok(result.events.some((event) => event.sourceId === 'osaka-art-museum'));
   assert.ok(result.events.some((event) => event.sourceId === 'aeon-osaka-dome-city'));
@@ -313,7 +327,7 @@ test('source failures and changed markup are reported as error rather than succe
   assert.equal(failed.events.length, 0);
   assert.equal(failed.sources.length, ADDITIONAL_SOURCE_DEFINITIONS.length);
   assert.ok(failed.sources.every((sourceReport) => sourceReport.status === 'error'));
-  assert.ok(failed.sources.every((sourceReport) => /network unavailable/.test(sourceReport.error ?? '')));
+  assert.ok(failed.sources.every((sourceReport) => /network unavailable|reviewed attachment snapshot has expired/.test(sourceReport.error ?? '')));
 
   const changed = await collectAdditionalEvents({
     fetchText: async () => '<html><body>provider markup changed</body></html>',

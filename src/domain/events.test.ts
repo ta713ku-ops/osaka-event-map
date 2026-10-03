@@ -9,6 +9,17 @@ const now = new Date('2026-08-30T18:00:00+09:00');
 const event = (overrides: Partial<EventItem> = {}): EventItem => ({ id: 'x', eventName: 'イベント', category: '祭り', startDate: '2026-08-30', endDate: '2026-08-30', startTime: '17:00', endTime: '21:00', startAt: '2026-08-30T17:00:00+09:00', endAt: '2026-08-30T21:00:00+09:00', latitude: 34.69, longitude: 135.50, ...overrides });
 
 describe('event time filters', () => {
+  it('accepts official single-digit hours without changing their meaning', () => {
+    const morning = event({ startDate: '2026-10-03', endDate: '2026-10-30', startAt: undefined, endAt: undefined, startTime: '9:30', endTime: '17:00' });
+    expect(isOngoing(morning, new Date('2026-10-03T13:00:00+09:00'))).toBe(true);
+    const night = event({ startAt: undefined, endAt: undefined, startTime: '9:30', endTime: '20:00' });
+    expect(filterEvents([night], 'tonight', now)).toHaveLength(1);
+    expect(filterEvents([night], 'tonight', new Date('2026-08-30T20:01:00+09:00'))).toHaveLength(0);
+    const daily = event({ startAt: undefined, endAt: undefined, schedule: { evidence: '公式時刻', dates: ['2026-08-30'], hoursByDate: { '2026-08-30': { startTime: '9:30', endTime: '21:00' } } } });
+    expect(isOngoing(daily, now)).toBe(true);
+    expect(filterEvents([daily], 'tonight', now)).toHaveLength(1);
+    expect(filterEvents([event({ startTime: '未確認', endTime: '20:00' })], 'tonight', now)).toHaveLength(0);
+  });
   it('filters today, tomorrow and weekend', () => {
     expect(filterEvents([event(), event({ id: 't', startDate: '2026-08-31', endDate: '2026-08-31', startAt: '2026-08-31T10:00:00+09:00', endAt: '2026-08-31T12:00:00+09:00' })], 'today', now)).toHaveLength(1);
     expect(filterEvents([event({ id: 't', startDate: '2026-08-31', endDate: '2026-08-31', startAt: '2026-08-31T10:00:00+09:00', endAt: '2026-08-31T12:00:00+09:00' })], 'tomorrow', now)).toHaveLength(1);
@@ -36,6 +47,36 @@ describe('event time filters', () => {
     expect(filterEvents([event({ schedule: { closedDates: ['2026-08-30'] } })], 'today', now)).toHaveLength(0);
     expect(filterEvents([event({ startDate: '2026-08-01', endDate: '2026-09-30', schedule: { dates: ['2026-08-31'] } })], 'today', now)).toHaveLength(0);
     expect(filterEvents([event({ startDate: '2026-08-01', endDate: '2026-09-30', schedule: { dates: ['2026-08-30'] } })], 'today', now)).toHaveLength(1);
+  });
+
+  it('uses the officially published clock for the selected night without borrowing another day', () => {
+    const varying = event({ startDate: '2026-10-02', endDate: '2026-10-04', startTime: undefined, endTime: undefined, startAt: undefined, endAt: undefined,
+      schedule: { dates: ['2026-10-02', '2026-10-03', '2026-10-04'], evidence: '公式の日別営業時間', hoursByDate: { '2026-10-02': { startTime: '16:00', endTime: '21:00' }, '2026-10-03': { startTime: '11:00', endTime: '17:00' } } } });
+    expect(filterEvents([varying], 'tonight', new Date('2026-10-02T18:00:00+09:00'))).toHaveLength(1);
+    expect(filterEvents([varying], 'tonight', new Date('2026-10-02T21:01:00+09:00'))).toHaveLength(0);
+    expect(filterEvents([varying], 'tonight', new Date('2026-10-03T12:00:00+09:00'))).toHaveLength(0);
+    expect(filterEvents([varying], 'tonight', new Date('2026-10-04T18:00:00+09:00'))).toHaveLength(0);
+    expect(filterEvents([{ ...varying, schedule: { ...varying.schedule, evidence: undefined } }], 'tonight', new Date('2026-10-02T18:00:00+09:00'))).toHaveLength(0);
+    expect(filterEvents([{ ...varying, schedule: { ...varying.schedule, closedDates: ['2026-10-02'] } }], 'tonight', new Date('2026-10-02T18:00:00+09:00'))).toHaveLength(0);
+  });
+  it('uses final-day hours for ended events and respects later hours than the common clock', () => {
+    const exhibition = event({ startDate: '2026-09-20', endDate: '2026-10-04', startAt: undefined, endAt: undefined, startTime: undefined, endTime: undefined,
+      schedule: { daily: true, evidence: '公式の日別時間', hoursByDate: { '2026-10-04': { startTime: '09:00', endTime: '16:00' } } } });
+    const afterClose = new Date('2026-10-04T17:00:00+09:00');
+    expect(isOngoing(exhibition, afterClose)).toBe(false);
+    expect(isFinished(exhibition, afterClose)).toBe(true);
+    expect(filterEvents([exhibition], 'today', afterClose)).toHaveLength(0);
+    expect(filterEvents([exhibition], 'weekend', afterClose)).toHaveLength(0);
+    const lateDay = event({ startDate: '2026-10-04', endDate: '2026-10-04', startAt: '2026-10-04T09:00:00+09:00', endAt: '2026-10-04T17:00:00+09:00', startTime: '09:00', endTime: '17:00',
+      schedule: { daily: true, evidence: '公式の当日延長', hoursByDate: { '2026-10-04': { startTime: '09:00', endTime: '21:00' } } } });
+    expect(isOngoing(lateDay, new Date('2026-10-04T18:00:00+09:00'))).toBe(true);
+    expect(filterEvents([lateDay], 'tonight', new Date('2026-10-04T18:00:00+09:00'))).toHaveLength(1);
+    const overnight = event({ startDate: '2026-10-03', endDate: '2026-10-03', startAt: undefined, endAt: undefined, startTime: undefined, endTime: undefined,
+      schedule: { dates: ['2026-10-03'], evidence: '公式の夜越え時間', hoursByDate: { '2026-10-03': { startTime: '23:00', endTime: '01:00' } } } });
+    const duringNight = new Date('2026-10-03T23:30:00+09:00');
+    expect(isOngoing(overnight, duringNight)).toBe(true);
+    expect(isFinished(overnight, duringNight)).toBe(false);
+    expect(filterEvents([overnight], 'tonight', duringNight)).toHaveLength(1);
   });
   it('derives weekend as the next Saturday and Sunday from Osaka local time', () => {
     const monday = new Date('2026-08-31T09:00:00+09:00');

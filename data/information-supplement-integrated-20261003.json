@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "updates": [
+    {
+      "match": {
+        "sourceId": "verified-outings-mucha-returns-2026",
+        "eventName": "企画展「ミュシャ芸術博覧会リターンズ」",
+        "startDate": "2026-08-01",
+        "officialUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+        "endDate": "2026-11-29"
+      },
+      "fields": {
+        "schedule": {
+          "daily": true,
+          "closedDates": [
+            "2026-08-03",
+            "2026-08-17",
+            "2026-08-24",
+            "2026-08-31",
+            "2026-09-07",
+            "2026-09-14",
+            "2026-09-28",
+            "2026-10-05",
+            "2026-10-13",
+            "2026-10-19",
+            "2026-10-26",
+            "2026-11-04",
+            "2026-11-09",
+            "2026-11-16",
+            "2026-11-24"
+          ],
+          "evidence": "休館日:月曜日(ただし8月10日、9月21日、10月12日、11月2日・23日は開館)、10月13日、11月4日・24日"
+        },
+        "startTime": "09:30",
+        "endTime": "17:15",
+        "timeInfo": "9:30～17:15（入館16:30まで）。月曜休館。ただし8/10・9/21・10/12・11/2・11/23は開館。10/13・11/4・11/24は休館。",
+        "closureInfo": "月曜休館。ただし8/10・9/21・10/12・11/2・11/23は開館。10/13・11/4・11/24は休館。",
+        "price": "一般510円／高校・大学生310円／小・中学生100円。小学生未満、堺市内在住の満65歳以上、障がい者手帳所持者と介助者は無料。20人以上の団体は割引（事前問い合わせ）。"
+      },
+      "fieldEvidence": {
+        "schedule": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "休館日:月曜日(ただし8月10日、9月21日、10月12日、11月2日・23日は開館)、10月13日、11月4日・24日",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "closureInfo": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "休館日:月曜日(ただし8月10日、9月21日、10月12日、11月2日・23日は開館)、10月13日、11月4日・24日",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "startTime": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "9:30~17:15(入館は16:30まで)",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "endTime": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "9:30~17:15(入館は16:30まで)",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "timeInfo": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "9:30~17:15(入館は16:30まで) 休館日:月曜日(ただし8月10日、9月21日、10月12日、11月2日・23日は開館)、10月13日、11月4日・24日",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "price": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "観覧料 〇一般510円 〇高校・大学生310円 〇小・中学生100円",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "priceExemptions": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "※小学生未満、堺市内にお住まいの満65歳以上の方、障がい者手帳をお持ちの方と介助の方は無料",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        },
+        "priceConditions": {
+          "sourceUrl": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+          "text": "※20人以上の団体は割引料金適用となります。事前にお問い合わせください。",
+          "checkedAt": "2026-10-03T04:42:18.934Z"
+        }
+      }
+    },
+    {
+      "match": {
+        "sourceId": "official-pack-a-kuboso-western-paintings-2026",
+        "eventName": "初！全点一挙公開 久保惣の西洋絵画 ─モネ・ルノワール・ゴッホをはじめとして─",
+        "startDate": "2026-07-05",
+        "officialUrl": "https://www.ikm-art.jp/tenrankai/2026/04/202602.html",
+        "endDate": "2026-10-04"
+      },
+      "fields": {
+        "price": "一般1,000円／高大生600円／中学生以下無料。20名以上の団体と65歳以上は2割引。各種障がい者手帳・ミライロID提示時は本人と介助者1名無料。"
+      },
+      "fieldEvidence": {
+        "price": {
+          "text": "入館料：一般1,000円　高大生600円　中学生以下無料",
+          "sourceUrl": "https://www.ikm-art.jp/tenrankai/kUBOSo_sEIYOh_A4.pdf",
+          "checkedAt": "2026-10-03T04:49:52.000Z",
+          "sha256": "010f350acfc0700e5b7d673a6287f00620d4a2448923b97b395c5f182f3437f7",
+          "extractionMethod": "manual-pdf-read",
+          "evidenceKind": "pdf"
+        },
+        "participationConditions": {
+          "text": "※ 団体（有料入館20名以上）は２割引\n※ 65歳以上は２割引（運転免許証など年齢のわかるものをご提示ください）\n※ 各種障がい者手帳、ミライロIDを提示された場合、本人及び介助者１名は無料",
+          "sourceUrl": "https://www.ikm-art.jp/riyou/",
+          "checkedAt": "2026-10-03T04:45:27Z"
+        }
+      }
+    },
+    {
+      "match": {
+        "sourceId": "information-pack-b-banpaku-night-sky-art-fireworks-2026-11-21",
+        "eventName": "第5回 万博夜空がアートになる日 2026",
+        "startDate": "2026-11-21",
+        "officialUrl": "https://www.expo70-park.jp/event/77580/",
+        "endDate": "2026-11-21"
+      },
+      "fields": {
+        "price": "全席指定席。プレミアムフロントシート26,000円、ダイナミックシート12,000円、パノラマシート大人9,600円・子ども4,800円、VIPシート55,000円、カメラシート35,000円、車いすシート24,000円〜48,000円（税込）。子ども席はパノラマシートのみ（3歳以上・小学生以下）。未就学児は大人1名につき1名まで膝上無料。座席利用は別途チケットが必要。 自然文化園の入園料込み。",
+        "timeInfo": "12:00開場、19:00開演（予定）。16:30以降は当イベントのチケット所持者のみ入園。",
+        "startTime": "19:00",
+        "accessByTransit": "最寄りは大阪モノレール「万博記念公園駅」。阪急線の南茨木・山田・蛍池、御堂筋線（北大阪急行線）の千里中央、谷町線の大日、京阪本線の門真市から大阪モノレールに接続。16:30以降は中央口のみが入口のため「公園東口駅」ではなく「万博記念公園駅」から来園。公園内駐車場・周辺道路の混雑が予想されるため公共交通機関を推奨。本公演専用駐車場なし。"
+      },
+      "fieldEvidence": {
+        "price": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "プレミアムフロントシート 1名 26,000円 (税込) 会場前方の特別フロントエリア ダイナミックシート 1名 12,000円 (税込) 頭上いっぱいに花火が広がる迫力エリア パノラマシート 大人 9,600円/ 子ども 4,800円 (税込) パノラマスケールで楽しめる好ポジション VIPシート 1名 55,000円 (税込) VIPホスピタリティを味わえる特別席 カメラシート 1名 35,000円 (税込) パノラマ席4つ分の撮影特化シート 車いすシート 24,000円〜48,000円 (税込) 対象者向けの出入り口に近いエリア",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        },
+        "priceConditions": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "子ども席は「パノラマシート」のみ ※ 子ども席の対象は「3歳以上・小学生以下」となります。",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        },
+        "priceExemptions": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "未就学児(小学校入学前)は、大人1名につき1名まで、膝の上で無料観覧いただけます。お席で観覧させたい場合は別途 座席チケットが必要です。なお、3歳以下のお子様がお一人で座席をご利用いただくことは、安全のためご遠慮いただいております。",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        },
+        "admissionIncluded": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "自然文化園の入園料は花火チケット料金に含まれております。入園口にて花火チケットのご提示をお願いします。",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        },
+        "timeInfo": {
+          "text": "［開場］ 12:00 ［開演］ 19:00 ※16:30以降のご入園は、当イベントのチケットをお持ちのお客様のみ",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "startTime": {
+          "text": "［開場］ 12:00 ［開演］ 19:00 ※16:30以降のご入園は、当イベントのチケットをお持ちのお客様のみ",
+          "sourceUrl": "https://www.expo70-park.jp/event/77580/",
+          "checkedAt": "2026-10-02T06:25:10.534Z"
+        },
+        "accessByTransit": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "■ 阪急線 「南茨木駅」、「山田駅」、「蛍池駅」から大阪モノレール「万博記念公園駅」 ■ 大阪メトロ御堂筋線(北大阪急行線) 「千里中央駅」から大阪モノレール「万博記念公園駅」 ■ 大阪メトロ谷町線 「大日駅」から大阪モノレール「万博記念公園駅」 ■ 京阪本線 「門真市駅」から大阪モノレール「万博記念公園駅」",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        },
+        "transitEntry": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "大阪モノレール「万博記念公園駅」です。当日16:30以降は公園入口が中央口のみとなるため、「公園東口駅」ではなく「万博記念公園駅」からお越しください。",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        },
+        "parkingConditions": {
+          "sourceUrl": "https://banpakuhanabi.jp/",
+          "text": "本公演専用の駐車場はありません。公共交通機関をご利用ください。",
+          "checkedAt": "2026-10-03T04:47:49.294Z"
+        }
+      }
+    },
+    {
+      "match": {
+        "sourceId": "verified-outings-citysup-nakanoshima-guided-tour",
+        "eventName": "水上さんぽガイドツアー 中之島公園ぐるっと",
+        "officialUrl": "https://www.citysup.jp/walkable_26/",
+        "calendarDetailsOnly": true
+      },
+      "fields": {
+        "price": "デイタイム（昼〜夕）：大人（中学生以上）平日1,650円／土日祝2,200円、小人（小学生以下）平日1,100円／土日祝1,650円（税込）。14日前予約10%OFF、7日前まで5%OFF。",
+        "timeInfo": "デイタイム（昼〜夕）。所要約20分。",
+        "reservationInfo": "予約優先、当日現地受付あり。3才以上、小学生以下は大人と一緒に参加。ライフジャケット着用（無料貸出）。現地支払いはキャッシュレスのみ（現金不可）。"
+      },
+      "fieldEvidence": {
+        "price": {
+          "sourceUrl": "https://www.citysup.jp/walkable_26/",
+          "text": "デイタイム |昼〜夕 大人 |中学生以上 平日 1,500円 (税込1,650円) 土日祝 2,000円 (税込2,200円) 小人 |小学生以下 平日 1,000円 (税込1,100円) 土日祝 1,500円 (税込1,650円)",
+          "checkedAt": "2026-10-03T04:47:49.533Z"
+        },
+        "priceConditions": {
+          "sourceUrl": "https://www.citysup.jp/walkable_26/",
+          "text": "※14日前のご予約で 10%OFF 、7日前までのご予約で 5%OFF に!",
+          "checkedAt": "2026-10-03T04:47:49.533Z"
+        },
+        "timeInfo": {
+          "sourceUrl": "https://www.citysup.jp/walkable_26/",
+          "text": "所要時間 デイタイム 約20分",
+          "checkedAt": "2026-10-03T04:47:49.533Z"
+        },
+        "reservationInfo": {
+          "sourceUrl": "https://www.citysup.jp/walkable_26/",
+          "text": "参加条件 3才以上(小学生以下は大人と一緒に参加),ライフジャケット着用(無料貸出),10月まではペット同乗可 お申込み ・予約優先、当日現地受付あり ※時間帯により混み合いますので事前予約がおすすめ ・早めの事前予約でお得な 割引価格 に!",
+          "checkedAt": "2026-10-03T04:47:49.533Z"
+        },
+        "paymentConditions": {
+          "sourceUrl": "https://www.citysup.jp/walkable_26/",
+          "text": "現地受付|クレジットカード・QRコード・交通系ICカード等(現金不可)",
+          "checkedAt": "2026-10-03T04:47:49.533Z"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+.official-guides { margin: 2rem 0; padding: clamp(1.1rem, 3vw, 2rem); background: var(--surface, #fffaf2); border: 1px solid #d7d0c4; border-radius: 18px; color: #302d27; }
+.official-guides h2 { margin: .35rem 0 .7rem; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+.official-guides h3 { font-size: 1.2rem; margin-bottom: .6rem; }
+.official-guides p { line-height: 1.8; }
+.official-guides__eyebrow { font-size: .8rem; color: #766044; }
+.official-guides__period { font-weight: 700; }
+.official-guides a { color: #654429; text-underline-offset: .25em; }
+.official-guides details { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #d7d0c4; }
+.official-guides summary { cursor: pointer; padding: .5rem 0; }
+.official-guides dl > div { padding: .6rem 0; }
+.official-guides dt { font-weight: 700; margin-bottom: .25rem; }
+.official-guides dd { margin: 0; line-height: 1.8; overflow-wrap: anywhere; }
+.official-guides a:focus-visible, .official-guides summary:focus-visible { outline: 3px solid #885835; outline-offset: 4px; }

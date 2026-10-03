@@ -1,0 +1,136 @@
+/* Storytelling: a photographed invitation, then a quieter search and varied chapters. */
+.home-discovery .home-hero { display:block; position:relative; width:min(100% - 64px,1160px); margin:24px auto 0; scroll-margin-top:70px; padding:0; border:0; overflow:visible; }
+.home-discovery .home-hero__content { color:var(--text); padding:0 0 20px; display:block; }
+.home-discovery .home-hero__eyebrow { margin:0 0 8px; font:500 13px/1.6 inherit; letter-spacing:.08em; color:#62574d; animation:none; }
+.home-discovery .home-hero h1 { font-size:clamp(32px,3.4vw,44px); margin:0; line-height:1.4; animation:none; }
+.home-discovery .home-hero h1 strong { margin-left:.3em; }
+.home-discovery .home-spotlight { width:100%; border-radius:4px; animation:none; }
+.home-discovery .home-spotlight__viewport { height:500px; }
+.home-discovery .home-spotlight__story { display:block; height:500px; background:#253c38; }
+.home-discovery .home-spotlight__media { position:absolute; inset:0; height:100%; }
+.home-discovery .home-spotlight__media::after { display:block; content:''; position:absolute; inset:0; background:linear-gradient(0deg,rgba(15,27,24,.96),rgba(15,27,24,.3) 40%,transparent 68%); pointer-events:none; }
+.home-discovery .home-spotlight__media img { object-fit:cover; animation:none; }
+.home-discovery .home-spotlight__copy { position:absolute; left:0; bottom:0; width:100%; padding:32px 40px 72px; color:#fffdf8; }
+.home-discovery .home-spotlight__copy > p { color:#fffdf8; font-size:17px; letter-spacing:.05em; margin:0 0 12px; }
+.home-discovery .home-spotlight__copy h2 { color:#fffdf8; font-size:clamp(26px,3.3vw,42px); line-height:1.45; -webkit-line-clamp:3; max-width:32ch; margin-bottom:12px; }
+.home-discovery .home-spotlight__copy > span { color:#f5f0e8; font-size:14px; line-height:1.8; }
+.home-discovery .home-spotlight__copy .home-participation { display:block; color:#fff4dc; margin-top:8px; }
+.home-story-action { display:inline-flex; align-items:center; gap:16px; font-size:14px; min-height:44px; margin-top:12px; border-bottom:1px solid #ffffff70; }
+.home-discovery .home-spotlight__controls { background:transparent; color:#fffdf8; padding:0 32px 8px; height:52px; }
+.home-discovery .home-spotlight__position, .home-discovery .home-spotlight__arrow, .home-discovery .home-motion-toggle { color:#fffdf8; }
+.home-discovery .home-spotlight__dots button { width:44px; height:44px; }
+.home-discovery .home-spotlight__dots button::after { background:#ffffff60; }
+.home-discovery .home-spotlight__dots button[aria-current="true"]::after { background:#fffdf8; }
+.home-discovery .home-spotlight__viewport:focus-visible { outline:3px solid #b33a2f; outline-offset:4px; }
+.home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) { display:grid; grid-template-columns:1fr 1fr; }
+.home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__media { position:relative; grid-column:2; }
+.home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__media::after { display:none; }
+.home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__copy { width:50%; }
+.home-discovery .home-discovery__body { padding-bottom:40px; }
+.home-search-entry { margin:32px 0 40px; padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.home-search-entry__heading { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:16px; }
+.home-search-entry__heading p { font:600 21px/1.5 'Yu Mincho','Hiragino Mincho ProN',serif; margin:0; }
+.home-search-entry__heading span { color:#62574d; font-size:13px; }
+.home-discovery .home-condition-entry { display:inline-flex; gap:6px; align-items:center; margin-left:auto; }
+.season-story { display:grid; grid-template-columns:1fr 1.35fr; gap:40px; background:#e9e1d1; padding:32px; border-radius:4px; margin:40px 0; }
+.season-story__copy { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; }
+.season-story__copy > p, .home-place-story > div > p { font-size:13px; color:var(--primary); margin:0 0 12px; }
+.season-story h2, .home-place-story h2 { font:500 36px/1.45 'Yu Mincho','Hiragino Mincho ProN',serif; margin:0 0 16px; }
+.season-story__copy > span, .home-place-story > div > span { font-size:14px; line-height:1.9; }
+.season-story button, .home-place-story button, .home-browse-entry button { display:inline-flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:10px 16px; margin-top:20px; color:var(--text); border:1px solid #766453; background:var(--surface); font:inherit; font-size:14px; cursor:pointer; border-radius:3px; }
+.season-story__events { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.home-discovery .editorial-section { margin:48px 0 0; }
+.home-discovery .editorial-weekend { padding:28px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.discovery-weekend { display:grid; grid-template-columns:1fr 1fr; gap:16px 24px; }
+.home-place-story { display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; margin:48px 0; }
+.home-place-story__map { position:relative; height:300px; overflow:hidden; background:#e2e5d9; border:1px solid #c8cebc; background-image:linear-gradient(35deg,transparent 44%,#f9f5e8 44%,#f9f5e8 48%,transparent 48%),linear-gradient(95deg,transparent 54%,#f9f5e8 54%,#f9f5e8 60%,transparent 60%); }
+.home-place-story__map > svg { position:absolute; top:47%; left:40%; color:var(--primary); }
+.place-river { position:absolute; top:15%; left:-5%; width:110%; height:36px; background:#b7ccd0; transform:rotate(-15deg); }
+.place-label { position:absolute; font-size:13px; padding:8px 12px; background:var(--surface); border:1px solid #cbc8bb; border-radius:3px; }
+.place-label--kita { top:18%; left:16%; }.place-label--minami { top:52%; right:8%; }.place-label--tennoji { bottom:12%; left:22%; }
+.home-place-story small { display:block; font-size:11px; color:#62574d; line-height:1.7; margin-top:12px; }
+.home-browse-entry { text-align:center; padding:40px 20px; margin:40px 0; border-top:1px solid var(--line); }
+.home-browse-entry h2 { font:500 30px/1.5 'Yu Mincho','Hiragino Mincho ProN',serif; margin:0; }
+.home-footer { display:flex; justify-content:space-between; align-items:flex-start; gap:32px; border-top:1px solid var(--line); padding-top:24px; }
+.home-footer > p { font:600 18px/1.8 'Yu Mincho',serif; margin:0; white-space:nowrap; }
+.home-footer > p span { display:block; font:400 12px/1.8 sans-serif; color:#62574d; }
+.home-source-guide { max-width:640px; font-size:13px; }
+.home-source-guide > summary { min-height:44px; cursor:pointer; padding:10px 0; }
+.home-source-guide .data-note { margin:8px 0 20px; }
+.home-results-reset { padding:8px 0; min-height:44px; border:0; background:none; text-decoration:underline; font:inherit; font-size:13px; color:#62574d; cursor:pointer; }
+.home-discovery.is-filtered .home-hero { display:none; }
+.home-discovery button:focus-visible, .home-discovery a:focus-visible, .home-discovery summary:focus-visible { outline:3px solid #b33a2f; outline-offset:3px; }
+@media(max-width:760px) {
+ .home-discovery .home-hero { width:100%; margin:0; }
+ .home-discovery .home-hero__content { color:var(--text); padding:18px 20px; }
+ .home-discovery .home-hero__eyebrow { font-size:12px; margin-bottom:4px; }
+ .home-discovery .home-hero h1 { font-size:32px; line-height:1.35; }
+ .home-discovery .home-hero h1 strong { display:block; margin-left:0; }
+ .home-discovery .home-spotlight { border-radius:0; }
+ .home-discovery .home-spotlight__viewport, .home-discovery .home-spotlight__story { height:460px; }
+ .home-discovery .home-spotlight__media { height:100%; }
+ .home-discovery .home-spotlight__copy { padding:24px 20px 66px; }
+ .home-discovery .home-spotlight__copy > p { font-size:15px; }
+ .home-discovery .home-spotlight__copy h2 { font-size:28px; }
+ .home-discovery .home-spotlight__copy > span { font-size:12px; }
+ .home-discovery .home-spotlight__controls { padding:0 16px 6px; }
+ .home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) { display:block; }
+ .home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__media { width:100%; height:210px; }
+ .home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__copy { width:100%; }
+ .home-discovery .home-discovery__body { width:calc(100% - 40px); padding-bottom:24px; }
+ .home-search-entry { margin:24px 0 32px; padding:20px 0; }
+ .home-search-entry__heading { display:block; margin-bottom:12px; }
+ .home-search-entry__heading p { font-size:20px; }
+ .home-search-entry__heading span { display:none; }
+ .home-discovery .home-time-filters { gap:8px; }
+ .home-discovery .home-time-chip { font-size:12px; padding:8px; }
+ .home-discovery .home-condition-entry { margin-left:0; }
+ .season-story { grid-template-columns:1fr; gap:24px; padding:24px 16px; margin:32px -4px; }
+ .season-story h2, .home-place-story h2 { font-size:30px; }
+ .season-story__copy > span { font-size:14px; }
+ .season-story__events { gap:12px; }
+ .home-discovery .editorial-section { margin:40px 0 0; }
+ .discovery-weekend { grid-template-columns:1fr; gap:12px; }
+ .home-place-story { grid-template-columns:1fr; gap:24px; margin:40px 0; }
+ .home-place-story__map { height:240px; }
+ .home-footer { display:block; }
+ .home-source-guide { margin-top:16px; }
+}
+@media(prefers-reduced-motion:reduce) { .home-discovery *, .home-discovery *::before, .home-discovery *::after { animation:none !important; transition:none !important; } }
+
+.home-discovery .home-spotlight__media img:is(.is-poster, .is-portrait) { object-fit:contain; background:#e9e1d1; }
+.home-discovery .home-spotlight__media img:not(.is-poster):not(.is-portrait):not(.is-thumbnail) { object-position:35% center; }
+.home-discovery .home-spotlight__media { animation:story-photo-arrival 420ms ease-out; }
+@keyframes story-photo-arrival { from { opacity:0; } to { opacity:1; } }
+.home-discovery .home-spotlight:has(.home-date-art) .home-spotlight__viewport,
+.home-discovery .home-spotlight:has(.home-date-art) .home-spotlight__story { height:240px; }
+.home-discovery .home-spotlight:has(.home-date-art) .home-spotlight__media { display:none; }
+.home-discovery .home-spotlight:has(.home-date-art) .home-spotlight__copy { padding-top:24px; }
+@media(prefers-reduced-motion:reduce) { .home-discovery .home-spotlight__media { animation:none !important; } }
+.discovery-weekend .discovery-card .home-event-card { flex-direction:row; }
+.discovery-weekend .discovery-card__media { width:132px; flex:0 0 132px; aspect-ratio:auto; }
+.discovery-weekend .discovery-card__media img { position:absolute; inset:0; }
+.discovery-weekend .discovery-card__copy { padding:16px; }
+.discovery-weekend .discovery-card .save-event { top:auto; bottom:8px; right:8px; background:var(--surface); }
+.discovery-weekend .discovery-card__footer { padding-right:42px; }
+@media(max-width:760px) { .discovery-weekend .discovery-card__media { width:104px; flex-basis:104px; } }
+
+.home-discovery.is-filtered .home-search-entry { margin:20px 0 0; padding:0 0 12px; border-top:0; }
+.home-discovery.is-filtered .home-search-entry__heading { display:none; }
+.home-discovery.is-filtered .home-section-heading > div > p:not(.feature-description) { display:none; }
+.home-discovery.is-filtered .home-results-reset { margin:0 0 12px; }
+.search-controls.is-compact { padding:0 0 8px; margin-bottom:16px; }
+.search-options > summary { display:flex; align-items:center; gap:10px; min-height:44px; width:fit-content; cursor:pointer; color:#62574d; font-size:13px; padding:8px 0; }
+.search-options > summary::before { content:'＋'; }
+.search-options[open] > summary::before { content:'−'; }
+.search-options > .search-controls__fields { margin:8px 0 16px; }
+.search-options > summary:focus-visible { outline:3px solid #b33a2f; outline-offset:3px; }
+@media(max-width:760px) { .home-discovery.is-filtered .home-search-entry { margin-top:16px; } }
+
+.home-discovery .home-spotlight:has(.home-spotlight__story[aria-hidden="false"] :is(.is-thumbnail, .is-poster, .is-portrait)) .home-spotlight__viewport { height:600px; }
+.home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) { height:600px; grid-template-rows:1fr; }
+@media(max-width:760px) {
+ .home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) { display:flex; flex-direction:column; }
+ .home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__media { height:210px; flex:0 0 210px; }
+ .home-discovery .home-spotlight__story:has(.is-thumbnail, .is-poster, .is-portrait) .home-spotlight__copy { position:relative; inset:auto; padding:24px 20px 64px; }
+}

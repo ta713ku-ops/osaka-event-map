@@ -3,7 +3,7 @@ import { defaultSurface, entryState, NAVIGATION_KEY, newEntry, readEntry } from 
 
 describe('navigation state', () => {
   it('round trips exploration and detail history without losing other state owners', () => {
-    const surface = { ...defaultSurface(), view: 'map' as const, query: '大阪', mapListLimit: 40 };
+    const surface = { ...defaultSurface(), view: 'map' as const, query: '大阪', mapListLimit: 40, browseAll: true };
     const home = newEntry(null, surface);
     const detail = newEntry('public-route', surface, home.key);
     const state = entryState(detail, { anotherApp: 12 });
@@ -12,6 +12,7 @@ describe('navigation state', () => {
     expect(readEntry(entryState(home, null), '/')).toEqual(home);
   });
   it.each([
+    { surface: { ...defaultSurface(), browseAll: 'yes' } },
     { version: 2 }, { key: '' }, { parentKey: 5 }, { detailId: 'different' },
     { surface: { ...defaultSurface(), viewport: { latitude: NaN, longitude: 135, zoom: 12 } } },
     { surface: { ...defaultSurface(), viewport: { latitude: 34, longitude: 135, zoom: Infinity } } },

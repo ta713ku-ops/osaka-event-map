@@ -10,7 +10,8 @@ const asDate = (s?: string, endOfDay = false) => {
 
 const dateTime = (date: string | undefined, time: string | undefined, endOfDay = false) => {
   if (!date) return undefined;
-  const normalizedTime = time?.trim().replace(/時/g, ':').replace(/分/g, '').slice(0, 8);
+  const normalizedTime = time?.trim().replace(/時/g, ':').replace(/分/g, '').slice(0, 8)
+    .replace(/^(\d):/u, '0$1:');
   return asDate(`${date}T${normalizedTime || (endOfDay ? '23:59:59' : '00:00:00')}+09:00`);
 };
 
@@ -18,8 +19,12 @@ const eventStart = (event: EventItem) => asDate(event.startAt) ?? dateTime(event
 
 const eventEnd = (event: EventItem) => {
   const start = eventStart(event);
-  let end = asDate(event.endAt)
+  const finalDate = dateOnly(event.endDate ?? event.startDate);
+  const finalHours = scheduleHasOfficialEvidence(event) ? event.schedule?.hoursByDate?.[finalDate] : undefined;
+  let end = (finalHours ? dateTime(finalDate, finalHours.endTime) : undefined) ?? asDate(event.endAt)
     ?? (event.endDate ? dateTime(event.endDate, event.endTime, true) : dateTime(event.startDate, event.endTime, true));
+  const finalStart = finalHours ? dateTime(finalDate, finalHours.startTime) : undefined;
+  if (end && finalStart && end < finalStart) end = new Date(end.getTime() + 86400000);
   // A single-day record without an end time is valid through that day's close.
   if (!end && event.startDate) end = dateTime(event.startDate, undefined, true);
   // A source may give an overnight endTime without an endDate. Keep it on the
@@ -48,6 +53,7 @@ function scheduleOccursOnDate(event: EventItem, date: string) {
     return schedule.weekdays.includes(weekday);
   }
   if (schedule.daily) return true;
+  if (schedule.hoursByDate) return Boolean(schedule.hoursByDate[date]);
   return undefined;
 }
 
@@ -67,6 +73,14 @@ function isUnavailableScheduleStatus(event: EventItem) {
 
 export function isOngoing(event: EventItem, now = new Date()): boolean {
   if (isUnavailableScheduleStatus(event)) return false;
+  const today = day(now);
+  const hours = scheduleHasOfficialEvidence(event) ? event.schedule?.hoursByDate?.[today] : undefined;
+  if (hours) {
+    const start = dateTime(today, hours.startTime);
+    let end = dateTime(today, hours.endTime);
+    if (start && end && end < start) end = new Date(end.getTime() + 86400000);
+    return !!start && !!end && start <= now && now <= end && occursOnDate(event, today);
+  }
   const start = eventStart(event);
   const end = eventEnd(event);
   return !!start && !!end && start <= now && now <= end && occursOnDate(event, day(now));
@@ -98,13 +112,16 @@ export function filterEvents(events: EventItem[], filter: TimeFilter = 'all', no
     // Tonight means a record whose published daily clock overlaps 18:00 to
     // midnight. A long startAt/endAt interval alone is a date range, not a
     // promise that the venue is open tonight.
-    const hasDailyTime = !!e.startTime && !!e.endTime;
+    const hours = scheduleHasOfficialEvidence(e) ? e.schedule?.hoursByDate?.[today] : undefined;
+    const startTime = hours?.startTime ?? e.startTime;
+    const endTime = hours?.endTime ?? e.endTime;
+    const hasDailyTime = !!startTime && !!endTime;
     const tonightStart = dateTime(today, '18:00');
     const tonightEnd = dateTime(today, undefined, true);
     const hasOccurrenceEvidence = e.startDate === (e.endDate ?? e.startDate) || (scheduleHasOfficialEvidence(e) && scheduleOccursOnDate(e, today) === true);
     if (!hasDailyTime || !hasOccurrenceEvidence || !occursOnDate(e, today) || !tonightStart || !tonightEnd) return false;
-    const dailyStart = dateTime(today, e.startTime);
-    let dailyEnd = dateTime(today, e.endTime);
+    const dailyStart = dateTime(today, startTime);
+    let dailyEnd = dateTime(today, endTime);
     if (!dailyStart || !dailyEnd) return false;
     if (dailyEnd < dailyStart) dailyEnd = new Date(dailyEnd.getTime() + 86400000);
     const overlapsTonight = dailyStart <= tonightEnd && dailyEnd >= tonightStart;

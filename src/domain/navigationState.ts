@@ -9,6 +9,7 @@ export type SurfaceState = {
   view: 'home' | 'map' | 'saved'; query: string; timeFilter: TimeFilter; filters: EventFilters;
   origin: Coordinates; originLabel: string; viewport: MapViewport;
   mapListLimit: number; railLimit: number; homeLimit: number;
+  browseAll?: boolean;
 };
 export type PagePosition = { home: number; list: number; rail: number; detail: number; focus: string | null };
 export type NavigationEntry = {
@@ -19,7 +20,7 @@ export const defaultSurface = (): SurfaceState => ({
   view: 'home', query: '', timeFilter: 'all', filters: {},
   origin: { latitude: 34.7025, longitude: 135.4959 }, originLabel: '大阪駅から',
   viewport: { latitude: 34.6937, longitude: 135.5023, zoom: 11 },
-  mapListLimit: 20, railLimit: 12, homeLimit: 6,
+  mapListLimit: 20, railLimit: 12, homeLimit: 6, browseAll: false,
 });
 export const emptyPosition = (): PagePosition => ({ home: 0, list: 0, rail: 0, detail: 0, focus: null });
 export function newEntry(detailId: string | null, surface = defaultSurface(), parentKey: string | null = null): NavigationEntry {
@@ -57,6 +58,7 @@ export function readEntry(state: unknown, pathname: string): NavigationEntry | n
   const s = entry.surface, p = entry.position;
   if (!record(s) || !['home', 'map', 'saved'].includes(String(s.view)) || typeof s.query !== 'string'
     || !timeFilters.includes(String(s.timeFilter)) || !validFilters(s.filters)
+    || !(s.browseAll === undefined || typeof s.browseAll === 'boolean')
     || !coordinates(s.origin) || typeof s.originLabel !== 'string' || !coordinates(s.viewport)
     || !record(s.viewport) || typeof s.viewport.zoom !== 'number' || s.viewport.zoom < 9 || s.viewport.zoom > 17
     || !Number.isFinite(s.viewport.zoom) || !count(s.mapListLimit) || !count(s.railLimit) || !count(s.homeLimit)

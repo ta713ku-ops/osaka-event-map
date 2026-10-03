@@ -1,0 +1,12 @@
+
+> osaka-event-map@0.1.0 test
+> vitest run --config vitest.config.ts
+
+
+ RUN  v4.1.11 /Users/taku/開発/地図
+
+
+ Test Files  21 passed (21)
+      Tests  157 passed (157)
+   Start at  13:55:16
+   Duration  6.60s (transform 1.45s, setup 1.37s, import 3.00s, tests 10.46s, environment 8.51s)

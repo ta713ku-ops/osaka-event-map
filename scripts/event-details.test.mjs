@@ -11,9 +11,45 @@ test('isolates a science session from other events and keeps separated time slot
 test('rejects unrelated page content and keeps identity and date intact',()=>{
  const r=parseEventDetails('<main><h2>別イベント</h2><p>予約してお越しください。</p></main>',e,checkedAt);assert.equal(r.recognized,false);assert.equal(mergeEventDetails(e,r).startDate,e.startDate);
 });
+test('fresh official detail fees replace obsolete free classification without changing routes',()=>{
+ const base={...e,routeId:'persisted-route',freeEvent:true,price:0,tags:['free'],tagEvidence:{free:'無料'}};
+ const paid=mergeEventDetails(base,{fields:{price:'参加費無料（展示場観覧料が必要）'}});
+ assert.equal(paid.freeEvent,false);assert.equal(paid.tags.includes('free'),false);assert.equal(paid.routeId,base.routeId);assert.equal(paid.id,base.id);
+ const free=mergeEventDetails({...base,freeEvent:false},{fields:{price:0}});
+ assert.equal(free.freeEvent,true);assert.equal(free.price,0);assert.equal(free.routeId,base.routeId);
+});
 test('does not confuse an opening clock before the start label with the start clock',()=>{
  const event={...e,eventName:'演奏会',sourceId:'atc-events',officialUrl:'https://www.atc-co.com/event/test/'};
  const r=parseEventDetails('<article class="p-event-detail__article"><h2>演奏会</h2><dl><dt>開催時間</dt><dd>開場16:00 開演16:30</dd></dl></article>',event,checkedAt);assert.equal(r.fields.startTime,'16:30');assert.equal(r.fields.endTime,undefined);
+});
+
+test('official detail images use real src when lazy attributes are absent and never resolve null placeholders',()=>{
+ for(const sourceId of ['expo-park','namba-parks']){
+  const event={...e,sourceId,eventName:'公園の公式催事',officialUrl:'https://official.example.test/event/77306/'};
+  const body=images=>`<article class="main"><h1>${event.eventName}</h1>${images}</article>`;
+  const real=parseEventDetails(body('<img src="/photos/official-event.jpg">'),event,checkedAt);
+  assert.equal(real.fields.imageUrl,'https://official.example.test/photos/official-event.jpg');
+  assert.equal(real.fields.imageSourceUrl,event.officialUrl);
+  const lazy=parseEventDetails(body('<img data-src="/photos/full.jpg" src="null">'),event,checkedAt);
+  assert.equal(lazy.fields.imageUrl,'https://official.example.test/photos/full.jpg');
+  for(const images of ['', '<img>', '<img src=" ">', '<img data-src="null" data-original="undefined" src="/null">', '<img src="https://official.example.test/undefined?size=large">', '<meta property="og:image"><meta name="twitter:image" content="undefined">']){
+   const missing=parseEventDetails(body(images),event,checkedAt);
+   assert.equal(missing.fields.imageUrl,undefined);assert.equal(missing.fields.imageSourceUrl,undefined);
+   assert.equal(missing.fields.fieldEvidence?.imageUrl,undefined);
+  }
+ }
+});
+
+test('official event image candidates exclude access buttons, theme furniture and shared ogp assets',()=>{
+ const event={...e,sourceId:'expo-park',eventName:'コスモス・コキアフェスタ',officialUrl:'https://www.expo70-park.jp/event/77306/'};
+ const ui='<picture><source srcset="/sys/wp-content/themes/pc/src/img/event/btn_access_train.png 4000w"></picture><img src="/sys/wp-content/uploads/sportsfesta_access.png"><img data-src="/assets/img/button-car.png"><img src="/ogp.jpg"><img src="/templates/site-decoration.jpg">';
+ const parse=images=>parseEventDetails(`<article class="main"><h1>${event.eventName}</h1>${images}</article>`,event,checkedAt);
+ assert.equal(parse(ui).fields.imageUrl,undefined);
+ const photograph=parse(ui+'<img src="/sys/wp-content/uploads/cosmos-photo.jpg">');
+ assert.equal(photograph.fields.imageUrl,'https://www.expo70-park.jp/sys/wp-content/uploads/cosmos-photo.jpg');
+ assert.equal(photograph.fields.fieldEvidence.imageUrl.sourceUrl,event.officialUrl);
+ const assetPhoto=parse(ui+'<img src="/honten/assets/img/schedule/event-2026.webp">');
+ assert.equal(assetPhoto.fields.imageUrl,'https://www.expo70-park.jp/honten/assets/img/schedule/event-2026.webp');
 });
 test('venue registry requires explicit venue identity and evidence, preserving existing facts',()=>{
  const registry=[{aliases:['大阪市立科学館'],roomSuffixes:['研修室'],fields:{nearestStation:'公式駅',address:'公式住所'},fieldEvidence:{nearestStation:{sourceUrl:'https://example.test/access',checkedAt},address:{sourceUrl:'https://example.test/access',checkedAt}}}];
@@ -24,6 +60,14 @@ test('reviewed facts cannot leak across occurrences or apply without evidence',(
  const facts=[{sourceId:e.sourceId,eventName:e.eventName,startDate:e.startDate,fields:{price:0,endTime:'17:00'},fieldEvidence:{price:{text:'無料',sourceUrl:e.officialUrl,checkedAt}}}];
  const rows=enrichVerifiedFacts([e,{...e,startDate:'2026-10-04'},{...e,eventName:'別の実験'}],facts);
  assert.equal(rows[0].price,0);assert.equal(rows[0].endTime,undefined);assert.equal(rows[1].price,undefined);assert.equal(rows[2].price,undefined);
+});
+test('a newly reviewed zero price clears an obsolete paid flag while explicit partial-free policy wins',()=>{
+ const base={...e,freeEvent:false,price:'500円',tags:[]};
+ const review={sourceId:e.sourceId,eventName:e.eventName,startDate:e.startDate,fields:{price:0},fieldEvidence:{price:{text:'入場無料',sourceUrl:e.officialUrl,checkedAt}}};
+ const [free]=enrichVerifiedFacts([base],[review]);
+ assert.equal(free.freeEvent,true);assert.equal(free.id,e.id);
+ const [partial]=enrichVerifiedFacts([base],[{...review,fields:{price:0,freeEvent:false},fieldEvidence:{...review.fieldEvidence,freeEvent:{text:'一部の参加は有料',sourceUrl:e.officialUrl,checkedAt}}}]);
+ assert.equal(partial.freeEvent,false);
 });
 test('exhibition facts exclude reservation requirements of a related talk',()=>{
  const event={...e,eventName:'美術展',sourceId:'nakka-art-museum',officialUrl:'https://nakka-art.jp/exhibition-post/test/'};
@@ -67,4 +111,27 @@ test('cloud show keeps intermittent sessions and rental booking separate from fr
  assert.equal(facts.price,0);assert.equal(facts.reservationRequired,false);assert.match(facts.timeInfo,/約30分に1回/u);assert.equal(facts.startTime,undefined);assert.equal(facts.endTime,undefined);assert.equal(facts.reservationUrl,undefined);
  assert.match(facts.description,/屋上庭園/u);assert.match(facts.rainPolicy,/雨天・荒天/u);
  assert.deepEqual(parseNambaUnkaiDetails(html,{...event,startDate:'2027-08-28'},'https://nambaparks.com/nambaunkai/',checkedAt),{});
+});
+
+test('reviewed supporting fee quotes survive without changing the published identity',()=>{
+ const support={text:'障害者と介護者1名無料',sourceUrl:e.officialUrl,checkedAt};
+ const review={sourceId:e.sourceId,eventName:e.eventName,startDate:e.startDate,fields:{price:'一般2000円'},fieldEvidence:{price:{text:'一般2000円',sourceUrl:e.officialUrl,checkedAt},priceExemptions:support}};
+ const [result]=enrichVerifiedFacts([e],[review]);
+ assert.equal(result.id,e.id);assert.deepEqual(result.fieldEvidence.priceExemptions,support);
+});
+
+test('calendar detail review preserves a bounded stale booking snapshot and refuses unknown days or identities',()=>{
+ const now=new Date('2026-10-02T12:00:00Z'),calendarUrl='https://official.example.test/calendar';
+ const calendarQuote={text:'"2026-10-03"',sourceUrl:calendarUrl,checkedAt:'2026-10-01T23:00:00Z'};
+ const snapshot={...e,startDate:'2026-10-03',endDate:'2026-10-03',routeId:'stable-route',sourceStatus:'stale',lastCheckedAt:calendarQuote.checkedAt,price:'旧料金',schedule:{dates:['2026-10-03']},fieldEvidence:{dateRange:calendarQuote,schedule:calendarQuote}};
+ const detailQuote={text:'休日一般2600円、保護者同伴',sourceUrl:e.officialUrl,checkedAt:'2026-10-02T11:00:00Z'};
+ const review={sourceId:e.sourceId,eventName:e.eventName,startDate:'2026-05-21',calendarDetailScope:{kind:'verified-calendar-details',officialUrl:e.officialUrl,officialStartDate:'2026-05-21',officialEndDate:null,officialPeriodEvidence:{...detailQuote,text:'2026年5月21日〜'},calendarUrl,confirmedCalendarDates:['2026-10-03']},fields:{price:'休日一般2600円',reservationInfo:'保護者同伴',schedule:{dates:['2026-10-04']},startDate:'2026-10-04',lastCheckedAt:detailQuote.checkedAt,endTime:'23:00'},fieldEvidence:{price:detailQuote,reservationInfo:detailQuote,schedule:detailQuote,startDate:detailQuote,lastCheckedAt:detailQuote,endTime:detailQuote,dateRange:detailQuote}};
+ const [result]=enrichVerifiedFacts([snapshot],[review],{now});
+ assert.equal(result.price,review.fields.price);assert.equal(result.reservationInfo,'保護者同伴');
+ for(const key of ['id','routeId','startDate','endDate','lastCheckedAt','sourceStatus'])assert.equal(result[key],snapshot[key]);
+ assert.deepEqual(result.schedule,snapshot.schedule);assert.deepEqual(result.fieldEvidence.dateRange,calendarQuote);assert.deepEqual(result.fieldEvidence.schedule,calendarQuote);assert.equal(result.endTime,undefined);assert.equal(result.fieldEvidence.price.checkedAt,detailQuote.checkedAt);
+ const mismatches=[{...snapshot,startDate:'2026-10-04',endDate:'2026-10-04',schedule:{dates:['2026-10-04']}},{...snapshot,officialUrl:'https://other.test/'},{...snapshot,sourceId:'another-source'},{...snapshot,eventName:'別の実験'},{...snapshot,fieldEvidence:{}},{...snapshot,lastCheckedAt:'2026-09-01T00:00:00Z'}];
+ for(const mismatch of mismatches)assert.equal(enrichVerifiedFacts([mismatch],[review],{now})[0].price,'旧料金');
+ assert.equal(enrichVerifiedFacts([snapshot],[review],{now:new Date('2026-10-17T12:00:00Z')})[0].price,'旧料金');
+ assert.equal(enrichVerifiedFacts([snapshot],[review],{now:new Date('2026-10-01T12:00:00Z')})[0].price,'旧料金');
 });

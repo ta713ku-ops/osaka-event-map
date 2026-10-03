@@ -1,0 +1,232 @@
+{
+  "retrievedAt": "2026-10-02T11:25:09.484Z",
+  "occurrences": [],
+  "unverified": [
+    {
+      "sourceId": "verified-outings-autumn-fest-osaka-station-city-2026",
+      "eventName": "Autumn Fest 2026 第2弾！",
+      "fields": ["individualDailySchedule", "eventWideTime", "eventWidePrice", "reservationInfo"],
+      "officialUrl": "https://osakastationcity.com/event/6374/",
+      "reason": "公式ページは複数催事をまとめた案内で、個々の催事の日程・時間・料金・予約条件を掲載していない。期間全日開催や共通の料金・時間は推定しない。",
+      "fieldEvidence": {
+        "descriptionHighlights": {
+          "text": "イベントを多数開催しています。 バーチャル大阪駅イベントや 「まち歩き&times;健康」がテーマの「梅田あるくフェス」 読書の秋「読の市」等イベントが多彩! 時空の広場ではご好評のフォトスポットも!",
+          "sourceUrl": "https://osakastationcity.com/event/6374/",
+          "checkedAt": "2026-10-02T11:20:56.297Z"
+        }
+      }
+    },
+    {
+      "sourceId": "verified-outings-tenshiba-oktoberfest-2026",
+      "eventName": "てんしばオクトーバーフェスト2026",
+      "fields": ["eventWidePrice"],
+      "officialUrl": "http://tenshiba-oktoberfest.com/enjoy/index.html",
+      "reason": "取得した2026年公式案内本文では飲食券の決済方法を確認できたが、入場料・飲食券の額はテキストで確認できないため金額を補わない。",
+      "fieldEvidence": {
+        "paymentMethod": {
+          "text": "ドリンク・フード購入のお支払い方法について ・ 現金 ・ ご飲食券 ・ キャッシュレス全般 ※デポジットにはご使用いただけません。",
+          "sourceUrl": "http://tenshiba-oktoberfest.com/enjoy/index.html",
+          "checkedAt": "2026-10-02T11:25:09.484Z"
+        }
+      }
+    }
+  ],
+  "updates": [
+    {
+      "sourceId": "verified-outings-conan-shinsaibashi-2026",
+      "eventName": "リアル脱出ゲーム×名探偵コナン『疾風の追走からの脱出』",
+      "startDate": "2026-07-09",
+      "patch": {
+        "description": "制御不能になった自動運転バスをめぐる物語を、コナンたちとともに追うリアル脱出ゲーム。",
+        "price": "一般チケット：前売3,700円・当日4,000円。for kidsチケット：前売2,700円・当日3,000円。グループチケット：前売20,400円・当日22,200円。",
+        "timeInfo": "10/2 12:30・16:00・19:30、10/3 10:00・13:30・16:30・20:00、10/4 11:00・14:30・18:00、10/5–7 12:30・16:00・19:30、10/9 12:30・16:00・19:30、10/10 10:00・13:30・16:30・20:00、10/11–12 11:00・14:30・18:00。各回受付は30分前開始、開演10分前までに来場。",
+        "schedule": {
+          "dates": [
+            "2026-10-02",
+            "2026-10-03",
+            "2026-10-04",
+            "2026-10-05",
+            "2026-10-06",
+            "2026-10-07",
+            "2026-10-09",
+            "2026-10-10",
+            "2026-10-11",
+            "2026-10-12"
+          ],
+          "evidence": "10月スケジュール 10/2(金) 12:30 16:00 19:30 10/3(土) 10:00 13:30 16:30 20:00 10/4(日) 11:00 14:30 18:00 10/5(月) 12:30 16:00 19:30 10/6(火) 12:30 16:00 19:30 10/7(水) 12:30 16:00 19:30 10/9(金) 12:30 16:00 19:30 10/10(土) 10:00 13:30 16:30 20:00 10/11(日) 11:00 14:30 18:00 10/12(月) 11:00 14:30 18:00"
+        },
+        "reservationInfo": "参加日時を指定したチケットを購入して来場。小学生以下は18歳以上の保護者同伴、未就学児は保護者同伴の場合に限り無料、小学生以上はチケットが必要。",
+        "accessByTransit": "大阪メトロ御堂筋線「心斎橋駅」から徒歩5分。7番出口からアクセス。",
+        "nearestStation": "大阪メトロ御堂筋線 心斎橋駅（徒歩5分）",
+        "fieldEvidence": {
+          "description": {
+            "text": "横浜で自動運転バスの試乗会に参加したコナン、蘭、世良。しかし突如、蘭を1人乗せたままバスが暴走を始める! コースを外れたバスを追うコナンと世良。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "descriptionHighlights": {
+            "text": "「指令センター、応答願います! 車内には......時限爆弾が仕掛けられている模様です!」",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "price": {
+            "text": "チケット料金 全日 前売料金 当日料金 一般チケット 3,700円 4,000円 for kidsチケット 2,700円 3,000円 グループチケット 20,400円 22,200円",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "timeInfo": {
+            "text": "10月スケジュール 10/2(金) 12:30 16:00 19:30 10/3(土) 10:00 13:30 16:30 20:00 10/4(日) 11:00 14:30 18:00 10/5(月) 12:30 16:00 19:30 10/6(火) 12:30 16:00 19:30 10/7(水) 12:30 16:00 19:30 10/9(金) 12:30 16:00 19:30 10/10(土) 10:00 13:30 16:30 20:00 10/11(日) 11:00 14:30 18:00 10/12(月) 11:00 14:30 18:00 ※8/10、12、13、14、9/24、25は「U22団員割」対象外です。 受付開始は、各回30分前となります。 ※必ずゲームスタートの10分前までに会場までお越しください。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "schedule": {
+            "text": "10月スケジュール 10/2(金) 12:30 16:00 19:30 10/3(土) 10:00 13:30 16:30 20:00 10/4(日) 11:00 14:30 18:00 10/5(月) 12:30 16:00 19:30 10/6(火) 12:30 16:00 19:30 10/7(水) 12:30 16:00 19:30 10/9(金) 12:30 16:00 19:30 10/10(土) 10:00 13:30 16:30 20:00 10/11(日) 11:00 14:30 18:00 10/12(月) 11:00 14:30 18:00",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "reservationInfo": {
+            "text": "参加したい日時のチケットをお求めいただき、当日受付時間に会場にお越しください。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "participationConditions": {
+            "text": "小学生以下のお子様は18歳以上の保護者の方とご一緒にご参加ください。また、小学生のお子様向けには、保護者の方とお子様が協力しながら謎解きを楽しむことができるファミリーキットをご準備しております。ファミリーキットの詳細はこちら 未就学児は保護者同伴の場合に限り無料でご参加いただけます。小学生以上は必ずチケットが必要です。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+            "checkedAt": "2026-10-02T11:20:56.013Z"
+          },
+          "accessByTransit": {
+            "text": "最寄駅 大阪メトロ 御堂筋線 [心斎橋駅]徒歩5分 御堂筋線 心斎橋駅『7番』出口を上がり、",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/access/",
+            "checkedAt": "2026-10-02T11:25:09.439Z"
+          },
+          "nearestStation": {
+            "text": "最寄駅 大阪メトロ 御堂筋線 [心斎橋駅]徒歩5分",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka/access/",
+            "checkedAt": "2026-10-02T11:25:09.439Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T11:25:09.439Z"
+      }
+    },
+    {
+      "sourceId": "verified-outings-jikken-lab-osaka-2026",
+      "eventName": "リアル脱出ゲーム『ある実験室からの脱出』（リバイバル）",
+      "startDate": "2026-05-21",
+      "patch": {
+        "price": "平日：一般前売2,300円・当日2,600円、グループ前売8,000円・当日9,200円。土日祝・ハイシーズン：一般前売2,600円・当日2,900円、グループ前売9,200円・当日10,400円。平日限定U22団員：一般当日1,300円、グループ当日4,600円（グループ全員が22歳以下のSCRAPファンクラブ会員限定）。",
+        "timeInfo": "平日 14:00・14:45・15:30・16:15・17:45・18:30・19:15。土日祝 10:45・11:30・12:15・13:00・13:45・14:30・15:15・16:00・16:45・17:30・18:15・19:00。各回20分前受付開始、開演10分前までに受付。",
+        "schedule": {
+          "closedDates": ["2026-10-14", "2026-10-15"],
+          "evidence": "※2026年10月14日(水),15日(木),11月10日(火),12月8日(火)は休業"
+        },
+        "reservationInfo": "日時指定チケット制。小学生以上はチケット必須。小学生以下は18歳以上の保護者同伴が必要で、未就学児は保護者1人につき1人まで同伴可能。前売りは参加日前日23:59まで、前売り完売時は当日券の販売なし。",
+        "accessByTransit": "地下鉄堺筋線「恵美須町駅」からの来場が便利。1−B出口を出て右方向へ進み、約2分。",
+        "nearestStation": "地下鉄堺筋線 恵美須町駅",
+        "fieldEvidence": {
+          "descriptionHighlights": {
+            "text": "本イベントは 1チーム1~4人 で挑戦していただくリアル脱出ゲームです。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+            "checkedAt": "2026-10-02T11:20:56.119Z"
+          },
+          "price": {
+            "text": "料金 通常料金 【平日料金】 一般 : 前売券 2,300円 / 当日券 2,600円 グループチケット:前売り券 8,000円 / 当日券 9,200円 【土日祝日&ハイシーズン料金】 一般 : 前売券 2,600円 / 当日券 2,900円 グループチケット:前売券 9,200円 / 10,400円 【平日限定U22団員】 U22団員一般 : 当日券 1,300円 U22団員グループチケット:当日券 4,600円 ※グループ全員が22歳以下のSCRAPファンクラブ会員の方限定のチケットです。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+            "checkedAt": "2026-10-02T11:20:56.119Z"
+          },
+          "timeInfo": {
+            "text": "開催日時 平日 14:00 / 14:45 / 15:30 / 16:15 / 17:45 / 18:30 / 19:15 土日祝 10:45 / 11:30 / 12:15 / 13:00 / 13:45 / 14:30 / 15:15 / 16:00 /16:45 / 17:30 / 18:15 / 19:00",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+            "checkedAt": "2026-10-02T11:20:56.119Z"
+          },
+          "schedule": {
+            "text": "※2026年10月14日(水),15日(木),11月10日(火),12月8日(火)は休業",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+            "checkedAt": "2026-10-02T11:20:56.119Z"
+          },
+          "reservationInfo": {
+            "text": "小学生以上のご参加には必ずチケットが必要です。参加される人数分のチケットをご購入ください。 ■小学生以下の方のご参加には、18歳以上の保護者の同伴が必要です。未就学児は1人の入場につき18歳以上の保護者1人の同伴が必要です。 ■チケットは記載されている日時にのみ有効です。 ■前売チケットは参加日前日の23:59まで購入可能です。 ■前売チケットが完売した場合、当日チケットの販売はございません。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+            "checkedAt": "2026-10-02T11:20:56.119Z"
+          },
+          "accessByTransit": {
+            "text": "地下鉄堺筋線、恵美須町駅からのご来場が便利です。会場に駐車場、駐輪場はございません。公共交通機関でのご来場をお勧めいたします。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/access.html?pj_id=wasureyuki",
+            "checkedAt": "2026-10-02T11:20:56.165Z"
+          },
+          "nearestStation": {
+            "text": "地下鉄堺筋線、恵美須町駅からのご来場が便利です。",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/access.html?pj_id=wasureyuki",
+            "checkedAt": "2026-10-02T11:20:56.165Z"
+          },
+          "transitRoute": {
+            "text": "(地下鉄恵美須町駅からのアクセス) ①1−B出口から出る(北西側出口) ②階段を上がったら、そのまま右方向へ。 ③約2分進んだら右手に見えます。かんたん!",
+            "sourceUrl": "https://realdgame.jp/ajito/osaka_nazobldg/access.html?pj_id=wasureyuki",
+            "checkedAt": "2026-10-02T11:20:56.165Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T11:20:56.165Z"
+      }
+    },
+    {
+      "sourceId": "verified-outings-autumn-fest-osaka-station-city-2026",
+      "eventName": "Autumn Fest 2026 第2弾！",
+      "startDate": "2026-09-26",
+      "patch": {
+        "description": "10月24日まで、バーチャル大阪駅イベント、「梅田あるくフェス」、「読の市」や時空の広場のフォトスポットなど、秋のお出かけ企画を多数開催。",
+        "accessByTransit": "大阪駅に直結。",
+        "fieldEvidence": {
+          "description": {
+            "text": "10月24日まで秋のおでかけシーズンに 合わせて心地よくお楽しみいただける イベントを多数開催しています。 バーチャル大阪駅イベントや 「まち歩き&times;健康」がテーマの「梅田あるくフェス」 読書の秋「読の市」等イベントが多彩! 時空の広場ではご好評のフォトスポットも!",
+            "sourceUrl": "https://osakastationcity.com/event/6374/",
+            "checkedAt": "2026-10-02T11:20:56.297Z"
+          },
+          "accessByTransit": {
+            "text": "関西の玄関口・大阪駅に直結",
+            "sourceUrl": "https://www.osakastationcity.com/map/",
+            "checkedAt": "2026-10-02T11:20:56.399Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T11:20:56.399Z"
+      }
+    },
+    {
+      "sourceId": "verified-outings-tenshiba-oktoberfest-2026",
+      "eventName": "てんしばオクトーバーフェスト2026",
+      "startDate": "2026-09-11",
+      "patch": {
+        "description": "ミュンヘン公式ブルワリーなどのドイツ直輸入樽生ビール、世界ワインフェス、週末のライブパフォーマンスを楽しめる催し。",
+        "reservationInfo": "席の予約は不可で、全席自由席。20歳未満の飲酒は禁止され、年齢確認を受ける場合があります。",
+        "accessByTransit": "Osaka Metro御堂筋線・谷町線、JR「天王寺」駅、近鉄「大阪阿部野橋」駅、いまざとライナー「あべの橋」停留所から徒歩すぐ。公共交通機関を利用。",
+        "nearestStation": "Osaka Metro御堂筋線・谷町線「天王寺」駅、JR「天王寺」駅、近鉄「大阪阿部野橋」駅。",
+        "fieldEvidence": {
+          "description": {
+            "text": "ミュンヘンオクトーバーフェスト公式ブルワリーをはじめ、てんしばオクトーバーフェスト初登場のビールなど、普段なかなか味わうことのできないドイツ直輸入の樽生ビールが大集結します! 日本のビールとは一味ちがう、コクがありながらもスッキリとした風味豊かなドイツビールを多数ご堪能いただけます。 さらに、ヨーロッパを中心とした世界のワインが味わえる「世界ワインフェス」も同時開催!! 週末にはステージでのライブパフォーマンスもあります♪",
+            "sourceUrl": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+            "checkedAt": "2026-10-02T11:20:56.598Z"
+          },
+          "reservationInfo": {
+            "text": "予約は承っておりません。全席自由席となっておりますのでお好きなお席をご利用ください。",
+            "sourceUrl": "http://tenshiba-oktoberfest.com/access/index.html",
+            "checkedAt": "2026-10-02T11:20:56.691Z"
+          },
+          "participationConditions": {
+            "text": "飲酒運転および20歳未満の方の飲酒は固く禁じられています。20歳未満の方の飲酒防止のため、スタッフが年齢確認をさせていただく場合がございます。",
+            "sourceUrl": "http://tenshiba-oktoberfest.com/access/index.html",
+            "checkedAt": "2026-10-02T11:20:56.691Z"
+          },
+          "accessByTransit": {
+            "text": "最寄り駅 ■電車でお越しの方 Osaka Metro 御堂筋線・谷町線「天王寺」駅 JR「天王寺」駅 近鉄「大阪阿部野橋」駅 ■大阪シティバスでお越しの方 いまざとライナー「あべの橋」停留所 各駅・停留所から徒歩すぐ",
+            "sourceUrl": "http://tenshiba-oktoberfest.com/access/index.html",
+            "checkedAt": "2026-10-02T11:20:56.691Z"
+          },
+          "nearestStation": {
+            "text": "■電車でお越しの方 Osaka Metro 御堂筋線・谷町線「天王寺」駅 JR「天王寺」駅 近鉄「大阪阿部野橋」駅",
+            "sourceUrl": "http://tenshiba-oktoberfest.com/access/index.html",
+            "checkedAt": "2026-10-02T11:20:56.691Z"
+          }
+        },
+        "lastCheckedAt": "2026-10-02T11:20:56.691Z"
+      }
+    }
+  ]
+}

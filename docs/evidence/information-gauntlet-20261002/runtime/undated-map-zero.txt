@@ -1,0 +1,63 @@
+- main:
+  - link "候補へ移動":
+    - /url: "#event-results"
+  - generic "どこいこ大阪":
+    - paragraph: どこいこ大阪
+    - navigation "メインナビゲーション":
+      - button "ホーム":
+        - generic: ホーム
+      - button "イベントを検索":
+        - generic: 検索
+      - button "地図" [active]:
+        - generic: 地図
+      - button "保存したイベント（0件）":
+        - generic: 保存
+    - button "現在地を基準にする":
+    - button "好みを設定":
+  - region "開催日の絞り込み":
+    - generic: イベント名や場所を検索
+    - textbox "イベント名や場所を検索":
+      - /placeholder: イベント名や場所から探す
+      - text: 50万本
+    - button "条件を追加":
+  - generic "イベントの検索条件":
+    - text: 日付を指定
+    - textbox "日付を指定"
+    - text: エリア
+    - combobox "エリア":
+      - option "大阪全域" [selected]
+      - option "梅田・中之島"
+      - option "なんば・心斎橋"
+      - option "天王寺・あべの"
+      - option "大阪ベイエリア"
+      - option "大阪市のその他"
+      - option "北摂"
+      - option "河内"
+      - option "堺・泉州"
+    - text: 並び順
+    - combobox "並び順":
+      - option "注目順" [selected]
+      - option "開催日順"
+    - button "ジャンル・条件"
+    - button "無料"
+    - generic "適用中の条件":
+      - button "検索：50万本を解除": 検索：50万本 ×
+      - button "すべて解除"
+  - paragraph: 大阪駅から · 地図に表示 0件 · 座標未確認 0件（ホームの一覧で確認できます）
+  - text: ・ ・ ・ ・ ・ ・
+  - region "大阪府イベントマップ":
+    - region "大阪のイベント地図":
+      - link "Leaflet":
+        - /url: https://leafletjs.com
+        - text: Leaflet
+      - text: "| ©"
+      - link "OpenStreetMap":
+        - /url: https://www.openstreetmap.org/copyright
+      - text: contributors
+      - button "現在地を表示":
+        - generic: 現在地
+    - generic: 地図に0件
+    - status:
+      - strong: この条件のイベントは見つかりませんでした
+      - generic: 時間や距離を広げると候補が増えます。
+      - button "これから行ける候補を見る"

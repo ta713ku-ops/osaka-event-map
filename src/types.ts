@@ -31,6 +31,7 @@ export interface RecommendationEvidence {
 }
 export interface EventSchedule {
   evidence?: string; weekdays?: number[]; closedDates?: string[]; daily?: boolean; dates?: string[];
+  hoursByDate?: Record<string, { startTime: string; endTime: string }>;
 }
 
 export type EventOfficialStatus = 'scheduled' | 'cancelled' | 'postponed' | 'sold_out' | 'registration_closed';
@@ -50,6 +51,30 @@ export interface EventFieldEvidence {
   text?: string;
   sourceUrl?: string;
   checkedAt?: string;
+  sha256?: string;
+  extractionMethod?: string;
+  evidenceKind?: string;
+}
+
+/** Official forecasts without confirmed occurrence dates. Never date-filter as events. */
+export interface SeasonalGuide {
+  id: string;
+  title: string;
+  venueName: string;
+  address: string;
+  periodText: string;
+  description: string;
+  bloomStatus: string;
+  priceInfo: string;
+  timeInfo: string;
+  accessByTransit: string;
+  parkingInfo: string;
+  contact: string;
+  officialUrl: string;
+  lastCheckedAt: string;
+  sourceStatus: EventSourceStatus;
+  validThroughMonth: string;
+  fieldEvidence: Record<string, EventFieldEvidence>;
 }
 
 export interface EventItem {
@@ -131,6 +156,7 @@ export interface EventDataFile {
   sources?: EventSource[];
   quality?: EventQualitySummary;
   events: EventItem[];
+  seasonalGuides?: SeasonalGuide[];
 }
 
 export interface EventQualityMetric {

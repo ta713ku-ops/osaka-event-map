@@ -1,0 +1,30 @@
+{
+  "conditions": "Information comparison at 2026-10-02 JST, fixed 38 subjects (37 dated events and 1 undated forecast). Runtime additionally exercised at real 2026-10-03 JST. No market-wide inference or reservation guarantee.",
+  "method": "Both actual inert JSON artifacts use the same subject set and conditions. No design scoring. Evidence files are captured outputs, not active reference code.",
+  "artifactFingerprints": {
+    "A": "c618e3012c11e6723fc926bc921c3b82bdc09a9e7bfc179051ab1256201b4f93",
+    "B": "daf44ce6857dfccfc8b53449a0b657aebeafd92686e402d7861aac5d023dcc6b"
+  },
+  "dataset": {
+    "records": 532,
+    "guides": 1,
+    "generatedAt": "2026-10-02T12:20:30.504Z",
+    "publicAndBuiltDataEqual": true,
+    "sha256": "1ec25ef5debac8b50f5717873904c79997136ddbba923dfbc700dccdec2456f9",
+    "scriptAsset": "index-BoLB4LhV.js"
+  },
+  "evidence": {
+    "official_evidence": "Both JSON artifacts carry actual published information. One also has primary fieldEvidence quotes/URLs/check times, with stale explicitly retained. Visually captured primary posters are supplied for PARKLABO, Oktoberfest, ART. Judge evidence quality independently.",
+    "coverage": "Inspect all 38 subject IDs and listingKind; undated forecast must not be counted as a dated event. Inspect real JSON, not headline counts.",
+    "schedule_correctness": "runtime-data-checks.json has 18 actual-data assertions including all Mucha closure exceptions and single-digit opening. mucha-date-search-final.json has seven native date input observations; closed dates yield0 and exceptional Mondays1. UI157 regression includes daily/final-day/overnight clocks.",
+    "search_consistency": "namba-free-one.txt=1 result at 0円, cosmos-free-zero.txt=0, night-zoo-weekend-zero.txt=0 on Oct3/4, undated-map-zero.txt=0 pins. Cosmos detail visibly states required admission450円.",
+    "regression_tests": "ui-tests-final.log157/157; collector-tests-final.log100/100; successful production build includes tsc.",
+    "production_build": "Successful production-build-final.log532 static detail pages; dataset-input.json and dataset-distribution.json supplied for independent byte/hash inspection. Runtime loaded index-BoLB4LhV.js.",
+    "browser_runtime": "Actual Chromium production preview. Current mobile390x844 anddesktop1280x800 measurements included; raw console-final.json empty; current mobile-mucha-final.jpg; mucha-detail-final.txt; back-restore-final.txt; retained direct-detail reload proof. No native Safari/VoiceOver test."
+  },
+  "limits": [
+    "Not a census of Osaka. The extra9 subjects were fixed before improvement, not an unseen holdout.",
+    "Unknown clock times remain unknown. SCRAP calendar onlyOct3 with checkUTC Oct1 = JST Oct2 08:12; booking availability not guaranteed. Some runtime proofs retained from Oct2/3 before the four bounded detail updates; new update assertions and Mucha/current asset runtime supplied.",
+    "A technical implementation may have gates that have no code analogue in an informational reference; report gate findings about the supplied executable implementation evidence independently of subjective A/B preference."
+  ]
+}

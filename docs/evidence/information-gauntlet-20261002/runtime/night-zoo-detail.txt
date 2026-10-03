@@ -1,0 +1,96 @@
+- text: ＋ ・ ・ ・ ・ ・ ・
+- main:
+  - button "戻る":
+    - text: 戻る
+  - link "どこいこ大阪":
+    - /url: /osaka-event-map/
+  - button "共有":
+    - text: 共有
+  - article:
+    - paragraph: 夜イベント
+    - heading "2026 ナイトZOO" [active] [level=1]
+    - paragraph: 本日開催なし
+    - generic "イベント概要":
+      - term: 日程
+      - definition: 2026年8月14日(金) 〜 10月25日(日)（期間内の指定日のみ）
+      - term: 会場
+      - definition: 天王寺動物園
+      - generic: ¥
+      - term: 料金
+      - definition: 大人800円、大阪市外の小・中学生200円、未就学児無料・条件は詳細
+    - button "お気に入りに保存":
+      - text: お気に入りに保存
+    - region "参加の基本情報":
+      - paragraph: 参加前に確認
+      - heading "参加の基本情報" [level=2]
+      - paragraph: 日時・費用・参加方法
+      - term: 開催日
+      - definition: 2026年8月14日(金)、8月15日(土)、8月16日(日)、9月19日(土)、9月20日(日)、9月21日(月)、9月22日(火)、9月23日(水)、10月10日(土)、10月11日(日)、10月17日(土)、10月18日(日)、10月24日(土)、10月25日(日)
+      - paragraph: 公式で確認した指定日のみ。期間内の毎日開催ではありません。
+      - paragraph:
+        - text: 9:30~20:00(最終入園19:30)。17時頃からライトアップ。動物舎によって観覧終了時刻が異なります。
+      - term: 会場
+      - definition: 天王寺動物園
+      - paragraph: 〒543-0063 大阪市天王寺区茶臼山町1-108
+      - generic: ¥
+      - term: 料金
+      - definition: 大人800円、大阪市外の小・中学生200円、未就学児無料・条件は詳細
+      - generic "詳しい料金・割引条件"
+      - term: 予約
+      - definition: 予約情報は未確認
+      - paragraph: 入園チケットは動物園ゲートまたは公式ウェブサイトで購入。
+      - link "公式情報を確認":
+        - /url: https://www.tennojizoo.jp/event-info/46679/
+        - text: 公式情報を確認
+    - region "イベントについて":
+      - paragraph: 開催内容
+      - heading "イベントについて" [level=2]
+      - paragraph: 普段は見ることができない動物たちの夜の姿を観覧し、生態をより深く知るイベントです。
+      - list "確認されているイベントの特徴":
+        - listitem: 親子
+    - region "アクセス":
+      - paragraph: 会場へ行く
+      - heading "アクセス" [level=2]
+      - strong: 天王寺動物園
+      - paragraph: 〒543-0063 大阪市天王寺区茶臼山町1-108
+      - term:
+        - text: 電車・バス
+      - definition: Osaka Metro「動物園前」「恵美須町」「天王寺」、JR・南海「新今宮」、JR「天王寺」、近鉄「大阪阿部野橋」などから徒歩5〜10分。
+      - button "Apple Mapsで経路を見る":
+        - text: Apple Mapsで経路を見る
+      - button "Google Mapsで見る":
+        - text: Google Mapsで見る
+    - region "出典と確認日":
+      - paragraph: 情報を確かめる
+      - heading "出典と確認日" [level=2]
+      - paragraph: 公式情報を確認済み
+      - paragraph:
+        - text: 最終確認
+        - time: 2026年10月2日 21:08
+      - paragraph: 情報元：地方独立行政法人天王寺動物園
+      - list:
+        - link "公式サイトを開く":
+          - /url: https://www.tennojizoo.jp/event-info/46679/
+          - text: 公式サイトを開く
+    - region "同じ会場・エリアのイベント":
+      - paragraph: あわせて見たい
+      - heading "同じ会場・エリアのイベント" [level=2]
+      - generic: 3件
+      - link "10月9日(金) ・ 展覧会 アジアの彫刻 大阪市立美術館":
+        - /url: /osaka-event-map/events/a2700b0e8abdad3a6dfd/
+        - generic: 大阪の催し
+        - generic: 10月9日(金) ・ 展覧会
+        - strong: アジアの彫刻
+        - generic: 大阪市立美術館
+      - link "10月9日(金) ・ 展覧会 景徳鎮窯のやきもの 大阪市立美術館":
+        - /url: /osaka-event-map/events/39afc7e1dbcb3460d0ea/
+        - generic: 大阪の催し
+        - generic: 10月9日(金) ・ 展覧会
+        - strong: 景徳鎮窯のやきもの
+        - generic: 大阪市立美術館
+      - link "10月9日(金) ・ 展覧会 東アジアの金工品 大阪市立美術館":
+        - /url: /osaka-event-map/events/71f9c2b5a9fa9e5a32e3/
+        - generic: 大阪の催し
+        - generic: 10月9日(金) ・ 展覧会
+        - strong: 東アジアの金工品
+        - generic: 大阪市立美術館

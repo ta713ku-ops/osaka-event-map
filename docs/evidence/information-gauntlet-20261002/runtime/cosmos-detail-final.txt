@@ -1,0 +1,120 @@
+- text: ＋ ・ ・ ・ ・ ・ ・
+- main:
+  - button "戻る":
+    - text: 戻る
+  - link "どこいこ大阪":
+    - /url: /osaka-event-map/
+  - button "共有":
+    - text: 共有
+  - article:
+    - paragraph: 祭り・フェス
+    - heading "コスモス・コキアフェスタ 2026" [active] [level=1]
+    - paragraph: 開催中
+    - generic "イベント概要":
+      - term: 日程
+      - definition: 2026年10月3日(土) 〜 10月30日(金)
+      - term: 会場
+      - definition: 自然文化園 花の丘ほか
+      - generic: ¥
+      - term: 料金
+      - definition: 催事は無料・入園料：高校生以上450円・中学生以下無料・条件は詳細
+    - button "お気に入りに保存":
+      - text: お気に入りに保存
+    - region "参加の基本情報":
+      - paragraph: 参加前に確認
+      - heading "参加の基本情報" [level=2]
+      - paragraph: 日時・費用・参加方法
+      - term: 開催日
+      - definition: 2026年10月3日(土) 〜 10月30日(金)
+      - paragraph:
+        - text: 9:30～17:00（最終入園16:30）
+      - term: 会場
+      - definition: 自然文化園 花の丘ほか
+      - paragraph: 〒565-0826 大阪府吹田市千里万博公園
+      - generic: ¥
+      - term: 料金
+      - definition: 催事は無料・入園料：高校生以上450円・中学生以下無料・条件は詳細
+      - generic "詳しい料金・割引条件"
+      - term: 予約
+      - definition: 予約情報は未確認
+      - link "公式情報を確認":
+        - /url: https://www.expo70-park.jp/event/77306/
+        - text: 公式情報を確認
+    - region "イベントについて":
+      - paragraph: 開催内容
+      - heading "イベントについて" [level=2]
+      - paragraph: 花の丘で約15万本のコスモスと約3,600株のコキアの紅葉を楽しむ催し。ミューレンベルギアや赤ソバなど秋の草花も見られます。
+    - region "アクセス":
+      - paragraph: 会場へ行く
+      - heading "アクセス" [level=2]
+      - strong: 自然文化園 花の丘ほか
+      - paragraph: 〒565-0826 大阪府吹田市千里万博公園
+      - term:
+        - text: 最寄駅
+      - definition: 大阪モノレール 万博記念公園駅／公園東口駅
+      - term:
+        - text: 電車・バス
+      - definition: 大阪モノレール「万博記念公園駅」「公園東口駅」が便利です。阪急南茨木・山田・蛍池、千里中央、大日、門真市の各駅からモノレールへ乗り換え。園内の目的地別の経路は公式案内で確認してください。
+      - button "Apple Mapsで経路を見る":
+        - text: Apple Mapsで経路を見る
+      - button "Google Mapsで見る":
+        - text: Google Mapsで見る
+    - region "出典と確認日":
+      - paragraph: 情報を確かめる
+      - heading "出典と確認日" [level=2]
+      - paragraph: 公式情報を確認済み
+      - paragraph:
+        - text: 最終確認
+        - time: 2026年10月2日 21:20
+      - paragraph: 情報元：万博記念公園
+      - list:
+        - link "公式サイトを開く":
+          - /url: https://www.expo70-park.jp/event/77306/
+          - text: 公式サイトを開く
+        - link "万博記念公園":
+          - /url: https://www.expo70-park.jp/events/
+          - text: 万博記念公園
+    - region "近くのイベント":
+      - paragraph: あわせて見たい
+      - heading "近くのイベント" [level=2]
+      - generic: 3件
+      - link "3月14日(土) ・ 展覧会 EXPO’70パビリオン企画展 1970年大阪万博ビフォー・アフター展 ~あのパビリオンはいまどこに?~ 2026 万博記念公園":
+        - /url: /osaka-event-map/events/81d8b910c6940868b4c9/
+        - generic: 大阪の催し
+        - generic: 3月14日(土) ・ 展覧会
+        - strong: EXPO’70パビリオン企画展 1970年大阪万博ビフォー・アフター展 ~あのパビリオンはいまどこに?~ 2026
+        - generic: 万博記念公園
+      - link "4月22日(水) ・ 体験・教室 “学びながら巡る万博体験”「EXPO’70スタンプラリー&EFE Global Learning Project」 万博記念公園":
+        - /url: /osaka-event-map/events/5cc84be6f471cee4966a/
+        - generic: 大阪の催し
+        - generic: 4月22日(水) ・ 体験・教室
+        - strong: “学びながら巡る万博体験”「EXPO’70スタンプラリー&EFE Global Learning Project」
+        - generic: 万博記念公園
+      - link "10月2日(金) ・ 祭り・フェス SAKANA&JAPAN FESTIVAL2026 in 万博記念公園 万博記念公園 お祭り広場":
+        - /url: /osaka-event-map/events/a3834bf85d4790a64a08/
+        - generic: 大阪の催し
+        - generic: 10月2日(金) ・ 祭り・フェス
+        - strong: SAKANA&JAPAN FESTIVAL2026 in 万博記念公園
+        - generic: 万博記念公園 お祭り広場
+    - region "同じ会場・エリアのイベント":
+      - paragraph: あわせて見たい
+      - heading "同じ会場・エリアのイベント" [level=2]
+      - generic: 3件
+      - link "5月11日(月) ・ 季節イベント 竹林保全活動ボランティア募集<要事前申込> 万博記念公園":
+        - /url: /osaka-event-map/events/e2d6d869b07f6f7ddb01/
+        - generic: 大阪の催し
+        - generic: 5月11日(月) ・ 季節イベント
+        - strong: 竹林保全活動ボランティア募集<要事前申込>
+        - generic: 万博記念公園
+      - link "10月4日(日) ・ 季節イベント ガンバ大阪ストライカー&GKクリニック<要事前申込> 万博記念公園":
+        - /url: /osaka-event-map/events/2c31a5f7932a5365f45e/
+        - generic: 大阪の催し
+        - generic: 10月4日(日) ・ 季節イベント
+        - strong: ガンバ大阪ストライカー&GKクリニック<要事前申込>
+        - generic: 万博記念公園
+      - link "10月9日(金) ・ 季節イベント パンとドーナツの世界 ららぽーとEXPOCITY 1F 光の広場":
+        - /url: /osaka-event-map/events/e1cf8d33c48f06570671/
+        - generic: 大阪の催し
+        - generic: 10月9日(金) ・ 季節イベント
+        - strong: パンとドーナツの世界
+        - generic: ららぽーとEXPOCITY 1F 光の広場

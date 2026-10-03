@@ -1,0 +1,143 @@
+- text: − ・ ・ ・ ・ ・ ・
+- main:
+  - button "戻る":
+    - text: 戻る
+  - link "どこいこ大阪":
+    - /url: /osaka-event-map/
+  - button "共有":
+    - text: 共有
+  - article:
+    - figure "なんば雲海の公式画像を大きく見る 画像の出典":
+      - img "なんば雲海の公式画像"
+      - link "なんば雲海の公式画像を大きく見る":
+        - /url: https://nambaparks.com/nambaunkai/images/hero_kv@1x.avif
+        - text: 画像を大きく見る
+      - link "画像の出典":
+        - /url: https://nambaparks.com/nambaunkai/
+        - text: 画像の出典
+    - paragraph: 季節イベント
+    - heading "なんば雲海" [active] [level=1]
+    - paragraph: 開催中
+    - generic "イベント概要":
+      - term: 日程
+      - definition: 2026年8月28日(金) 〜 11月1日(日)
+      - term: 会場
+      - definition: なんばパークス
+      - generic: ¥
+      - term: 料金
+      - definition: 無料
+    - button "お気に入りに保存":
+      - text: お気に入りに保存
+    - region "参加の基本情報":
+      - paragraph: 参加前に確認
+      - heading "参加の基本情報" [level=2]
+      - paragraph: 日時・費用・参加方法
+      - term: 開催日
+      - definition: 2026年8月28日(金) 〜 11月1日(日)
+      - paragraph:
+        - text: 17:30～22:00の内、約30分に1回・約3分間。21:00は全スポット一斉のスーパー雲海タイム。9月22・23日のファミリーDAYは11:00～22:00。
+      - term: 会場
+      - definition: なんばパークス
+      - paragraph: 〒556-0011 大阪市浪速区難波中2-10-70
+      - generic: ¥
+      - term: 料金
+      - definition: 無料
+      - paragraph: 表示の料金条件を公式情報でご確認ください。
+      - term: 予約
+      - definition: 予約不要
+      - paragraph: 雲海イベントは事前申込不要。提灯レンタルは別料金・事前予約制（当日空きがあれば利用可能）。
+      - link "公式情報を確認":
+        - /url: https://nambaparks.com/event/334
+        - text: 公式情報を確認
+    - region "イベントについて":
+      - paragraph: 開催内容
+      - heading "イベントについて" [level=2]
+      - paragraph: なんばパークスの庭園2～8階で、光と雲海を楽しむ夜の散策。6つのスポットを巡り、21:00には全フロアで雲海が同時に発生する約3分の演出があります。提灯レンタルは500円・事前予約制。
+      - term: 雨天時
+      - definition: 雨天・荒天時は予告なく雲海イベントと提灯レンタルが中止される場合があります。
+      - term: 駐車場
+      - definition: 会場施設の駐車場：なんばパークス地下7:00～23:30（最終入庫23:00）、立体9:00～翌0:30。平日250円/30分（平日最大1,300円）、土日祝500円/30分。なんばCITYは24時間、300円/30分（平日最大1,800円、7:00～23:30）。平日最大料金には利用時間などの条件があります。駐車優待は対象施設での購入額や会員条件を公式サイトで確認してください。
+    - region "アクセス":
+      - paragraph: 会場へ行く
+      - heading "アクセス" [level=2]
+      - strong: なんばパークス
+      - paragraph: 〒556-0011 大阪市浪速区難波中2-10-70
+      - term:
+        - text: 最寄駅
+      - definition: 南海電鉄 なんば駅
+      - term:
+        - text: 電車・バス
+      - definition: 南海電鉄「なんば駅」直結。Osaka Metro御堂筋線「なんば駅」より徒歩約7分。
+      - term:
+        - text: 車
+      - definition: なんばパークス駐車場・なんばCITY駐車場の西側共通入口は「難波中」交差点を南へ進んだ左手。なんばCITY東側入口は「難波中2」交差点を南へ進んだ右手で、21:00～翌7:00は閉鎖。
+      - button "Apple Mapsで経路を見る":
+        - text: Apple Mapsで経路を見る
+      - button "Google Mapsで見る":
+        - text: Google Mapsで見る
+    - region "問い合わせ":
+      - paragraph: 主催者へ
+      - heading "問い合わせ" [level=2]
+      - paragraph: なんばパークス 2Fインフォメーション（施設案内）
+      - paragraph:
+        - link "06-6644-7100":
+          - /url: tel:0666447100
+    - region "出典と確認日":
+      - paragraph: 情報を確かめる
+      - heading "出典と確認日" [level=2]
+      - paragraph: 公式情報を確認済み
+      - paragraph:
+        - text: 最終確認
+        - time: 2026年10月2日 21:08
+      - paragraph: 情報元：なんばパークス
+      - list:
+        - link "公式サイトを開く":
+          - /url: https://nambaparks.com/event/334
+          - text: 公式サイトを開く
+        - link "なんばパークス":
+          - /url: https://nambaparks.com/event
+          - text: なんばパークス
+    - region "近くのイベント":
+      - paragraph: あわせて見たい
+      - heading "近くのイベント" [level=2]
+      - generic: 3件
+      - link "9月1日(火) ・ 季節イベント パークスガーデンフォトコンテスト2026 なんばパークス":
+        - /url: /osaka-event-map/events/25cee3541f4e1dfd4e2c/
+        - generic: 大阪の催し
+        - generic: 9月1日(火) ・ 季節イベント
+        - strong: パークスガーデンフォトコンテスト2026
+        - generic: なんばパークス
+      - link "9月4日(金) ・ 季節イベント NAMBA Parks Autumn なんばパークス":
+        - /url: /osaka-event-map/events/d6127d1046176cb8e280/
+        - generic: 大阪の催し
+        - generic: 9月4日(金) ・ 季節イベント
+        - strong: NAMBA Parks Autumn
+        - generic: なんばパークス
+      - link "9月28日(月) ・ グルメ 秋のなんばグルメめぐり なんばパークス":
+        - /url: /osaka-event-map/events/9ad2ae368b0bff66ae3e/
+        - generic: 大阪の催し
+        - generic: 9月28日(月) ・ グルメ
+        - strong: 秋のなんばグルメめぐり
+        - generic: なんばパークス
+    - region "同じ会場・エリアのイベント":
+      - paragraph: あわせて見たい
+      - heading "同じ会場・エリアのイベント" [level=2]
+      - generic: 3件
+      - link "10月3日(土) ・ 季節イベント 『真アギト展』× NANKAIコラボレーション なんばパークス":
+        - /url: /osaka-event-map/events/022c25309260edbcb716/
+        - generic: 大阪の催し
+        - generic: 10月3日(土) ・ 季節イベント
+        - strong: 『真アギト展』× NANKAIコラボレーション
+        - generic: なんばパークス
+      - link "10月10日(土) ・ 季節イベント Greater Namba Festival なんばパークス":
+        - /url: /osaka-event-map/events/21169640bfd11495c06a/
+        - generic: 大阪の催し
+        - generic: 10月10日(土) ・ 季節イベント
+        - strong: Greater Namba Festival
+        - generic: なんばパークス
+      - link "10月31日(土) ・ 祭り・フェス なんばソトフェス Vol.5 なんばパークス":
+        - /url: /osaka-event-map/events/3071acb54c9f35e02565/
+        - generic: 大阪の催し
+        - generic: 10月31日(土) ・ 祭り・フェス
+        - strong: なんばソトフェス Vol.5
+        - generic: なんばパークス

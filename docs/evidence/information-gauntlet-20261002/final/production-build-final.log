@@ -1,0 +1,35 @@
+
+> osaka-event-map@0.1.0 build
+> npm run collect:cached && npm run audit:coverage:cached && tsc -b && vite build && node scripts/generate-event-pages.mjs
+
+
+> osaka-event-map@0.1.0 collect:cached
+> node scripts/collect-events.mjs --cached
+
+検証済みキャッシュからイベント 532件を再現しました（partial）。
+[stale] 大阪市立自然史博物館: 最新取得に失敗したため前回のイベントを使用しています
+[stale] ジブリパーク展 大阪公式: 最新取得に失敗したため前回のイベントを使用しています
+[stale] 空庭温泉: 取得できませんでした
+[stale] 都シティ 大阪天王寺: 取得できませんでした
+[stale] SCRAP: HTTP 403
+[stale] てんしば: official attachment hash matches; text remains a dated manually reviewed snapshot, not an automatic reread
+[stale] イオンモール堺北花田: 取得できませんでした
+[stale] ドーセット バイ アゴーラ 大阪堺: official page fetch failed; retaining last verified timestamp: fetch failed
+[stale] 堺市博物館(堺市): official attachment hash matches; text remains a dated manually reviewed snapshot, not an automatic reread
+[stale] LOCO★MARKET公式: official attachment hash matches; text remains a dated manually reviewed snapshot, not an automatic reread
+[stale] 日本スワップミート協会(主催:ばらいけ NEXT 創発パートナーズ): official page fetch failed; retaining last verified timestamp: HTTP 403
+
+> osaka-event-map@0.1.0 audit:coverage:cached
+> node scripts/audit-coverage.mjs --cached
+
+網羅性監査を出力しました（カテゴリ・会場 healthy 0, warning 28, gap 10; 収集元 healthy 0, warning 24, gap 0; 候補 13件）。
+vite v6.4.3 building for production...
+transforming...
+✓ 1665 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.67 kB │ gzip:   0.45 kB
+dist/assets/index-rrXt1D-N.css  131.09 kB │ gzip:  27.50 kB
+dist/assets/index-BoLB4LhV.js   486.61 kB │ gzip: 149.27 kB │ map: 2,009.51 kB
+✓ built in 1.55s
+Generated 532 event detail pages.

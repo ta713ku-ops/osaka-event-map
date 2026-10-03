@@ -1,0 +1,265 @@
+{
+  "generatedAt": "2026-10-02T12:20:30.504Z",
+  "events": 532,
+  "seasonalGuides": 1,
+  "checks": [
+    {
+      "name": "free Namba cloud remains included",
+      "status": "pass"
+    },
+    {
+      "name": "park admission prevents free Cosmos event",
+      "status": "pass"
+    },
+    {
+      "name": "night zoo not falsely held on Oct 3/4 weekend",
+      "status": "pass"
+    },
+    {
+      "name": "museum Monday closure and holiday exception",
+      "status": "pass"
+    },
+    {
+      "name": "wizard closed on Oct 2",
+      "status": "pass"
+    },
+    {
+      "name": "Oktoberfest official varying clocks",
+      "status": "pass"
+    },
+    {
+      "name": "undated forecast isolated from event dates",
+      "status": "pass"
+    },
+    {
+      "name": "no private calendar credentials in public data",
+      "status": "pass"
+    },
+    {
+      "name": "official renamed event has no obsolete cache duplicate",
+      "status": "pass"
+    },
+    {
+      "name": "Cosmos supplement is one persistent official route",
+      "status": "pass"
+    },
+    {
+      "name": "current bamboo official listing keeps old route and exact dates",
+      "status": "pass"
+    },
+    {
+      "name": "published routes unique",
+      "status": "pass"
+    },
+    {
+      "name": "dated clocks stay inside official occurrence days",
+      "status": "pass"
+    },
+    {
+      "name": "Mucha complete holiday and substitute closures",
+      "status": "pass"
+    },
+    {
+      "name": "single-digit actual Cosmos opening is ongoing at noon",
+      "status": "pass"
+    },
+    {
+      "name": "Kuboso exhibition fee is explicit and not generally free",
+      "status": "pass"
+    },
+    {
+      "name": "fireworks fees do not imply a known end clock",
+      "status": "pass"
+    },
+    {
+      "name": "day boat child fee preserves calendar and unknown clocks",
+      "status": "pass"
+    }
+  ],
+  "baselineRouteRetirements": [
+    {
+      "name": "季節の和菓子 食物販イベント",
+      "route": "ca05216e8a746ab4d0b9",
+      "source": "aeon-osaka-dome-city",
+      "endDate": "2026-10-04"
+    },
+    {
+      "name": "えほんをたのしもう!守口市立図書館えほんの広場 in イオンモール大日",
+      "route": "733d34e1b58610869cb9",
+      "source": "aeon-dainichi",
+      "endDate": "2026-10-02"
+    }
+  ],
+  "sources": [
+    {
+      "id": "verified-outings-solaniwa-yokai-2026",
+      "name": "空庭温泉",
+      "url": "https://solaniwa.com/lp/youkai_matsuri_26/",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 0
+    },
+    {
+      "id": "verified-outings-daizetsumetsu-osaka-2026",
+      "name": "特別展「大絶滅展―生命史のビッグファイブ」実行委員会",
+      "url": "https://daizetsumetsu.jp/outline_osaka.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-hokkaido-buffet-2026",
+      "name": "都シティ 大阪天王寺",
+      "url": "https://d33qqn1gw1wkus.cloudfront.net/pressrelease/1213/",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 0
+    },
+    {
+      "id": "verified-outings-jikken-lab-osaka-2026",
+      "name": "SCRAP",
+      "url": "https://realdgame.jp/ajito/osaka_nazobldg/event/jikkenn.html?pj_id=none",
+      "status": "stale",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "error": "HTTP 403",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-tenshiba-oktoberfest-2026",
+      "name": "てんしば",
+      "url": "https://www.tennoji-park.jp/event/detail/5416a82d-41c3-4b12-84de-981f204c7de2",
+      "status": "stale",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "error": "official attachment hash matches; text remains a dated manually reviewed snapshot, not an automatic reread",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-conan-shinsaibashi-2026",
+      "name": "SCRAP",
+      "url": "https://realdgame.jp/ajito/osaka/2026/07/post-43.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-autumn-fest-osaka-station-city-2026",
+      "name": "大阪ステーションシティ",
+      "url": "https://osakastationcity.com/event/6374/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-mucha-returns-2026",
+      "name": "堺 アルフォンス・ミュシャ館",
+      "url": "https://mucha.sakai-bunshin.com/event/mucha2026ex2/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-bread-donut-expocity-2026",
+      "name": "ららぽーとEXPOCITY",
+      "url": "https://mitsui-shopping-park.com/lalaport/expocity/event/3592977.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-kyushu-shikoku-fair-sakai-2026",
+      "name": "イオンモール堺北花田",
+      "url": "https://sakaikitahanada.aeonmall.jp/event/a87d5402-2b15-4a9d-af76-031a9747d546",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 0
+    },
+    {
+      "id": "verified-outings-vintage-market-suita-2026",
+      "name": "万博記念公園",
+      "url": "https://www.expo70-park.jp/event/77096/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-sakana-japan-suita-2026",
+      "name": "SAKANA&JAPAN FESTIVAL実行委員会",
+      "url": "https://37sakana.jp/sjfesosaka/index.html",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-zumzum-kitchencar-sakai-2026",
+      "name": "カエルスタジオ",
+      "url": "https://www.kaeru-studio.com/live-detail?n=c58445f1c3330378aba824164440d3da",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-seaside-terrace-bbq-sakai-2026",
+      "name": "ドーセット バイ アゴーラ 大阪堺",
+      "url": "https://www.agoradorsett-sakai.com/event/seasideterrace_bbq/",
+      "status": "stale",
+      "count": 0,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "error": "official page fetch failed; retaining last verified timestamp: fetch failed",
+      "allowCachedFallback": false,
+      "publishedCount": 0
+    },
+    {
+      "id": "verified-outings-citysup-night-nakanoshima-2026",
+      "name": "日本シティサップ協会",
+      "url": "https://www.citysup.jp/guidedtour-night-sum/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-expo-bamboo-volunteer-2026",
+      "name": "万博記念公園",
+      "url": "https://www.expo70-park.jp/event/75878/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "allowCachedFallback": false,
+      "publishedCount": 1
+    },
+    {
+      "id": "verified-outings-citysup-nakanoshima-guided-tour",
+      "name": "日本シティサップ協会",
+      "url": "https://www.citysup.jp/walkable_26/",
+      "status": "success",
+      "count": 1,
+      "checkedAt": "2026-10-02T12:20:30.504Z",
+      "publishedCount": 1
+    }
+  ]
+}

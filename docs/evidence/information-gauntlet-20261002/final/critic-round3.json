@@ -1,0 +1,56 @@
+{
+  "verdict": "B",
+  "single_biggest_gap": "A presents Harvest Hill's 50万本のコスモス as a confirmed November 1–30 event with Wednesday closures, whereas the supplied official quotation establishes only an early-to-late-November flowering forecast. This gives visitors unjustified certainty about when to go.",
+  "evidence": [
+    "Independently read all 38 subjects, including A's supplementaryInfo. Both artifacts contain the same 38 unique subject IDs in the same order. B distinguishes 37 dated events from one undated official flowering forecast.",
+    "candidate-b.json, cosmos: explicitly labels the flowering period and mid-November peak as predictions, preserves the September 18 growth observation as historical, and excludes the guide from today, tonight and weekend counts. A supplies exact November 1–30 dates.",
+    "candidate-a.json, hold-589873: ART FLASH starts September 21, omits the final-day 16:00 closure, and describes artist recruitment with a June deadline. candidate-b.json identifies the actual artist exhibition, September 20 start and October 4 closing time. official-art-poster.jpg independently confirms September 20–October 4, September 28 closure and final-day 16:00 closing.",
+    "candidate-a.json, intangible: says admission is free and places the exhibition in the experience floor. B's municipal announcement quotations place it in the cultural heritage exhibition room and its accompanying museum admission evidence supports 200/100/50 yen with conditional exemptions.",
+    "candidate-b.json, seine: provides the confirmed October 4 occurrence, age-specific BBQ prices and the seven-day advance application deadline. A's supplementaryInfo retains a previous-year verification warning and lacks prices and the application deadline; B exposes that an October 2 reader has already missed the ordinary application cutoff.",
+    "candidate-b.json, grapes: supplies separate ordinary and large-grape prices, weekday/weekend reception and closing times, Tuesday exceptions and the absence of station transfers. A provides reception cutoffs and Tuesday closure in supplementaryInfo but omits actual prices.",
+    "candidate-b.json, conan: quotes specific October session times and arrival requirements. A leaves times to the official site. B does not turn those multiple session starts into an invented continuous opening interval.",
+    "candidate-b.json, boat and night-boat: keeps separate booking calendars and venues, states child conditions, payment or cancellation rules, and avoids inventing unknown clock endpoints. The laboratory calendar remains explicitly stale, checked at October 2 08:12 JST, and supports only October 3 rather than a guaranteed continuing season.",
+    "A and B both correctly describe Night ZOO's discrete dates and Mucha's exceptional opening Mondays. B additionally represents these exceptions in structured schedules and the supplied runtime observations exercise them.",
+    "B is not uniformly more complete: it omits A's station guidance for Mucha and Ukiyoe, gives little participation detail for Autumn Fest and PARKLABO, and leaves ART FLASH admission unconfirmed. These omissions do not outweigh its corrections to actual dates, closing times, required costs and participation deadlines.",
+    "Some B supplements, including Kuboso's 600-yen student fee and fireworks ticket conditions, were checked on October 3. They support the additional current-runtime assessment, but do not independently establish what the official pages displayed on October 2.",
+    "Computed candidate SHA-256 hashes exactly match the supplied fingerprints. dataset-input.json and dataset-distribution.json are independently byte-identical, each 2,483,727 bytes with SHA-256 1ec25ef5debac8b50f5717873904c79997136ddbba923dfbc700dccdec2456f9. Every B subject matches one corresponding dataset event or guide on the shared substantive fields."
+  ],
+  "gate_results": [
+    {
+      "name": "official_evidence",
+      "status": "pass",
+      "evidence": "Inspected actual field quotations, source URLs, check times and stale labels across the subjects. Visually inspected the ART FLASH, PARKLABO and Oktoberfest primary posters; their dates, venues and published clocks agree with B. This validates supplied evidence consistency, not independent live retrieval of every cited page. October 3 supplements cannot prove October 2 page state."
+    },
+    {
+      "name": "coverage",
+      "status": "pass",
+      "evidence": "Both actual artifacts cover the identical 38 unique fixed subjects. B contains 37 dated records and one undated forecast; the full dataset contains 532 events and one separate seasonal guide. Coverage is confined to this fixed comparison, not an Osaka census or unseen holdout."
+    },
+    {
+      "name": "schedule_correctness",
+      "status": "pass",
+      "evidence": "Independently recomputed Mucha's complete Monday closures and exceptional openings from its quoted rule, checked the museum holiday exception, Night ZOO's absence on October 3/4, Wizard's October 2 closure, Oktoberfest weekday/weekend clocks, and dated hours remaining within occurrence ranges. Native date-input observations show Mucha result counts 0,1,0,1,0,1,0 for October 5/12/13 and November 2/4/23/24. Unknown boat clocks and the fireworks end clock remain absent. Unknown future closure particulars are not demonstrated as resolved."
+    },
+    {
+      "name": "search_consistency",
+      "status": "pass",
+      "evidence": "Underlying runtime snapshots show Namba plus the free filter returns one 0-yen result; Cosmos/Kochia plus free returns zero; Night ZOO plus the October 3/4 weekend returns zero; the undated flowering forecast returns zero map pins. Final Cosmos detail and mobile screenshot visibly include the required adult park admission of 450 yen. Actual dataset classifications agree."
+    },
+    {
+      "name": "regression_tests",
+      "status": "pass",
+      "evidence": "Read ui-tests-final.log: 21 files and 157 tests passed. Read collector-tests-final.log: 100 passed, zero failures, cancellations or skips, with named checks for schedules, stale calendars, fee classification and route preservation. Independently reproduced the substance of the 18 supplied data assertions against JSON. The UI log gives aggregate results rather than individual test traces; tests were not rerun under the read-only constraint."
+    },
+    {
+      "name": "production_build",
+      "status": "pass",
+      "evidence": "production-build-final.log shows the cached collection, TypeScript build, successful Vite output and generation of 532 detail pages; typecheck-final.log contains no diagnostics. Independently verified dataset byte equality and hashes. The built script name index-BoLB4LhV.js matches desktop runtime observation. This does not constitute a public deployment or independent executable-bundle hash verification."
+    },
+    {
+      "name": "browser_runtime",
+      "status": "pass",
+      "evidence": "Inspected underlying detail, direct-reload, back-restoration, filter and map snapshots, seven native date-field AX observations, three mobile screenshots and empty console-final.json. Back restoration preserves the Mucha query and active result link. Current desktop measurement is 1280/1280 and mobile is 390/390 without horizontal overflow; the desktop observation names the final build asset. Evidence covers the supplied Chromium run, with some retained earlier snapshots; native Safari and VoiceOver remain untested."
+    }
+  ],
+  "confidence": "high"
+}
