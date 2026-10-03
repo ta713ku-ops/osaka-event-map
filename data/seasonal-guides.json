@@ -6,101 +6,101 @@
     "address": "大阪府堺市南区鉢ヶ峯寺2405-1",
     "periodText": "2026年11月初旬〜下旬予想。見ごろは11月中旬ごろ予想。",
     "description": "約3,000㎡の花畑に約50万本・3品種。色や花姿の違いを楽しめます。天候で開花時期が変わるため、訪問前に公式の開花状況を確認してください。",
-    "bloomStatus": "公式の掲載状況：成長中（9/18時点）。本日の開花状況を示すものではありません。",
+    "bloomStatus": "公式の掲載状況：成長中（10/3時点）。訪問前に公式の最新状況を確認してください。",
     "priceInfo": "通常入園料：中学生以上1,500円、4歳以上1,000円、3歳以下無料。遊具・体験などは別料金。小学生以下は18歳以上の保護者の同伴が必要。",
     "timeInfo": "施設の通常営業時間は10:00〜17:00。花の開催日・休園日は確定日程として掲載していません。",
     "accessByTransit": "泉ヶ丘駅バスターミナル6番から南海バス「ハーベストの丘」行で約20分（直行便ではありません）。帰りの最終は平日17:10、土日祝17:40。休園日はバスも運休。",
     "parkingInfo": "約1,800台・無料。入園は有料です。",
     "contact": "072-296-9911",
     "officialUrl": "https://farm.or.jp/event/14063",
-    "lastCheckedAt": "2026-10-02T06:36:53.527Z",
+    "lastCheckedAt": "2026-10-03T07:19:25.557Z",
     "sourceStatus": "success",
     "validThroughMonth": "2026-11",
     "fieldEvidence": {
       "title": {
         "sourceUrl": "https://farm.or.jp/event/14063",
         "text": "500,000本のコスモス",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "venueName": {
         "sourceUrl": "https://farm.or.jp/event/14063",
         "text": "場所:村のエリア花畑[太陽の丘](約3,000m2)",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "address": {
         "sourceUrl": "https://farm.or.jp/access",
         "text": "大阪府堺市南区鉢ヶ峯寺2405-1",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.419Z"
       },
       "periodText": {
         "sourceUrl": "https://farm.or.jp/event/14063",
         "text": "開花時期:2026年11月初旬~下旬予想 見ごろ:2026年11月中旬ごろ予想",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "description": {
         "sourceUrl": "https://farm.or.jp/event/14063",
         "text": "今年は3品種のコスモスが花畑を彩り、3エリアに分かれて色や花姿の違いもお楽しみいただけます。",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "description_scale": {
         "sourceUrl": "https://farm.or.jp/event/14063",
         "text": "本数:約50万本",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "description_weather": {
         "sourceUrl": "https://farm.or.jp/event/14063",
         "text": "天候等により、開花時期は変動する場合がございます",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "bloomStatus": {
         "sourceUrl": "https://farm.or.jp/event/14063",
-        "text": "開花状況:成長中(9/18時点)",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "text": "開花状況:成長中(10/3時点)",
+        "checkedAt": "2026-10-03T07:19:25.282Z"
       },
       "priceInfo": {
         "sourceUrl": "https://farm.or.jp/price",
         "text": "おとな(中学生以上) 1,500円 こども(4歳以上) 1,000円 幼児(3歳以下) 無料",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.557Z"
       },
       "priceInfo_extras": {
         "sourceUrl": "https://farm.or.jp/price",
         "text": "遊具施設やシルバニアパーク入場、体験教室など園内各施設の利用には別途料金が必要です",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.557Z"
       },
       "priceInfo_children": {
         "sourceUrl": "https://farm.or.jp/price",
         "text": "必ず18歳以上の保護者の方と一緒にご来園ください",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.557Z"
       },
       "timeInfo": {
         "sourceUrl": "https://farm.or.jp/price",
         "text": "通常営業時間(10:00~17:00)の入園料金です",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.557Z"
       },
       "accessByTransit": {
         "sourceUrl": "https://farm.or.jp/access",
         "text": "バスターミナル6番乗り場「ハーベストの丘」行、南海路線バスにて約20分。(直行ではございません。)",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.419Z"
       },
       "accessByTransit_return": {
         "sourceUrl": "https://farm.or.jp/access",
         "text": "平日17:10、土日祝17:40",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.419Z"
       },
       "accessByTransit_closure": {
         "sourceUrl": "https://farm.or.jp/access",
         "text": "ハーベストの丘の休園日は、路線バスも運休いたします",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.419Z"
       },
       "parkingInfo": {
         "sourceUrl": "https://farm.or.jp/access",
         "text": "約1,800台(無料)",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.419Z"
       },
       "contact": {
         "sourceUrl": "https://farm.or.jp/access",
         "text": "TEL 072-296-9911",
-        "checkedAt": "2026-10-02T06:36:53.527Z"
+        "checkedAt": "2026-10-03T07:19:25.419Z"
       }
     }
   }
